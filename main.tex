@@ -1,0 +1,3570 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=2.7cm]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tcolorbox}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[italian]{babel}
+\usepackage{csquotes}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{wrapfig}
+\usepackage{enumitem}
+\usepackage{awesomebox}
+\usepackage{xcolor}
+\usepackage{soul}
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\newcommand{\hlfancy}[2]{\sethlcolor{#1}\hl{#2}}
+
+\setlist[description]{leftmargin=\parindent,labelindent=\parindent}
+\tcbuselibrary{theorems}
+
+\newtcbtheorem[number within=section]{teo}{Teorema}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\theoremstyle{definition}
+\newtcbtheorem[number within=section]{cor}{Corollario}%
+{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{deff}{Definizione}%
+{colback=blue!3,colframe=blue!25!gray,fonttitle=\bfseries}{th}
+\newtheorem*{oss}{Osservazione}
+\newtheorem*{dimm}{Dimostrazione}
+\newtheorem*{es}{Esempio}
+\newtheorem*{prop}{Proposizione}
+% Add theorems to the table of contents
+% \usepackage{tocloft}
+% \newcommand{\listoftheorems}{\section*{Lista dei teoremi}\addcontentsline{toc}{section}{Lista dei teoremi}\cftsetindents{section}{0em}{2.3em}\cftsetindents{subsection}{2.3em}{2.3em}\cftsetindents{subsubsection}{4.6em}{2.3em}}
+
+\title{Riassunto Algebra e Geometria}
+\author{Maicol Battistini}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Unità 1 - Lezioni 1, 2}
+\subsection{Insiemi}
+\begin{deff}{Relazione di un insieme}{}
+	Una relazione su un insieme \(A\) è un sottoinsieme \(R\) di \(A \times A\). \\
+	Scrivo \(a_1 \ R \ a_2\) se \( (a_1, a_2) \in R\) e dico\enquote*{\(a_1\) è in relazione con \(a_2\)}
+\end{deff}
+\begin{deff}{Relazione di equivalenza}{}
+	Una relazione \(R\) è una relazione di equivalenza se valgono le seguenti proprietà:
+	\begin{description}
+		\item \textbf{Riflessiva}: \(a \ R \ a \ \forall a \in A \)
+		\item \textbf{Simmetrica}: \(a \ R \ b \ \Rightarrow b \ R \ A \)
+		\item \textbf{Transitiva}: \(a \ R \ a, b \ R \ c \ \Rightarrow a \ R \ c \)
+	\end{description}
+\end{deff}
+\begin{deff}{Congruenza}{}
+	\[ \mathbb{Z} = {0, 1, -1, 2, -2, 3, -3, ...} \]
+	Sia $n \in \mathbb{Z}, n >= 2$
+	\begin{align*}
+		a \equiv b \ (n) &  & \text{\enquote*{$a$ è congruo a $b$ modulo $n$}}
+	\end{align*}
+	se $a - b$ è multiplo di $n$ (cioè $\exists h \mid a - b = hn$)
+\end{deff}
+Esempi:
+\begin{align*}
+	8 \equiv 23 (5) &  & 8 \not\equiv 17(5) &  & 4 \equiv 10,16,-2,-8(6) &  & 4 \not\equiv 13(6)
+\end{align*}
+\begin{oss}
+	Essere congrui modulo n è una relazione di equivalenza
+\end{oss}
+\begin{dimm}
+	Dimostro le tre proprietà della relazione di equivalenza:
+	\begin{description}
+		\item Riflessiva: \[ \forall a \in \mathbb{Z}, \ a \equiv a (n) \ \text{perchè} \ a - a = 0 = 0 \cdot n\]
+		\item Simmetrica: \\ se $a \equiv b (n)$, allora $b \equiv a (n)$ perchè se $a - b = hn \Rightarrow b - a = -hn$
+		\item Transitiva: \\ se $a \equiv b (n)$ e $b \equiv c (n)$, allora $a \equiv c (n)$ perchè se $a - b = hn$ e $b - c = kn$, allora $a - c = (a - b) + (b - c) = (h + k)n$
+	\end{description}
+\end{dimm}
+\subsection{Funzioni e applicazioni}
+\[ f: X \rightarrow Y \]
+\[ f(a) = b \]
+
+$f$ è una applicazione se ad ogni $a \in X$ corrisponde uno e un solo $b \in Y$
+
+\begin{deff}{Funzione iniettiva}{}
+	Una funzione $f: X \rightarrow Y$ è iniettiva se:
+	\[ \forall x_1, x_2 \in X \mid x_1 = x_2 \Rightarrow f(x_1) = f(x_2) \]
+	Ovvero: \enquote*{due elementi distinti di $X$ vengono mandati in elementi distinti di $Y$}
+	\begin{center}
+		\includegraphics{images/iniettiva.png}
+	\end{center}
+\end{deff}
+\begin{deff}{Funzione suriettiva}{}
+	Una funzione $f: X \rightarrow Y$ è suriettiva se:
+	\[
+		Y = Im \ f = \{y \in Y \mid \exists x \in X \mid f(x) = y\}
+	\]
+	Ovvero: \enquote*{ogni elemento di $Y$ è immagine di almeno un elemento di $X$}
+	\begin{center}
+		\includegraphics{images/suriettiva.png}
+	\end{center}
+\end{deff}
+\begin{deff}{Funzione biunivoca}{}
+	Una funzione $f: X \rightarrow Y$ è biunivoca se è iniettiva e suriettiva, cioè se per ogni $y \in Y$ esiste un solo $x \in X$ tale che $f(x) = y$
+	\begin{center}
+		\includegraphics{images/biunivoca_1.png}
+	\end{center}
+	\begin{es}
+		Una funzione biunivoca è invertibile, cioè $\exists f^{-1}: Y \rightarrow X$ tale che $f^{-1} \circ f = Id_X$ e $f \circ f^{-1} = Id_Y$
+	\end{es}
+	\begin{center}
+		\includegraphics{images/biunivoca_2.png}
+	\end{center}
+\end{deff}
+\begin{es}
+	\[ f_1: \mathbb{R} \rightarrow \mathbb{R}, f(1) = x^2 \]
+	\begin{description}
+		\item Iniettiva? No, perchè $f(-1) = f(1) = 1$
+		\item Suriettiva? No, perchè $Im \ f = \{y \in \mathbb{R} \mid y \ge 0\} \ne \mathbb{R}$
+		\item Biunivoca? No, perchè non è iniettiva e non è suriettiva
+	\end{description}
+	\[ f: \mathbb{R} \rightarrow \mathbb{R}^{+}, f(x) = x^2 \]
+	Nota: $\mathbb{R}^+ = [0, +\infty[$
+	\begin{description}
+		\item Iniettiva? No, perchè $f(-1) = f(1) = 1$
+		\item Suriettiva? Sì, perchè $Im \ f = \mathbb{R}^+$
+		\item Biunivoca? No, perchè non è iniettiva
+	\end{description}
+	\[ f:\, \mathbb{R}^+ \rightarrow \mathbb{R}, f(x) = x^2 \]
+	\begin{description}
+		\item Iniettiva? Sì, perchè $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$
+		\item Suriettiva? No, perchè $Im \ f = \{y \in \mathbb{R} \mid y \ge 0\} \ne \mathbb{R}$
+		\item Biunivoca? No, perchè non è suriettiva
+	\end{description}
+	\[ f:\, \mathbb{R}^+ \rightarrow \mathbb{R}^+, f(x) = x^2 \]
+	\begin{description}
+		\item Iniettiva? Sì, perchè $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$
+		\item Suriettiva? Sì, perchè $Im \ f = \mathbb{R}^+$
+		\item Biunivoca? Sì, perchè è iniettiva e suriettiva
+		\item Inversa: $\exists f^{-1}:\, \mathbb{R}^+ \rightarrow \mathbb{R}^+, f^{-1}(y)$ è l'unico $x \in \mathbb{R}^+$ tale che $f(x) = y$ (cioè $f^{-1}(y) = \sqrt{y}$)
+	\end{description}
+\end{es}
+
+\subsection{Numeri complessi}
+\begin{deff}{Numero complesso}{}
+	Un numero complesso è un numero della forma:
+	\[ z = a + ib \]
+	dove $a, b \in \mathbb{R}$ e $i$ è l'unità immaginaria, cioè $i^2 = -1$. \\\\
+	Un numero complesso rientra nell'insieme dei numeri complessi, indicato con $\mathbb{C}$.
+	\[ \mathbb{C} = \{a + ib \mid a, b \in \mathbb{R}\} \]
+\end{deff}
+In questo modo $x^2 + 1 = 0$ è risolto da $x = \pm i$.
+Ogni elemento non nullo di $\mathbb{C}$ ha l'inverso:
+\[ z = a + ib \ne 0 \Rightarrow z^{-1} = \frac{a - ib}{a^2 + b^2} \]
+perchè:
+\[ z \cdot z^{-1} = (a + ib) \cdot \frac{a - ib}{a^2 + b^2} = \frac{a^2 + b^2}{a^2 + b^2} = 1 \]
+
+\begin{teo}{Teorema fondamentale dell'algebra}{}
+	Ogni equazione polinomiale a coefficienti in $\mathbb{C}$ ha soluzioni in $\mathbb{C}$.
+\end{teo}
+
+\subsection{Campo e spazio vettoriale}
+\begin{deff}{Campo}{}
+	Un campo è un insieme $K$ con due operazioni \textbf{somma} e \textbf{prodotto}, commutative e associative, con proprietà distributiva, elementi neutri 0 e 1, opposto di ogni elemento e inverso di ogni elemento non nullo.
+	\begin{itemize}
+		\item Ogni elemento di $X$ ha un opposto $-x$.
+		\item Ogni elemento di $X \ne 0$ ha un inverso $x^{-1}$.
+	\end{itemize}
+	\begin{es}
+		$\mathbb{N}, \mathbb{Z}$ non sono campi, $\mathbb{Q}, \mathbb{R}, \mathbb{C}$ sono campi.
+	\end{es}
+\end{deff}
+
+\begin{es}
+	$\mathbb{Z}_5$ è un campo? Cioè è vero che se $[a] \ne [0]$ allora $\exists [b] | [a] \cdot [b] = [1]$?
+	\[ [2] \cdot [3] = [6] = [1] \Rightarrow [2]^{-1} = [3], [3]^{-1} = [2] \]
+	\[ [4] \cdot [4] = [16] = [1] \Rightarrow [4]^{-1} = [4] \]
+	Quindi, $\mathbb{Z}_5$ è un campo.
+\end{es}
+
+\begin{es}
+	$\mathbb{Z}_4$ è un campo?
+	\[ [2] \cdot [2] = [4] = [0] \Rightarrow \text{l'inverso non esiste} \]
+	\[ [2] \cdot [0] = [0] \ne [1] \Rightarrow \text{l'inverso non esiste} \]
+	Quindi, $\mathbb{Z}_4$ non è un campo.
+\end{es}
+
+\begin{oss}
+	$\mathbb{Z}_p$ è un campo se $p$ è un numero primo.
+\end{oss}
+
+\begin{deff}{Spazio vettoriale}{}
+	Sia $K$ un campo. Uno spazio vettoriale su $K$ è un insieme $V$ con due operazioni:
+	\begin{description}
+		\item \textbf{Somma} $+: \forall v_1, v_2 \in V \rightarrow v_1 + v_2 \in V$
+		\item \textbf{Prodotto per scalare} $\cdot: \forall a \in K, \forall v \in V \rightarrow a \cdot v \in V$
+	\end{description}
+	tali che valgano le seguenti proprietà:
+	\begin{description}
+		\item \textbf{Somma}: Associativa, Commutativa, Elemento neutro $0$, Elemento opposto $-v$
+		\item \textbf{Prodotto per scalare}: Associativa, Distributiva rispetto alla somma, Elemento neutro $1$
+	\end{description}
+\end{deff}
+Dato uno spazio vettoriale $V$ su un campo $K$, gli elementi di $V$ sono detti \textbf{vettori} e gli elementi di $K$ sono detti \textbf{scalari}.
+
+\begin{deff}{Sottospazio vettoriale}{}
+	Sia $V$ uno spazio vettoriale su un campo $K$. Un sottospazio vettoriale di $V$ è un sottoinsieme $U$ di $V$ non vuoto (cioè $0 \in U$) che è chiuso rispetto alla somma e al prodotto per scalare, cioè:
+	\[ u_1, u_2 \in U \Rightarrow u_1 + u_2 \in U \]
+	\[ a \in K, u \in U \Rightarrow a \cdot u \in U \]
+\end{deff}
+
+\begin{es}
+	Sia $K = \mathbb{R}$ e $V = \mathbb{R}^2 = \{(x, y) \mid x, y \in \mathbb{R}\}$. \\
+	$U = \{(x, y) \in \mathbb{R}^2 \mid y = 2x\}$ è un sottospazio vettoriale di $V$ perchè dati $v_1 = (x, 2x), v_2 = (x', 2x') \in U$ e $a \in \mathbb{R}$:
+	\begin{description}
+		\item[Non vuoto] $0 = (0, 0) \in U$
+		\item[Somma] $v_1 + v_2 = (x + x', 2x + 2x') = (x + x', 2(x + x')) \in U$
+		\item[Prodotto] $a \cdot v_1 = a \cdot (x, 2x) = (a \cdot x, a \cdot 2x) = (a \cdot x, 2a \cdot x) \in U$
+	\end{description}
+\end{es}
+
+% \begin{prop}
+% 	$U$ è un sottospazio vettoriale di $V \Leftrightarrow \forall v_1, v_2 \in U, \forall a_1, a_2 \in K: a_1v_1 + a_2v_2 \in U$
+% 	(combinazione lineare di $v_1$ e $v_2$)
+% \end{prop}
+% \begin{dimm}
+% 	Siano $v_1, v_2 \in U$ e $a_1, a_2 \in K$.
+% 	Poichè $U$ è un sottospazio vettoriale, $a_1v_1, a_2v_2 \in U \Rightarrow a_1v_1 + a_2v_2 \in U$
+% 	\\\\
+% 	Dimostrazione simmetrica per l'altro verso: \\
+% 	Siano $v_1, v_2 \in U$ e $a_1, a_2 \in K$.
+% 	Poichè $a_1v_1 + a_2v_2 \in U$, $a_1v_1 + a_2v_2 = v \in U \forall a_1, a_2 \in K$, scegliendo $a_1 = 1, a_2 = 1$ otteniamo $v_1 + v_2 \in U$.
+% 	Scegliendo invece $a_2 = 0$ otteniamo $a_1v_1 \in U \forall a_1 \in K$.
+% \end{dimm}
+
+\subsection{Combinazione e Indipendenza lineare}
+
+\begin{deff}{Combinazione lineare}{}
+	Sia $V$ uno spazio vettoriale su un campo $K$ e $v_1, v_2, ..., v_n \in V$.
+	Diciamo che $v \in V$ è una combinazione lineare di $v_1, v_2, ..., v_n$ se:
+	\[ \exists a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n \]
+\end{deff}
+\begin{es}
+	$K = \mathbb{R}, V = \mathbb{R}^2, v_1 = (2, 0), v_2 = (0, -1), v = (1, 3)$ è una combinazione lineare di $v_1$ e $v_2$ perchè:
+	\[ \frac{1}{2}v_1 + (-3)v_2 = (1, 0) + (0, 3) = (1, 3) = v \]
+	Se non li vedo ad occhio, posso risolvere il sistema per cercare i coefficienti:
+	\[ a_1v_1 + a_2v_2 = (2a_1, 0) + (0, -a_2) = (2a_1, -a_2) = (1, 3) \]
+	\begin{align*}
+		\begin{cases}
+			2a_1 = 1 \\
+			-a_2 = 3
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			a_1 = \frac{1}{2} \\
+			a_2 = -3
+		\end{cases}
+	\end{align*}
+\end{es}
+
+\begin{es}
+	$u_1 = (1, 0), u_2 = (-1, 0), u = (1, 3)$ NON è una combinazione lineare di $u_1$ e $u_2$ perchè
+	$\forall a_1, a_2 \in \mathbb{R}, a_1u_1 + a_2u_2 = (2a_1, 0) + (-a_2, 0) = (2a_1 - a_2, 0) = (1, 3)$ non ha soluzione:
+	\begin{align*}
+		\begin{cases}
+			2a_1 - a_2 = 1 \\
+			0 = 3
+		\end{cases}
+	\end{align*}
+	Infatti $\forall a_1, a_2 \in \mathbb{R},a_1u_1 + a_2u_2 \ne u$
+\end{es}
+\begin{deff}{Span}{}
+	Uno spazio vettoriale $V$ è detto \textbf{generato} da un insieme di vettori $v_1, v_2, ..., v_n \in V$ se ogni $v \in V$ è una combinazione lineare di tali vettori.
+	In questo caso $V$ è detto \textbf{span} di $v_1, v_2, ..., v_n$ e si scrive:
+	\[ V = \langle v_1, v_2, ..., v_n \rangle \]
+\end{deff}
+\begin{es}
+	$V = \mathbb{R}^4 = \{(x_1, x_2, x_3, x_4) \mid x_1, x_2, x_3, x_4 \in \mathbb{R}\}, v_1 = (2, 0, 0, 0), v_2 = (0, 1, -1, 0)$
+	\begin{align*}
+		U = \langle v_1, v_2 \rangle = \{(a_1v_1 + a_2v_2) \mid a_1, a_2 \in \mathbb{R}\} = \\
+		\{(2a_1, 0, 0, 0) + (0, a_2, -a_2, 0) \mid a_1, a_2 \in \mathbb{R}\} =              \\
+		\{(2a_1, a_2, -a_2, 0) \mid a_1, a_2 \in \mathbb{R}\} =                             \\
+		\{(x_1, x_2, x_3, x_4) \mid x_1, x_2, x_3, x_4 \in \mathbb{R}\} \mid \begin{cases}
+			                                                                     x_2 + x_3 = 0 \\
+			                                                                     x_4 = 0
+		                                                                     \end{cases}
+	\end{align*}
+\end{es}
+\begin{es}
+	$V = \mathbb{R}[x] = \{a_nx^n + a_{n-1}x^{n-1} + ... + a_1x + a_0 \mid a_0, a_1, ..., a_n \in \mathbb{R}\}$ \\
+	$p_1 = x, p_2 = x^2, q = 2x^2 - 7x$ è una combinazione lineare di $p_1$ e $p_2$ perchè $q = 2x^2 - 7x = 2x^2 - 7x + 0 \cdot x = 2x^2 - 7x + 0 \cdot x^2$ \\
+	$h = 3x^3 - 8x, l = 2x^2 + 3$ non sono combinazioni lineari di $p_1$ e $p_2$ perchè $\forall a_1, a_2 \in \mathbb{R}, a_1p_1 + a_2p_2 \ne h, l$. \\
+	Il sottospazio vettoriale generato da $p_1$ e $p_2$ è $\langle p_1, p_2 \rangle = \{a_1p_1 + a_2p_2 \mid a_1, a_2 \in \mathbb{R}\} = \{a_1x + a_2x^2 \mid a_1, a_2 \in \mathbb{R}\}$, ovvero tutti i polinomi di grado $\le 2$ con termine noto nullo.
+\end{es}
+
+\begin{oss}
+	Un sottoinsieme non vuoto $U$ di uno spazio vettoriale $V$ è un sottospazio vettoriale di $V$ se e solo se $U$ contiene tutte le combinazioni lineari dei suoi elementi (infatti, dati $u_1, u_2 \in U$ e $u_1 + u_2 \in U$ e $a \in K$ sono combinazioni lineari particolari)
+\end{oss}
+
+\begin{deff}{Indipendenza lineare}{}
+	Un insieme di vettori $v_1, v_2, ..., v_n \in V$ è detto \textbf{linearmente indipendente} se nessuno di loro è combinazione linare degli altri o, equivalentemente,
+	l'unica combinazione lineare che dà come risultato il vettore nullo è quella in cui tutti i coefficienti sono nulli:
+	\[ a_1v_1 + a_2v_2 + ... + a_nv_n = 0 \Rightarrow a_1 = a_2 = ... = a_n = 0 \]
+	Invece, è detto \textbf{linearmente dipendente} se esiste almeno un vettore che è combinazione lineare degli altri.
+\end{deff}
+\begin{es}
+	$v_1 = (2, 0), v_2 = (-1, 0)$ sono linearmente dipendenti perchè $v_1 = -2v_2$ ($v_1$ è combinazione lineare di $v_2$), ovvero:
+	\[ \exists a_1 = 1, a_2 = 2 \mid a_1v_1 + a_2v_2 = 1 \cdot (2, 0) + (2) \cdot (-1, 0) = (0, 0) \]
+\end{es}
+\begin{es}
+	$u_1 = (2, 0), u_2 = (0, -1)$ sono linearmente indipendenti perchè $a_1u_1 \ne u_2 \forall a_1 \in \mathbb{R}$, ovvero:
+	\begin{align*}
+		a_1u_1 + a_2u_2 = 0 \Leftrightarrow (2a_1, - a_2) = (0, 0) \\
+		\begin{cases}
+			2a_1 = 0 \\
+			-a_2 = 0
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			a_1 = 0 \\
+			a_2 = 0
+		\end{cases}
+	\end{align*}
+\end{es}
+
+\subsection{Base e dimensione}
+\begin{deff}{Base}{}
+	Sia $V$ uno spazio vettoriale su un campo $K$. \\
+	Un insieme di vettori $v_1, v_2, ..., v_n \in V$ è detto \textbf{base} di $V$ se sono linearmente indipendenti e generano $V$, cioè:
+	\[ V = \langle v_1, v_2, ..., v_n \rangle \]
+\end{deff}
+
+\begin{es}
+	$V = \mathbb{R}^2, v_1 = (1, 0), v_2 = (0, 1), v_3 = (2, 1)$ generano $V$ ma non sono linearmente indipendenti perchè $v_3 = 2v_1 + v_2$.
+	Invece $v_1 = (1, 0), v_2 = (0, 1)$ sono linearmente indipendenti e generano $V$ ($a_1v_1 + a_2v_2 = (a_1, a_2)$), quindi sono una base di $V$.
+\end{es}
+
+\begin{es}
+	$V = \mathbb{R}^2, v_1 = (2, 1), v_2 = (1, -3)$ sono una base di $V$? Verifichiamolo:
+	\begin{description}
+		\item[Linearmente indipendenti?] $a_1v_1 + a_2v_2 = 0 \Rightarrow a_1 = a_2 = 0$
+		      \begin{align*}
+			      a_1(2, 1) + a_2(1, -3) = (0, 0) \\
+			      (2a_1 + a_2, a_1 - 3a_2) = (0, 0) \\
+			      \begin{cases}
+				      2a_1 + a_2 = 0 \\
+				      a_1 - 3a_2 = 0
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 = 0 \\
+				      a_2 = 0
+			      \end{cases}
+		      \end{align*}
+		\item[Generano $V$?] Ovvero che ogni $v = (x, y) \in \mathbb{R}^2$ si scrive come combinazione lineare di $v_1$ e $v_2$.
+		      \begin{align*}
+			      (x, y) = a_1(2, 1) + a_2(1, -3) \\
+			      (x, y) = (2a_1 + a_2, a_1 - 3a_2) \\
+			      \begin{cases}
+				      2a_1 + a_2 = x \\
+				      a_1 - 3a_2 = y
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 = \frac{3x - y}{7} \\
+				      a_2 = \frac{x + y}{7}
+			      \end{cases}
+		      \end{align*}
+			  Quindi, $\exists a_1, a_2 \in \mathbb{R} \mid a_1v_1 + a_2v_2 = v$.
+	\end{description}
+	Quindi $v_1 = (2, 1), v_2 = (1, -3)$ sono una base di $\mathbb{R}^2$.
+\end{es}
+
+\begin{es}
+	\textit{Dire se $v_1 = (1, 1, 0), v_2 = (0, 1, 1), v_3 = (1, 0, 1)$ sono una base di $\mathbb{R}^3$}
+	\indent \begin{description}
+		\item[Passo 1] Verifico se sono linearmente indipendenti, ovvero se è vero che se $a_1v_1 + a_2v_2 + a_3v_3 = (0, 0, 0) \Rightarrow a_1 = 0, a_2 = 0, a_3 = 0$
+		      \begin{align*}
+			      a_1(1, 1, 0) + a_2(0, 1, 1) + a_3(1, 0, 1) = (0, 0, 0) \\
+			      (a_1 + a_3, a_1 + a_2, a_2 + a_3) = (0, 0, 0)          \\
+			      \begin{cases}
+				      a_1 + a_3 = 0 \\
+				      a_1 + a_2 = 0 \\
+				      a_2 + a_3 = 0
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 = 0 \\
+				      a_2 = 0 \\
+				      a_3 = 0
+			      \end{cases}
+		      \end{align*}
+		      Sì perchè l'unica soluzione è quella in cui tutti i coefficienti sono nulli. Quindi, $v_1, v_2, v_3$ sono linearmente indipendenti.
+		\item[Passo 2] Verifico se generano $\mathbb{R}^3$, ovvero se $\forall v \in \mathbb{R}^3, \exists a_1, a_2, a_3 \in \mathbb{R} \mid v = a_1v_1 + a_2v_2 + a_3v_3$
+		      \begin{align*}
+			      (a_1 + a_3, a_1 + a_2, a_2 + a_3) = (x, y, z) \\
+			      \begin{cases}
+				      a_1 + a_3 = x \\
+				      a_1 + a_2 = y \\
+				      a_2 + a_3 = z
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 - a_2 = x - z \\
+				      a_1 + a_2 = y     \\
+				      a_3 = z - a_2
+			      \end{cases}
+			      \begin{cases}
+				      2a_1 = x + y - z   \\
+				      - 2a_2 = x - y + z \\
+				      a_3 = z + \frac{x - y - z}{2}
+			      \end{cases}
+			      \begin{cases}
+				      a_1 = \frac{x + y - z}{2} \\
+				      a_2 = \frac{x - y - z}{2} \\
+				      a_3 = \frac{x - y + z}{2}
+			      \end{cases}
+		      \end{align*}
+		      Quindi esiste una soluzione per ogni $v \in \mathbb{R}^3$, quindi $v_1, v_2, v_3$ generano $\mathbb{R}^3$.
+		      Di conseguenza, $v_1, v_2, v_3$ sono una base di $\mathbb{R}^3$.
+	\end{description}
+\end{es}
+\begin{es}
+	\textit{Dire se $u_1 = (1, 3, 2), u_2 = (-1, 0, 1), u_3 = (2, 1, -1)$ sono una base di $\mathbb{R}^3$}
+	\begin{description}
+		\item[Passo 1] Verifico se sono linearmente indipendenti
+		      \begin{align*}
+			      a_1v_1 + a_2v_2 + a_3v_3 = (0, 0, 0)                         \\
+			      a_1(1, 3, 2) + a_2(-1, 0, 1) + a_3(2, 1, -1) = (0, 0, 0)     \\
+			      (a_1 - a_2 + 2a_3, 3a_1 + a_3, 2a_1 - a_2 - a_3) = (0, 0, 0) \\
+			      \begin{cases}
+				      a_1 - a_2 + 2a_3 = 0 \\
+				      3a_1 + a_3 = 0       \\
+				      2a_1 + a_2 - a_3 = 0
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 - a_2 + 2a_3 = 0 \\
+				      3a_2 - 5a_3 = 0      \\
+				      3a_2 - 5a_3 = 0      \\
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 = - 1 \\
+				      a_2 = 5   \\
+				      a_3 = - 1
+			      \end{cases}
+		      \end{align*}
+		      No perchè esiste una soluzione in cui non tutti i coefficienti sono nulli. Quindi $u_1, u_2, u_3$ non sono linearmente indipendenti.
+		\item[Passo 2] Verifico se generano $\mathbb{R}^3$
+		      \begin{align*}
+			      a_1u_1 + a_2u_2 + a_3u_3 = (x, y, z)                         \\
+			      (a_1 - a_2 + 2a_3, 3a_1 + a_3, 2a_1 - a_2 - a_3) = (x, y, z) \\
+			      \begin{cases}
+				      a_1 - a_2 + 2a_3 = x \\
+				      3a_1 + a_3 = y       \\
+				      2a_1 + a_2 - a_3 = z
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      a_1 - a_2 + 2a_3 = x \\
+				      3a_2 - 5a_3 = y - 3x \\
+				      3a_2 - 5a_3 = z - 2x \\
+			      \end{cases}
+			      \Rightarrow
+			      \begin{cases}
+				      0 = y - 3x - z + 2x \Leftarrow x + z = y \\
+				      \dots                                    \\
+			      \end{cases}
+		      \end{align*}
+		      Facendo combinazioni lineari di $u_1, u_2, u_3$ si ottengono solo vettori di $\mathbb{R}^3 \mid x + z = y$, quindi $u_1, u_2, u_3$ non generano $\mathbb{R}^3$.
+	\end{description}
+\end{es}
+
+\begin{deff}{Coordinate}{}
+	$a_1, a_2, ..., a_n$ sono dette \textbf{coordinate} di $v$ rispetto alla base $v_1, v_2, ..., v_n$.
+\end{deff}
+
+\begin{es}
+	Trovare le coordinate di $v = (-4, -8)$ rispetto alla base $v_1 = (2, 1), v_2 = (1, -3)$ di $\mathbb{R}^2$. \\
+	Basta trovare gli unici $a_1, a_2 \in \mathbb{R}$ tali che $a_1v_1 + a_2v_2 = v$:
+	\begin{align*}
+		a_1(2, 1) + a_2(1, -3) = (-4, -8) \\
+		(2a_1 + a_2, a_1 - 3a_2) = (-4, -8) \\
+		\begin{cases}
+			2a_1 + a_2 = -4 \\
+			a_1 - 3a_2 = -8
+		\end{cases}
+		\Rightarrow
+		\begin{cases}
+			a_1 = -2 \\
+			a_2 = -2
+		\end{cases}
+	\end{align*}
+\end{es}
+
+\subsubsection{Completamento e estrazione di una base}
+Se si hanno dei vettori linearmente indipendenti che non generano $V$, si può \enquote*{\textbf{completarli a una base}}, cioè aggiungere altri vettori fino ad ottenere una base.
+\begin{es}
+	$v_1 = (1, 0, 0), v_2 = (0, 1, 0)$ sono linearmente indipendenti ma non generano $\mathbb{R}^3$: $\langle v_1, v_2 \rangle = \{(x, y, z) \mid z = 0\}$ \\
+	Aggiungendo $v_3 = (0, 0, 1)$ si ottiene una base di $\mathbb{R}^3$: $\langle v_1, v_2, v_3 \rangle = \mathbb{R}^3$.
+	\notebox{$v_1, v_2, v_3$ sono linearmente indipendenti perchè $a_1v_1 + a_2v_2 + a_3v_3 = 0 \Rightarrow a_1 = a_2 = a_3 = 0$. $v_3$ poteva essere qualsiasi vettore con $z \ne 0$}
+\end{es}
+Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrarne una base}}, cioè rimuovere dei vettori linearmente dipendenti fino ad ottenere una base.
+\begin{es}
+	$V = \mathbb{R}^2, v_1 = (1, 0), v_2 = (2, 0), v_3 = (0, 1), v_4 = (2, 5)$ generano $V$ ma non sono linearmente indipendenti perchè $v_4 = 2v_1 + 5v_3$ e $v_2 = 2v_1$.
+	Scartando $v_2$ e $v_4$ si ottiene una base di $\mathbb{R}^2$: $\langle v_1, v_3 \rangle = \mathbb{R}^2$.
+	Un'altra estrazione possibile sarebbe stata $\langle v_2, v_3 \rangle = \mathbb{R}^2$.
+\end{es}
+
+\section{Unità 2 - Lezioni 3, 4}
+\subsection{Approfondimenti sulle basi}
+\begin{teo}{Teorema delle coordinate}{}
+	Un insieme di vettori $v_1, v_2, ..., v_n$ è una base di uno spazio vettoriale $V$ se e solo se ogni vettore $v \in V$ può essere scritto in modo unico come combinazione lineare di $v_1, v_2, ..., v_n$, ovvero:
+	\begin{equation*}
+		\forall v \in V, \exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n
+	\end{equation*}
+	\notebox{Nota: Il simbolo $\exists!$ vuol dire \enquote*{esiste ed è unico}.}
+\end{teo}
+\begin{dimm}
+	Dimostrazione del teorema delle coordinate per i due versi:
+	\begin{description}
+		\item[$\Rightarrow$] Siano $v_1, v_2, ..., v_n$ una base di $V$,cioè generano $V$ e sono linearmente indipendenti. \\
+		      Quindi, $\forall v \in V, \exists a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+		      Per dimostrare l'unicità, supponiamo che esistano $b_1, b_2, ..., b_n \in K \mid v = b_1v_1 + b_2v_2 + ... + b_nv_n$. \\
+		      Sottraendo, $0 = v - v = (a_1 - b_1)v_1 + (a_2 - b_2)v_2 + ... + (a_n - b_n)v_n$. \\
+		      Poichè $v_1, v_2, ..., v_n$ sono linearmente indipendenti, allora $a_1 - b_1 = a_2 - b_2 = ... = a_n - b_n = 0 \Rightarrow a_1 = b_1, a_2 = b_2, ..., a_n = b_n$.
+		      Per cui, $a_1, a_2, ..., a_n$ sono uniche.
+		\item[$\Leftarrow$] Per ipotesi $\forall v \in V, \exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+		      Dunque $v_1, v_2, ..., v_n$ generano $V$ e, poichè $0 \in V$, gli unici coefficienti pesibili sono $a_1 = a_2 = ... = a_n = 0$. \\
+		      Per cui, $v_1, v_2, ..., v_n$ sono linearmente indipendenti. e quindi sono una base di $V$.
+	\end{description}
+\end{dimm}
+\begin{teo}{Teorema della dimensione}{}
+	Sia $V$ uno spazio vettoriale su un campo $K$. Tutte le basi di $V$ hanno lo stesso numero di elementi, detto \textbf{dimensione} di $V$ e indicato con $\dim V$.
+\end{teo}
+
+\begin{teo}{Teorema di completamento ed estrazione}{}
+	Sia $V$ uno spazio vettoriale di dimensione $dim V = d$. \\
+	Allora:
+	\begin{enumerate}
+		\item Qualunque insieme linearmente indipendente di $V$ è composto da $k \leq d$ vettori.
+		    Posso completare l'insieme a una base di $V$ aggiungendo $d - k$ vettori.
+		\item Qualunque insieme che genera $V$ è composto da $h$ vettori con $h \geq d$.
+		    Posso estrarre una base di $V$ selezionando $d$ vettori.
+	\end{enumerate}
+\end{teo}
+
+\begin{cor}{}{}
+	Se $V$ ha $dim n$, un insieme $v_1, v_2, ..., v_n$ è linearmente indipendente se e solo se genera $V$.
+\end{cor}
+
+\begin{es}
+	\textit{Determinare la dimensione di $\mathbb{R}^3$} \\
+	Una base di $\mathbb{R}^3$ è formata da tre vettori linearmente indipendenti che generano $\mathbb{R}^3$. \\
+	Ad esempio, $v_1 = (1, 0, 0), v_2 = (0, 1, 0), v_3 = (0, 0, 1)$ è una base di $\mathbb{R}^3$ e quindi $\dim \mathbb{R}^3 = 3$.
+\end{es}
+\begin{deff}{Base canonica}{}
+	Una base è detta \textbf{canonica} se è formata dai vettori della base standard, cioè:
+	\begin{align*}
+		\mathbb{R}^n & \rightarrow \text{Base canonica}                                   \\
+		\mathbb{R}^1 & \rightarrow (1)                                                    \\
+		\mathbb{R}^2 & \rightarrow (1, 0), (0, 1)                                         \\
+		\mathbb{R}^3 & \rightarrow (1, 0, 0), (0, 1, 0), (0, 0, 1)                        \\
+		\mathbb{R}^4 & \rightarrow (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1) \\
+		\mathbb{R}^n & \rightarrow (1, 0, ..., 0), (0, 1, ..., 0), ..., (0, 0, ..., 1)
+	\end{align*}
+\end{deff}
+\begin{es}
+	\textit{Determinare una base canonica di $\mathbb{R}^3$} \\
+	Una base canonica di $\mathbb{R}^3$ è formata dai vettori $(1, 0, 0), (0, 1, 0), (0, 0, 1)$.
+	Dato però il vettore $(3/2, 7, 4)$, determinare le sue coordinate rispetto alla base canonica di $\mathbb{R}^3$.
+	\begin{align*}
+		(3/2, 7, 4) = a_1(1, 0, 0) + a_2(0, 1, 0) + a_3(0, 0, 1) \\
+		(3/2, 7, 4) = (a_1, 0, 0) + (0, a_2, 0) + (0, 0, a_3)    \\
+		(3/2, 7, 4) = (a_1, a_2, a_3)                            \\
+		\begin{cases}
+			a_1 = 3/2 \\
+			a_2 = 7   \\
+			a_3 = 4
+		\end{cases}
+	\end{align*}
+\end{es}
+\begin{es}
+	Uno spazio vettoriale ha tante basi diversi. Le coordinate di un vettore rispetto a una base dipendono dalla base scelta.
+\end{es}
+\begin{deff}{Forma cartesiana e parametrica}{}
+	Sia $U$ un sottospazio di dimensione $dim U = k$ in uno spazio $V$ di dimensione $dim V = n$ con $(k \leq n)$. \\
+	In forma parametrica $U$ esprime tutti i suoi vettori in funzione di $k$ parametri. \\
+	In forma cartesiana $U$ esprime tutti i suoi vettori in funzione di $n - k$ equazioni cartesiane.
+\end{deff}
+\begin{es}
+	Dati $V = \mathbb{R}^5, v_1 = (1, 2, 0, 0, 1), v_2 = (0, 0, 1, 0, -1)$ posso scrivere il sottospazio generato da $v_1$ e $v_2$ in forma cartesiana e parametrica.
+	\begin{align*}
+		\textbf{Forma cartesiana}  &  & U = \langle v_1, v_2 \rangle & = \{(x_1, x_2, x_3, x_4, x_5) \in \mathbb{R}^5 \mid x_2 = 2x_1, x4 = 0, x_5 = x_1 - x_2\}      \\
+		\textbf{Forma parametrica} &  & U = \langle v_1, v_2 \rangle & = \{tv_1 + sv_2 \mid t, s \in \mathbb{R}\} = \{(t, 2t, s, 0, t - s) \mid t, s \in \mathbb{R}\}
+	\end{align*}
+	In questo caso $\text{dim} \ U = 2$ perchè $v_1, v_2$ sono linearmente indipendenti e generano $U$.
+	Nella forma parametrica, $t$ e $s$ sono detti \textbf{parametri} mentre in quella cartesiana è individuata da 3 (5 - 2) equazioni cartesiane.
+\end{es}
+\begin{es}
+	Sia $V = \mathbb{R}^3$ e
+	\begin{align*}
+		U & = \langle (1, 1, 0), (0, 0, 1) \rangle = \{t(1, 1, 0) + s(0, 0, 1) \mid t, s \in \mathbb{R}\} = \{(t, t, s) \mid t, s \in \mathbb{R}\}    \\
+		W & = \langle (1, 0, 0), (0, 1, -1) \rangle = \{a(1, 0, 0) + b(0, 1, -1) \mid a, b \in \mathbb{R}\} = \{(a, b, -b) \mid a, b \in \mathbb{R}\}
+	\end{align*}
+	Calcolare $U \cap W$.
+	\\
+	Per calcolare l'intersezione tra due sottospazi vettoriali, trasformo i vettori in forma cartesiana:
+	\begin{align*}
+		U & = \{(x, y, z) \in \mathbb{R}^3 \mid x = y\}  \\
+		W & = \{(x, y, z) \in \mathbb{R}^3 \mid y = -z\}
+	\end{align*}
+	A questo punto, calcolo l'intersezione tra le due equazioni:
+	\begin{equation*}
+		U \cap W = \{(x, y, z) \in \mathbb{R}^3 \mid x = y, y = -z\} = \{(x, y, z) \in \mathbb{R}^3 \mid x = y = -z\}
+	\end{equation*}
+	In forma parametrica:
+	\begin{equation*}
+		U \cap W = \{t(1, 1, -1) \mid t \in \mathbb{R}\}
+	\end{equation*}
+	Le dimensioni di $U$ e $W$ sono rispettivamente 2 e 2, quindi $\dim(U \cap W) = 1$.
+\end{es}
+
+\begin{prop}
+	Siano $U$ e $W$ due sottospazi vettoriali di uno spazio vettoriale $V$. Allora $U \cap W$ è un sottospazio vettoriale di $V$.
+	In altri termini, \enquote*{l'intersezione di due sottospazi è un sottospazio}.
+\end{prop}
+
+\begin{dimm}
+	Siano $u_1, u_2 \in U \cap W, u_1, u_2 \in U$ e $U$ è un sottospazio vettoriale, quindi $u_1 + u_2 \in U$.
+	Analogamente, $u_1, u_2 \in W$ e $W$ è un sottospazio vettoriale, quindi $u_1 + u_2 \in W$. \\
+	Quindi, $u_1 + u_2 \in U \cap W$. \\
+	Allo stesso modo si dimostra che $\forall a \in K, u \in U \cap W \Rightarrow a \cdot u \in U \cap W$.
+\end{dimm}
+
+\begin{oss}
+	In generale, l'unione di due sottospazi vettoriali ($U \cup W$) non è un sottospazio vettoriale.
+\end{oss}
+\begin{es}
+	$V = \mathbb{R}^2, U = \{(x, y) \in \mathbb{R}^2 \mid x = 0\}, W = \{(x, y) \in \mathbb{R}^2 \mid y = 0\}$ \\
+	L'unione è $U \cup W = \{(x, y) \in \mathbb{R}^2 \mid x = 0 \lor y = 0\}$ \\
+	Se prendiamo un vettore di ogni sottospazio possiamo facilmente dimostrare che $U \cup W$ non è un sottospazio vettoriale.
+	\[ u = (0, 1) \in U, w = (1, 0) \in W \Rightarrow u + w = (0, 1) + (1, 0) = (1, 1) \notin U \cup W \]
+\end{es}
+
+\begin{deff}{Somma di sottospazi}{}
+	Siano $U$ e $W$ due sottospazi vettoriali di uno spazio vettoriale $V$.
+	La somma di $U$ e $W$ è il sottospazio vettoriale $U + W = \{u + w \mid u \in U, w \in W\}$.
+\end{deff}
+\begin{prop}
+	$U + W$ è un sottospazio vettoriale di $V$.
+\end{prop}
+\begin{dimm}
+	Se $u_1, u_2 \in U + W \Rightarrow \exists w_1, w_2 \in W, u_1, u_2 \in U \mid v_1 = u_1 + w_1, v_2 = u_2 + w_2$.
+	\[ v_1 + v_2 = (u_1 + w_1) + (u_2 + w_2) = (u_1 + u_2) + (w_1 + w_2) \in U + W \]
+	Si nota che $u_1 + u_2 \in U$ e $w_1 + w_2 \in W$. \\
+	Allo stesso modo si dimostra che $\forall a \in K, v \in U + W \Rightarrow a \cdot v \in U + W$.
+\end{dimm}
+
+\begin{es}
+	Dati $V = \mathbb{R}^4, U = \{ (x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_3 = 0, x_4 = 0 \}, W = \{ (x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_1 = 0, x_4 = 0 \}$ \\
+	Calcolare $U + W$.
+	\begin{description}
+		\item[Passo 1] Scrivere $U$ e $W$ in forma parametrica
+		      \begin{align*}
+			      U & = \{(a, b, 0, 0) \mid a, b \in \mathbb{R}\} &  & \text{dim} \ U = 2 \\
+			      W & = \{(0, t, s, 0) \mid t, s \in \mathbb{R}\} &  & \text{dim} \ W = 2
+		      \end{align*}
+		\item[Passo 2] Calcolare $U + W$
+		      \begin{align*}
+			      U + W & = \{u + w \mid u \in U, w \in W\} = \{(a, b, 0, 0) + (0, t, s, 0) \mid a, b, t, s \in \mathbb{R}\}                             \\
+			            & = \{(a, b + t, s, 0) \mid a, b, t, s \in \mathbb{R}\}                                              &  & \text{dim} \ U + W = 3
+		      \end{align*}
+	\end{description}
+	In forma cartesiana, $U + W = \{(x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_1 = 0 \lor x_4 = 0\}$.
+\end{es}
+
+\begin{teo}{Formula di Grassman}{}
+	Siano $U$ e $W$ due sottospazi vettoriali di uno spazio vettoriale $V$. Allora
+	\begin{equation*}
+		\dim(U + W) = \dim U + \dim W - \dim(U \cap W)
+	\end{equation*}
+\end{teo}
+\begin{dimm}
+	Sia $v_1, v_2, ..., v_k$ una base di $U \cap W$. \\
+	Completiamola a una base di $U$: $v_1, v_2, ..., v_k, u_1, u_2, ..., u_m$. \\
+	Completiamola ora $v_1, v_2, ...,m v_k$ a una base di $W$: $v_1, v_2, ..., v_k, w_1, w_2, ..., w_n$. \\
+	Si può verificare che $v_1, v_2, ..., v_k, u_1, u_2, ..., u_m, w_1, w_2, ..., w_n$ è una base. \\
+	Perciò $\dim(U \cap W) = l, \dim U = l + n, \dim W = l + m, \dim(U + W) = l + m + n$.
+\end{dimm}
+
+\begin{es}
+	Sia $V = \mathbb{R}^4, U = \{ (x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_1 = x_2, x_4 = 0 \}, W = \{ (x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_1 = -x_2, x_4 = 0 \}$
+	\[ U \cap W = \{ (x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_1 = x_2 = -x_2 = 0, x_4 = 0 \} = \{ (0, 0, x_3, 0) \mid x_3 \in \mathbb{R} \} \]
+	Una possibile base di $U \cap W$ è $(0, 0, 1, 0)$, quindi $\dim(U \cap W) = 1$. \\
+	Una possibile base di $U$ è $(1, 1, x_3, 0), (0, 0, 0, 1)$, quindi $\dim U = 2$. \\
+	Una possibile base di $W$ è $(1, -1, x_3, 0), (0, 0, 0, 1)$, quindi $\dim W = 2$. \\
+	Per la formula di Grassman, $\dim(U + W) = \dim U + \dim W - \dim(U \cap W) = 2 + 2 - 1 = 3$.
+	In effetti, una base di $U + W$ è data da $v_1, u_1, w_1$, cioè $U + W = \{ tu + su, rw, t, s, r \in \mathbb{R} \} = \{ (0, 0, t, 0), (s, s, 0, 0), (r, -r, 0, 0) \mid t, s, r \in \mathbb{R} \} = \{ (s + r, s - r, t, 0) \mid t, s, r \in \mathbb{R} \} = \{ (x_1, x_2, x_3, x_4) \in \mathbb{R}^4 \mid x_4 = 0 \}$.
+\end{es}
+
+\begin{deff}{Somma diretta}{}
+	La somma di due sottospazi $U + W$ è detta \textbf{diretta} se $U \cap W = \{0\}$.
+	In tal caso, si scrive $U \oplus W$.
+\end{deff}
+
+\begin{prop}
+	$U, W$ formano una somma diretta \textcolor{blue}{$\Leftrightarrow$} ogni vettore $v \in U \oplus W$ può essere scritto in modo unico come somma di un vettore $u \in U$ e un vettore $w \in W$
+	\textcolor{teal}{$\Leftrightarrow$} l'unione di una base di $U$ e una base di $W$ è una base di $U \oplus W$.
+\end{prop}
+\begin{dimm}
+	Dimostriamo entrambe le implicazioni:
+	\begin{description}
+		\item[\textcolor{blue}{$\Leftrightarrow$}] Se $V = U \oplus W$ allora $V = U + W$, quindi $\forall v \in V \exists u \in U, w \in W \mid v = u + w$. \\
+		      Supponiamo che $\exists u' \in U, w' \in W \mid v = u' + w' = u + w \Rightarrow u - u' = w - w'$ in cui $u - u' \in U$ e $w - w' \in W$. \\
+		      Tuttavia, dato che $U \cap W = \{0\}$, allora $u - u' = w - w' = 0 \Rightarrow u = u', w = w'$.
+			  Viceversa se ogni $v$ si scrive in modo unico, la somma deve essere diretta per lo stesso ragionamento.
+		\item[\textcolor{teal}{$\Leftrightarrow$}] Se $u_1, ..., u_n$ è una base di $U$ e $w_1, ..., w_m$ è una base di $W$, allora ogni $v \in V$ si scrive in modo unico come $v = u + w$ con $u \in U, w \in W$.
+		      Quindi: $v = (a_1u_1 + ... + a_nu_n) + (b_1w_1 + ... + b_mw_m)$, perciò $u_1, ..., u_n, w_1, ..., w_m$ è una base di $V$. Similarmente il viceversa.
+	\end{description}
+\end{dimm}
+
+\begin{es}
+	$V = \mathbb{R}^2, U = \{(x, 0) \mid x \in \mathbb{R}\}, W = \{(0, y) \mid y \in \mathbb{R}\}$ \\
+	$U \cap W = \{0\}$. D'altra parte, ogni $(x, y) \in V$ si scrive in modo unico come $(x, y) = (x, 0) + (0, y)$. \\
+	Quindi $V = U + W = U \oplus W$. \\
+	Una base di $U$ è $(1, 0)$, una base di $W$ è $(0, 1)$, quindi una base di $V$ è $(1, 0), (0, 1)$.
+\end{es}
+
+\begin{es}
+	$V = \mathbb{R}^3, U = \{(x, y, z) \mid z = 0\}, W = \{(x, y, z) \mid x = 0\}$ \\
+	$U \cap W = \{(x, y, z) \mid z = 0, x = 0\} \ne \{(0, 0, 0)\}$. \\
+	Quindi $V = U + W$ ma $V \ne U \oplus W$. \\
+	Infatti, ogni vettore di $V$ si scrive come somma di un vettore di $U$ e un vettore di $W$, ma non in modo unico. \\
+	Ad esempio, $(2, 7, -3) = (2, 7, 0) + (0, 0, -3) = (2, 0, 0) + (0, 7, -3)$.
+\end{es}
+
+\subsection{Metodo di Gauss}
+\begin{es}
+	Risolvere il sistema lineare:
+	\begin{align*}
+		\begin{cases}
+			2x_1 - x_2 + x_3 + 2x_4 = 1  \\
+			4x_1 - x_2 - 3x_3 - x_4 = -1 \\
+			- 2x_1 - x_2 + x_3 + x_4 = 1 \\
+			x_1 + x_2 + x_3 + x_4 = 2
+		\end{cases}
+	\end{align*}
+
+	\begin{description}
+		\item[Passo 1] Sommo a ciascuna equazione (dalla seconda in poi) la prima moltiplicata per un coefficiente tale che il termine $x_1$ nelle altre equazioni si annulli.
+		      \begin{align*}
+			      \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                                & = 1  \\
+			      \text{-2R1 + R2}           &  & \mathbf{0x_1} + x_2 - 5x_3 - 5x_4                      & = -3 \\
+			      \text{R1 + R3}             &  & \mathbf{0x_1} - 2x_2 + 2x_3 + 3x_4                     & = 2  \\
+			      -\frac{1}{2}\text{R1 + R4} &  & \mathbf{0x_1} + \frac{3}{2}x_2 + \frac{1}{2}x_3 + 0x_4 & = 1
+		      \end{align*}
+		\item[Passo 2] Vado avanti di una equazione. Non tocco più la prima e neanche la seconda, ma sommo a ciascuna equazione (dalla terza in poi) la seconda moltiplicata per un coefficiente tale che il termine $x_2$ nelle altre equazioni si annulli.
+		      \begin{align*}
+			      \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                & = 1   \\
+			      \text{R2}                  &  & x_2 - 5x_3 - 5x_4                      & = -3  \\
+			      \text{2R2 + R3}            &  & \mathbf{0x_2} - 8x_3 - 7x_4            & = - 4 \\
+			      -\frac{3}{2}\text{R2 + R4} &  & \mathbf{0x_2} + 8x_3 + \frac{15}{2}x_4 & = 6
+		      \end{align*}
+		\item[Passo 3] Vado avanti di una equazione. Non tocco più la prima, la seconda e neanche la terza, ma sommo a ciascuna equazione (dalla quarta in poi) la terza moltiplicata per un coefficiente tale che il termine $x_3$ nelle altre equazioni si annulli.
+		      \begin{align*}
+			      \text{R1}      &  & 2x_1 - x_2 + x_3 + 2x_4        & = 1   \\
+			      \text{R2}      &  & - 5x_3 - 5x_4                  & = -3  \\
+			      \text{R3}      &  & - 8x_3 - 7x_4                  & = - 4 \\
+			      \text{R3 + R4} &  & \mathbf{0x_3} + \frac{1}{2}x_4 & = 2
+		      \end{align*}
+		\item[Passo 4] Finite le equazioni per trovare la soluzione del sistema, risalgo dall'ultima risolvendo le equazioni e sostituendo le incognite di volta in volta:
+		      \begin{align*}
+			      \text{R4} &  & \frac{1}{2}x_4            & = 2 \Rightarrow x_4 = 4   \\
+			      \text{R3} &  & - 8x_3 - 7 \cdot 4        & = -4 \Rightarrow x_3 = 1  \\
+			      \text{R2} &  & - 5 \cdot 1 - 5 \cdot 4   & = -3 \Rightarrow x_2 = 17 \\
+			      \text{R1} &  & 2x_1 - 17 + 1 + 2 \cdot 4 & = 1 \Rightarrow x_1 = - 3
+		      \end{align*}
+	\end{description}
+	Ho trovato così l'unica soluzione del sistema: $x_1 = -3, x_2 = 17, x_3 = 1, x_4 = 4$.
+\end{es}
+Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una soluzione generale.
+\section{Unità 3 - Lezioni 5, 6, 7}
+\subsection{Approfondimento sulle funzioni}
+\begin{deff}{Applicazione lineare}{}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$.
+	Un'applicazione $f: V \rightarrow U$ è \textbf{lineare} se \enquote*{rispetta le operazioni}, cioè:
+	\begin{align*}
+		\text{Somma}                &  & f(v_1 + v_2) = f(v_1) + f(v_2) &  & \forall v_1, v_2 \in V           \\
+		\text{Prodotto per scalare} &  & f(a \cdot v) = a \cdot f(v)    &  & \forall a \in K, \forall v \in V
+	\end{align*}
+	In maniera equivalente, $f$ è lineare $\Leftrightarrow \forall v_1, v_2 \in V, \forall a_1, a_2 \in K$:
+	\begin{equation*}
+		f(a_1v_1 + a_2v_2) = a_1f(v_1) + a_2f(v_2)
+	\end{equation*}
+\end{deff}
+\begin{es}
+	$f: \mathbb{R}^3 \rightarrow \mathbb{R}^2, f(x, y, z) = (2z, x + y)$ è lineare? \\
+	Dati due vettori $v_1 = (x_1, y_1, z_1), v_2 = (x_2, y_2, z_2) \in \mathbb{R}^3$ e uno scalare $a \in \mathbb{R}$,
+	verifico se le operazioni sono compatibili: \\
+	\textbf{Somma}:
+	\begin{align*}
+		f(v_1 + v_2)    & = f(x_1 + x_2, y_1 + y_2, z_1 + z_2) = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)   \\
+		f(v_1) + f(v_2) & = (2z_1, x_1 + y_1) + (2z_2, x_2 + y_2) = (2z_1 + 2z_2, x_1 + x_2 + y_1 + y_2) \\
+		                & = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)
+	\end{align*}
+	\textbf{Prodotto per scalare}:
+	\begin{align*}
+		f(a \cdot v) = f(ax, ay, az)       & = (2az, ax + ay) \\
+		a \cdot f(v) = a \cdot (2z, x + y) & = (2az, ax + ay)
+	\end{align*}
+	Quindi $f$ è lineare, dato che i risultati coincidono.
+\end{es}
+\begin{es}
+	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, f(x, y) = (2x, y^2)$ è lineare? \\
+	Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili: \\
+	\textbf{Somma}:
+	\begin{align*}
+		f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (2(x_1 + x_2), (y_1 + y_2)^2) & = (2(x_1 + x_2), y_1^2 + 2y_1y_2 + y_2^2) \\
+		f(v_1) + f(v_2) = (2x_1, y_1^2) + (2x_2, y_2^2)                        & = (2(x_1 + x_2), y_1^2 + y_2^2)
+	\end{align*}
+	\textbf{Prodotto per scalare}:
+	\begin{align*}
+		f(a \cdot v) = f(ax, ay)         & = (2ax, (ay)^2) \\
+		a \cdot f(v) = a \cdot (2x, y^2) & = (2ax, ay^2)
+	\end{align*}
+	Quindi $f$ non è lineare, dato che i risultati non coincidono.
+\end{es}
+\begin{es}
+	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^3, f(x, y) = (0, x+y, 1)$ è lineare? \\
+	Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili: \\
+	\textbf{Somma}:
+	\begin{align*}
+		f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (0, (x_1 + x_2) + (y_1 + y_2), 1) & = (0, x_1 + x_2 + y_1 + y_2, 1) \\
+		f(v_1) + f(v_2) = (0, x_1 + y_1, 1) + (0, x_2 + y_2, 1)                    & = (0, x_1 + x_2 + y_1 + y_2, 2)
+	\end{align*}
+	\textbf{Prodotto per scalare}:
+	\begin{align*}
+		f(a \cdot v) = f(ax, ay)             & = (0, ax + ay, 1) \\
+		a \cdot f(v) = a \cdot (0, x + y, 1) & = (0, ax + ay, a)
+	\end{align*}
+	Quindi $f$ non è lineare, dato che i risultati non coincidono.
+\end{es}
+\begin{prop}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	Inoltre ricordiamo che Im $f = \{u \in U \mid \exists v \in V \mid f(v) = u\}$ e che $f$ è surriettiva $\Leftrightarrow$ Im $f = U$.
+	Im $f$ è un sottospazio vettoriale di $U$.
+\end{prop}
+\begin{dimm}
+	Devo verificare che le proprietà di un sottospazio vettoriale siano rispettate:
+	\begin{description}
+		\item Im $f$ non è vuoto perchè $0 \in \text{Im } f$ (dato che $f(0) = 0$).
+		\item Se $u_1, u_2 \in \text{Im } f \Rightarrow u_1 + u_2 \in \text{Im } f$. In effetti, $u_1 \in \text{Im } f \Rightarrow \exists v_1 \in V \mid f(v_1) = u_1$ e $u_2 \in \text{Im } f \Rightarrow \exists v_2 \in V \mid f(v_2) = u_2$. Quindi:
+		      \begin{align*}
+			      \exists v_1 + v_2 \in V \mid f(v_1 + v_2) = f(v_1) + f(v_2) = u_1 + u_2 \Rightarrow u_1 + u_2 \in \text{Im } f
+		      \end{align*}
+		\item Se $u \in \text{Im } (u = f(v) \ \forall v \in V)$ e $a \in K \Rightarrow f(av) = af(v) = au \Rightarrow au \in \text{Im } f$
+	\end{description}
+\end{dimm}
+
+\begin{deff}{Nucleo di un'applicazione lineare}{}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	Il \textbf{nucleo} di $f$ è l'insieme dei vettori di $V$ che risultano in $0$ dopo l'applicazione di $f$:
+	\[ \text{Ker } f = \{v \in V \mid f(v) = 0\} \]
+\end{deff}
+\begin{prop}
+	Ker $f$ è un sottospazio vettoriale di $V$.
+\end{prop}
+\begin{dimm}
+	Devo verificare che le proprietà di un sottospazio vettoriale siano rispettate:
+	\begin{description}
+		\item Ker $f$ non è vuoto perchè $0 \in \text{Ker } f$ (dato che $f(0) = 0$).
+		\item Se $v_1, v_2 \in \text{Ker } f \Rightarrow f(v_1) = f(v_2) = 0 \Rightarrow f(v_1 + v_2) = f(v_1) + f(v_2) = 0 + 0 = 0 \Rightarrow v_1 + v_2 \in \text{Ker } f$
+		\item Se $v \in \text{Ker } f \ (f(v) = 0)$ e $a \in K \Rightarrow f(av) = af(v) = a \cdot 0 = 0 \Rightarrow av \in \text{Ker } f$
+	\end{description}
+\end{dimm}
+\begin{prop}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	$f$ è iniettiva $\Leftrightarrow$ Ker $f = \{0\}$
+\end{prop}
+\begin{dimm}
+	Dimostriamo entrambi i versi:
+	\begin{description}
+		\item[$\Rightarrow$] Se $f$ è iniettiva, allora $f(0) = 0$ (per definizione di iniettività).
+		      Quindi, dato un $v \in \text{Ker } f$, $f(v) = 0 = f(0) \Rightarrow v = 0 \Rightarrow \text{Ker } f = \{0\}$
+		\item[$\Leftarrow$] Devo dimoistrare che se $\text{Ker } f = \{0\}$ allora $f$ è iniettiva.
+		      Dati due vettori $v_1, v_2 \in V$ tali che $f(v_1) = f(v_2)$, allora $f(v_1) - f(v_2) = 0 = f(v_1 - v_2) = 0 \Rightarrow v_1 - v_2 \in \text{Ker } f = \{0\} \Rightarrow v_1 - v_2 = 0 \Rightarrow v_1 = v_2$.
+		      Di conseguenza, $f$ è iniettiva.
+	\end{description}
+\end{dimm}
+\begin{es}
+	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, f(x, y) = (x + y, 2x + 2y)$ è iniettiva? \\
+	Devo verificare se Ker $f = \{0\}$.
+	\begin{align*}
+		f(x, y) = (x + y, 2x + 2y) = (0, 0) \Rightarrow \begin{cases}
+			                                                x + y = 0 \\
+			                                                2x + 2y = 0
+		                                                \end{cases}
+		\Rightarrow \begin{cases}
+			            x = 0 \\
+			            y = 0
+		            \end{cases}
+	\end{align*}
+	Quindi Ker $f = \{0\}$ e $f$ è iniettiva.
+	Inoltre, Im $f = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\} = \{(x, -x) \mid x \in \mathbb{R}\}$.
+\end{es}
+\begin{teo}{Teorema del rango}{}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	\begin{equation*}
+		\text{dim Ker} f + \text{dim Im} f = \text{dim} V
+	\end{equation*}
+\end{teo}
+\begin{dimm}
+	Sia $v_1, v_2, ..., v_d$ una base di Ker $f$ (sottospazio di $V$) e completiamola a una base di $V$, $v_1, v_2, ..., v_d, v_{d+1}, ..., v_n$.
+	Per la definizione di Ker $f$, $f(v_1) = f(v_2) = ... = f(v_d) = 0$.
+	Quindi i vettori $f(v_{d+1}), f(v_{d+2}), ..., f(v_n)$ generano Im $f$. \\
+	Sia $u \in \text{Im } f$, cioè $\exists v \in V \mid f(v) = u$. Poichè $v_1, v_2, ..., v_n$ sono una base di $V$,
+	$\exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$ per il teorema delle coordinate. \\
+	Poichè $f$ è lineare, $f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_{d+1}f(v_{d+1}) + ... + a_nf(v_n)$. \\
+	Dunque $\forall u \in \text{Im } f, \exists! a_{d+1}, ..., a_n \in K \mid u = f(v) = a_{d+1}f(v_{d+1}) + ... + a_nf(v_n)$,
+	cioè per il teorema delle coordinate, $f(v_{d+1}), f(v_{d+2}), ..., f(v_n)$ sono una base di Im $f$. \\
+	Quindi $\text{dim Ker} f = d, \text{dim V} = n, \text{dim Im} f = n - d$ e la formula è verificata.
+\end{dimm}
+
+\begin{es}
+	Conseguenze del teorema del rango:
+	\begin{itemize}
+		\item Se $f$ è iniettiva, allora $\dim U \geq \dim V$. \\
+		      Infatti, $\dim U \geq \dim \text{Im} f = \dim V - \dim \text{Ker} f = \dim V - 0 = \dim V$.
+		\item Se $f$ è suriettiva, allora $\dim U \leq \dim V$. \\
+		      Infatti, $\dim U = \dim \text{Im} f = \dim V - \dim \text{Ker} f \leq \dim V$.
+		\item Se $f$ è biunivoca, allora Ker $\dim U = \dim V$. Infatti per i punti precedenti valgono entrambe le disuguaglianze.
+		\item Se $\dim U = \dim V$, allora $f$ è iniettiva $\Leftrightarrow$ $f$ è suriettiva $\Leftrightarrow$ $f$ è biunivoca. \\
+		      Infatti $f$ è iniettiva $\Leftrightarrow \dim \text{Ker} f = 0 \Leftrightarrow \dim V = \dim \text{Im} f + 0 \Leftrightarrow \dim V = \dim \text{Im} f \Leftrightarrow \dim U = \dim \text{Im} f \Leftrightarrow f$ è suriettiva.
+	\end{itemize}
+\end{es}
+
+\subsection{Isomorfismi}
+\begin{deff}{Isomorfismo}{}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	$f$ è un \textbf{isomorfismo} se è biunivoca.
+\end{deff}
+
+\begin{es}
+	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, f(x, y) = (x + y, x - y)$ è un isomorfismo? \\
+	Devo verificare se $f$ è lineare e se è biunivoca.
+	\begin{description}
+		\item[Linearità] Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili:
+		      \begin{align*}
+			      f(v_1 + v_2)    & = f(x_1 + x_2, y_1 + y_2) = ((x_1 + x_2) + (y_1 + y_2), (x_1 + x_2) - (y_1 + y_2))                         \\
+			      f(v_1) + f(v_2) & = (x_1 + y_1, x_1 - y_1) + (x_2 + y_2, x_2 - y_2) = ((x_1 + x_2) + (y_1 + y_2), (x_1 + x_2) - (y_1 + y_2))
+		      \end{align*}
+		      \begin{align*}
+			      f(a \cdot v) & = f(ax, ay) = (ax + ay, ax - ay) = a(x + y, x - y) = a \cdot f(v) \\
+			      a \cdot f(v) & = a \cdot (x + y, x - y) = (ax + ay, ax - ay) = f(ax, ay)
+		      \end{align*}
+		      Quindi $f$ è lineare.
+		\item[Iniettività] Devo verificare se Ker $f = \{0\}$.
+		      \begin{align*}
+			      f(x, y) = (x + y, x - y) = (0, 0) \Rightarrow \begin{cases}
+				                                                    x + y = 0 \\
+				                                                    x - y = 0
+			                                                    \end{cases}
+			      \Rightarrow \begin{cases}
+				                  x = 0 \\
+				                  y = 0
+			                  \end{cases}
+		      \end{align*}
+		      Quindi Ker $f = \{0\}$ e $f$ è iniettiva.
+		\item[Suriettività] Devo verificare se Im $f = \mathbb{R}^2$.
+		      \begin{align*}
+			      \text{Im } f = \{(x + y, x - y) \mid x, y \in \mathbb{R}\} = \{(x_1, x_2) \mid x_1, x_2 \in \mathbb{R}\} = \mathbb{R}^2
+		      \end{align*}
+		      Quindi $f$ è suriettiva.
+	\end{description}
+	Quindi $f$ è lineare e biunivoca, quindi è un isomorfismo.
+\end{es}
+
+\begin{deff}{Isomorfismo di spazi vettoriali}{}
+	Due spazi vettoriali $V$ e $U$ su un campo $K$ si dicono \textbf{isomorfi} se esiste un isomorfismo $f: V \rightarrow U$.
+\end{deff}
+\begin{prop}
+	"Essere isomorfi" è una relazione di equivalenza.
+\end{prop}
+\begin{dimm}
+	Devo verificare che la relazione sia riflessiva, simmetrica e transitiva:
+	\begin{description}
+		\item[Riflessività] $V$ è isomorfo a se stesso tramite l'identità (l'identità è un isomorfismo).
+		\item[Simmetria] Se $V$ è isomorfo a $U$, allora $U$ è isomorfo a $V$ tramite l'isomorfismo inverso.
+		\item[Transitività] Se $V$ è isomorfo a $U$ e $U$ è isomorfo a $W$, allora $V$ è isomorfo a $W$ tramite la composizione degli isomorfismi.
+	\end{description}
+\end{dimm}
+
+\begin{prop}
+	La composizione di un'applicazione lineare è lineare e la composizione di un isomorfismo è un isomorfismo.
+\end{prop}
+\begin{dimm}
+	Siano $V, U, W$ tre spazi vettoriali su un campo $K$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
+	Siano $v_1, v_2 \in V, a \in K$. \\
+	Verifico che la composizione sia lineare:
+	\begin{align*}
+		(g \circ f)(v_1 + v_2) & = g(f(v_1 + v_2)) = g(f(v_1) + f(v_2)) = g(f(v_1)) + g(f(v_2)) = (g \circ f)(v_1) + (g \circ f)(v_2) \\
+		(g \circ f)(av)        & = g(f(av)) = g(af(v)) = ag(f(v)) = a(g \circ f)(v)
+	\end{align*}
+	Inoltre, se $f$ e $g$ sono biunivoche esistono le inverse $f^{-1}$ e $g^{-1}$. Perciò anche $g \circ f$ è biunivoca perchè $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$. \\
+	Quindi $g \circ f$ è lineare e biunivoca, cioè un isomorfismo.
+	\begin{center}
+		\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+		\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+			%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+			%Curve Lines [id:da5099385504152638] 
+			\draw    (203,153.21) .. controls (247.55,227.46) and (368.55,181.16) .. (409.78,151.12) ;
+			\draw [shift={(411,150.21)}, rotate = 143.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Straight Lines [id:da7275692198111594] 
+			\draw    (224,143) -- (293,142.23) ;
+			\draw [shift={(295,142.21)}, rotate = 179.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Straight Lines [id:da10053352872854315] 
+			\draw    (328,139) -- (397,138.23) ;
+			\draw [shift={(399,138.21)}, rotate = 179.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Curve Lines [id:da6691146622767405] 
+			\draw [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,draw opacity=1 ]   (416,120.21) .. controls (435.8,97.44) and (306.62,58.01) .. (315.68,121.26) ;
+			\draw [shift={(316,123.21)}, rotate = 259.7] [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Curve Lines [id:da3543070763797562] 
+			\draw [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,draw opacity=1 ]   (310,121.21) .. controls (329.8,98.44) and (198.66,60.97) .. (207.68,124.26) ;
+			\draw [shift={(208,126.21)}, rotate = 259.7] [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Curve Lines [id:da5831588993196353] 
+			\draw [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,draw opacity=1 ]   (416,120.21) .. controls (468.74,44.59) and (178.92,0.65) .. (207.54,124.34) ;
+			\draw [shift={(208,126.21)}, rotate = 255.75] [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+			% Text Node
+			\draw (199,128.4) node [anchor=north west][inner sep=0.75pt]    {$V$};
+			% Text Node
+			\draw (301,129.4) node [anchor=north west][inner sep=0.75pt]    {$U$};
+			% Text Node
+			\draw (407,129.4) node [anchor=north west][inner sep=0.75pt]    {$W$};
+			% Text Node
+			\draw (253,115.4) node [anchor=north west][inner sep=0.75pt]    {$f$};
+			% Text Node
+			\draw (357,114.4) node [anchor=north west][inner sep=0.75pt]    {$g$};
+			% Text Node
+			\draw (271,200.4) node [anchor=north west][inner sep=0.75pt]    {$f\ \circ \ g$};
+			% Text Node
+			\draw (274.92,23.14) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,opacity=1 ]  {$( f\ \circ \ g)^{-1}$};
+			% Text Node
+			\draw (265,66.4) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,opacity=1 ]  {$f^{-1}$};
+			% Text Node
+			\draw (345,63.4) node [anchor=north west][inner sep=0.75pt]  [color={rgb, 255:red, 48; green, 95; blue, 151 }  ,opacity=1 ]  {$g^{-1}$};
+		\end{tikzpicture}
+	\end{center}
+\end{dimm}
+\begin{prop}
+	L'inverso di un isomorfismo è un isomorfismo.
+\end{prop}
+\begin{dimm}
+	Sia $f: V \rightarrow U$ un isomorfismo di spazi vettoriali. Poichè $f$ è biunivoca $\exists f^{-1}: U \rightarrow V$. \\
+	Dobbiamo verificare che $f^{-1}$ sia lineare. \\
+	Siano $u_1, u_2 \in U, a \in K$. Poichè $f$ è biunivoca, $\exists! v_1, v_2 \in V \mid f(v_1) = u_1, f(v_2) = u_2$.
+	Quindi:
+	\begin{align*}
+		f^{-1}(u_1 + u_2) & = f^{-1}(f(v_1) + f(v_2)) = f^{-1}(f(v_1 + v_2)) = v_1 + v_2 = f^{-1}(u_1) + f^{-1}(u_2) \\
+		f^{-1}(au)        & = f^{-1}(af(v)) = f^{-1}(f(av)) = av = af^{-1}(u)
+	\end{align*}
+	Quindi $f^{-1}$ è lineare e biunivoca, cioè un isomorfismo.
+\end{dimm}
+\begin{teo}{Teorema dell'estensione lineare}{}
+	Sia $V$ uno spazio vettoriale su un campo $K$ e $v_1, v_2, ..., v_n$ una base di $V$. \\
+	Siano $U$ uno spazio vettoriale su $K$ e $u_1, u_2, ..., u_n$ vettori di $U$. \\
+	Allora esiste un'unica applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = u_1, f(v_2) = u_2, ..., f(v_n) = u_n$.
+\end{teo}
+\begin{dimm}
+	Sia $v$ un vettore di $V$. Poichè $v_1, v_2, ..., v_n$ è una base di $V$, $\exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+	Quindi $f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = a_1u_1 + a_2u_2 + ... + a_nu_n$. \\
+	Quindi $f$ esiste ed è unicamente determinata.
+\end{dimm}
+\begin{es}
+	Sia $V = \mathbb{R}^2, l_1 = (1, 0), l_2 = (0, 1)$ , dire se esiste ed è unica un'applicazione lineare $f: V \rightarrow V$ tale che $f(l_1) = (2, 1), f(l_2) = (-1, 3)$. \\
+	Poichè $l_1, l_2$ è una base di $V$, per il teorema dell'estensione lineare esiste ed è unica un'applicazione lineare $f: V \rightarrow V$ tale che $f(l_1) = (2, 1), f(l_2) = (-1, 3)$.
+	In effetti ogni vettore $v = (x, y) \in V$ si può scrivere come $v = xl_1 + yl_2$ e quindi $f(v) = xf(l_1) + yf(l_2) = x(2, 1) + y(-1, 3) = (2x - y, x + 3y)$.
+\end{es}
+\begin{es}
+	Siano $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, v_1 = (2, -1), v_2 = (4, -2)$.
+	Esiste un'unica applicazione lineare tale che $f(v_1) = (1, 0), f(v_2) = (3, -1)$? \\
+	Osserviamo che $v_2 = 2v_1$, quindi $f(v_2) = 2f(v_1)$. Ma $f(v_2) = (3, -1) \neq 2(1, 0) = (2, 0)$. \\
+	Quindi non esiste un'unica applicazione lineare che soddisfi le condizioni.
+\end{es}
+\begin{es}
+	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, v_1 = (2, -1), v_2 = (4, -2)$.
+	Esiste un'applicazione lineare tale che $f(v_1) = (1, 1), f(v_2) = (2, 2)$? Se sì, è unica? \\
+	Osserviamo che $v_2 = 2v_1$, quindi $f(v_2) = 2f(v_1)$: le condizioni sono soddisfatte. \\
+	Completiamo $v_1$ a una base di $\mathbb{R}^2$: $v_1, v_2$ è una base di $\mathbb{R}^2$. \\
+	Per ogni scelta di $v_2$ non esiste un'unica applicazione lineare che soddisfi le condizioni (per il teorema dell'estensione lineare), ma ce ne sono infinite.
+\end{es}
+
+Il teorema dell'estensione lineare indica che per sapere chi è $f$ è sufficiente conoscere cosa fa sui vettori di una base di $V$.
+\begin{deff}{Matrice associata ad un'applicazione lineare}{}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	Siano $v_1, v_2, ..., v_n$ una base di $V$ e $u_1, u_2, ..., u_m$ una base di $U$. \\
+	Dato $f(v_1) \in U \exists! a_{11}, a_{21}, ..., a_{m1} \in K \mid f(v_1) = a_{11}u_1 + a_{21}u_2 + ... + a_{m1}u_m$. \\
+	Definiamo la \textbf{matrice associata} ad $f$ rispetto alle basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ come:
+	\begin{equation*}
+		\begin{pmatrix}
+			a_{11} & a_{21} & \cdots & a_{m1} \\
+			a_{12} & a_{22} & \cdots & a_{m2} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{1n} & a_{2n} & \cdots & a_{mn}
+		\end{pmatrix}
+	\end{equation*}
+	Ho ottenuto una matrice $m \times n$., cioè una tabella con $m$ righe e $n$ colonne.
+\end{deff}
+Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto alle basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ determina univocamente $f$.
+\begin{es}
+	Sia $V = \mathbb{R}^3$ e $U = \mathbb{R}^2$. Siano $v_1 = (1, 1, 0), v_2 = (1, 0, -1), v_3 = (0, 1, 2)$ una base di $V$ e $u_1 = (0, 2), u_2 = (-1, 0)$ una base di $U$. \\
+	Sia $f: V \rightarrow U$ un'applicazione lineare tale che $f(x, y, z) = (x - z, 2y - x)$. \\
+	Allora la matrice associata ad $f$ rispetto alle basi $v_1, v_2, v_3$ e $u_1, u_2$ è:
+	\begin{align*}
+		\begin{pmatrix}
+			1  & \frac{1}{2} & 0 \\
+			-1 & - 2         & 2
+		\end{pmatrix}
+	\end{align*}
+\end{es}
+\begin{align*}
+	f(v_1) = f(1, 1, 0) = (1 - 0, 2 - 1) = (1, 1) = 1 \cdot u_1 + 1 \cdot u_2      \\
+	f(v_2) = f(1, 0, -1) = (1 + 1, 0 - 1) = (0, -1) = 0 \cdot u_1 + (-1) \cdot u_2 \\
+	f(v_3) = f(0, 1, 2) = (0 - 2, 2 - 0) = (-2, 2) = (-2) \cdot u_1 + 2 \cdot u_2
+\end{align*}
+\begin{es}
+	La matrice ottenuta dipende dalle basi scelte. Se scelgo basi diverse, ottengo matrici diverse.
+\end{es}
+
+Siano $V, U, W$ tre spazi vettoriali su un campo $K$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
+I campi hanno rispettivamente le basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ e $w_1, w_2, ..., w_p$.
+Sia $A$ la matrice di $f$ e $B$ la matrice di $g$ rispetto alle basi scelte. \\
+Si vuole calcolare la matrice di $g \circ f$ rispetto alle basi scelte. \\
+$f(v_1)$ si può scrivere come $\sum_{j} a_{ji}u_j$ e $g(u_j)$ si può scrivere come $\sum_{h} b_{hj}w_h$. \\
+Quindi $g(f(v_i)) = g\left(\sum_{j} a_{ji}u_j\right) = \sum_{j} a_{ji}g(u_j) = \sum_{j} a_{ji}\left(\sum_{h} b_{hj}w_h\right) = \sum_{h} \left(\sum_{j} a_{ji}b_{hj}\right)w_h$. \\
+La matrice di $g \circ f$ rispetto alle basi scelte è la matrice che ha alla $h$-esima riga e $i$-esima colonna l'elemento $\sum_{j\in\{1,...,m\}} a_{ji}b_{hj}$, ovvero il "prodotto riga per colonna" delle matrici $A$ e $B$.
+\begin{es}
+	Sia $V = U = W$ con base $l_1 = (1, 0), l_2 = (0, 1)$. Siano $f(x, y) = (5x + 2y, -2x + y)$ e $g(x, y) = (2x - y, -x + 3y)$.
+	Calcolare la matrice di $g \circ f$ rispetto alla base $l_1, l_2$. \\
+	La matrice di $f$ è:
+	\begin{align*}
+		A = \begin{pmatrix}
+			    5  & 2 \\
+			    -2 & 1
+		    \end{pmatrix}
+	\end{align*}
+	La matrice di $g$ è:
+	\begin{align*}
+		B = \begin{pmatrix}
+			    2  & -1 \\
+			    -1 & 3
+		    \end{pmatrix}
+	\end{align*}
+	La matrice di $g \circ f$ è:
+	\begin{align*}
+		BA = \begin{pmatrix}
+			     2  & -1 \\
+			     -1 & 3
+		     \end{pmatrix} \begin{pmatrix}
+			                   5  & 2 \\
+			                   -2 & 1
+		                   \end{pmatrix} = \begin{pmatrix}
+			                                   2 \cdot 5 + (-1) \cdot (-2) & 2 \cdot 2 + (-1) \cdot 1 \\
+			                                   (-1) \cdot 5 + 3 \cdot (-2) & (-1) \cdot 2 + 3 \cdot 1
+		                                   \end{pmatrix} = \begin{pmatrix}
+			                                                   12  & 3 \\
+			                                                   -11 & 1
+		                                                   \end{pmatrix}
+	\end{align*}
+	Aritmeticamente:
+	\begin{align*}
+		g(f(x, y)) & = g(5x + 2y, -2x + y) = g(5x + 2y, -2x + y) = (2(5x + 2y) - (-2x + y), -(5x + 2y) + 3(-2x + y)) \\
+		           & = (12x + 3y, -11x + y)
+	\end{align*}
+	Le soluzioni coincidono.
+\end{es}
+
+\begin{teo}{Isomorfismi e basi}{}
+	Un'applicazione lineare è un isomorfismo $\Leftrightarrow$ manda basi in basi, ovvero se $f: V \rightarrow U$ è un isomorfismo e $v_1, v_2, ..., v_n$ è una base di $V$, allora $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$.
+\end{teo}
+\begin{dimm}
+	Dimostriamo entrambi i versi dell'implicazione:
+	\begin{itemize}
+		\item[$\Rightarrow$] Supponiamo che $f$ sia un isomorfismo e $v_1, v_2, ..., v_n$ sia una base di $V$. Si vuole dimostrare che $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$. \\
+		      Per il teorema delle coordinate, $\forall u \in U \ \exists! a_1, a_2, ..., a_n \in K \mid u = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n)$ (dato che $f$ è biunivoca e lineare e $v_1, v_2, ..., v_n$ è una base di $V$).
+		      La combinazione lineare ottenuta è unica, quindi $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$.
+		\item[$\Leftarrow$] Supponiamo che $f(v_1), f(v_2), ..., f(v_n)$ sia una base di $U$ e $v_1, v_2, ..., v_n$ sia una base di $V$. \\
+		      Si vuole dimostrare che $f$ è un isomorfismo. \\
+		      Per il teorema delle coordinate, poichè $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$, $\exists! a_1, a_2, ..., a_n \in K \mid u = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = f(a_1v_1 + a_2v_2 + ... + a_nv_n)$. \\
+		      Quindi $\forall u \in U \ \exists! v \in V \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n \land f(v) = u$. \\
+		      Quindi $f$ è biunivoca, cioè un isomorfismo.
+	\end{itemize}
+\end{dimm}
+
+\begin{es}
+	Dati $v_1 = (1, 1), v_2 = (1, -1), u_1 = (0, 2), u_2 = (-1, 0)$, dire se:
+	\begin{enumerate}
+		\item Esiste un'applicazione lineare $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $f(v_1) = u_1, f(v_2) = u_2$. Se esiste, è unica?
+		\item $f$ è un isomorfismo?
+		\item $f(v_1), f(v_2)$ è una base?
+	\end{enumerate}
+	Soluzione:
+	\begin{enumerate}
+		\item Poichè $v_1, v_2$ è una base di $\mathbb{R}^2$, esiste ed è unica un'applicazione lineare $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $f(v_1) = u_1, f(v_2) = u_2$.
+		\item Poichè $u_1, u_2$ è una base di $\mathbb{R}^2$, $f$ è un isomorfismo.
+		\item Poichè $l_1 = (0, 0), l_2 = (-1, 0)$ è una base e poichè $f$ è un isomorfismo e manda basi in basi, $f(v_1), f(v_2)$ è una base.
+	\end{enumerate}
+\end{es}
+\begin{es}
+	\begin{enumerate}
+		\item Esiste ed è unica un'applicazione lineare $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $f(v_1) = u_1, f(v_2) = u_2$ dove $v_1 = (1, 1), v_2 = (1, -1), u_1 = (-1, 2), u_2 = (2, -4)$?
+		\item In tal caso, $f$ è un isomorfismo?
+		\item Trovare Im $f$ e Ker $f$.
+	\end{enumerate}
+	Soluzione:
+	\begin{enumerate}
+		\item Poichè $v_1, v_2$ è una base di $\mathbb{R}^2$, esiste ed è unica un'applicazione lineare $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $f(v_1) = u_1, f(v_2) = u_2$.
+		\item Poichè $u_1, u_2$ non è una base di $\mathbb{R}^2$, $f$ non è un isomorfismo. Si può verificare che $u_2 = 2u_1$, quindi non sono linearmente indipendenti (quindi non è una base).
+		\item Sia $v \in \mathbb{R}^2$. Poichè $v_1, v_2$ è una base di $\mathbb{R}^2$, $\exists! a_1, a_2 \in \mathbb{R} \mid v = a_1v_1 + a_2v_2 \Rightarrow f(v) = a_1u_1 + a_2u_2 = a_1(-1, 2) + a_2(2, -4) = (-a_1 + 2a_2, 2a_1 - 4a_2)$. \\
+		      Quindi Im $f = \{f(v), v \in V\} = \{(-a_1 + 2a_2, 2a_1 - 4a_2) \mid a_1, a_2 \in \mathbb{R}\} = \{(-t, 2t) \mid t \in \mathbb{R}\}$. \\
+		      Poichè $\dim Im f = 1$, per il teorema del rango $\dim$ Ker $f = 2 - 1 = 1$, quindi Ker $f$ è dato da una equazione cartesiana in $\mathbb{R}^2$. \\
+		      Poichè $u_2 = -2u_1$, cioè $2u_1 + u_2 = 0$ allora $f(2v_1 + v_2) = 2f(v_1) + f(v_2) = 2u_1 + u_2 = 0$, quindi $2v_1 + v_2 = (3, 1) \in$ Ker $f$. \\
+		      Dunque Ker $f = \langle (3, 1) \rangle = \{(3s, s) \mid s \in \mathbb{R}\} = \{(x, y) \in \mathbb{R}^2 \mid x - 3y = 0\}$.
+	\end{enumerate}
+\end{es}
+
+\begin{cor}{Isomorfismo e dimensione}{}
+	Due spazi vettoriali su K con la stessa dimensione sono isomorfi tra loro.
+\end{cor}
+\begin{dimm}
+	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ con $\dim V = \dim U = n$.
+	Inoltre, siano $v_1, v_2, ..., v_n$ una base di $V$ e $u_1, u_2, ..., u_n$ una base di $U$. \\
+	Per il teorema dell'estensione lineare, esiste ed è unica un'applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = u_1, f(v_2) = u_2, ..., f(v_n) = u_n$. \\
+	Per il teorema dell'isomorfismo e basi $f$ è un isomorfismo.
+\end{dimm}
+
+\begin{es}
+	Sia $V = \mathbb{R}^n$ e $U = \mathbb{R}[x]_{<n} = \mathbb{R}[x]_{\leq n - 1} = \{\text{polinomi di grado < n}\} \Leftrightarrow \{a_0 + a_1x + a_2x^2 + ... + a_{n - 1}x^{n - 1}\}$.
+	Base di $V$: $l_1 = (1, 0, 0, ..., 0), l_2 = (0, 1, 0, ..., 0), ..., l_n = (0, 0, ..., 0, 1)$. \\
+	Base di $U$: $u_1 = 1, u_2 = x, u_3 = x^2, ..., u_n = x^{n - 1}$. \\
+	Esiste un'unica applicazione lineare $f: V \rightarrow U$ tale che $f(l_1) = u_1, f(l_2) = u_2, ..., f(l_n) = u_n$ e tale $f$ è un isomorfismo.
+\end{es}
+\begin{es}
+	Sia $V = M_{2, 3}(\mathbb{R})$ = $\{matrici 2 \times 3$ a coefficienti $\in \mathbb{R}\}
+		= \{\begin{pmatrix} a & c & e \\ b & d & f \end{pmatrix} \mid a, b, c, d, e, f \in \mathbb{R}\}$. \\
+	$V$ è uno spazio vettoriale rispetto alla somma coefficiente per coefficiente e al prodotto per uno scalare. \\
+	\begin{align*}
+		\begin{pmatrix}
+			2 & 0 & 11 \\
+			1 & 3 & 4
+		\end{pmatrix} + \begin{pmatrix}
+			                3 & \frac{1}{2} & 0 \\
+			                0 & 0           & 3
+		                \end{pmatrix} = \begin{pmatrix}
+			                                5 & \frac{1}{2} & 11 \\
+			                                1 & 3           & 7
+		                                \end{pmatrix} \\
+		3 \cdot \begin{pmatrix}
+			        2 & 0 & 11 \\
+			        1 & 3 & 4
+		        \end{pmatrix} = \begin{pmatrix}
+			                        6 & 0 & 33 \\
+			                        3 & 9 & 12
+		                        \end{pmatrix}
+	\end{align*}
+	Qual'è la dimensione di $V$? \\
+	Cerchiamo una base di $V$. Sia $l_1 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}, l_2 = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, l_3 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}, l_4 = \begin{pmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \end{pmatrix}, l_5 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \end{pmatrix}, l_6 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$. \\
+	$l_1, l_2, l_3, l_4, l_5, l_6$ è una base di $V$ perchè $\forall \begin{pmatrix}
+			a & c & e \\
+			b & d & f
+		\end{pmatrix} \in V \ \exists! (a, b, c, d, e, f) \in \mathbb{R}^6 \mid \begin{pmatrix}
+			a & c & e \\
+			b & d & f
+		\end{pmatrix} = al_1 + bl_2 + cl_3 + dl_4 + el_5 + fl_6$. \\
+	Quindi $\dim V = 6$ e $V$ è isomorfo a $\mathbb{R}^6$.
+\end{es}
+\section{Unità 4 - Lezioni 8, 9}
+\subsection{Matrici}
+\begin{deff}{Matrice identità}{}
+	La matrice identità $I_n$ è la matrice quadrata $n \times n$ che ha 1 sulla diagonale principale e 0 altrove.
+	Ad esempio su $\mathbb{R}^3$:
+	\begin{align*}
+		I_3 = \begin{pmatrix}
+			      1 & 0 & 0 \\
+			      0 & 1 & 0 \\
+			      0 & 0 & 1
+		      \end{pmatrix}
+	\end{align*}
+\end{deff}
+\begin{es}
+	Per ogni $f: V \rightarrow V$, $id \circ f = f \circ id = f$ (perchè $id(f(v))=f(v)$ e $f(id(v))=f(v)$). \\
+	Quindi se $f$ è lineare e $A$ la sua matrice allora:
+	\begin{align*}
+		A \cdot I_n = I_n \cdot A = A
+	\end{align*}
+	$I_n$ è l'elemento neutro rispetto al prodotto riga per colonna.
+\end{es}
+\begin{oss}
+	Un'applicazione lineare $f: V \rightarrow U$ è un isomorfismo $\Leftrightarrow$ è invertibile,
+	cioè $\exists f^{-1}: U \rightarrow V \mid f \circ f^{-1} = id_u$ e $f^{-1} \circ f = id_v$.
+	In altre parole, se $A$ è la matrice di $f$ in una base $v_1, v_2, ..., v_n$ di $V$ allora $f$ è invertibile $\Leftrightarrow$ $A$ è invertibile,
+	cioè esiste una matrice $A^{-1}$ tale che $A \cdot A^{-1} = A^{-1} \cdot A = I_n$ ($A^{-1}$ è la matrice di $f^{-1}$).
+\end{oss}
+\begin{oss}
+	Se $\dim V \neq \dim U$ non esistono isomorfismi tra $V$ e $U$ (per il teorema del rango). Quindi solo le matrici quadrate sono invertibili.
+	Se il numero di righe di $A$ è diverso dal numero di colonne, $A$ non è invertibile.
+\end{oss}
+\subsubsection{Cambiamenti di base}
+Sia $V$ uno spazio vettoriale su un campo $K$ e sia $f: V \rightarrow V$ un'applicazione lineare.
+Siano $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ e $\mathcal{B}' = \{u_1, u_2, ..., u_n\}$.
+Sia $A$ la matrice di $f$ rispetto alla base $\mathcal{B}$ e $M$ la matrice di $f$ rispetto alla base $\mathcal{B}'$.
+In altre parole $f(v_j) = a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n$ e $f(u_j) = m_{1j}u_1 + m_{2j}u_2 + ... + m_{nj}u_n$.
+\begin{teo}{Cambiamenti di base}{}
+	La matrice del cambiamento di base è $B$ ottenuta esprimendo i vettori della base $\mathcal{B}'$ in funzione di quelli della base $\mathcal{B}$.
+	Cioè $u_j = b_{1j}v_1 + b_{2j}v_2 + ... + b_{nj}v_n$.
+	Quindi:
+	\begin{align*}
+		M = B^{-1} \cdot A \cdot B
+	\end{align*}
+	dove $M$ è la matrice di $f$ rispetto alla base $\mathcal{B}'$ e $A$ è la matrice di $f$ rispetto alla base $\mathcal{B}$.
+	$B$ è la matrice del cambiamento di base, mentre $B^{-1}$ è la matrice del cambiamento di base inverso.
+\end{teo}
+% \begin{es}
+% 	Sia $V = \mathbb{R}^2$ e $v_1 = (2, 1), v_2 = (1, -1), u_1 = (1, 0), u_2 = (0, 1)$ le basi.
+
+% \end{es}
+\begin{deff}{Matrici simili}{}
+	Due matrici $A, B$ si dicono simili se esiste una matrice invertibile $B$ tale che $M = B^{-1} \cdot A \cdot B$.
+\end{deff}
+\begin{oss}
+	Per il teorema precedente, due matrici sono simili se e solo se rappresentano la stessa applicazione lineare rispetto a basi diverse.
+\end{oss}
+\begin{es}
+	\begin{enumerate}
+		\item $A = \begin{pmatrix}
+				      2 & 1  \\
+				      1 & -1
+			      \end{pmatrix}$ e $M = \begin{pmatrix}
+				      \frac{7}{3} & -\frac{5}{3}  \\
+				      \frac{5}{3} & -\frac{10}{3}
+			      \end{pmatrix}$ sono simili perchè $M = \begin{pmatrix}
+				      1 & 0 \\
+				      0 & 1
+			      \end{pmatrix}^{-1} \cdot A \cdot \begin{pmatrix}
+				      1 & 0 \\
+				      0 & 1
+			      \end{pmatrix}$.
+		\item Data $M$ precedente e $I_2 = \begin{pmatrix}
+				      1 & 0 \\
+				      0 & 1
+			      \end{pmatrix}$, $M$ e $I_2$ non sono simili perchè $\forall B, B^{-1} \cdot I_2 \cdot B = B^{-1} \cdot B = I_2 \neq M$.
+	\end{enumerate}
+\end{es}
+\begin{prop}
+	La relazione di similitudine è una relazione di equivalenza.
+\end{prop}
+\begin{dimm}
+	Dimostriamo ogni proprietà:
+	\begin{itemize}
+		\item Riflessiva: Ogni matrice $A$ è simile a se stessa perchè $A = I_n^{-1} \cdot A \cdot I_n$.
+		\item Simmetrica: Se $A$ è simile a $M$ allora $M$ è simile a $A$ infatti se $\exists B \mid M = B^{-1} \cdot A \cdot B$ allora $B^{-1} \cdot M \cdot B = B^{-1} \cdot B^{-1} \cdot A \cdot B \cdot B = (B \cdot B)^{-1} \cdot A \cdot (B \cdot B) = A$.
+		\item Transitiva: Se $A$ è simile a $M$ (cioè $\exists B \mid M = B^{-1} \cdot A \cdot B$) e $M$ è simile a $N$ (cioè $\exists C \mid N = C^{-1} \cdot M \cdot C$) allora $N = C^{-1} \cdot M \cdot C = C^{-1} \cdot B^{-1} \cdot A \cdot B \cdot C = (B \cdot C)^{-1} \cdot A \cdot (B \cdot C)$.
+		      Quindi $A$ è simile a $N$.
+	\end{itemize}
+\end{dimm}
+\begin{teo}{Invertibilità}{}
+	Una matrice $A$ è invertibile $\Leftrightarrow$ i suoi vettori colonna sono linearmente indipendenti.
+\end{teo}
+\begin{dimm}
+	Siano $v_1, v_2, ..., v_n$ i vettori colonna di $A \in M_{n \times n}$.
+	Consideriamo l'applicazione lineare $f: K^n \rightarrow K^n$ tale che $f(l_1) = v_1, f(l_2) = v_2, ..., f(l_n) = v_n$.
+	Per il teorema dell'estensione lineare, $f$ esiste ed è unica. \\
+	La matrice di $f$ rispetto alla base canonica è $A = \begin{pmatrix}
+			v_1 & v_2 & ... & v_n
+		\end{pmatrix}$. \\
+	Infatti $f(l_j) = v_j = a_{1j}l_1 + a_{2j}l_2 + ... + a_{nj}l_n$. \\
+	Quindi per il teorema isomorfismo e basi, $f$ è un isomorfismo $\Leftrightarrow$ $v_1, v_2, ..., v_n$ è una base di $K^n$ $\Leftrightarrow$ $v_1, v_2, ..., v_n$ è una base di $K^n$.
+	Poichè in $K^n$ ogni insieme di $n$ vettori linearmente indipendenti è una base, allora $A$ è invertibile $\Leftrightarrow f$ è un isomorfismo $\Leftrightarrow v_1, v_2, ..., v_n$ sono linearmente indipendenti.
+\end{dimm}
+\begin{es}
+	Consideriamo la matrice $A = \begin{pmatrix}
+			2 & 5 \\
+			1 & 3
+		\end{pmatrix}$. I vettori $v_1 = \begin{pmatrix}
+			2 \\
+			1
+		\end{pmatrix} \text{ e } v_2 = \begin{pmatrix}
+			5 \\
+			3
+		\end{pmatrix}$ sono linearmente indipendenti, perchè $av_1 = \begin{pmatrix}
+			2a \\
+			a
+		\end{pmatrix} \neq v_2 = \begin{pmatrix}
+			5 \\
+			3
+		\end{pmatrix}$ quindi $v_1, v_2$ sono una base.
+	Per il teorema precedente, $A$ è invertibile.
+	In effetti esiste ed è unica un'applicazione lineare $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $f(1, 0) = (2, 1)$ e $f(0, 1) = (5, 3)$.
+	La sua matrice è $A$, perchè $f(1, 0) = v_1 = 2 l_1 + l_2$ e $f(0, 1) = v_2 = 5l_1 + 3l_2$, ovvero $\begin{pmatrix}
+			2 & 5 \\
+			1 & 3
+		\end{pmatrix}$
+	Se $v \in \mathbb{R}^2$ allora $v = (x, y) = x(1, 0) + y(0, 1) = xl_1 + yl_2$ e $f(v) = xf(l_1) + yf(l_2) = xv_1 + yv_2 = (2x + 5y, x + 3y)$.
+	In effetti $f(x, y) = (2x + 5y, x + 3y)$ è invertibile. \\
+	Sia $u = (a, b) \in \mathbb{R}^2 \mid u = f(v)$ cioè $u = (2x + 5y, x + 3y) = (a, b)$. Risolviamo il sistema:
+	\begin{align*}
+		\begin{cases}
+			2x + 5y = a \\
+			x + 3y = b
+		\end{cases} \Rightarrow \begin{cases}
+			                        x = \frac{3a - 5b}{1} \\
+			                        y = \frac{2b - a}{1}
+		                        \end{cases} \Rightarrow (3a - 5b, 2b - a)
+	\end{align*}
+	Quindi $\forall u \in \mathbb{R}^2 \ \exists! v = (x, y) \mid f(v) = u$ ovvero $f^{-1}(u) = (3a - 5b, -a + 2b)$. \\
+	Quindi la matrice di $f^{-1}$ è $A^{-1} = \begin{pmatrix}
+			3  & -5 \\
+			-1 & 2
+		\end{pmatrix}$.
+\end{es}
+\begin{es}
+	Consideriamo la matrice $A = \begin{pmatrix}
+			-1 & 2  \\
+			3  & -6
+		\end{pmatrix}$. I vettori $v_1 = \begin{pmatrix}
+			-1 \\
+			3
+		\end{pmatrix} \text{ e } v_2 = \begin{pmatrix}
+			2 \\
+			-6
+		\end{pmatrix} = -2v_1$ non sono linearmente dipendenti. Quindi per il teorema dell'Invertibilità, $A$ non è invertibile. \\
+	In effetti l'unica applicazione tale che $f(l_1) = v_1$ e $f(l_2) = v_2$ è $f(x, y) = (-x + 2y, 3x - 6y)$. \\
+	Inoltre, Ker $f = \{(x, y) \in \mathbb{R}^2 \mid \begin{cases}
+			-x + 2y = 0 \\
+			3x - 6y = 0
+		\end{cases} \Leftrightarrow \begin{cases}
+			x = 2y \\
+			0y = 0
+		\end{cases} \Leftrightarrow x = 2y\}$ quindi $\dim \ker f = 1$ e $\dim \text{Im} f = 2 - 1 = 1$.
+	Per questo $f$ non è iniettiva, nè suriettiva e quindi non è invertibile, cioè $\not\exists f^{-1} \mid f \circ f^{-1} = id = f^{-1} \circ f$.
+	Quindi non esiste una matrice $A^{-1}$ tale che $A \cdot A^{-1} = A^{-1} \cdot A = I_2$.
+\end{es}
+\begin{deff}{Rango di una matrice}{}
+	Il rango di una matrice $A$ è il massimo numero di vettori colonna linearmente indipendenti.
+\end{deff}
+\begin{es}
+	$rK\begin{pmatrix}
+			2 & 5 \\
+			1 & 3
+		\end{pmatrix} = 2, rK\begin{pmatrix}
+			-1 & 2  \\
+			3  & -6
+		\end{pmatrix} = 1, rK\begin{pmatrix}
+			0 & 0 \\
+			0 & 0
+		\end{pmatrix} = 0, rK\begin{pmatrix}
+			1 & 2 & 0 & 1  & 2  \\
+			3 & 6 & 0 & -1 & -2
+		\end{pmatrix} = 2$.
+	Il teorema dell'Invertibilità può anche essere formulato come "una matrice è invertibile $\Leftrightarrow$ il suo rango è massimo".
+\end{es}
+\begin{es}
+	$V = \mathbb{R}[x]_{< 4}, d: V \rightarrow V, p(x) \mapsto p'(x)$ nella base $\mathcal{B} = \{1, x, x^2, x^3\}$. \\
+	La matrice di $d$ è $D = \begin{pmatrix}
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 2 & 0 \\
+			0 & 0 & 0 & 3 \\
+			0 & 0 & 0 & 0
+		\end{pmatrix}, rK(D) = 3$. I vettori colonna non sono linearmente indipendenti perchè $v_1 = 0$. \\
+	Quindi $D$ non è invertibile cioè non esiste $D^{-1}$. Inoltre, $d$ non è un isomorfismo.
+\end{es}
+\begin{cor}{Rango di una matrice e immagine}{}
+	$rK(A) = \dim \text{Im} f$.
+\end{cor}
+\begin{deff}{Matrice trasposta}{}
+	La matrice trasposta $M^T$ di una matrice $M$ è la matrice ottenuta scambiando righe con colonne.
+\end{deff}
+\begin{es}
+	$M = \begin{pmatrix}
+			3  & 1 & 7 \\
+			-1 & 0 & 4
+		\end{pmatrix}, M^T = \begin{pmatrix}
+			3 & -1 \\
+			1 & 0  \\
+			7 & 4
+		\end{pmatrix}$.
+\end{es}
+\begin{oss}
+	Per come è definito il prodotto riga per colonna tra matrici, $(A \cdot B)^T = B^T \cdot A^T$.
+\end{oss}
+\begin{deff}{Determinante di una matrice}{}
+	Il determinante di una matrice $A \in M_{n,m}(K)$ è un numero reale che si ottiene come somma dei prodotti degli elementi di una riga per i loro minori.
+	Nello specifico è definito nel seguente modo ricorsivo:
+	\begin{itemize}
+		\item Per $n = 1$, $A = (a) \Rightarrow \det A = a$.
+		\item Per $n > 1$, riduciamo il calcolo del determinante al determinante di matrici più piccoli mediante la \textbf{regola di Laplace}:
+		      \begin{equation*}
+			      \det A = \sum_{i = 1}^{n} (-1)^{i + j} \cdot a_{ij} \cdot \det A_{ij}
+		      \end{equation*}
+		      dove $j \in \{1, .., n\}$ e $A_{ij}$ è la matrice ottenuta da $A$ cancellando la riga $i$ e la colonna $j$.
+	\end{itemize}
+\end{deff}
+\begin{es}
+	\begin{align*}
+		A = \begin{pmatrix}
+			    - 3 & 0 & 0   & 4 \\
+			    7   & 2 & 11  & 9 \\
+			    2   & 0 & - 1 & 3 \\
+			    1   & 0 & 0   & 0
+		    \end{pmatrix} \Rightarrow \det A & = 0 \cdot \det A^{(1, 2)} + ( - 1)^{2 + 2} \cdot 2 \cdot \det A^{(2, 2)} + 0 \cdot \det A^{(3, 2)} + 0 \cdot \det A^{(4, 2)} = \\
+		                                 & = 2 \cdot \det \begin{pmatrix}
+			                                                  -3 & 0   & 4 \\
+			                                                  2  & - 1 & 3 \\
+			                                                  1  & 0   & 0
+		                                                  \end{pmatrix} = 2 \cdot ( - 1)^{2 + 2} \cdot ( - 1) \cdot \det \begin{pmatrix}
+			                                                                                                                 - 3 & 4 \\
+			                                                                                                                 1   & 0
+		                                                                                                                 \end{pmatrix} =                                      \\
+		                                 & = - 2 \cdot ( - 1)^{1 + 2} \cdot 4 \cdot \det 1 = 8
+	\end{align*}
+	Dato che $\det A = 8 \neq 0$, $A$ è invertibile.
+\end{es}
+\begin{oss}
+	Se $n = 2, A = \begin{pmatrix}
+			a_{11} & a_{12} \\
+			a_{21} & a_{22}
+		\end{pmatrix}$ la regola di Laplace implica che $\det A = a_{11} \cdot a_{22} - a_{12} \cdot a_{21}$.
+\end{oss}
+\begin{oss}
+	Se $n = 3$, $A = \begin{pmatrix}
+			a_{11} & a_{12} & a_{13} \\
+			a_{21} & a_{22} & a_{23} \\
+			a_{31} & a_{32} & a_{33}
+		\end{pmatrix}$ sviluppando Laplace rispetto alla prima colonna si ottiene la \textbf{regola di Sarrus}.
+\end{oss}
+
+\begin{teo}{Proprietà della funzione determinante}{}
+	La funzione determinante definita ricorsivamente $\det: M_{n,m}(K) \rightarrow K, A \mapsto \det A$ gode delle seguenti proprietà:
+	\begin{itemize}
+		\item Il determinante è \textbf{alternante}, cioè se scambiamo due colonne cambia segno.
+		      In altre parole, se $A$ è una matrice e $A'$ è la matrice ottenuta scambiando due colonne qualsiasi di $A$, allora $\det A' = - \det A$.
+		\item Il determinante è \textbf{multilineare}, cioè se ho due matrici $A = \begin{pmatrix}
+				      \vdots & \vdots & \vdots \\
+				      v_1    & v_i    & v_n    \\
+				      \vdots & \vdots & \vdots
+			      \end{pmatrix}$ e $B = \begin{pmatrix}
+				      \vdots & \vdots & \vdots \\
+				      v_1    & v_i'   & v_n    \\
+				      \vdots & \vdots & \vdots
+			      \end{pmatrix}$ allora $\det \begin{pmatrix}
+				      \vdots & \vdots       & \vdots \\
+				      v_1    & av_i + bv_i' & v_n    \\
+				      \vdots & \vdots       & \vdots
+			      \end{pmatrix} = a \cdot \det A + b \cdot \det B$.
+		\item $\det I_n = 1$.
+		\item Il determinante è l'unica funzione $f: M_{n,m}(K) \rightarrow K$ che soddisfa le tre proprietà precedenti.
+		\item $\det A = \det A^T$.
+		\item $\det A \cdot \det B = \det(A \cdot B)$.
+		\item $\det A \ne 0 \Leftrightarrow A$ è invertibile.
+	\end{itemize}
+\end{teo}
+\begin{es}
+	Verificare se i seguenti vettori formano una base di $\mathbb{R}^4$:
+	\begin{align*}
+		v_1 = ( - 3, 7, 2, 1), v_2 = (0, 2, 0, 0), v_3 = (0, 11, - 1, 0), v_4 = (4, 9, 3, 0)
+	\end{align*}
+	Soluzione utilizzando il determinante:
+	\begin{align*}
+		\det \begin{pmatrix}
+			     - 3 & 0 & 0   & 4 \\
+			     7   & 2 & 11  & 9 \\
+			     2   & 0 & - 1 & 3 \\
+			     1   & 0 & 0   & 0
+		     \end{pmatrix} = 8 \ne 0 \Rightarrow \text{è invertibile}
+	\end{align*}
+	$\Leftrightarrow v_1, v_2, v_3, v_4$ sono linearmente indipendenti $\Leftrightarrow$ sono una base di $\mathbb{R}^4$.
+\end{es}
+\begin{oss}
+	Se A è invertibile, $\det(A^{-1}) = \det(A)^{-1}$. Infatti $A \cdot A^{-1} = I_n \Rightarrow \det(A \cdot A^{-1}) = \det I_n = 1 \Rightarrow \det A \cdot \det A^{-1} = 1 \Rightarrow \det A^{-1} = \det A^{-1}$.
+\end{oss}
+\begin{prop}
+	Se $A$ e $M$ sono simili, allora $\det A = \det M$.
+\end{prop}
+\begin{dimm}
+	Se $A$ e $M$ sono simili, allora $\exists B \text{invertibile} \mid M = B^{-1} \cdot A \cdot B$.
+	Quindi $\det M = \det(B^{-1} \cdot A \cdot B) = \det B^{-1} \cdot \det A \cdot \det B = \det A$ (per le proprietà del determinante).
+\end{dimm}
+\begin{deff}{Determinante di un'applicazione lineare}{}
+	Data $f: V \rightarrow V$ un'applicazione lineare, definiamo $det(f) = \det(A)$ dove $A$ è la matrice di $f$ rispetto a una base di $V$.
+	Per la proposizione precedente, il determinante non dipende dalla base scelta.
+	Inoltre, se $f$ è un isomorfismo, allora $det(f) \ne 0$.
+\end{deff}
+\begin{teo}{Determinante e matrice inversa}{}
+	\begin{equation*}
+		A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T
+	\end{equation*}
+	dove cof$(A)$ è la matrice dei cofattori di $A$, ovvero:
+	\begin{equation*}
+		\text{cof}(A)_{ij} = (-1)^{i + j} \cdot \det A_{ij}
+	\end{equation*}
+\end{teo}
+\begin{es}
+	$A = \begin{pmatrix}
+			3 & 5 \\
+			2 & 4
+		\end{pmatrix}$. Determinare l'inversa.
+	\begin{enumerate}
+		\item Verifichiamo se è Invertibile. $\det A = 3 \cdot 4 - 5 \cdot 2 = 2 \ne 0 \Rightarrow A$ è invertibile.
+		\item Calcoliamo la matrice dei cofattori:
+		      \begin{align*}
+			      \text{cof}(A) = \begin{pmatrix}
+				                      4  & -2 \\
+				                      -5 & 3
+			                      \end{pmatrix}
+		      \end{align*}
+		\item Calcoliamo l'inversa:
+		      \begin{align*}
+			      A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T = \frac{1}{2} \cdot \begin{pmatrix}
+				                                                                          4  & -5 \\
+				                                                                          -2 & 3
+			                                                                          \end{pmatrix} = \begin{pmatrix}
+				                                                                                          2  & -\frac{5}{2} \\
+				                                                                                          -1 & \frac{3}{2}
+			                                                                                          \end{pmatrix}
+		      \end{align*}
+	\end{enumerate}
+	Possiamo verificare che l'inversa è corretta moltiplicando $A$ per $A^{-1}$ (e verificando che il risultato sia la matrice identità):
+	\begin{align*}
+		A \cdot A^{-1} = \begin{pmatrix}
+			                 3 & 5 \\
+			                 2 & 4
+		                 \end{pmatrix} \cdot \begin{pmatrix}
+			                                     2  & -\frac{5}{2} \\
+			                                     -1 & \frac{3}{2}
+		                                     \end{pmatrix} = \begin{pmatrix}
+			                                                     3 \cdot 2 + 5 \cdot ( - \frac{1}{2}) & 3 \cdot ( - \frac{5}{2}) + 5 \cdot \frac{3}{2} \\
+			                                                     2 \cdot 2 + 4 \cdot ( - \frac{1}{2}) & 2 \cdot ( - \frac{5}{2}) + 4 \cdot \frac{3}{2}
+		                                                     \end{pmatrix} = \begin{pmatrix}
+			                                                                     1 & 0 \\
+			                                                                     0 & 1
+		                                                                     \end{pmatrix} = I_2
+	\end{align*}
+\end{es}
+Il determinante permette di formulare anche una regola per calcolare il \textbf{prodotto vettoriale},
+cioè un'operazione $f: \mathbb{R}^3 \times \mathbb{R}^3 \rightarrow \mathbb{R}^3$ tale che $f(u, v) = u \wedge v$, molto usata in fisica.
+Se $u = (a_1, a_2, a_3)$ e $v = (b_1, b_2, b_3)$, allora $u \wedge v = \det \begin{pmatrix}
+		a_1 & a_2 & a_3 \\
+		b_1 & b_2 & b_3 \\
+		l_1 & l_2 & l_3
+	\end{pmatrix} = l_1(a_2b_3 - a_3b_2) - l_2(a_1b_3 - a_3b_1) + l_3(a_1b_2 - a_2b_1)$.
+\begin{es}
+	$(1, 2, 3) \wedge (-1, 0, 2) = (4, -5, 2)$.
+\end{es}
+Il prodotto vettoriale eredita le proprietà del determinante:
+\begin{itemize}
+	\item Altalenante: $u \wedge v = - v \wedge u$.
+	\item Multilineare: $(au + bv) \wedge w = a(u \wedge w) + b(v \wedge w)$.
+\end{itemize}
+\subsubsection{Esercizio parametrico}
+\begin{es}
+	Al variare del parametro $t$, determinare il rango della matrice $A = \begin{pmatrix}
+			3 & -2 & t  \\
+			0 & 1  & 2  \\
+			t & -1 & -2
+		\end{pmatrix}$.
+	$\det(A) = 0 + (-1)^{2 + 2} \cdot 1 \cdot \det \begin{pmatrix}
+			3 & t  \\
+			t & -2
+		\end{pmatrix} + (-1)^{3 + 3} \cdot 2 \cdot \det \begin{pmatrix}
+			3 & -2 \\
+			t & -1
+		\end{pmatrix} = -6 - t^2 - 2(-3 + 2t) = -6 - t^2 + 6 - 4t = -t^2 - 4t = -t(t + 4)$.
+	\begin{itemize}
+		\item Se $t \ne 0, -4 \Rightarrow \det(A) \ne 0 \Rightarrow rK(A) = 3$. A è invertibile.
+		\item Se $t = 0, -4, rk(A) < 3$:
+		      \begin{itemize}
+			      \item $t = 0 \begin{pmatrix}
+					            3 & -2 & 0  \\
+					            0 & 1  & 2  \\
+					            0 & -1 & -2
+				            \end{pmatrix} \Rightarrow rK(A) = 2$. (I vettori colonna 1 e 2 sono linearmente indipendenti).
+			      \item $t = -4 \begin{pmatrix}
+					            3  & -2 & -4 \\
+					            0  & 1  & 2  \\
+					            -4 & -1 & -2
+				            \end{pmatrix} \Rightarrow rK(A) = 2$. (I vettori colonna 1 e 2 sono linearmente indipendenti).
+		      \end{itemize}
+	\end{itemize}
+\end{es}
+\begin{es}
+	Al variare di $t \in \mathbb{R}$, calcolare la dimensione di Im e Ker dell'applicazione $f_t: \mathbb{R}^3 \rightarrow \mathbb{R}^3$ tale che $f_t(x, y, z) = (3x-2y+tz, y+2z, tx-y-27)$.
+	Nella base canonica $l_1 = (1, 0, 0), l_2 = (0, 1, 0), l_3 = (0, 0, 1)$, la matrice di $f_t$ è $A = \begin{pmatrix}
+			3 & -2 & t  \\
+			0 & 1  & 2  \\
+			t & -1 & -2
+		\end{pmatrix}$. \\
+	Quindi, se $t \ne 0, -4 \Rightarrow \dim \text{Im} f_t = rk(A) = 3$ e $\dim \ker f_t = 3 - 3 = 0 \Rightarrow f_t$ è un isomorfismo.
+	Se $t = 0, -4 \Rightarrow \dim \text{Im} f_t = rk(A) = 2$ e $\dim \ker f_t = 3 - 2 = 1 \Rightarrow f_t$ non è nè iniettiva nè suriettiva.
+\end{es}
+\section{Unità 5 - Lezioni 10, 11, 12}
+\subsection{Matrici e sistemi lineari}
+	Consideriamo un sistema lineare di $m$ equazioni in $n$ incognite:
+	\begin{align*}
+		\begin{cases}
+			a_{11}x_1 + a_{12}x_2 + ... + a_{1n}x_n = b_1 \\
+			a_{21}x_1 + a_{22}x_2 + ... + a_{2n}x_n = b_2 \\
+			... \\
+			a_{m1}x_1 + a_{m2}x_2 + ... + a_{mn}x_n = b_m
+		\end{cases}
+	\end{align*}
+	Il sistema può essere riscritto nella forma matriciale $A \cdot x = B$ dove:
+	\begin{align*}
+		A = \begin{pmatrix}
+			a_{11} & a_{12} & ... & a_{1n} \\
+			a_{21} & a_{22} & ... & a_{2n} \\
+			...    & ...    & ... & ...    \\
+			a_{m1} & a_{m2} & ... & a_{mn}
+		\end{pmatrix}, x = \begin{pmatrix}
+			x_1 \\
+			x_2 \\
+			... \\
+			x_n
+		\end{pmatrix}, B = \begin{pmatrix}
+			b_1 \\
+			b_2 \\
+			... \\
+			b_m
+		\end{pmatrix}
+	\end{align*}
+	e si chiamano rispettivamente matrice dei coefficienti, vettore delle incognite e vettore dei termini noti.
+	\begin{oss}
+		La scrittura di un sistema $Ax=b$ è comoda anche per svolgere rapidamente il metodo di Gauss.
+	\end{oss}
+	\begin{es}
+		Risolvere il sistema:
+		\begin{align*}
+			\begin{cases}
+				x + 2y - z = 1 \\
+				2x - y + z = 3 \\
+				 - x + y - 2z = - 2
+			\end{cases} \Leftrightarrow \begin{pmatrix}
+				1 & 2 & -1 & \mid & 1  \\
+				2 & -1 & 1 & \mid & 3  \\
+				-1 & 1 & -2 & \mid & - 2
+			\end{pmatrix}
+		\end{align*}
+		Inizio a fare le operazioni secondo il metodo di Gauss:
+		\begin{align*}
+			\begin{matrix}
+				R1 \\
+				 - 2R1 + R2 \\
+				 R1 + R3
+			\end{matrix} & \begin{pmatrix}
+				1 & 2 & -1 & \mid & 1  \\
+				0 & -5 & 3 & \mid & 1  \\
+				0 & 3 & -3 & \mid & - 1
+			\end{pmatrix} \\
+			\begin{matrix}
+				R1 \\
+				R2 \\
+				- \frac{3}{5}R2 + R3
+			\end{matrix} & \begin{pmatrix}
+				1 & 2 & -1 & \mid & 1  \\
+				0 & -5 & 3 & \mid & 1  \\
+				0 & 0 & \frac{6}{5} & \mid & - \frac{2}{5}
+			\end{pmatrix} \\
+			\begin{cases}
+				\frac{6}{5}z = - \frac{2}{5} \Rightarrow z = - \frac{2}{3} \\
+				-5y + 3z = 1 \Rightarrow -5y + 3 \cdot ( - \frac{2}{3}) = 1 \Rightarrow y = 1 \\
+				x + 2y - z = 1 \Rightarrow x + 2 - ( - \frac{2}{3}) = 1 \Rightarrow x = 0
+			\end{cases}
+		\end{align*}
+	\end{es}
+	\begin{prop}
+		\textbf{Metodo di Cramer}: Sia $Ax = b$ un sistema di $n$ equazioni in $n$ incognite ($A$ è una matrice $n \times n$). \\
+		Allora se $\det A = 0$, la soluzione del sistema non esiste o non è unica. \\
+		Se $\det A \ne 0$, allora la soluzione del sistema esiste, è unica ed è data da:
+		\begin{equation*}
+			x = A^{-1} \cdot b = \det(A)^{-1} \cdot \text{cof}(A)^T \cdot b
+		\end{equation*}
+	\end{prop}
+	\begin{dimm}
+		Se $\det A = 0$, allora $A$ non è invertibile e quindi l'applicazione $X \mapsto A \cdot X$ non è biunivoca
+		(per qualche $b$ non esiste $x$ tale che $A \cdot x = b$ oppure esistono più $x$ che soddisfano $A \cdot x = b$, ovvero la soluzione non esiste o non è unica).
+		Se invece $\det A \ne 0$, allora esiste $A^{-1}$ e $A^{-1}Ax = A^{-1}b \Rightarrow x = A^{-1}b$ è l'unica soluzione del sistema.
+	\end{dimm}
+	\begin{es}
+		Risolvere: 
+		$\begin{cases}
+				x - 2y = 3 \\
+				-2x + 4y = 7
+			\end{cases}$
+		Calcolo il determinante: $\det \begin{pmatrix}
+			1 & -2 \\
+			-2 & 4
+		\end{pmatrix} = 4 - 4 = 0$. \\
+		Quindi il sistema non ha soluzione o ha infinite soluzioni.
+	\end{es}
+	\begin{es}
+		Risolvere: $\begin{cases}
+			3x + 5y = 2 \\
+			2x + 4y = -1
+		\end{cases}$
+		Calcolo il determinante: $\det \begin{pmatrix}
+			3 & 5 \\
+			2 & 4
+		\end{pmatrix} = 12 - 10 = 2 \ne 0$ (la soluzione è unica per ogni b).
+		\begin{align*}
+			A^{-1} = \frac{1}{2} \begin{pmatrix}
+				4 & -5 \\
+				-2 & 3
+			\end{pmatrix} = \begin{pmatrix}
+				2 & -\frac{5}{2} \\
+				1 & \frac{3}{2}
+			\end{pmatrix} \\
+			\begin{pmatrix}
+				x \\
+				y
+			\end{pmatrix} = \begin{pmatrix}
+				2 & -\frac{5}{2} \\
+				1 & \frac{3}{2}
+			\end{pmatrix} \begin{pmatrix}
+				2 \\
+				- 1
+			\end{pmatrix} = \begin{pmatrix}
+				2 \cdot 2 - \frac{5}{2} \cdot ( - 1) \\
+				1 \cdot 2 + \frac{3}{2} \cdot - 1
+			\end{pmatrix} = \begin{pmatrix}
+				4 + \frac{5}{2} \\
+				2 - \frac{3}{2}
+			\end{pmatrix} = \begin{pmatrix}
+				\frac{13}{2} \\
+				\frac{1}{2}
+			\end{pmatrix}
+		\end{align*}
+	\end{es}
+	Tuttavia il metodo di Cramer funziona solo per matrici quadrate $m = n$ ed è computazionalmente costoso.
+	\begin{teo}{Teorema di Rouché-Capelli}{}
+		Sia $Ax = b$ un sistema di $m$ equazioni in $n$ incognite e $A|b$ la matrice ottenuta aggiungendo la colonna $b$ alla matrice $A$.
+		Allora il sistema ammette almeno una soluzione se e solo se $\text{rk}(A) = \text{rk}(A|b)$.
+	\end{teo}
+	\begin{dimm}
+		Se $\text{rk}(A) = \text{rk}(A|b), b$ è combinazione lineare dei vettori colonna di $v_1, v_2, ..., v_n$ di $A$ cioè
+		$\exists x_1, x_2, ..., x_n \in K \mid b = x_1v_1 + x_2v_2 + ... + x_nv_n$. \\
+		Quindi $A\begin{pmatrix}
+			x_1 \\
+			x_2 \\
+			... \\
+			x_n
+		\end{pmatrix} = b$ ha la soluzione $x = \begin{pmatrix}
+			x_1 \\
+			x_2 \\
+			... \\
+			x_n
+		\end{pmatrix}$. \\
+		Se invece $\text{rk}(A|b) > \text{rk}(A)$, allora il sistema non ha soluzione (perchè $b$ non è combinazione lineare dei vettori colonna di $A$).
+	\end{dimm}
+	\begin{es}
+		$A = \begin{pmatrix}
+			1 & -2 \\
+			-2 & 4
+		\end{pmatrix}, b = \begin{pmatrix}
+			3 \\
+			-6
+		\end{pmatrix}$. \\
+		Trovare x tale che $Ax = b$. \\
+		$A|b = \begin{pmatrix}
+			1 & -2 & \mid & 3 \\
+			-2 & 4 & \mid & -6
+		\end{pmatrix}$. \\
+		$\text{rk}(A) = \text{rk}(A|b) = 1$, per il teorema di Rouché-Capelli il sistema ammette soluzione, cioè $\exists x_1, x_2 \mid \begin{pmatrix}
+			3 \\
+			-6
+		\end{pmatrix} = x_1 \begin{pmatrix}
+			1 \\
+			-2
+		\end{pmatrix} + x_2 \begin{pmatrix}
+			-2 \\
+			4
+		\end{pmatrix}$. \\
+		Cioè $\exists x_1, x_2 \mid \begin{cases}
+			x_1 - 2x_2 = 3 \\
+			-2x_1 + 4x_2 = -6
+		\end{cases}$ cioè il sistema ammette soluzioni.
+	\end{es}
+	\begin{es}
+		Trovare, se esiste, un polinomio di grado $\le 2$ tale che $p(2) = 0, p(1) = 3, p(0) = 1, p(-1) = 2$. \\
+		Sia $p(x) = ax^2 + bx + c$.
+		\begin{align*}
+			\begin{cases}
+				4a + 2b + c = 0 \\
+				a + b + c = 3 \\
+				c = 1 \\
+				a - b + c = 2
+			\end{cases} & A = \begin{pmatrix}
+				4 & 2 & 1 \\
+				1 & 1 & 1 \\
+				0 & 0 & 1 \\
+				1 & -1 & 1
+			\end{pmatrix} &
+			A|b = \begin{pmatrix}
+				4 & 2 & 1 & \mid & 0 \\
+				1 & 1 & 1 & \mid & 3 \\
+				0 & 0 & 1 & \mid & 1 \\
+				1 & -1 & 1 & \mid & 2
+			\end{pmatrix}
+		\end{align*}
+		$\text{rk}(A) = 3, \text{rk}(A|b) = 4$ perchè $\det A|b = \det \begin{pmatrix}
+			4 & 2 & 0 \\
+			1 & 1 & 3 \\
+			1 & -1 & 2
+		\end{pmatrix} - \det \begin{pmatrix}
+			4 & 2 & 1 \\
+			1 & 1 & 1 \\
+			1 & -1 & 1
+		\end{pmatrix} = 28 \ne 0$. \\
+		Quindi per il teorema di Rouché-Capelli il sistema non ha soluzione.
+	\end{es}
+
+	\subsection{Algoritmo di Gauss-Jordan}
+
+	Sia $A$ una matrice $m \times n$ invertibile.
+	Dalla matrice $(A|I_n)$ si può ottenere la matrice $(I_n|A^{-1})$ applicando l'algoritmo di Gauss.
+	Allora $B=A^{-1}$.
+	\begin{es}
+		$A = \begin{pmatrix}
+			3 & 5 \\
+			2 & 4
+		\end{pmatrix}$. \\
+		Costruisco la matrice $(A|I_2)$ fino ad ottenere $(I_n|B)$:
+		\begin{align*}
+			\begin{pmatrix}
+				3 & 5 & \mid & 1 & 0 \\
+				2 & 4 & \mid & 0 & 1
+			\end{pmatrix} \Rightarrow \begin{matrix}
+				R1 \\
+				- \frac{2}{3}R1 + R2
+			\end{matrix} \Rightarrow \begin{pmatrix}
+				3 & 5 & \mid & 1 & 0 \\
+				0 & \frac{2}{3} & \mid & - \frac{2}{3} & 1
+			\end{pmatrix} \Rightarrow \begin{matrix}
+				\frac{1}{3}R_1
+				\frac{3}{2}R_2
+			\end{matrix} \Rightarrow \begin{pmatrix}
+				1 & \frac{5}{3} & \mid & \frac{1}{3} & 0 \\
+				0 & 1 & \mid & -1 & \frac{3}{2}
+			\end{pmatrix} \\ \Rightarrow \begin{matrix}
+				R_1 - \frac{5}{3}R_2
+				R_2
+			\end{matrix} \Rightarrow \begin{pmatrix}
+				1 & 0 & \mid & 2 & - \frac{5}{3} \\
+				0 & 1 & \mid & -1 & \frac{3}{2}
+			\end{pmatrix}
+		\end{align*}
+		Quindi $A^{-1} = \begin{pmatrix}
+			2 & - \frac{5}{3} \\
+			-1 & \frac{3}{2}
+		\end{pmatrix}$, che è uguale a quella ottenuta con $A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T$.
+	\end{es}
+	\begin{deff}{Sottospazio affine}{}
+		Un sottoinsieme $S$ di $\mathbb{K}^n$ è un sottospazio affine di dimensione $d$ di $\mathbb{K}^n$ se è ottenuto traslando un sottospazio vettoriale $U$ di dimensione $d$,
+		cioè se $\exists p \in \mathbb{K}^n$ e un sottospazio vettoriale $U \subseteq \mathbb{K}^n$ tale che $S = \{p + u \mid u \in U\}$.
+	\end{deff}
+	\begin{es}
+		Consideriamo in $\mathbb{R}^2$ $U = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\}$ e $S = \{(x, y) \in \mathbb{R}^2 \mid x + y = 2\}$.
+		Disegno:
+		\tcbsidebyside[colback=white,colframe=white]{
+			\begin{tikzpicture}
+				\draw[->] (-2, 0) -- (3, 0) node[right] {$x$};
+				\draw[->] (0, -2) -- (0, 3) node[above] {$y$};
+				\draw[red] (-2, 2) -- (2, -2) node[right] {$U$};
+				\draw[blue] (-2, 4) -- (3, -1) node[right] {$S$};
+				% Draw p vectors that makes U translate to S
+				\draw[->, thick, orange] (-2, 2) -- (-1, 3) node[left] {$p$};
+				\draw[->, thick, orange] (-1, 1) -- (0, 2) node[left] {$p$};
+				\draw[->, thick, orange] (0, 0) -- (1, 1) node[left] {$p$};
+				\draw[->, thick, orange] (1, -1) -- (2, 0) node[left] {$p$};
+			\end{tikzpicture}
+		}{
+			$U$ è un sottospazio vettoriale, $S$ non lo è. \\
+			$S = \{p + u \mid u \in U\}$, cioè $S$ è ottenuto traslando $U$ di $p = (1, 1)$. $S$ è quindi un sottospazio affine di $\mathbb{R}^2$,
+			di dimensione 1.
+			In forma parametrica:
+			\begin{align*}
+				U &= \{(t, -t) \mid t \in \mathbb{R}\} \\
+				S &= \{(t, - t) + (1, 1) \mid t \in \mathbb{R}\} = \{(t + 1, 1 - t) \mid t \in \mathbb{R}\}
+			\end{align*}
+			\begin{oss}
+				Il vettore $p$ non è unico, altri vettori $p$ che traslano $U$ in $S$ sono $(2, 0), (0, 2)$, ottenendo un diverso $S = \{(t + 2, -t) \mid t \in \mathbb{R}\}$ e $S = \{(t, 1 - t) \mid t \in \mathbb{R}\}$.
+			\end{oss}
+		}
+	\end{es}
+	\begin{teo}{Sistema lineare omogeneo associato}{}
+		Sia $Ax = b$ un sistema lineare e $A$ la matrice $m \times n$ dei coefficienti. \\
+		Consideriamo il sistema lineare omogeneo associato $Ax = 0$. Allora:
+		\begin{enumerate}
+			\item L'insieme $U$ delle soluzioni del sistema omogeneo è un sottospazio vettoriale di $\mathbb{K}^n$ di dimensione $n - \text{rk}(A)$.
+			\item L'insieme $S$ delle soluzioni del sistema non omogeneo, se non è vuoto, è un sottospazio affine di $\mathbb{K}^n$ di dimensione $n - \text{rk}(A)$,
+			ottenuto traslando $U$ con qualsiasi $p \in S$ cioè $S = \{p + u \mid u \in U\}$.
+		\end{enumerate}
+	\end{teo}
+	\begin{dimm}
+		Verifichiamo i due punti:
+		\begin{enumerate}
+			\item Siano $u_1, u_2 \in U$ (cioè $Au_1 = 0, Au_2 = 0$, quindi $A(u_1 + u_2) = Au_1 + Au_2 = 0 + 0 = 0$). \\
+			Analogamente, se $u \in U$ e $k \in \mathbb{K}$, allora $A(ku) = kAu = k0 = 0$, quindi $ku \in U$. \\
+			Alla luce di questi risultati, $U$ è un sottospazio vettoriale di $\mathbb{K}^n$.
+			\item Sia $u \in U$ (cioè $Au = 0$) e $p \in S$ (cioè $Ap = b$). Allora $u + p \in S$ perchè $A(u + p) = Au + Ap = 0 + b = b$,
+			quindi $\{p + u \mid u \in U\} \subseteq S$. \\
+			Siano $p, p' \in S$ (cioè $Ap = b, Ap' = b$); allora $A(p - p') = Ap - Ap' = b - b = 0$, cioè $p - p' \in U$.
+			Quindi $p' = p + u$ con $u \in U$, cioè $S \subseteq \{p + u \mid u \in U\} \Rightarrow S = \{p + u \mid u \in U\}$.
+		\end{enumerate}
+	\end{dimm}
+	\subsection{Applicazioni alla geometria analitica}
+	\subsubsection{Retta passante per due punti}
+	Consideriamo due punti $P_1(x_1, y_1), P_2(x_2, y_2)$ in $\mathbb{R}^2, P_1 \ne P_2$. Trovare la retta che passa per $P_1$ e $P_2$.
+	Una retta in $\mathbb{R}^2$ è data dall'equazione $ax + by = c$. Si vuole quindi trovare $a, b, c$.
+	\begin{oss}
+		Se $ax + by = c$ è l'equazione di una retta, anche $2ax + 2by = 2c$ lo è. Quindi $a, b, c$ non sono univoci.
+	\end{oss}
+	\begin{es}
+		$P_1(1, 3), P_2(3, 2)$. \\
+		La retta passante per $P_1$ e $P_2$ è data da $ax + by = c$.
+		\begin{align*}
+			\begin{cases}
+				a + 3b = c \\
+				3a + 2b = c
+			\end{cases} \Rightarrow \begin{pmatrix}
+				1 & 3 & \mid & c \\
+				3 & 2 & \mid & c
+			\end{pmatrix} \Rightarrow \begin{matrix}
+				R1 \\
+				R2 - 3R1
+			\end{matrix} \Rightarrow \begin{pmatrix}
+				1 & 3 & \mid & c \\
+				0 & -7 & \mid & -2c
+			\end{pmatrix} \Rightarrow \begin{cases}
+				-7b = -2c \Rightarrow b = \frac{2}{7}c \\
+				a + 3 \cdot \frac{2}{7}c = c \Rightarrow a = \frac{5}{7}c
+			\end{cases}
+		\end{align*}
+		Quindi: $S = \{(\frac{1}{7}t, \frac{2}{7}t, t) \mid t \in \mathbb{R}\}$.
+	\end{es}
+	\subsubsection{Piano passante per tre punti}
+	Consideriamo tre punti $P_1(x_1, y_1, z_1), P_2(x_2, y_2, z_2), P_3(x_3, y_3, z_3)$ in $\mathbb{R}^3, P_1, P_2, P_3$ non allineati.
+	Trovare il piano che passa per $P_1, P_2, P_3$.
+	Un piano in $\mathbb{R}^3$ è dato dall'equazione $ax + by + cz = d$. Si vuole quindi trovare $a, b, c, d$.
+	\begin{es}
+		$P_1 = (1, 0, 0), P_2 = (0, 1, 1), P_3 = (2, 0, -1)$. \\
+		La retta passante per $P_1, P_2, P_3$ è data da $ax + by + cz = d$.
+		\begin{align*}
+			\begin{cases}
+				a + b = d \\
+				b + c = d \\
+				2a - c = d
+			\end{cases} \Rightarrow \begin{cases}
+				a = t \\
+				b = d - c = 0 \\
+				c = - d + 2a = t \\
+				d = t
+			\end{cases}
+		\end{align*}
+		Quindi: $S = \{(t, 0, t, t) \mid t \in \mathbb{R}\}$. Una equazione del piano è $x + z = 1$.
+		\begin{oss}
+			$p$ è un sottospazio affine di dimensione 2 di $\mathbb{R}^3$. $S$ è un sottospazio affine di dimensione 1 di $\mathbb{R}^4$.
+		\end{oss}
+	\end{es}
+	\begin{es}
+		$P_1 = (2, 0, -1), P_2 = (3, 1, 0), P_3 = (4, 2, 1)$. \\
+		La retta passante per $P_1, P_2, P_3$ è data da $ax + by + cz = d$.
+		\begin{align*}
+			\begin{cases}
+				2a - c = d \\
+				3a + b = d \\
+				4a + 2b + c = d
+			\end{cases} \Rightarrow gauss \begin{cases}
+				2a - c = d \\
+				b + \frac{3}{2}c = -\frac{1}{2}d \\
+				2b + 3c = -d
+			\end{cases} \Rightarrow \begin{cases}
+				2a - c = d \\
+				b + \frac{3}{2}c = -\frac{1}{2}d \\
+				0 = 0
+			\end{cases} \Rightarrow \begin{cases}
+				a = \frac{c + d}{2} = \frac{1}{2}t + \frac{1}{2}s \\
+				b = -\frac{1}{2}d - \frac{3}{2}c = -\frac{1}{2}t - \frac{3}{2}s \\
+				c = s \\
+				d = t
+			\end{cases}
+		\end{align*}
+		Quindi: $S = \{(\frac{1}{2}t + \frac{1}{2}s, -\frac{1}{2}t, -\frac{3}{2}t , s, t) \mid s, t \in \mathbb{R}\}$.
+		Abbiamo ottenuto un sottospazio affine di dimensione 2 perchè $P_1, P_2, P_3$ sono allineati, quindi $P$ non è unico.
+	\end{es}
+
+	\begin{deff}{Sottospazi in geometria analitica}{}
+		\begin{itemize}
+			\item Un punto in $\mathbb{R}^n$ è un sottospazio affine di dimensione 0.
+			\item Una retta in $\mathbb{R}^n$ è un sottospazio affine di dimensione 1.
+			\item Un piano in $\mathbb{R}^n$ è un sottospazio affine di dimensione 2.
+		\end{itemize}
+		Dati due punti distinti di $\mathbb{K}^n$, esiste un'unica retta che li contiene. \\
+		Dati tre punti non allineati di $\mathbb{K}^n$, esiste un unico piano che li contiene.
+		Se invece i tre punti sono allineati, esistono infiniti piani che li contengono.
+	\end{deff}
+
+	\begin{es}
+		Determinare la retta passante per i punti $P(3, 1, -1), Q(2, 2, 1)$. \\
+		$\overrightarrow{PQ} = (2 - 3, 2 - 1, 1 - (- 1)) = (-1, 1, 2)$. \\
+		Quindi la retta è data da $\{P + t \overrightarrow{PQ}, t \in \mathbb{R}\} = \{(3, 1, -1) + t(-1, 1, 2), t \in \mathbb{R}\}
+		= \{(3 - t, 1 + t, -1 + 2t), t \in \mathbb{R}\}$.
+		Posso esprimere la retta $r = \{3 - t, 1 + t, -1 + 2t\}$ anche tramite equazioni cartesiane con $x = 3 - t, y = 1 + t, z = -1 + 2t$.
+		\begin{align*}
+			\begin{cases}
+				x + y = 4 (= 3 - t + t + 1)\\
+				2x + z = 5 (= 6 - 2t - 1 + 2t)
+			\end{cases}
+		\end{align*}
+		Bastano due equazioni ($\dim \mathbb{R}^3 - \dim M = 3 - 1 = 2$) per determinare la retta, ma non sono uniche, perchè
+		ci sono infiniti piani che passano per una retta.
+	\end{es}
+
+	\begin{es}
+		Trovare l'intersezione della retta $r = \{3  -t, t + 1, 2t - 1\}$ con il piano di equazione $x + 2y - z = 3$. \\
+		Trovo $t$ sostituendo $x, y, z$ con le equazioni della retta:
+		\begin{align*}
+			3 - t + 2(t + 1) - (2t - 1) = 3 \\
+			(3 - t) + 2(t + 1) - (2t - 1) = 3 \\
+			3 - t + 2t + 2 - 2t + 1 = 3 \\
+			t = 3
+		\end{align*}
+		Sostituendo in $r$ ho il punto di intersezione: $(3 - 3, 3 + 1, 2 \cdot 3 - 1) = (0, 4, 5)$.
+	\end{es}
+
+	\begin{es}
+		Trovare la retta $r'$ parallela alla retta $r = \{3 - t, t + 1, 2t - 1\}$ e passante per il punto $P(5, -2, 3)$. \\
+		Se $r'$ è parallela a $r$, allora avrà lo stesso vettore di direzione $\overrightarrow{v} = (-1, 1, 2)$ di $r$.
+		Inoltre, poichè $r'$ passa per $P$, allora $r' = \{P' + t \overrightarrow{v}, t \in \mathbb{R}\}
+		= \{(5, -2, 3) + t(-1, 1, 2), t \in \mathbb{R}\} = \{(-t + 5, t - 2, 2t + 3), t \in \mathbb{R}\}$.
+	\end{es}
+
+	\begin{es}
+		Trovare, se esiste, l'intersezione tra la retta $r = \{3 - t, t + 1, 2t - 1\}$ e il piano $x + 2y - z = 3$ e la retta
+		$r'' = \{(2s - 1, 3s + 1, s + 5), s \in \mathbb{R}\}$. \\
+		Se esiste un punto di intersezione esistono $t, s \in \mathbb{R}$ tali che:
+		\begin{align*}
+			\begin{cases}
+				3 - t = 2s - 1 \\
+				t + 1 = 3s + 1 \\
+				2t - 1 = s + 5
+			\end{cases} \Rightarrow \begin{cases}
+				3 - 3s = 2s - 1 \\
+				t = 3s \\
+				6s - 1 = s + 5
+			\end{cases} \Rightarrow \begin{cases}
+				4 = 5s \\
+				t = 3s \\
+				6 = 5s
+			\end{cases}
+		\end{align*}
+		Quindi non c'è soluzione: $r, r''$ sono parallele e non si intersecano.
+		D'altra parte, non sono paralleli perchè i vettori di direzione $(-1, 1, 2)$ e $(2, 3, 1)$ non sono l'uno il multiplo dell'altro.
+		In questo caso, $r, r''$ sono sghembe.
+	\end{es}
+
+	\begin{es}
+		Sia $K = \mathbb{Z}_3$. Trovare tutti gli elementi del piano di $K$ di equazione $2x + y + z = 1$. \\
+		Osserviamo che poichè $\mathbb{Z}_3 = \{\overline{0}, \overline{1}, \overline{2}\}$, allora ha $3^3 = 27$ elementi e un piano in esso avrà $3^2 = 9$ elementi.
+		$p = \{(\overline{0}, \overline{0}, \overline{1}), (\overline{0}, \overline{1}, \overline{0}), (\overline{0}, \overline{2}, \overline{2}),
+		(\overline{1}, \overline{0}, \overline{2}), (\overline{1}, \overline{1}, \overline{1}), (\overline{1}, \overline{2}, \overline{0}),
+		(\overline{2}, \overline{0}, \overline{0}), (\overline{2}, \overline{1}, \overline{2}), (\overline{2}, \overline{2}, \overline{1})\}$.
+	\end{es}
+
+	\begin{es}
+		Trovare tutti i polinomi $p(x) \in \mathbb{R}[x]_{\leq 3}$ tali che $\begin{cases}
+			p(1) = 4 \\
+			p'(1) = 1 \\
+			p''(1) = -2
+		\end{cases}$. \\
+		Sappiamo che $p(x) = ax^3 + bx^2 + cx + d$. Costruisco il sistema calcolando le derivate:
+		\begin{align*}
+			\begin{cases}
+				p(x) = ax^3 + bx^2 + cx + d \\
+				p'(x) = 3ax^2 + 2bx + c \\
+				p''(x) = 6ax + 2b
+			\end{cases} \Rightarrow \begin{cases}
+				a + b + c + d = 4 \\
+				3a + 2b + c = 1 \\
+				6a + 2b = -2
+			\end{cases} \Rightarrow \begin{cases}
+				a = t \\
+				b = - 1 - 3t \\
+				c = 3t + 3 \\
+				d = - t + 2
+			\end{cases}
+		\end{align*}
+		L'insieme dei polinomi che verificano queste condizioni è $\{tx^3 + (-1 - 3t)x^2 + (3t + 3)x + (- t + 2), t \in \mathbb{R}\}$.
+	\end{es}
+
+	Se invece cerco un polinomio che, oltre a soddisfare le condizioni precedenti, verifichi anche $p'''(1) = -6$, allora la soluzione è unica:
+	$p'''(x) = 6a$, quindi $6a = -6 \Rightarrow a = -1 \Rightarrow t = -1$ e sostituendo $p(x) = -x^3 + 2x^2 + 3$.
+
+	\begin{es}
+		Trovare il piano passante per i punti $P_0(1, 0, 1), P_1(2, -1, 0), P_2(-1, 1, 1)$. \\
+		Per prima cosa trovo i vettori di direzione:
+		\begin{align*}
+			\overrightarrow{v_1} = \overrightarrow{P_0P_1} = (2 - 1, -1 - 0, 0 - 1) = (1, -1, -1) \\
+			\overrightarrow{v_2} =\overrightarrow{P_0P_2} = (-1 - 1, 1 - 0, 1 - 1) = (-2, 1, 0)
+		\end{align*}
+		Quindi il piano è dato da $\{P_0 + t \overrightarrow{v_1} + s \overrightarrow{v_2}, t, s \in \mathbb{R}\} =
+		\{(1, 0, 1) + t(1, -1, -1) + s(-2, 1, 0), t, s \in \mathbb{R}\} = \{(1 + t - 2s, -t + s, 1 - t), t, s \in \mathbb{R}\}
+		= \{(x, y, z) \in \mathbb{R}^3 \mid x + 2y - z = 0\}$.
+	\end{es}
+	\section{Unità 6  - Lezioni 13, 14, 15}
+	\begin{deff}{Endomorfismo}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. Un'applicazione lineare $f: V \to V$ è detta endomorfismo di $V$.
+	\end{deff}
+	\begin{deff}{Matrice diagonale}{}
+		Una matrice $D (n \times n)$ è detta \textbf{diagonale} se $d_{ij} = 0 \ \forall i \ne j$ (cioè se è nulla al di fuori della diagonale principale).
+		\begin{equation*}
+			D = \begin{pmatrix}
+				d_{11} & 0 & \cdots & 0 \\
+				0 & d_{22} & \cdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & d_{nn}
+			\end{pmatrix}
+		\end{equation*}
+	\end{deff}
+	\begin{oss}
+		Due matrici diagonali sono semplici da moltiplicare tra loro:
+		\begin{align*}
+			D = \begin{pmatrix}
+			d_{11} & 0 & \cdots & 0 \\
+			0 & d_{22} & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & d_{nn}
+		\end{pmatrix}, E = \begin{pmatrix}
+			e_{11} & 0 & \cdots & 0 \\
+			0 & e_{22} & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & e_{nn}
+		\end{pmatrix}. \\
+		DE = \begin{pmatrix}
+			d_{11}e_{11} & 0 & \cdots & 0 \\
+			0 & d_{22}e_{22} & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & d_{nn}e_{nn}
+		\end{pmatrix}
+		\end{align*}
+		Inoltre, $\det D = d_{11}d_{22}...d_{nn}$ e se $\det D \ne 0$ (cioè $d_i \ne 0 \forall i$) allora $D$ è invertibile e $D^{-1} = \begin{pmatrix}
+			\frac{1}{d_{11}} & 0 & \cdots & 0 \\
+			0 & \frac{1}{d_{22}} & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & \frac{1}{d_{nn}}
+		\end{pmatrix}$. \\
+		Inoltre $\forall m \in \mathbb{Z} \setminus \{0\}, D^m = \begin{pmatrix}
+			d_{11}^m & 0 & \cdots & 0 \\
+			0 & d_{22}^m & \cdots & 0 \\
+			\vdots & \vdots & \ddots & \vdots \\
+			0 & 0 & \cdots & d_{nn}^m
+		\end{pmatrix}$.
+	\end{oss}
+
+	\begin{deff}{Autovettore}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo.
+		Un vettore $v \in V, v \ne 0$ è detto \textbf{autovettore} di $f$ se $f(v) = \lambda v$ per un certo $\lambda \in \mathbb{K}$ (detto \textbf{autovalore} di $f$).
+	\end{deff}
+	\begin{es}
+		$f(x, y) = (2y, 2x)$
+		\begin{itemize}
+			\item $l_1$ non è un autovettore perchè $f(l_1) = f(1, 0) = 2l_2 = (0, 2) \ne \lambda (1, 0)$.
+			\item $l_2$ non è un autovettore perchè $f(l_2) = f(0, 1) = 2l_1 = (2, 0) = 2(0, 1)$.
+			\item $v_1 = (1, 1)$ è un autovettore di autovalore 2 perchè $f(v_1) = f(1, 1) = (2, 2) = 2(1, 1) = 2v_1$.
+			\item $v_2 = (1, -1)$ è un autovettore di autovalore -2 perchè $f(v_2) = f(1, -1) = (-2, 2) = -2(1, -1) = -2v_2$.
+		\end{itemize}
+		Matrici di $f$:
+		\begin{align*}
+			\text{Base}\, l_1, l_2 & \begin{pmatrix}
+				0 & 2 \\
+				2 & 0
+			\end{pmatrix} & \text{Non è diagonale} \\
+			\text{Base}\, v_1, v_2 & \begin{pmatrix}
+				2 & 0 \\
+				0 & -2
+			\end{pmatrix} & \text{È diagonale}
+		\end{align*}
+	\end{es}
+	\begin{oss}
+		Se $f: V \to V$ è un endomorfismo e $v_1, v_2, ..., v_n$ è una base di $V$ composta da autovettori di $f$ allora:
+		\begin{align*}
+			f(v_1) &= \lambda_1 v_1 = \lambda_1 v_1 + 0v_2 + ... + 0v_n \\
+			f(v_2) &= \lambda_2 v_2 = 0v_1 + \lambda_2 v_2 + ... + 0v_n \\
+			&\vdots \\
+			f(v_n) &= \lambda_n v_n
+		\end{align*}
+		Quindi la matrice di $f$ rispetto alla base $v_1, v_2, ..., v_n$ è diagonale:
+		\begin{equation*}
+			\begin{pmatrix}
+				\lambda_1 & 0 & \cdots & 0 \\
+				0 & \lambda_2 & \cdots & 0 \\
+				\vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & \cdots & \lambda_n
+			\end{pmatrix}
+		\end{equation*}
+	\end{oss}
+
+	Passi generali per rispondere alle domande "Si può diagonalizzare $f$?",
+	"Si può trovare una base di $V$ in cui la matrice di $f$ è diagonale?",
+	"esiste una base di $V$ composta da autovettori di $f$?":
+	\begin{enumerate}
+		\item Trovare gli autovalori di $f$ (se esistano).
+		\item Per ogni autovalore $\lambda$ trovare gli autovettori corrispondenti.
+	\end{enumerate}
+
+	\begin{deff}{Polinonio caratteristico}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo.
+		Il polinomio $p(\lambda) = \det(f - \lambda I)$ è detto \textbf{polinomio caratteristico} di $f$.
+	\end{deff}
+	\begin{teo}{Autovalori e polinomio caratteristico}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo.
+		Allora $\lambda_i \in K$ è un autovalore di $f$ se e solo se $p(\lambda_i) = 0$.
+	\end{teo}
+	\begin{dimm}
+		$\lambda_i$ è un autovalore di $f$ se e solo se esiste un vettore $v \ne 0 \in V$ tale che $f(v) = \lambda_i v$.
+		Quindi $f(v) = \lambda_i v \Leftrightarrow (f - \lambda_i I)(v) = 0 \Leftrightarrow \exists v \ne 0 \in \ker (f - \lambda_i I)
+		\Leftrightarrow \ker (f - \lambda_i I) \ne \{0\} \Leftrightarrow f - \lambda_i I$ non è iniettiva e quindi non è invertibile
+		$\Leftrightarrow \det(f - \lambda_i I) = 0 \Leftrightarrow p(\lambda_i) = 0$. 
+	\end{dimm}
+	\begin{es}
+		$f: \mathbb{R}^2 \to \mathbb{R}^2, f(x, y) = (2y, 2x)$.
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0), e_2 = (0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0) = (0, 2) = 0(1, 0) + 2(0, 1) = 2e_2 \\
+			f(e_2) &= f(0, 1) = (2, 0) = 2(1, 0) + 0(0, 1) = 2e_1 \\
+			A &= \begin{pmatrix}
+				0 & 2 \\
+				2 & 0
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_2) = \det \begin{pmatrix}
+				- \lambda & 2 \\
+				2 & - \lambda
+			\end{pmatrix} = \lambda^2 - 4 = 0 \Rightarrow \lambda^2 = 4 \Rightarrow \lambda = \pm 2
+		\end{align*}
+		Quindi gli autovalori di $f$ sono $\lambda_1 = 2, \lambda_2 = -2$. \\
+		Per definizione gli autovettori sono i vettori $v \ne 0$ tali che $f(v) = \lambda v$, quindi, dato un vettore $v = (x, y)$:
+		\begin{align*}
+			f(x, y) &= 2v \\
+			(2y, 2x) &= (2x, 2y) \\
+			\begin{cases}
+				2y = 2x \\
+				2x = 2y
+			\end{cases} \Rightarrow \begin{cases}
+				y = x \\
+				x = y
+			\end{cases} \Rightarrow y = x
+		\end{align*}
+		Quindi gli autovettori di $f$ sono i vettori $(x, x), x \in \mathbb{R}$, ad esempio $(1, 1), (2, 2), (3, 3), ...$. \\
+		Analogamente per $\lambda_2 = -2$ dato un vettore $v = (x, y)$:
+		\begin{align*}
+			f(x, y) &= -2v \\
+			(2y, 2x) &= (-2x, -2y) \\
+			\begin{cases}
+				2y = -2x \\
+				2x = -2y
+			\end{cases} \Rightarrow \begin{cases}
+				y = -x \\
+				x = -y
+			\end{cases} \Rightarrow y = - x
+		\end{align*}
+		Quindi gli autovettori di $f$ sono i vettori $(x, -x), x \in \mathbb{R}$, ad esempio $(1, -1), (2, -2), (3, -3), ...$.
+	\end{es}
+
+	\begin{es}
+		$f: \mathbb{R}^3 \to \mathbb{R}^3, f(x, y, z) = (2x, -4x - 2y -8z, -4z)$. \\
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0, 0), e_2 = (0, 1, 0), e_3 = (0, 0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0, 0) = (2, -4, 0) = 2e_1 - 4e_2 + 0e_3 \\
+			f(e_2) &= f(0, 1, 0) = (0, -2, 0) = 0e_1 - 2e_2 + 0e_3 \\
+			f(e_3) &= f(0, 0, 1) = (0, 0, -4) = 0e_1 + 0e_2 - 4e_3 \\
+			A &= \begin{pmatrix}
+				2 & 0 & 0 \\
+				-4 & -2 & 0 \\
+				0 & 0 & -4
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_3) = \det \begin{pmatrix}
+				2 - \lambda & 0 & 0 \\
+				-4 & -2 - \lambda & 0 \\
+				0 & 0 & -4 - \lambda
+			\end{pmatrix} = (2 - \lambda)(-2 - \lambda)(-4 - \lambda) = 0 \\
+			&\Rightarrow \lambda_1 = 2, \lambda_2 = -2, \lambda_3 = - 4
+		\end{align*}
+		Troviamo gli autovettori per ciascun autovalore, dato un vettore $v = (x, y, z)$:
+		\begin{itemize}
+			\item $\lambda_1 = 2$:
+				\begin{align*}
+					f(v) = \lambda_1 v \Rightarrow (2x, -4x - 2y - 8z, -4z) = (2x, 2y, 2z) \\
+					\begin{cases}
+						2x = 2x \\
+						-4x - 2y - 8z = 2y \\
+						-4z = 2z
+					\end{cases} \Rightarrow \begin{cases}
+						0 = 0 \\
+						4y = - 4x \\
+						z = 0
+					\end{cases} \Rightarrow \begin{cases}
+						y = - x \\
+						z = 0
+					\end{cases}
+				\end{align*}
+				Quindi gli autovettori di $f$ per $\lambda_1 = 2$ sono i vettori $(x, -x, 0)$, ad esempio $(1, -1, 0), (2, -2, 0), (3, -3, 0), ...$.
+			\item $\lambda_2 = -2$: 
+				\begin{align*}
+					f(v) = \lambda_2 v \Rightarrow (2x, -4x - 2y - 8z, -4z) = (-2x, -2y, -2z) \\
+					\begin{cases}
+						2x = -2x \\
+						-4x - 2y - 8z = -2y \\
+						-4z = -2z
+					\end{cases} \Rightarrow \begin{cases}
+						4x = 0 \\
+						 -2 y = - 2x \\
+						z = 0
+					\end{cases} \Rightarrow \begin{cases}
+						x = 0 \\
+						0 = 0 \\
+						z = 0
+					\end{cases}
+				\end{align*}
+				Quindi gli autovettori di $f$ per $\lambda_2 = -2$ sono i vettori $(0, y, 0)$, ad esempio $(0, 1, 0), (0, 2, 0), (0, 3, 0), ...$.
+			\item $\lambda_3 = -4$:
+				\begin{align*}
+					f(v) = \lambda_3 v \Rightarrow (2x, -4x - 2y - 8z, -4z) = (-4x, -4y, -4z) \\
+					\begin{cases}
+						2x = -4x \\
+						-4x - 2y - 8z = -4y \\
+						-4z = -4z
+					\end{cases} \Rightarrow \begin{cases}
+						6x = 0 \\
+						-2y + 8z = 0 \\
+						0 = 0
+					\end{cases} \Rightarrow \begin{cases}
+						x = 0 \\
+						y = 4z
+					\end{cases}
+				\end{align*}
+				Quindi gli autovettori di $f$ per $\lambda_3 = -4$ sono i vettori $(0, 4z, z)$, ad esempio $(0, 4, 1), (0, 8, 2), (0, 12, 3), ...$.
+		\end{itemize}
+		Possiamo verificare che $v_1 = (1, -1, 0), v_2 = (0, 1, 0), v_3 = (0, 4, 1)$ sono una base di $\mathbb{R}^3$ composta da autovettori di $f$.
+		Sappiamo già da $f(v) = \lambda v$ che la matrice di $f$ rispetto a questa base è diagonale:
+		\begin{equation*}
+			D = \begin{pmatrix}
+				2 & 0 & 0 \\
+				0 & -2 & 0 \\
+				0 & 0 & -4
+			\end{pmatrix}
+		\end{equation*}
+	\end{es}
+	Tuttavia, se il polinomio caratteristico non ha i suoi zeri in $\mathbb{K}$, allora non è detto che esistano autovettori.
+	\begin{es}
+		$K = \mathbb{Q}, f: \mathbb{Q}^2 \to \mathbb{Q}^2, f(x, y) = (2y, x), \mathbb{Q} = \{$ numeri razionali $\}$. \\
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0), e_2 = (0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0) = (0, 1) = 0e_1 + 1e_2 \\
+			f(e_2) &= f(0, 1) = (2, 0) = 2e_1 + 0e_2 \\
+			A &= \begin{pmatrix}
+				0 & 2 \\
+				1 & 0
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_2) = \det \begin{pmatrix}
+				- \lambda & 2 \\
+				1 & - \lambda
+			\end{pmatrix} = \lambda^2 - 2 = 0 \Rightarrow \lambda^2 = 2 \Rightarrow \lambda = \pm \sqrt{2} \notin \mathbb{Q}
+		\end{align*}
+		Quindi $f: \mathbb{Q}^2 \to \mathbb{Q}^2$ non può essere diagonalizzata, ma può essere diagonalizzata in $\mathbb{R}^2$ (perchè $\sqrt{2} \in \mathbb{R}$).
+	\end{es}
+
+	\begin{es}
+		$\mathbb{K} = \mathbb{R}, f: \mathbb{R}^2 \to \mathbb{R}^2, f(x, y) = (y, -x)$.
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0), e_2 = (0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0) = (0, -1) = 0e_1 - 1e_2 \\
+			f(e_2) &= f(0, 1) = (1, 0) = 1e_1 + 0e_2 \\
+			A &= \begin{pmatrix}
+				0 & 1 \\
+				-1 & 0
+			\end{pmatrix}
+			A - \lambda I_2 = \begin{pmatrix}
+				- \lambda & 1 \\
+				-1 & - \lambda
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_2) = \det \begin{pmatrix}
+				- \lambda & 1 \\
+				-1 & - \lambda
+			\end{pmatrix} = \lambda^2 + 1 = 0 \Rightarrow \lambda^2 = -1 \Rightarrow \lambda = \pm i \notin \mathbb{R}
+		\end{align*}
+		Quindi $f: \mathbb{R}^2 \to \mathbb{R}^2$ non può essere diagonalizzata, ma può essere diagonalizzata in $\mathbb{C}^2$ (perchè $i \in \mathbb{C}$).
+		Troviamo gli autovettori per ciascun autovalore, dato un vettore $v = (x, y)$:
+		\begin{itemize}
+			\item $\lambda_1 = i$:
+				\begin{align*}
+					f(v) = \lambda_1 v \Rightarrow (y, -x) = (iy, -ix) \\
+					\begin{cases}
+						y = iy \\
+						- x = - ix
+					\end{cases} \Rightarrow \begin{cases}
+						y = ix \\
+						x = iy
+					\end{cases} \Rightarrow y = ix
+				\end{align*}
+				Quindi gli autovettori di $f$ per $\lambda_1 = i$ sono i vettori $(x, ix), x \in \mathbb{R}$, ad esempio $(1, i), (2, 2i), (3, 3i), ...$.
+			\item $\lambda_2 = -i$: 
+				\begin{align*}
+					f(v) = \lambda_2 v \Rightarrow (y, -x) = (-iy, -ix) \\
+					\begin{cases}
+						y = - iy \\
+						- x = - ix
+					\end{cases} \Rightarrow \begin{cases}
+						y = - ix \\
+						x = - iy
+					\end{cases} \Rightarrow y = - ix
+				\end{align*}
+				Quindi gli autovettori di $f$ per $\lambda_2 = -i$ sono i vettori $(x, -ix), x \in \mathbb{R}$, ad esempio $(1, -i), (2, -2i), (3, -3i), ...$.
+		\end{itemize}
+	\end{es}
+
+	\begin{deff}{Autospazio}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$, $f: V \to V$ un endomorfismo e $\lambda_i \in \mathbb{K}$ un autovalore di $f$. \\
+		L'\textbf{autospazio} di $f$ relativo all'autovalore $\lambda_i$ è l'insieme $V_{\lambda_i} = \{v \in V \mid f(v) = \lambda_i v\}$.
+	\end{deff}
+	\begin{prop}
+		\begin{enumerate}
+			\item $V_{\lambda_i}$ è un sottospazio vettoriale di $V$.
+			\item Se $\lambda_i \ne \lambda_j$ allora $V_{\lambda_i} \cap V_{\lambda_j} = \{0\}$.
+		\end{enumerate}
+	\end{prop}
+	\begin{dimm}
+		\begin{enumerate}
+			\item Se $v, u \in V\lambda_i$ (cioè $f(v) = \lambda_i v$ e $f(u) = \lambda_i u$) allora $f(v + u) = f(v) + f(u) = \lambda_i v + \lambda_i u = \lambda_i(v + u)$,
+				quindi $v + u \in V_{\lambda_i}$.
+				Inoltre se $a \in \mathbb{K}, f(av) = af(v) = a\lambda_i v = \lambda_i (av)$, quindi $av \in V_{\lambda_i}$.
+			\item Sia $v \in V_{\lambda_i} \cap V_{\lambda_j}$, con $\lambda_i \ne \lambda_j$.
+				Allora $\lambda_i v = f(v) = \lambda_j v \Rightarrow (\lambda_i - \lambda_j)v = 0 \Rightarrow v = 0$.
+		\end{enumerate}
+	\end{dimm}
+
+	\begin{deff}{Molteplità algebrica e geometrica}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$, $f: V \to V$ un endomorfismo e $\lambda_i \in \mathbb{K}$ un autovalore di $f$. \\
+		La \textbf{molteplicità geometrica} di $\lambda_i$ è la dimensione dell'autospazio $V_{\lambda_i}$, cioè $m_g(\lambda_i) = \dim V_{\lambda_i}$. \\
+		La \textbf{molteplicità algebrica} di $\lambda_i$ è la sua molteplicità come soluzione dell'equazione $p(\lambda) = 0$, cioè quante volte $\lambda_i$ annulla il polinomio caratteristico $p(\lambda)$.
+	\end{deff}
+	\begin{es}
+		$f: \mathbb{R}^2 \to \mathbb{R}^2, f(x, y) = (3x + y, 3y)$. \\
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0), e_2 = (0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0) = (3, 0) = 3e_1 + 0e_2 \\
+			f(e_2) &= f(0, 1) = (1, 3) = 1e_1 + 3e_2 \\
+			A &= \begin{pmatrix}
+				3 & 1 \\
+				0 & 3
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_2) = \det \begin{pmatrix}
+				3 - \lambda & 1 \\
+				0 & 3 - \lambda
+			\end{pmatrix} = (3 - \lambda)^2
+		\end{align*}
+		Calcolo la molteplicità algebrica di $\lambda = 3$:
+		\begin{align*}
+			p(\lambda) &= (\lambda - 3)^2 = 0 \Rightarrow (\lambda - 3)(\lambda - 3) = 0 \Rightarrow \lambda = 3 \\
+			m_a(3) &= 2 \ \text{(perchè annulla 2 volte $p(x)$)}
+		\end{align*}
+		Troviamo gli autovettori per $\lambda = 3$, dato un vettore $v = (x, y)$:
+		\begin{align*}
+			f(v) = \lambda v \Rightarrow (3x + y, 3y) = (3x, 3y) \\
+			\begin{cases}
+				3x + y = 3x \\
+				3y = 3y
+			\end{cases} \Rightarrow \begin{cases}
+				y = 0 \\
+				3y = 3y
+			\end{cases}
+		\end{align*}
+		Quindi gli autovettori di $f$ per $\lambda = 3$ sono i vettori $(x, 0), x \in \mathbb{R}$, ad esempio $(1, 0), (2, 0), (3, 0), ...$.
+		L'autospazio $V_3$ è quindi $V_3 = \{v \in \mathbb{R}^2 \mid f(v) = 3v\} = \{(x, y) \in \mathbb{R}^2 \mid y = 0\}$. \\
+		La molteplicità geometrica di $\lambda = 3$ è $m_g(3) = \dim V_3 = 1$.
+	\end{es}
+
+	\begin{prop}
+		Sia $\lambda_i$ un autovalore di $f: V \to V$. Allora $1 \le m_g(\lambda_i) \le m_a(\lambda_i)$.
+	\end{prop}
+	\begin{dimm}
+		$m_g(\lambda_i) \ge 1$ perchè se $m_g(\lambda_i) = 0$ allora $V_{\lambda_i} = \{0\}$
+		e quindi non ci sarebbero vettori $v \in V, v \ne 0$ tali che $f(v) = \lambda_i v$ e quindi $\lambda_i$ non sarebbe un autovalore di $f$, contraddicendo la definizione stessa di autovalore. \\
+		Sia ora $h = m_g(\lambda_i) = \dim V_{\lambda_i}$ e mostriamo che $m_a(\lambda_i) \ge h$. \\
+		Presa una base $\{v_1, v_2, ..., v_h\}$ di $V_{\lambda_i}$, completiamola ad una base di $V$ aggiungendo $v_{h+1}, ..., v_n$.
+		Scriviamo la matrice di $f$ rispetto a questa base:
+		\begin{align*}
+			f(v_1) &= \lambda_i v_1 = \lambda_i v_1 + 0v_2 + ... + 0v_n \\
+			f(v_2) &= \lambda_i v_2 = 0v_1 + \lambda_i v_2 + ... + 0v_n \\
+			&\vdots \\
+			f(v_h) &= \lambda_i v_h = 0v_1 + 0v_2 + ... + \lambda_i v_h \\
+			f(v_{h+1}) &= \lambda_i v_{h+1} = a_{1, h+1}v_1 + a_{2, h+1}v_2 + ... + a_{h, h+1}v_h + \lambda_i v_{h+1} \\
+			&\vdots \\
+			f(v_n) &= \lambda_i v_n = a_{1, n}v_1 + a_{2, n}v_2 + ... + a_{h, n}v_h + \lambda_i v_n \\
+			A - \lambda I_n &= \begin{pmatrix}
+				\lambda_i - \lambda & 0 & \cdots & 0 & a_{1, h+1} \\
+				0 & \lambda_i - \lambda & \cdots & 0 & a_{2, h+1} \\
+				\vdots & \vdots & \ddots & \vdots & \vdots \\
+				0 & 0 & \cdots & - \lambda & a_{h, h+1} \\
+				0 & 0 & \cdots & 0 & - \lambda
+			\end{pmatrix}
+		\end{align*}
+		Quindi $\det(A - \lambda I_n) = (\lambda_i - \lambda)^h \cdot q(\lambda)$, dove $q(\lambda)$ è un polinomio di grado $n - h$.
+		Quindi il fattore $(\lambda_i - \lambda)^h$ è presente nel polinomio caratteristico $p(\lambda)$ almeno $h$ volte, cioè $m_a(\lambda_i) \ge h$.
+	\end{dimm}
+
+	\begin{teo}{Criterio di diagonalizzabilità}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo e siano $\lambda_1, \lambda_2, ..., \lambda_k$ i suoi autovalori.
+		$f$ è diagonalizzabile se e solo se valgono le seguenti due condizioni:
+		\begin{enumerate}
+			\item $\lambda_i \in \mathbb{K}$ per ogni $i = 1, 2, ..., k$, ovvero tutti gli autovalori sono nel campo.
+			\item $m_a(\lambda_i) = m_g(\lambda_i)$ per ogni $i = 1, 2, ..., k$, ovvero la molteplicità algebrica è uguale alla molteplicità geometrica per ogni autovalore.
+		\end{enumerate}
+	\end{teo}
+
+	\begin{dimm}
+		Supponiamo che valga la condizione 1, cioè $\lambda_1, \lambda_2, ..., \lambda_t \in \mathbb{K}$ e consideriamo gli autospazi $V_{\lambda_1}, V_{\lambda_2}, ..., V_{\lambda_t}$. \\
+		Sia $U = V_{\lambda_1} \oplus V_{\lambda_2} \oplus ... \oplus V_{\lambda_t}$, cioè $U$ è la somma diretta degli autospazi (perchè $V_{\lambda_i} \cap V_{\lambda_j} = \{0\}$ se $\lambda_i \ne \lambda_j$). \\
+		Sia $\mathcal{B}_1$ una base di $V_{\lambda_1}$, $\mathcal{B}_2$ una base di $V_{\lambda_2}$, ..., $\mathcal{B}_t$ una base di $V_{\lambda_t}$;
+		quindi poichè la somma è diretta $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2 \cup ... \cup \mathcal{B}_t$ è una base di $U$.
+		Quindi $\dim U = \dim V_{\lambda_1} + \dim V_{\lambda_2} + ... + \dim V_{\lambda_t} = m_g(\lambda_1) + m_g(\lambda_2) + ... + m_g(\lambda_t)$. \\
+		D'altra parte $\dim V = m_a(\lambda_1) + m_a(\lambda_2) + ... + m_a(\lambda_t)$. \\
+		Se vale la condizione 2 allora $\dim U = \dim V$ e quindi $U = V$ e quindi $\mathcal{B}$ è una base di $V$ composta da autovettori di $f$ e quindi la matrice di $f$ rispetto a $\mathcal{B}$ è diagonale. \\
+		Se non vale la condizione 2 allora $\dim U = m_g(\lambda_1) + m_g(\lambda_2) + ... + m_g(\lambda_t) < m_a(\lambda_1) + m_a(\lambda_2) + ... + m_a(\lambda_t) = \dim V$ e quindi $B$ non è una base di $V$.
+		Posso completare $\mathcal{B}$ ad una base di $V$ ma i vettori che aggiungo non sono autovettori di $f$ e quindi la matrice di $f$ rispetto a $\mathcal{B}$ non è diagonale.
+	\end{dimm}
+
+	\begin{oss}
+		Se valgono 1 e 2 la dimostrazione ci fornisce un algoritmo esplicito per trovare la base di autovettori di $V$: basta unire le basi degli autospazi.
+	\end{oss}
+
+	\begin{es}
+		Consideriamo $\mathbb{K} = \mathbb{R}, V = \mathbb{R}^3, f: V \to V, f(x, y, z) = (x - 3y + 3z, 3x - 5y + 3z, 6x - 6y + 4z)$. \\
+		Trovare, se possibile, una base di $\mathbb{R}^3$ in cui la matrice di $f$ è diagonale. \\
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0, 0), e_2 = (0, 1, 0), e_3 = (0, 0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0, 0) = (1, 3, 6) = 1e_1 + 3e_2 + 6e_3 \\
+			f(e_2) &= f(0, 1, 0) = (-3, -5, -6) = -3e_1 - 5e_2 - 6e_3 \\
+			f(e_3) &= f(0, 0, 1) = (3, 3, 4) = 3e_1 + 3e_2 + 4e_3 \\
+			A &= \begin{pmatrix}
+				1 & -3 & 3 \\
+				3 & -5 & 3 \\
+				6 & -6 & 4
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_3) = \det \begin{pmatrix}
+				1 - \lambda & -3 & 3 \\
+				3 & -5 - \lambda & 3 \\
+				6 & -6 & 4 - \lambda
+			\end{pmatrix} = (\lambda + 2)^2(\lambda - 4)
+		\end{align*}
+		Quindi gli autovalori di $f$ sono $\lambda_1 = -2, \lambda_2 = 4$ con molteplicità algebrica rispettivamente $m_a(-2) = 2, m_a(4) = 1$. \\
+		Troviamo gli autovettori per $\lambda_1 = -2$, dato un vettore $v = (x, y, z)$:
+		\begin{align*}
+			V_{\lambda_1} = \{v \in \mathbb{R}^3 \mid f(v) = -2v\} \\
+			f(v) = \lambda_1 v \Rightarrow (x - 3y + 3z, 3x - 5y + 3z, 6x - 6y + 4z) = (-2x, -2y, -2z) \\
+			\begin{cases}
+				x - 3y + 3z = -2x \\
+				3x - 5y + 3z = -2y \\
+				6x - 6y + 4z = -2z
+			\end{cases} \Rightarrow \begin{cases}
+				3x - 3y + 3z = 0 \\
+				3x - 3y + 3z = 0 \\
+				6x - 6y + 6z = 0
+			\end{cases} \Rightarrow x + z = y \Rightarrow m_g(-2) = 2
+		\end{align*}
+		Quindi gli autovettori di $f$ per $\lambda_1 = -2$ sono i vettori $(x, x + z, z), x, z \in \mathbb{R}$, ad esempio $(1, 1, 0), (2, 2, 0), (3, 3, 0), ...$. \\
+		Di conseguenza la base $\mathbb{B}_1 = \{(1, 1, 0), (0, 1, 1)\}$ è la base di $V_{\lambda_1}$. \\
+		Troviamo gli autovettori per $\lambda_2 = 4$, dato un vettore $v = (x, y, z)$:
+		\begin{align*}
+			V_{\lambda_2} = \{v \in \mathbb{R}^3 \mid f(v) = 4v\} \\
+			f(v) = \lambda_2 v \Rightarrow (x - 3y + 3z, 3x - 5y + 3z, 6x - 6y + 4z) = (4x, 4y, 4z) \\
+			\begin{cases}
+				x - 3y + 3z = 4x \\
+				3x - 5y + 3z = 4y \\
+				6x - 6y + 4z = 4z
+			\end{cases} \Rightarrow \begin{cases}
+				-6x = - 3z \\
+				-6x = - 3z \\
+				x = y
+			\end{cases} \Rightarrow \begin{cases}
+				x = y \\
+				z = 2x
+			\end{cases} \Rightarrow m_g(4) = 1
+		\end{align*}
+		Quindi gli autovettori di $f$ per $\lambda_2 = 4$ sono i vettori $(t, t, 2t), t \in \mathbb{R}$, ad esempio $(1, 1, 2), (2, 2, 4), (3, 3, 6), ...$. \\
+		Di conseguenza la base $\mathbb{B}_2 = \{(1, 1, 2)\}$ è la base di $V_{\lambda_2}$. \\
+		Per il teorema di diagonalizzabilità $f$ è diagonalizzabile se e solo se $m_a(-2) = m_g(-2)$ e $m_a(4) = m_g(4)$, cioè se e solo se $m_a(-2) = 2 = m_g(-2)$ e $m_a(4) = 1 = m_g(4)$. \\
+		La base di autovettori di $f$ è quindi $\mathcal{B} = \mathbb{B}_1 \cup \mathbb{B}_2 = \{(1, 1, 0), (0, 1, 1), (1, 1, 2)\}$.
+		In questa base la matrice di $f$ è diagonale:
+		\begin{align*}
+			f(v_1) &= - 2v_1 + 0v_2 + 0v_3 \\
+			f(v_2) &= 0v_1 - 2v_2 + 0v_3 \\
+			f(v_3) &= 0v_1 + 0v_2 + 4v_3 \\
+			D &= \begin{pmatrix}
+				-2 & 0 & 0 \\
+				0 & -2 & 0 \\
+				0 & 0 & 4
+			\end{pmatrix}
+		\end{align*}
+	\end{es}
+
+	\begin{es}
+		Dati $f: \mathbb{R}^4 \to \mathbb{R}^4, f(x, y, z, w) = (y, z, w, 0)$.
+		Dire se $f$ è diagonalizzabile e in caso affermativo trovare una base di autovettori. \\
+		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0, 0, 0), e_2 = (0, 1, 0, 0), e_3 = (0, 0, 1, 0), e_4 = (0, 0, 0, 1)$:
+		\begin{align*}
+			f(e_1) &= f(1, 0, 0, 0) = (0, 0, 0, 0) = 0e_1 + 0e_2 + 0e_3 + 0e_4 \\
+			f(e_2) &= f(0, 1, 0, 0) = (1, 0, 0, 0) = 1e_1 + 0e_2 + 0e_3 + 0e_4 \\
+			f(e_3) &= f(0, 0, 1, 0) = (0, 1, 0, 0) = 0e_1 + 1e_2 + 0e_3 + 0e_4 \\
+			f(e_4) &= f(0, 0, 0, 1) = (0, 0, 1, 0) = 0e_1 + 0e_2 + 1e_3 + 0e_4 \\
+			A &= \begin{pmatrix}
+				0 & 1 & 0 & 0 \\
+				0 & 0 & 1 & 0 \\
+				0 & 0 & 0 & 1 \\
+				0 & 0 & 0 & 0
+			\end{pmatrix}
+		\end{align*}
+		Calcolo il polinomio caratteristico:
+		\begin{align*}
+			p(\lambda) &= \det(A - \lambda I_4) = \det \begin{pmatrix}
+				- \lambda & 1 & 0 & 0 \\
+				0 & - \lambda & 1 & 0 \\
+				0 & 0 & - \lambda & 1 \\
+				0 & 0 & 0 & - \lambda
+			\end{pmatrix} = - \lambda \det \begin{pmatrix}
+				- \lambda & 1 & 0 \\
+				0 & - \lambda & 1 \\
+				0 & 0 & - \lambda
+			\end{pmatrix} = - \lambda (- \lambda)^3 = \lambda^4
+		\end{align*}
+		Quindi l'unico autovalore di $f$ è $\lambda = 0$ con molteplicità algebrica $m_a(0) = 4$. \\
+		$f(x, y, z, w) = 0 \cdot (x, y, z, w) \Rightarrow (y, z, w, 0) = (0, 0, 0, 0) \Rightarrow y = z = w = 0$.
+		Quindi l'autospazio $V_{\lambda_1} = \{v \in \mathbb{R}^4 \mid f(v) = 0v\} = \{(x, y, z, w) \in \mathbb{R}^4 \mid y = z = w = 0\} = \{(x, 0, 0, 0) \mid x \in \mathbb{R}\}$
+		con base $\{e_1\} = \{(1, 0, 0, 0)\} \Rightarrow m_g(0) = 1$. \\
+		Per il teorema di diagonalizzabilità $f$ è diagonalizzabile se e solo se $m_a(0) = m_g(0)$, cioè se e solo se $4 = 1$, che è falso. \\
+		Quindi $f$ non è diagonalizzabile.
+	\end{es}
+
+	\begin{deff}{Endomorfismo nilpotente}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo. \\
+		$f$ si dice \textbf{nilpotente} se esiste un $n \in \mathbb{N}$ tale che $f^n = 0$, cioè $f \circ f \circ ... \circ f(v) = 0 \ \forall v \in V$.
+	\end{deff}
+	\begin{deff}{Matrice nilpotente}{}
+		Sia $A \in M_n(\mathbb{K})$. \\
+		$A$ si dice \textbf{nilpotente} se esiste un $n \in \mathbb{N}$ tale che $A^n = 0$, cioè $A \cdot A \cdot ... \cdot A = 0$
+		(la matrice ha tutti gli elementi nulli).
+	\end{deff}
+
+	\begin{teo}{Endomorfismo nilpotente non diagonalizzabile}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo. \\
+		Se $f$ è nilpotente allora $f$ non è diagonalizzabile.
+	\end{teo}
+	\begin{dimm}
+		Sia $\lambda$ un autovalore di $f$ e sia $v$ un autovettore relativo ad $\lambda$, cioè $f(v) = \lambda v$. \\
+		Poichè $f$ è nilpotente esiste un $n \in \mathbb{N}$ tale che $f^n = 0$, cioè $f \circ f \circ ... \circ f(v) = 0$, in
+		particolare $f^n(v) = 0$. \\
+		D'altra parte $f^n(v) = f^{n-1}(\lambda v) = \lambda f^{n-1}(v) = ... = \lambda^n v$. \\
+		Quindi $\lambda^n = 0$ (perchè $f^n(v) = 0$) e quindi $\lambda = 0$. \\
+		Quindi l'unico autovalore di $f$ è $\lambda = 0$. Di conseguenza, se $f$ fosse diagonalizzabile,
+		avrebbe come matrice una matrice diagonale con tutti gli elementi nulli, cioè la matrice nulla, che è assurdo.
+	\end{dimm}
+
+	\begin{es}
+		$A = \begin{pmatrix}
+			5 & 2 & 0 \\
+			0 & 5 & 2 \\
+			0 & 0 & 5
+		\end{pmatrix}$ è una matrice non diagonalizzabile.
+		$A$ si può scrivere come somma di una matrice diagonalizzabile (anzi già diagonale) e di una matrice nilpotente:
+		\begin{align*}
+			A = \begin{pmatrix}
+				5 & 0 & 0 \\
+				0 & 5 & 0 \\
+				0 & 0 & 5
+			\end{pmatrix} + \begin{pmatrix}
+				0 & 2 & 0 \\
+				0 & 0 & 2 \\
+				0 & 0 & 0
+			\end{pmatrix}
+		\end{align*}
+		$A$ quindi non è nilpotente ma non si diagonalizza.
+	\end{es}
+
+	\begin{deff}{Blocco di Jordan}{}
+		Sia $A \in M_n(\mathbb{K})$ una matrice non diagonalizzabile. \\
+		Un \textbf{blocco di Jordan} di $A$ è una matrice quadrata $J \in M_k(\mathbb{K})$ della forma:
+		\begin{align*}
+			J = \begin{pmatrix}
+				\lambda & 1 & 0 & \cdots & 0 \\
+				0 & \lambda & 1 & \cdots & 0 \\
+				0 & 0 & \lambda & \cdots & 0 \\
+				\vdots & \vdots & \vdots & \ddots & \vdots \\
+				0 & 0 & 0 & \cdots & \lambda
+			\end{pmatrix}
+		\end{align*}
+		dove $\lambda$ è l'autovalore di $A$ e $k$ è la molteplicità geometrica di $\lambda$. \\
+		In sostanza, un blocco di Jordan è una matrice diagonale con tutti gli elementi uguali a $\lambda$ e con una riga di 1 sulla diagonale superiore.
+	\end{deff}
+	$p(\lambda) = (\lambda _i - \lambda) \cdot \det J_{\lambda_i,n-1} = ... = (\lambda_i - \lambda)^n \Rightarrow$ l'unico autovalore di $J$ è $\lambda_i$
+	e la molteplicità algebrica è $m_a(\lambda_i) = n$.
+	$\forall n > 1 J_{\lambda_i,n}$ non è diagonalizzabile. Notiamo che $J_{\lambda_i,1}$ è somma di una matrice diagonale e di una matrice nilpotente.
+
+	\begin{es}
+		$J_{7,3} = \begin{pmatrix}
+			7 & 1 & 0 \\
+			0 & 7 & 1 \\
+			0 & 0 & 7
+		\end{pmatrix}$ è un blocco di Jordan di ordine 3.
+		Controllare se è diagonalizzabile:
+		\begin{align*}
+			p(\lambda) &= \det(J_{7,3} - \lambda I_3) = \det \begin{pmatrix}
+				7 - \lambda & 1 & 0 \\
+				0 & 7 - \lambda & 1 \\
+				0 & 0 & 7 - \lambda
+			\end{pmatrix} = (7 - \lambda)^3 \Rightarrow \lambda_1 = 7 \Rightarrow m_a(7) = 3
+		\end{align*}
+		$V_7 = \{(x_1, x_2, x_3) \in \mathbb{R}^3 \mid J_{7,3}(x_1, x_2, x_3) = 7(x_1, x_2, x_3)\} = \{(x_1, x_2, x_3) \in \mathbb{R}^3 \mid \begin{pmatrix}
+			7 & 1 & 0 \\
+			0 & 7 & 1 \\
+			0 & 0 & 7
+		\end{pmatrix} \begin{pmatrix}
+			x_1 \\
+			x_2 \\
+			x_3
+		\end{pmatrix} = \begin{pmatrix}
+			7x_1 \\
+			7x_2 \\
+			7x_3
+		\end{pmatrix}\} = \begin{cases}
+			7x_1 + x_2 = 7x_1 \\
+			7x_2 + x_3 = 7x_2 \\
+			7x_3 = 7x_3
+		\end{cases} \Rightarrow \begin{cases}
+			x_2 = 0 \\
+			x_3 = 0
+		\end{cases}$
+		Quindi $V_7 = \{(x, 0, 0) \mid x \in \mathbb{R}\}$ e $m_g(7) = 1 \Rightarrow J_{7,3}$ non è diagonalizzabile.
+	\end{es}
+
+	\begin{teo}{Decomposizione canonica di Jordan}{}
+		Sia $f: V \to V$ un endomorfismo e siano $\lambda_1, \lambda_2, ..., \lambda_k$ gli autovalori di $f$. \\
+		Allora: \\
+		\begin{enumerate}
+			\item $f$ è somma di una applicazione diagonalizzabile $f_d$ e di una applicazione nilpotente $f_n$.
+			Tale decomposizione $f = f_d + f_n$ è unica e $f$ è diagonalizzabile se e solo se $f_n = 0$.
+			\item Esiste una base di $V$ in cui la matrice di $f$ è la forma canonica di Jordan
+			(dove per ciascun autovalore $\lambda_i$ si hanno $m_g(\lambda_i)$ blocchi di Jordan, la cui somma delle dimensioni è $m_a(\lambda_i)$).
+			\begin{equation*}
+				\begin{pmatrix}
+					J_{\lambda_1, n_1} & 0 & \cdots & 0 \\
+					0 & J_{\lambda_2, n_2} & \cdots & 0 \\
+					\vdots & \vdots & \ddots & \vdots \\
+					0 & 0 & \cdots & J_{\lambda_k, n_k}
+				\end{pmatrix}
+			\end{equation*}
+		\end{enumerate}
+	\end{teo}
+
+	\begin{es}
+		Supponiamo di avere $f: \mathbb{R}^6 \to \mathbb{R}^6$ con autovalori $\lambda_1 = 7, \lambda_2 = 3, \lambda_3 = -2$ con
+		molteplicità algebrica rispettivamente $m_a(7) = 3, m_a(3) = 2, m_a(-2) = 1$.
+		Supponiamo inoltre che tutte le molteplicità geometriche siano $-1$ (quindi $f$ non è diagonalizzabile). \\
+		Per il teorema della decomposizione canonica di Jordan, esiste una base di $\mathbb{R}^6$ in cui la matrice di $f$ è:
+		\begin{equation*}
+			\begin{pmatrix}
+				J_{7,3} & 0 & 0 \\
+				0 & J_{3,2} & 0 \\
+				0 & 0 & J_{-2,1}
+			\end{pmatrix}
+		\end{equation*}
+	\end{es}
+
+	\begin{es}
+		Sia $V = \mathbb{K}[x]_{\le 3} = \{p(x) = a + bx + cx^2 + dx^3 \mid a, b, c, d \in \mathbb{R}\}$.
+		Consideriamo l'endomorfismo $f: V \to V$ definito da $f(p(x)) = p'(x)$, cioè la derivata di $p(x) = b + 2cx + 3dx^2$.
+		Dire se $f$ è diagonalizzabile.
+		$d^4(p(x)) = 0 \ \forall p(x)$ di grado $\le 3$. $d'' = 0, d \ne 0 \Rightarrow d$ non è diagonalizzabile.
+	\end{es}
+
+	\section{Unità 7  - Lezioni 16, 17}
+	\subsection{Forme bilineari e prodotti scalari}
+	\begin{deff}{Forma bilineare}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. \\
+		Una \textbf{forma bilineare} su $V$ è una funzione $f: V \times V \to \mathbb{K}$ che è lineare rispetto ad entrambe le variabili, cioè:
+		\begin{enumerate}
+			\item $f(x + y, z) = f(x, z) + f(y, z) \ \forall x, y, z \in V$
+			\item $f(x, y + z) = f(x, y) + f(x, z) \ \forall x, y, z \in V$
+			\item $f(\lambda x, y) = \lambda f(x, y) = f(x, \lambda y) \ \forall x, y \in V, \lambda \in \mathbb{K}$
+		\end{enumerate}
+	\end{deff}
+
+	\begin{es}
+		$V: \mathbb{R}^2, \beta(v, u) = 2x_1y_1 + x_1y_2 + x 3x_2y_1 - x_2y_2, v = (x_1, x_2), u = (y_1, y_2), v' = (x_1', x_2')$.
+		Verificare se $\beta$ è una forma bilineare. \\
+		$\beta(v + v', u) = 2(x_1 + x_1')y_1 + (x_1 + x_1')y_2 + 3(x_2 + x_2')y_1 - (x_2 + x_2')y_2 = 2x_1y_1 + x_1y_2 + 3x_2y_1 - x_2y_2 + 2x_1'y_1 + x_1'y_2 + 3x_2'y_1 - x_2'y_2 = \beta(v, u) + \beta(v', u)$. \\
+		Analogamente si verifica che $\beta(v, u + u') = \beta(v, u) + \beta(v, u')$. \\
+		$\beta(av, u) = 2(ax_1)y_1 + (ax_1)y_2 + 3(ax_2)y_1 - (ax_2)y_2 = a(2x_1y_1 + x_1y_2 + 3x_2y_1 - x_2y_2) = a\beta(v, u)$. \\
+		Analogamente si verifica che $\beta(v, au) = a\beta(v, u)$. \\
+		Quindi $\beta$ è una forma bilineare.
+	\end{es}
+
+	\begin{es}
+		Sia $V = \mathbb{R}^2$ su $\mathbb{K} = \mathbb{R}$ e sia $v = (x_1, x_2), u = (y_1, y_2)$. \\
+		Verificare se $\beta(v, u) = x_1y_1 + x_2y_2$ è una forma bilineare. \\
+		$\beta(av, u) = (ax_1)(ax_2) + y_1y_2 = a^2x_1y_1 + a^2x_2y_2 = a^2\beta(v, u) \ne a\beta(v, u)$. \\
+		Quindi $\beta$ non è una forma bilineare.
+	\end{es}
+
+	\begin{deff}{Forma bilineare simmetrica}{}
+		Una forma bilineare $\beta: V \times V \to \mathbb{K}$ si dice \textbf{simmetrica} se $\beta(v, u) = \beta(u, v) \ \forall v, u \in V$.
+		Una forma bilineare $\beta: V \times V \to \mathbb{K}$ si dice \textbf{antisimmetrica} se $\beta(v, u) = -\beta(u, v) \ \forall v, u \in V$.
+	\end{deff}
+
+	\begin{es}
+		Sia $V = \mathbb{R}^2$ su $\mathbb{K} = \mathbb{R}$ e sia $v = (x_1, x_2), u = (y_1, y_2)$. \\
+		\begin{enumerate}
+			\item Verificare se $\beta(v, u) = 2x_1y_1 - 3x1y_2 - 3x_2y_1 + 4x_2y_2$ è simmetrica. \\
+			$\beta(u, v) = 2y_1x_1 - 3y_1x_2 - 3y_2x_1 + 4y_2x_2 = 2x_1y_1 - 3x_1y_2 - 3x_2y_1 + 4x_2y_2 = \beta(v, u)$. \\
+			Quindi $\beta$ è simmetrica.
+			\item Verificare se $\beta(v, u) =x_1y_2 - x_2y_1$ è antisimmetrica. \\
+			$\beta(u, v) = y_1x_2 - y_2x_1 = -x_1y_2 + x_2y_1 = -\beta(v, u)$. \\
+			Quindi $\beta$ è antisimmetrica.
+			\begin{oss}
+				$\beta = \det \begin{pmatrix}
+					x_1 & y_1 \\
+					x_2 & y_2
+				\end{pmatrix}$.
+			\end{oss}
+			\item Verificare se $\beta(v, u) = 2x_1y_2 - 3x_2y_1$ è simmetrica o antisimmetrica. \\
+			$\beta(u, v) = 2y_1x_2 - 3y_2x_1 = 2x_2y_1 - 3x_1y_2 \ne \beta(v, u) \ne -\beta(v, u)$. \\
+			Quindi $\beta$ non è simmetrica ne antisimmetrica.
+			Lo si può vedere anche con un esempio numerico: $\beta((1, 0), (1, 1)) = 2, \beta((1, 1), (1, 0)) = -3$.
+			\item Può esistere una forma bilineare che sia sia simmetrica che antisimmetrica? \\
+			$\beta(v, u) = \beta(u, v) = -\beta(v, u) \Rightarrow \beta(v, u) = -\beta(v, u) \Rightarrow 2\beta(v, u) = 0 \Rightarrow \beta(v, u) = 0 \ \forall v, u \in V$.
+			Quindi solo la forma bilineare nulla è sia simmetrica che antisimmetrica.
+		\end{enumerate}
+	\end{es}
+
+	\begin{oss}
+		Ogni forma bilineare $\beta$ si può scrivere come somma di una forma bilineare simmetrica $\beta_s$ e di una forma bilineare antisimmetrica $\beta_a$:
+		\begin{align*}
+			\beta(v, u) = \beta_s(v, u) + \beta_a(v, u) \\
+			\beta_s(v, u) = \frac{\beta(v, u) + \beta(u, v)}{2} \\
+			\beta_a(v, u) = \frac{\beta(v, u) - \beta(u, v)}{2}
+		\end{align*}
+	\end{oss}
+
+	\begin{deff}{Matrice di una forma bilineare}{}
+		la matrice di una forma bilineare $\beta: V \times V \to \mathbb{K}$ rispetto ad una base $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ di $V$ è la matrice $A \in M_n(\mathbb{K})$ tale che $a_{ij} = \beta(v_i, v_j)$.
+	\end{deff}
+	\begin{oss}
+		Se $v = a_1v_1 + ... + a_nv_n, u = b_1v_1 + ... + b_nv_n$ allora $\beta(v, u) = (a_1, a_2, ..., a_n)A \begin{pmatrix}
+			b_1 \\
+			b_2 \\
+			\vdots \\
+			b_n
+		\end{pmatrix}$.
+	\end{oss}
+
+	\begin{es}
+		Sia $v_1 = (1, 1), v_2 = (1, -1)$ una base di $V = \mathbb{R}^2$ e $\beta(v, u) = x_1y_1 + 2x-1y_2 - x_2y_1 + 3x_2y_2$ una forma bilineare su $V$.
+		Trovare la matrice di $\beta$ rispetto alla base $\mathcal{B} = \{v_1, v_2\}$.
+		\begin{align*}
+			\beta(v_1, v_1) &= 1 \cdot 1 + 2 \cdot 1 - 1 \cdot 1 + 3 \cdot 1 = 5 \\
+			\beta(v_1, v_2) &= 1 \cdot 1 + 2 \cdot (-1) - 1 \cdot 1 + 3 \cdot (-1) = -3 \\
+			\beta(v_2, v_1) &= -3 \\
+			\beta(v_2, v_2) &= 1 \cdot (-1) + 2 \cdot (-1) - 1 \cdot (-1) + 3 \cdot (-1) = -7 \\
+			A &= \begin{pmatrix}
+				5 & -3 \\
+				-3 & -7
+			\end{pmatrix}
+		\end{align*}
+	\end{es}
+
+	\begin{deff}{Matrice simmetrica e antisimmetrica}{}
+		Una matrice $A \in M_n(\mathbb{K})$ si dice \textbf{simmetrica} se $A = A^T$ e si dice \textbf{antisimmetrica} se $A = -A^T$.
+	\end{deff}
+
+	\begin{es}
+		\begin{enumerate}
+			\item $A = \begin{pmatrix}
+				3 & 4 \\
+				4 & 2
+			\end{pmatrix}$ è simmetrica.
+			\item $B = \begin{pmatrix}
+				0 & -3 \\
+				3 & 0
+			\end{pmatrix}$ è antisimmetrica.
+			\item $C = \begin{pmatrix}
+				2 & 3 \\
+				-1 & 1
+			\end{pmatrix}$ non è nè simmetrica nè antisimmetrica.
+		\end{enumerate}
+	\end{es}
+	\begin{oss}
+		Una forma bilineare $\beta$ è simmetrica se e solo se la sua matrice rispetto ad una base è simmetrica.
+		Analogamente, una forma bilineare $\beta$ è antisimmetrica se e solo se la sua matrice rispetto ad una base è antisimmetrica.
+	\end{oss}
+
+	\begin{deff}{Matrici congruenti}{}
+		Due matrici $A, M$ si dicono \textbf{congruenti} se esiste una matrice invertibile $B$ tale che $A = B^TMB$.
+	\end{deff}
+
+	\begin{teo}{Matrici congruenti e forme bilineari}{}
+		Due matrici $A, M$ sono congruenti se e solo se rappresentano la stessa forma bilineare rispetto a basi diverse.
+	\end{teo}
+	\begin{dimm}
+		Siano $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ e $\mathcal{B}' = \{u_1, u_2, ..., u_n\}$ due basi di $V$. \\
+		Siano $v = a_1v_1 + ... + a_nv_n = x_1u_1 + ... + x_nu_n$ e $u = b_1v_1 + ... + b_nv_n = y_1u_1 + ... + y_nu_n$. \\
+		Sia $B$ la matrice del cambiamento di base da $\mathcal{B}$ a $\mathcal{B}'$, cioè $\begin{pmatrix}
+			a_1 \\
+			\vdots \\
+			a_n
+		\end{pmatrix} = B \begin{pmatrix}
+			x_1 \\
+			\vdots \\
+			x_n
+		\end{pmatrix}$ e $\begin{pmatrix}
+			b_1 \\
+			\vdots \\
+			b_n
+		\end{pmatrix} = B \begin{pmatrix}
+			y_1 \\
+			\vdots \\
+			y_n
+		\end{pmatrix}$. \\
+		Allora $\beta(v, u) = \begin{pmatrix}
+			a_1 & \cdots & a_n
+		\end{pmatrix}A \begin{pmatrix}
+			b_1 \\
+			\vdots \\
+			b_n
+		\end{pmatrix} = \begin{pmatrix}
+			x_1 & \cdots & x_n
+		\end{pmatrix}B^T A B \begin{pmatrix}
+			y_1 \\
+			\vdots \\
+			y_n
+		\end{pmatrix} = \begin{pmatrix}
+			x_1 & \cdots & x_n
+		\end{pmatrix} M \begin{pmatrix}
+			y_1 \\
+			\vdots \\
+			y_n
+		\end{pmatrix}$.
+	\end{dimm}
+
+	\begin{oss}
+		Se $\beta$ è simmetrica si può sempre trovare una base diagonalizzante.
+	\end{oss}
+
+	\begin{teo}{Diagonalizzazione di una forma bilineare simmetrica}{}
+		Sia $\beta: V \times V \to \mathbb{K}$ una forma bilineare simmetrica. \\
+		Allora esiste una base $\mathcal{B}$ di $V$ tale che la matrice di $\beta$ rispetto a $\mathcal{B}$ è diagonale. \\
+		In altre parole, se $A$ è una matrice simmetrica allora esiste una matrice diagonale che è congruente ad $A$.
+	\end{teo}
+	\begin{dimm}
+		Definiamo una base qualsiasi di $V: \mathcal{B} = \{w_1, w_2, ..., w_n\}$. \\
+		\begin{enumerate}
+			\item Se $\beta(w_1, w_1)$ vado allo step 2. \\
+			Se $\beta(w_1, w_1) = 0$ ma esiste $i$ tale che $\beta(w_i, w_i) \ne 0$ allora scambio $w_1$ con $w_i$ e vado allo step 2. \\
+			Se $\beta(w_i, w_i) = 0 \ \forall i \ne 1$ allora cerco $i, j$ tali che $\beta(w_i, w_j) \ne 0$ e scambio $w_1$ con $w_i + w_j$, $w_2$ con $w_j$, $w_i$ con $w_1$ e $w_j$ con $w_2$ e vado allo step 2.
+			\item Dal passo 1, $\beta(w_1, w_1) \ne 0$. Definiamo una nuova base $w_1', w_2', ..., w_n'$ tale che $w_1' = w_1$ e $w_i' = w_i - \frac{\beta(w_i, w_1)}{\beta(w_1, w_1)}w_1 \ \forall i \ne 1$. \\
+			In questo modo $\beta(w_i', w_1') = \beta(w_i, w_1) - \frac{\beta(w_i, w_1)}{\beta(w_1, w_1)}\beta(w_1, w_1) = 0 \ \forall i \ne 1$. \\
+			Ora $w_1'$ non lo tocco più e riapplico il passo 1 e passo 2 a $w_2', ..., w_n'$.
+		\end{enumerate}
+		Dopo $n - 1$ iterazioni si ottiene una base $u_1, u_2, ..., u_n$ tale che la matrice $\beta$ rispetto a tale base è diagonale.
+	\end{dimm}
+
+	\begin{teo}{Teorema di Sylvester}{}
+		Sia $\beta: V \times V \to \mathbb{K}$ una forma bilineare simmetrica. \\
+		Esiste una base $u_1, u_2, ..., u_n$ di $V$ tale che la matrice di $\beta$ rispetto a tale base è diagonale con $r$ elementi $1$, $s$ elementi $-1$ e $n - r - s$ elementi $0$.
+		I numeri $r, s$ dipendono solo da $\beta$ e non dalla base scelta e sono detti \textbf{segnatura} di $\beta$.
+	\end{teo}
+
+	\begin{dimm}
+		Per il teorema di diagonalizzazione esiste una base $v_1, v_2, ..., v_n$ tale che la matrice di $\beta$ rispetto a tale base è diagonale. \\
+		Quindi:
+		\begin{align*}
+			\beta(v_i, v_i) &> 0 \ \forall i = 1, 2, ..., r \\
+			\beta(v_i, v_i) &< 0 \ \forall i = r + 1, r + 2, ..., r + s \\
+			\beta(v_i, v_i) &= 0 \ \forall i = r + s + 1, r + s + 2, ..., n
+		\end{align*}
+		Consideriamo la base $u_1 = \begin{cases}
+			\frac{1}{\sqrt{|\beta(v_i, v_i)|}} & \text{se } i \le r + s \\
+			v_i & \text{se } i > r + s
+		\end{cases}$ \\
+		così che $\beta(u_1, u_1) = \begin{cases}
+			1 & \text{se } i = 1, 2, ..., r \\
+			-1 & \text{se } i = r + 1, r + 2, ..., r + s \\
+			0 & \text{se } i = r + s + 1, r + s + 2, ..., n
+		\end{cases}$.
+	\end{dimm}
+
+	% Saltato un esempio e un pò di roba
+
+	\begin{teo}{Teorema di Sylvester per le forme quadratiche}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{C}$ e sia $\beta$ una forma bilineare simmetrica su $V$. \\
+		Allora esiste una base $u_1, u_2, ..., u_n$ di $V$ tale che la matrice di $\beta$ rispetto a tale base è diagonale del tipo:
+		\begin{align*}
+			\begin{pmatrix}
+				I_r & \vline & 0 \\
+				\hline
+				0 & \vline & 0
+			\end{pmatrix}
+		\end{align*}
+		dove $r$ è il rango della matrice.
+	\end{teo}
+
+	\begin{dimm}
+		Come nella dimostrazione precedente, salvo che $\forall i = r + 1, r + 2, ..., r + s$ si ha $\beta(v_i, v_i) = 0$.
+		Definisco $u_i = \frac{1}{\sqrt{|\beta(v_i, v_i)|}}v_i$ così che $\beta(u_i, u_i) = (\frac{1}{\sqrt{|\beta(v_i, v_i)|}})^2\beta(v_i, v_i) = 1$.
+	\end{dimm}
+
+	\begin{cor}{Congruenza e segnatura}{}
+		Due matrici simmetriche $A, B$ sono congruenti su $\mathbb{R}$ se e solo se hanno la stessa segnatura. \\
+		Sono invece congruenti su $\mathbb{C}$ se e solo se hanno lo stesso rango.
+	\end{cor}
+
+	\begin{es}
+		Le matrici $A = \begin{pmatrix}
+			2 & 0 \\
+			0 & 3
+		\end{pmatrix}$ e $B = \begin{pmatrix}
+			2 & 0 \\
+			0 & -3
+		\end{pmatrix}$ sono congruenti su $\mathbb{C}$ perchè hanno entrambe rango 2
+		ma non sono congruenti su $\mathbb{R}$ perchè hanno segnature diverse (rispettivamente $2, 0$ e $1, 1$).
+	\end{es}
+	
+	\begin{deff}{Forma quadratica}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ una forma bilineare simmetrica. \\
+		La \textbf{forma quadratica} associata a $\beta$ è la funzione $q: V \to \mathbb{K}$ definita da $q(v) = \beta(v, v) \ \forall v \in V$.
+	\end{deff}
+	\begin{oss}
+		Data $q$ posso ricostruire $\beta$, perchè $\beta(v, u) = \frac{1}{2}(q(v + u) - q(v) - q(u))$.
+	\end{oss}
+
+	\begin{es}
+		Sia $V = \mathbb{R}^2, v = (x_1, x_2), u = (y_1, y_2), \beta(v, u) = 2x_1y_1 + 3x_1y_2 + 3x_2y_1 - x_2y_2$. \\
+		La forma quadratica associata a $\beta$ è $q(v) = \beta(v, v) = 2x_1^2 + 6x_1x_2 - x_2^2$.
+	\end{es}
+
+	\begin{oss}
+		Si chiama forma quadratica perchè $\forall a \in \mathbb{K}$, $q(av) = a^2q(v)$.
+		Se $q(0) = \beta(0, 0) = 0$
+	\end{oss}
+
+	\begin{deff}{Forma quadratica definita positiva, negativa, semidefinita, indefinita}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $q: V \to \mathbb{K}$ una forma quadratica. \\
+		$q$ è:
+		\begin{itemize}
+			\item \textbf{definita positiva} se $q(v) > 0 \ \forall v \ne 0, v \in V$
+			\item \textbf{definita negativa} se $q(v) < 0 \ \forall v \ne 0, q \in V$
+			\item \textbf{semidefinita positiva} se $q(v) \ge 0 \ \forall v \in V$
+			\item \textbf{semidefinita negativa} se $q(v) \le 0 \ \forall v \in V$
+			\item \textbf{indefinita} se esistono $v_1, v_2 \in V$ tali che $q(v_1) > 0$ e $q(v_2) < 0$
+		\end{itemize}
+	\end{deff}
+
+	\begin{es}
+		Sia $V = \mathbb{R}^2, v = (x_1, x_2)$.
+		\begin{itemize}
+			\item $q(x_1, x_2) = x_1^2 + x_2^2$ è definita positiva, perchè $q(x_1, x_2) = x_1^2 + x_2^2 > 0 \ \forall x_1, x_2 \ne 0$.
+			\item $q(x_1, x_2) = -x_1^2 - x_2^2$ è definita negativa, perchè $q(x_1, x_2) = -x_1^2 - x_2^2 < 0 \ \forall x_1, x_2 \ne 0$.
+			\item $q(x_1, x_2) = x_1^2$ è semidefinita positiva, perchè $q(x_1, x_2) = x_1^2 \ge 0 \ \forall x_1, x_2$, ma $q(0, 1) = 0$.
+			\item $q(x_1, x_2) = -x_1^2$ è semidefinita negativa, perchè $q(x_1, x_2) = -x_1^2 \le 0 \ \forall x_1, x_2$, ma $q(0, 1) = 0$.
+			\item $q(x_1, x_2) = x_1^2 - x_2^2$ è indefinita, perchè $q(1, 0) = 1 > 0$ e $q(0, 1) = -1 < 0$.
+			\item $q(x_1, x_2) = x_1^2 + 9x_2^2 + 6x_1x_2$ è semidefinita positiva, perchè $q(x_1, x_2) = x_1^2 + 9x_2^2 + 6x_1x_2 = (x_1 + 3x_2)^2 \ge 0 \Leftrightarrow x1 = -3x_2 \ \forall x_1, x_2$.
+			Dunque ad esempio $q(-3, 1) = 0$.
+		\end{itemize}
+	\end{es}
+
+	\begin{oss}
+		\begin{itemize}
+			\item $q$ è definita positiva se e solo se la segnatura di $\beta$ è $(n, 0)$, ovvero esiste una base in cui la matrice di $\beta$ è $I_n$.
+			\item $q$ è definita negativa se e solo se la segnatura di $\beta$ è $(0, n)$.
+			\item $q$ è semidefinita positiva se e solo se la segnatura di $\beta$ è $(r, n - r)$ con $r \le n$.
+			\item $q$ è semidefinita negativa se e solo se la segnatura di $\beta$ è $(n - r, r)$ con $r \le n$.
+			\item $q$ è indefinita se e solo se la segnatura di $\beta$ è $(r, s)$ con $r, s \ne 0$.
+		\end{itemize}
+	\end{oss}
+
+	\begin{deff}{Matrice hassiana}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ e sia $f: \mathbb{R^n} \to \mathbb{R}$ una funzione di $n$ variabili, derivabile due volte. \\
+		Dato $v \in \mathbb{R}^n$, la \textbf{matrice hassiana} di $f$ in $v$ è la matrice $Hf(v) \in M_n(\mathbb{R})$ tale che $h_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}(v)$. \\
+		Se le derivate seconde sono continue allora $Hf(v)$ è simmetrica. \\
+		Inoltre, se $Hf(v)$ è:
+		\begin{itemize}
+			\item definita positiva allora $f$ ha un minimo locale in $v$
+			\item definita negativa allora $f$ ha un massimo locale in $v$
+			\item indefinita allora $f$ ha un punto di sella in $v$
+		\end{itemize}
+	\end{deff}
+
+	\begin{deff}{Prodotto scalare}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{R}$. \\
+		Un \textbf{prodotto scalare} su $V$ è una forma bilineare simmetrica $\beta: V \times V \to \mathbb{K}$ che è definita positiva.
+	\end{deff}
+
+	\begin{es}
+		\begin{itemize}
+			\item $V = \mathbb{R}^n, v = (x_1, x_2, ..., x_n), u = (y_1, y_2, ..., y_n), \beta(v, u) = x_1y_1 + x_2y_2 + ... + x_ny_n$ è un prodotto scalare standard.
+			Infatti, la sua matrice nella base canonica è $I_n$.
+			\item $V = \{\text{funzioni } [a, b] \to \mathbb{R}\}, \beta(f, g) = \int_a^b f(x)g(x)dx$ è un prodotto scalare?
+			No, la funzione è bilineare e simmetrica ma non è definita positiva perchè $\beta(f, f) = \int_a^b f^2(x)dx \ge 0$ ma $\beta(f, f) = 0 \Leftrightarrow f(x) = 0 \ \forall x \in [a, b]$.
+			\item $U = \{f: [a, b] \to \mathbb{R} \mid f \text{ continua}\}, \beta(f, g) = \int_a^b f(x)g(x)dx$ è un prodotto scalare?
+			Sì, pwechè è bilineare, simmetrica e definita positiva peerchè sia $t \ne 0$ allora $\exists p \in ]a, b[$ tale che $f(p) \ne 0$ e quindi $\int_a^b f^2(x)dx > 0$.
+		\end{itemize}
+	\end{es}
+
+	\begin{deff}{Versore}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
+		Un vettore $v \in V$ si dice \textbf{versore} se $\beta(v, v) = 1$.
+		Inoltre, $v, u$ sono ortogonali se $\beta(v, u) = 0$. \\
+		Un insieme di vettori sono \textbf{ortonormali} se sono versori tra loro ortogonali, cioè se $\forall i, j (V_i, V_j) = \begin{cases}
+			1 & \text{se } i = j \\
+			0 & \text{se } i \ne j
+		\end{cases}$.
+	\end{deff}
+
+	\begin{teo}{Base e prodotto scalare}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
+		Allora esiste una base ortonormale di $V$ rispetto a $\beta$.
+	\end{teo}
+	\begin{dimm}
+		Per il teorema di Sylvester, poichè il prodotto scalare è una forma bilineare simmetrica,
+		esiste una base $v_1, v_2, ..., v_n$ tale che la matrice di $\beta$ rispetto a tale base è diagonale con $r$ elementi $1$, $s$ elementi $-1$ e $n - r - s$ elementi $0$. \\
+		Poichè è definita positiva, la segnatura è $(n, 0)$, quindi $r = n$ e $s = 0$, cioè la matrice è $I_n$. \\
+		Dunque $(V_i, V_j) = (I_n)_{ij} = \begin{cases}
+			1 & \text{se } i = j \\
+			0 & \text{se } i \ne j
+		\end{cases}$.
+	\end{dimm}
+
+	\section{Unità 8  - Lezioni 18, 19, 20}
+
+	\begin{prop}
+		Il prodotto scalare di due vettori è uguale al prodotto scalare standard dei vettori delle loro coordinate rispetto ad una base ortonormale.
+	\end{prop}
+	\begin{dimm}
+		Sappiamo che, se $\beta$ è una forma lineare e $A$ è la sua matrice rispetto a una base $v_1, v_2, ..., v_n$, e se
+		$v = a_1v_1 + a_2v_2 + ... + a_nv_n$ e $u = b_1v_1 + b_2v_2 + ... + b_nv_n$, allora $\beta(v, u) = (a_1, a_2, ..., a_n)A \begin{pmatrix}
+			b_1 \\
+			b_2 \\
+			\vdots \\
+			b_n
+		\end{pmatrix}$. \\
+		Ora, se $\beta$ è un prodotto scalare e $v_1, v_2, ..., v_n$ è una base ortonormale, allora $A = I_n$ e quindi $(v, u) = (x_1, x_2, ..., x_n)I_n \begin{pmatrix}
+			y_1 \\
+			y_2 \\
+			\vdots \\
+			y_n
+		\end{pmatrix} = x_1y_1 + x_2y_2 + ... + x_ny_n$.
+	\end{dimm}
+
+	\begin{prop}
+		Se $v_1, v_2, ..., v_n$ sono vettori tra loro ortogonali, allora sono linearmente indipendenti.
+	\end{prop}
+	\begin{dimm}
+		Supponiamo che $(v_i, v_j) = 0$ per $i \ne j$ e vogliamo mostrare che se $a_1v_1 + a_2v_2 + ... + a_nv_n = 0$ allora $a_1 = a_2 = ... = a_n = 0$. \\
+		In effetti, per ogni $\forall i \in \{1, 2, ..., n\}$ abbiamo che $(a_1v_1 + a_2v_2 + ... + a_nv_n, v_i) = a_1(v_1, v_i) + a_2(v_2, v_i) + ... + a_n(v_n, v_i) = a_i(v_i, v_i) = 0$.
+		Quindi $(v_i, a_1v_1 + a_2v_2 + ... + a_nv_n) = (v_i, 0) = 0$
+	\end{dimm}
+
+	\begin{es}
+		Consideriamo la forma bilinare su $\mathbb{R}^2, v = (a_1, a_2), u = (b_1, b_2)$ e $\beta(v, u) = a_1b_1 + 5a_2b_2 + 2a_1b_2 + 2a_2b_1$. \\
+		$\beta$ è un prodotto scalare? \\
+		Osserviamo che è bilineare e simmetrica perchè $\beta(v, u) = a_1b_1 + 5a_2b_2 + 2a_1b_2 + 2a_2b_1 = a_1b_1 + 5a_2b_2 + 2a_1b_2 + 2a_2b_1 = \beta(u, v)$. \\
+		è definita positiva? \\
+		Nella base canonica, la matrice di $\beta$ è $A = \begin{pmatrix}
+			1 & 2 \\
+			2 & 5
+		\end{pmatrix}$. Ponendo $v_1 = (1, 0), v_2 = e_2 - 2e_1 = -2e_1 + e_2 = (-2, 1)$, abbiamo che $\beta(v_1, v_2) = 0$ e $\beta(v_2, v_2) = 1$. \\
+		Nella base $\{v_1, v_2\}$, la matrice di $\beta$ è $I_2$, di conseguenza la segnatura di $\beta$ è $(2, 0)$ e quindi $\beta$ è definita positiva, cioè è un prodotto scalare.
+	\end{es}
+
+	\begin{prop}
+		\textbf{Disuguaglianza di Carichy-Schwartz} \\
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
+		Allora $\forall v, u \in V$ vale che $|\beta(v, u)| \le \sqrt{\beta(v, v)}\sqrt{\beta(u, u)}$ e l'uguaglianza vale se e solo se $v$ e $u$ sono linearmente dipendenti.
+	\end{prop}
+	\begin{deff}{Angolo convesso}{}
+		L'angolo convesso tra $v, u \in V$ è $\theta = \arccos\left(\frac{\beta(v, u)}{\sqrt{\beta(v, v)}\sqrt{\beta(u, u)}}\right)$.
+	\end{deff}
+	\begin{deff}{Distanza euclidea}{}
+		La distanza euclidea tra due punti $P, Q \in \mathbb{R}^n$ è $d(P, Q) = ||\overrightarrow{PQ}|| = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + ... + (x_n - y_n)^2}$.
+	\end{deff}
+	\begin{es}
+		$P = (3, 1), Q = (5, 0)$. Calcolare la distanza euclidea tra $P$ e $Q$. \\
+		$d(P, Q) = \sqrt{(3 - 5)^2 + (1 - 0)^2} = \sqrt{4 + 1} = \sqrt{5}$.
+	\end{es}
+
+	\begin{teo}{Proprietà distanza euclidea}{}
+		La distanza euclidea gode delle seguenti proprietà:
+		\begin{enumerate}
+			\item $d(P, Q) \ge 0$ e $d(P, Q) = 0 \Leftrightarrow P = Q$
+			\item $d(P, Q) = d(Q, P) \ \forall P, Q \in V$
+			\item $d(P, Q) \le d(P, R) + d(R, Q) \forall P, Q, R \in V$ (disuguaglianza triangolare)
+		\end{enumerate}
+	\end{teo}
+	\begin{dimm}
+		\begin{enumerate}
+			\item Poichè un prodotto scalare è definito positivo, $(\overrightarrow{PQ}, \overrightarrow{PQ}) \ge 0$ e quindi $||\overrightarrow{PQ}|| = 0 \Leftrightarrow \overrightarrow{PQ} = 0 \Leftrightarrow P = Q$.
+			\item Se $a \in \mathbb{R}, ||av|| = \sqrt{(av, av)} = \sqrt{a^2(v, v)} = |a|\sqrt{(v, v)} = |a|||v||$. \\
+			In particolare, se $a = -1, d(P, Q) = ||\overrightarrow{PQ}|| = ||\overrightarrow{QP}|| = d(Q, P)$.
+			\item $d(P, Q) = ||\overrightarrow{PQ}|| = ||\overrightarrow{PR} + \overrightarrow{RQ}|| \le ||\overrightarrow{PR}|| + ||\overrightarrow{RQ}|| = d(P, R) + d(R, Q)$.
+			\item Se $v, w \in V, ||v+w|| \le ||v|| + ||w||$ perchè $||v+w||^2 = (v+w, v+w) = (v, v) + 2(v, w) + (w, w) \le ||v||^2 + 2||v||\cdot||w|| + ||w||^2 = (||v|| + ||w||)^2$.
+			In particolare per $v = \overrightarrow{PR}, w = \overrightarrow{RQ}, v + w = \overrightarrow{PR} + \overrightarrow{RQ} \le \overrightarrow{PQ}$.
+		\end{enumerate}
+	\end{dimm}
+
+	\begin{deff}{Sottospazio ortoganale}{}
+		Sia $U$ un sottospazio vettoriale.
+		Il \textbf{sottospazio ortogonale} di $U$ è $U^\perp = \{v \in V \mid \forall u \in U, \beta(v, u) = 0\}$.
+	\end{deff}
+	\begin{oss}
+		Se $v_1, v_2, ..., v_n \in U^\perp$ allora $(v_1, u) = 0, (v_2, u) = 0, ..., (v_n, u) = 0 \ \forall u \in U$ e quindi $(v_1 + v_2, u) = (v_1, u) + (v_2, u) = 0 \Rightarrow v_1 + v_2 \in U^\perp$.
+		Analogamente, se $v \in U^\perp$ e $a \in \mathbb{K}$ allora $(av, u) = a(v, u) = 0 \Rightarrow av \in U^\perp$.
+	\end{oss}
+	\begin{oss}
+		Osserviamo anche che $U \cap U^\perp = \{0\}$, infatti se $u \in U, U^\perp$ allora $(u, u) = 0 \Rightarrow u = 0$.
+	\end{oss}
+	Inoltre, se $u_1, u_2, ..., u_n$ è una base di $U$ allora $U^\perp \Leftrightarrow (v, u_1) = 0, (v, u_2) = 0, ..., (v, u_n) = 0$. \\
+	Quindi, se $\dim U = k$ allora $\dim V = n, \dim U^\perp = n - k$ (è descritto da $k$ equazioni cartesiane).
+	Pertanto, $V = U \oplus U^\perp$.
+
+	\begin{es}
+		$V = \mathbb{R}^5, U = \{(x_1, x_2, x_3, x_4, x_5) \in V$ tale che $x_1 - 2x_2 = 0, x_3 = 0 e x_4 = x_2 + x_5\}$. \\
+		$U = \{(2t, t, 0, t + s, s), s, t \in \mathbb{R}$\}. \\
+		Una base di $U$ è $u_1 = (2, 1, 0, 1, 0), u_2 = (0, 0, 0, 1, 1)$. \\
+		Rispetto al prodotto scalare standard, $U^\perp = \{v \in V \mid (v, u_) = 0 \forall u \in U\} = \{v \in V \mid (v, u_1) = 0, (v, u_2) = 0\}$.
+		\begin{align*}
+			\begin{cases}
+				2x_1 + x_2 + x_4 = 0 \\
+				x_1 + x_4 = 0
+			\end{cases}
+		\end{align*}
+		Quindi $\dim U^\perp = 5 - 2 = 3$ e $U^\perp = \{\frac{a - c}{2}, c, b, -a, a \mid a, b, c \in \mathbb{R}\}$.
+	\end{es}
+
+	\begin{es}
+		Trovare in $V = \mathbb{R}^2$ la retta $r$ perprendicolare a $U = \{(x, y) \in \mathbb{R}^2 \mid x + 2y = 0\}$ e passante per il punto $P = (2, 3)$. \\
+		Rispetto al prodotto scalare standard, $U = \langle u_1 = (2, -1) \rangle \Rightarrow U^\perp = \{v \in \mathbb{R}^2 \mid (v, u_1) = 0\} = \{v \in \mathbb{R}^2 \mid 2x - y = 0\}$. \\
+		La retta $r$ è parallela a $U^\perp$ e passante per $P = (2, 3)$, quindi $r = \{v \in \mathbb{R}^2 \mid 2x - y = 2 \cdot 2 - 3 = 1\}$. \\
+		L'equazione di $r$ è $2x - y = 1$.
+	\end{es}
+
+	\subsection{Isometrie}
+	\begin{deff}{Isometria}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
+		Un'applicazione lineare $f: V \to V$ è un'\textbf{isometria} se preserva il prodotto scalare, cioè $(f(v), f(u)) = (v, u) \ \forall v, u \in V$.
+	\end{deff}
+	\begin{oss}
+		"Isometria" = "stessa misura"
+	\end{oss}
+	\begin{prop}
+		$f$ è un isometria $\Leftrightarrow \forall v, u \in V, ||f(v)|| = ||v||$.
+	\end{prop}
+	\begin{dimm}
+		\begin{itemize}
+			\item[$\Rightarrow$] Se $f$ è un'isometria, allora $||f(v)|| = \sqrt{(f(v), f(v))} = \sqrt{(v, v)} = ||v||$.
+			\item[$\Leftarrow$] Dati $v, u \in V$, calcoliamo $||v + u||^2 - ||v - u||^2 = (v + u, v + u) - (v - u, v - u) = 4(v, u) \Rightarrow (v, u) = \frac{||v + u||^2 - ||v - u||^2}{4}$. \\
+			Quindi se $f$ conserva la norma $(v, u) = \frac{||f(v) + f(u)||^2 - ||f(v) - f(u)||^2}{4} = \frac{||v + u||^2 - ||v - u||^2}{4} = (f(v), f(u))$.
+		\end{itemize}
+	\end{dimm}
+
+	\begin{es}
+		Sia $V = \mathbb{R}^2$ con il prodotto scalare standard. Dato $v = (x, y) \in V$, consideriamo l'applicazione $f: V \to V$ definita da $f(x, y) = (\frac{\sqrt{3}}{2}x + \frac{1}{2}y, -\frac{1}{2}x + \frac{\sqrt{3}}{2}y)$. \\
+		$f$ è un'isometria? \\
+		Sì, perchè $||v|| = \sqrt{x^2 + y^2},
+		||f(v)|| = \sqrt{(\frac{\sqrt{3}}{2}x + \frac{1}{2}y)^2 + (-\frac{1}{2}x + \frac{\sqrt{3}}{2}y)^2} = \sqrt{\frac{3}{4}x^2 + xy + \frac{1}{4}y^2 + \frac{1}{4}x^2 - xy + \frac{3}{4}y^2} = \sqrt{x^2 + y^2} = ||v||$.
+	\end{es}
+
+	\begin{oss}
+		Una isometria conserva le distanze
+	\end{oss}
+	\begin{prop}
+		Se $f$ è un'isometria, allora $f$ conserva gli angoli.
+	\end{prop}
+	\begin{dimm}
+		In effetti, l'angolo convesso tra $v, u$ è:
+		\begin{align*}
+			\arccos\left(\frac{(v, u)}{\sqrt{(v, v)}\sqrt{(u, u)}}\right) = \arccos\left(\frac{(f(v), f(u))}{||f(v)|||f(u)||}\right)
+		\end{align*}
+		che è l'angolo convesso tra $f(v), f(u)$.
+	\end{dimm}
+
+	\begin{oss}
+		Non vale il contrario, cioè se $f$ conserva gli angoli non è detto che sia un'isometria.
+	\end{oss}
+
+	\begin{teo}{Isometrie e isomorfismo}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
+		Allora $f: V \to V$ è un'isometria se e solo se è un isomorfismo.
+	\end{teo}
+	\begin{dimm}
+		Sia $V$ uno spazio vettoriale con un prodotto scalare e sia $f: V \to V$ un'isometria rispetto a quel prodotto scalare. \\
+		Mostriamo prima che $f$ è iniettiva. \\
+		Poichè un prodotto scalare è definito positivo, $||v|| = 0 \Leftrightarrow v = 0$. \\
+		Ora, se $v \in \ker f$ allora $f(v) = 0 \Rightarrow ||f(v)|| = 0$ ma poichè $f$ è un'isometria, $||f(v)|| = ||v|| = 0 \Rightarrow v = 0 \Rightarrow \ker f = \{0\}$. \\
+		Quindi $f$ è iniettiva. \\
+		Mostriamo ora che $f$ è suriettiva: per il teorema del rango, $\dim Im f = \dim V - 0$ e quindi $f$ è suriettiva.
+	\end{dimm}
+	\begin{es}
+		Non vale il contrario, cioè se $f$ è un isomorfismo non è detto che sia un'isometria.
+	\end{es}
+
+	\begin{deff}{Matrice ortogonale}{}
+		Una matrice $A$ è \textbf{ortogonale} se $A^tA = I_n$.
+	\end{deff}
+
+	\begin{es}
+		$A = \begin{pmatrix}
+			\frac{\sqrt{3}}{2} & \frac{1}{2} \\
+			-\frac{1}{2} & \frac{\sqrt{3}}{2}
+		\end{pmatrix}$ è ortogonale perchè $A^tA = \begin{pmatrix}
+			\frac{\sqrt{3}}{2} & -\frac{1}{2} \\
+			\frac{1}{2} & \frac{\sqrt{3}}{2}
+		\end{pmatrix} \begin{pmatrix}
+			\frac{\sqrt{3}}{2} & \frac{1}{2} \\
+			-\frac{1}{2} & \frac{\sqrt{3}}{2}
+		\end{pmatrix} = \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} = I_2$.
+	\end{es}
+	\begin{oss}
+		$A$ è ortogonale se e solo se le colonne di $A$ formano una base ortonormale rispetto al prodotto scalare standard.
+	\end{oss}
+
+	\begin{teo}{Basi ortonormali e matrice del cambio di base}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. \\
+		Sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$. Allora sia $v_1', v_2', ..., v_n'$ un'altra base ortonormale di $V$
+		se e solo se la matrice del cambio di base è ortogonale.
+	\end{teo}
+	\begin{dimm}
+		Poichè $v_1, v_2, ..., v_n$ è una base ortonormale, cioè $(v_i, v_j) = \begin{cases}
+			1 & \text{se } i = j \\
+			0 & \text{se } i \ne j
+		\end{cases}$, allora la matrice di tale prodotto scalare in base $v_1, v_2, ..., v_n$ è $I_n$. \\
+		Quindi se $B$ è la matrice del cambio di base, la matrice del prodotto scalare in base $v_1', v_2', ..., v_n'$ è $B^tI_nB = B^tB = I_n$. \\
+		Quindi $B$ è ortogonale.
+	\end{dimm}
+
+	\begin{teo}{Isometrie e basi ortogonali}
+		Una applicazione lineare $f: V \to V$ è un'isometria se e solo se manda basi ortonormali in basi ortonormali.
+	\end{teo}
+	\begin{dimm}
+		\begin{itemize}
+			\item[$\Rightarrow$] Sia $f$ una isometria e sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$. \\
+			Allora $(f(v_i), f(v_j)) = (v_i, v_j) = \begin{cases}
+				1 & \text{se } i = j \\
+				0 & \text{se } i \ne j
+			\end{cases}$, cioè $f(v_1), f(v_2), ..., f(v_n)$ è una base ortonormale di $V$.
+			\item[$\Leftarrow$] Sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$ etale che $f(v_1), f(v_2), ..., f(v_n)$ è una base ortonormale di $V$. \\
+			Si vuole mostrare che $f$ è un'isometria. \\
+			Dati $v, u \in V$, scriviamo $v = a_1v_1 + a_2v_2 + ... + a_nv_n$ e $u = b_1v_1 + b_2v_2 + ... + b_nv_n$. \\
+			Poichè $f$ è lineare, $f(v) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n)$ e $f(u) = b_1f(v_1) + b_2f(v_2) + ... + b_nf(v_n)$. \\
+			Allora $(v, u) = (a_1, ..., a_n) \begin{pmatrix}
+				b_1 \\
+				b_2 \\
+				\vdots \\
+				b_n
+			\end{pmatrix} = a_1b_1 + a_2b_2 + ... + a_nb_n = (f(v), f(u)) \ \forall v, u \in V$ cioè $f$ è un'isometria.
+		\end{itemize}
+	\end{dimm}
+
+	\begin{teo}{Isometrie e matrici ortogonali}
+		Un'applicazione lineare $f: V \to V$ è un'isometria se e solo se la sua matrice in una qualsiasi base ortonormale è ortogonale.
+	\end{teo}
+	\begin{dimm}
+		Sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$ e sia $A$ la matrice di $f$ in tale base, cioè:
+		\begin{align*}
+			f(v_1) = a_{11}v_1 + a_{21}v_2 + ... + a_{n1}v_n \\
+			f(v_2) = a_{12}v_1 + a_{22}v_2 + ... + a_{n2}v_n \\
+			\vdots \\
+			f(v_n) = a_{1n}v_1 + a_{2n}v_2 + ... + a_{nn}v_n \\
+			A = \begin{pmatrix}
+				a_{11} & a_{12} & \cdots & a_{1n} \\
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{n1} & a_{n2} & \cdots & a_{nn}
+			\end{pmatrix}
+		\end{align*}
+		$(f(v_i), f(v_j)) = (a_{1i}v_1 + a_{2i}v_2 + ... + a_{ni}v_n, a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n) = a_{1i}a_{1j} + a_{2i}a_{2j} + ... + a_{ni}a_{nj} = (v_i, v_j) = (AA^T)_{ij}$. \\
+		Quindi $f(f(v_i), f(v_j)) = (v_i, v_j) \Rightarrow AA^T = I_n. f$ è un'isometria se e solo se $f(v_i), ..., f(v_n)$ è una base ortonormale di $V$ se e solo se $A$ è ortogonale. \\
+		Quindi $\Leftrightarrow (f(v_i), f(v_j)) = \begin{cases}
+			1 & \text{se } i = j \\
+			0 & \text{se } i \ne j
+		\end{cases} \Leftrightarrow A^TA = \begin{cases}
+			1 & \text{se } i = j \\
+			0 & \text{se } i \ne j
+		\end{cases} \Leftrightarrow A^TA = I_n \Leftrightarrow A \text{ è ortogonale}$.
+	\end{dimm}
+	
+	\begin{center}
+		\includegraphics[width=\linewidth]{images/es_teo_ortonormale.png}
+	\end{center}
+	\begin{es}
+		$V = \mathbb{R}^2$ con il prodotto scalare standard. \\
+		$f: V \to V$ definita da $f(x, y, <) = (z, x, y)$. $f$ è un'isometria? \\
+		Sì perchè $||(x, y, z)|| = \sqrt{x^2 + y^2 + z^2} = \sqrt{z^2 + x^2 + y^2} = ||(z, x, y)||$.
+	\end{es}
+
+	\begin{oss}
+		Le nozioni di base ortonormale e isometria dipendono dal prodotto scalare su $V$.
+	\end{oss}
+
+	\begin{prop}
+		Sia $f$ un'isometria. Allora $\det f = \pm 1$.
+	\end{prop}
+
+	\begin{dimm}
+		Fissiamo una base ortonormale $v_1, v_2, ..., v_n$ di $V$. \\
+		In tale base la matrice $A$ di $f$ è ortogonale, cioè $A^TA = I_n$. \\
+		$1 = \det I_n = \det(A^TA) = \det A^T \det A = (\det A)^2 \Rightarrow \det A = \pm 1$.
+	\end{dimm}
+
+	\begin{oss}
+		Non vale l'inversa!
+	\end{oss}
+
+	\begin{prop}
+		Sia $f: V \to V$ un'isometria e $\lambda$ un suo autovalore. Se $\lambda \in \mathbb{R}$ allora $\lambda = \pm 1$.
+	\end{prop}
+	\begin{dimm}
+		Se $\lambda$ è un autovalore di $f$ allora $\exists v \in V, v \ne 0$ tale che $f(v) = \lambda v$ e quindi
+		$||f(v)|| = ||\lambda v|| = |\lambda|||v|| = ||v|| \Rightarrow |\lambda| = 1 \Rightarrow \lambda = \pm 1$.
+	\end{dimm}
+
+	\begin{oss}
+		Può succedere che una isometria $f: V \to V$ abbia autovalori non reali (ad esempio, numeri complessi).
+	\end{oss}
+\end{document}
