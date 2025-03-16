@@ -17,6 +17,7 @@
 \usepackage{soul}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \newcommand{\hlfancy}[2]{\sethlcolor{#1}\hl{#2}}
+\newcommand{\IM}{\ \mathrm{Im} \ }
 
 \setlist[description]{leftmargin=\parindent,labelindent=\parindent}
 \tcbuselibrary{theorems}
@@ -791,12 +792,12 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 \subsection{Approfondimento sulle funzioni}
 \begin{deff}{Applicazione lineare}{}
 	Siano $V$ e $U$ due spazi vettoriali su un campo $K$.
-	Un'applicazione $f: V \rightarrow U$ è \textbf{lineare} se \enquote*{rispetta le operazioni}, cioè:
+	Un'applicazione $f: V \rightarrow U$ è \textbf{lineare} se valgono entrambe le proprietà:
 	\begin{align*}
-		\text{Somma}                &  & f(v_1 + v_2) = f(v_1) + f(v_2) &  & \forall v_1, v_2 \in V           \\
-		\text{Prodotto per scalare} &  & f(a \cdot v) = a \cdot f(v)    &  & \forall a \in K, \forall v \in V
+		f(v_1 + v_2) = f(v_1) + f(v_2) &  & \forall v_1, v_2 \in V           \\
+		f(a \cdot v) = a \cdot f(v)    &  & \forall a \in K, \forall v \in V
 	\end{align*}
-	In maniera equivalente, $f$ è lineare $\Leftrightarrow \forall v_1, v_2 \in V, \forall a_1, a_2 \in K$:
+	Oppure, equivalentemente, $f$ è lineare $\Leftrightarrow \forall v_1, v_2 \in V, \forall a_1, a_2 \in K$:
 	\begin{equation*}
 		f(a_1v_1 + a_2v_2) = a_1f(v_1) + a_2f(v_2)
 	\end{equation*}
@@ -804,95 +805,102 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 \begin{es}
 	$f: \mathbb{R}^3 \rightarrow \mathbb{R}^2, f(x, y, z) = (2z, x + y)$ è lineare? \\
 	Dati due vettori $v_1 = (x_1, y_1, z_1), v_2 = (x_2, y_2, z_2) \in \mathbb{R}^3$ e uno scalare $a \in \mathbb{R}$,
-	verifico se le operazioni sono compatibili: \\
-	\textbf{Somma}:
-	\begin{align*}
-		f(v_1 + v_2)    & = f(x_1 + x_2, y_1 + y_2, z_1 + z_2) = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)   \\
-		f(v_1) + f(v_2) & = (2z_1, x_1 + y_1) + (2z_2, x_2 + y_2) = (2z_1 + 2z_2, x_1 + x_2 + y_1 + y_2) \\
-		                & = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)
-	\end{align*}
-	\textbf{Prodotto per scalare}:
-	\begin{align*}
-		f(a \cdot v) = f(ax, ay, az)       & = (2az, ax + ay) \\
-		a \cdot f(v) = a \cdot (2z, x + y) & = (2az, ax + ay)
-	\end{align*}
+	verifico se le operazioni sono compatibili:
+	\begin{description}
+		\item[Somma:] 
+		\begin{align*}
+			f(v_1 + v_2)    & = f(x_1 + x_2, y_1 + y_2, z_1 + z_2) = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)   \\
+			f(v_1) + f(v_2) & = (2z_1, x_1 + y_1) + (2z_2, x_2 + y_2) = (2z_1 + 2z_2, x_1 + x_2 + y_1 + y_2) \\
+							& = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)
+		\end{align*}
+		\item[Prodotto per scalare:]
+		\begin{align*}
+			f(a \cdot v) = f(ax, ay, az)       & = (2az, ax + ay) \\
+			a \cdot f(v) = a \cdot (2z, x + y) & = (2az, ax + ay)
+		\end{align*}
+	\end{description}
 	Quindi $f$ è lineare, dato che i risultati coincidono.
 \end{es}
 \begin{es}
 	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, f(x, y) = (2x, y^2)$ è lineare? \\
-	Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili: \\
-	\textbf{Somma}:
-	\begin{align*}
-		f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (2(x_1 + x_2), (y_1 + y_2)^2) & = (2(x_1 + x_2), y_1^2 + 2y_1y_2 + y_2^2) \\
-		f(v_1) + f(v_2) = (2x_1, y_1^2) + (2x_2, y_2^2)                        & = (2(x_1 + x_2), y_1^2 + y_2^2)
-	\end{align*}
-	\textbf{Prodotto per scalare}:
-	\begin{align*}
-		f(a \cdot v) = f(ax, ay)         & = (2ax, (ay)^2) \\
-		a \cdot f(v) = a \cdot (2x, y^2) & = (2ax, ay^2)
-	\end{align*}
+	Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili:
+	\begin{description}
+		\item[Somma:]
+			\begin{align*}
+				f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (2(x_1 + x_2), (y_1 + y_2)^2) & = (2(x_1 + x_2), y_1^2 + 2y_1y_2 + y_2^2) \\
+				f(v_1) + f(v_2) = (2x_1, y_1^2) + (2x_2, y_2^2)                        & = (2(x_1 + x_2), y_1^2 + y_2^2)
+			\end{align*}
+		\item[Prodotto per scalare:]
+			\begin{align*}
+				f(a \cdot v) = f(ax, ay)         & = (2ax, (ay)^2) \\
+				a \cdot f(v) = a \cdot (2x, y^2) & = (2ax, ay^2)
+			\end{align*}
+	\end{description}
 	Quindi $f$ non è lineare, dato che i risultati non coincidono.
 \end{es}
 \begin{es}
 	$f: \mathbb{R}^2 \rightarrow \mathbb{R}^3, f(x, y) = (0, x+y, 1)$ è lineare? \\
-	Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili: \\
-	\textbf{Somma}:
-	\begin{align*}
-		f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (0, (x_1 + x_2) + (y_1 + y_2), 1) & = (0, x_1 + x_2 + y_1 + y_2, 1) \\
-		f(v_1) + f(v_2) = (0, x_1 + y_1, 1) + (0, x_2 + y_2, 1)                    & = (0, x_1 + x_2 + y_1 + y_2, 2)
-	\end{align*}
-	\textbf{Prodotto per scalare}:
-	\begin{align*}
-		f(a \cdot v) = f(ax, ay)             & = (0, ax + ay, 1) \\
-		a \cdot f(v) = a \cdot (0, x + y, 1) & = (0, ax + ay, a)
-	\end{align*}
+	Dati due vettori $v_1 = (x_1, y_1), v_2 = (x_2, y_2) \in \mathbb{R}^2$ e uno scalare $a \in \mathbb{R}$, verifico se le operazioni sono compatibili:
+	\begin{description}
+		\item[Somma:] 
+		\begin{align*}
+			f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (0, (x_1 + x_2) + (y_1 + y_2), 1) & = (0, x_1 + x_2 + y_1 + y_2, 1) \\
+			f(v_1) + f(v_2) = (0, x_1 + y_1, 1) + (0, x_2 + y_2, 1)                    & = (0, x_1 + x_2 + y_1 + y_2, 2)
+		\end{align*}
+		\item[Prodotto per scalare:]
+		\begin{align*}
+			f(a \cdot v) = f(ax, ay)             & = (0, ax + ay, 1) \\
+			a \cdot f(v) = a \cdot (0, x + y, 1) & = (0, ax + ay, a)
+		\end{align*}
+	\end{description}
 	Quindi $f$ non è lineare, dato che i risultati non coincidono.
 \end{es}
+
+\underline{\textbf{Sia $f: V \rightarrow U$ un'applicazione lineare. $f$ è suriettiva $\Leftrightarrow$ Im $f = U$.}}
+
 \begin{prop}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
-	Inoltre ricordiamo che Im $f = \{u \in U \mid \exists v \in V \mid f(v) = u\}$ e che $f$ è surriettiva $\Leftrightarrow$ Im $f = U$.
 	Im $f$ è un sottospazio vettoriale di $U$.
 \end{prop}
 \begin{dimm}
-	Devo verificare che le proprietà di un sottospazio vettoriale siano rispettate:
-	\begin{description}
-		\item Im $f$ non è vuoto perchè $0 \in \text{Im } f$ (dato che $f(0) = 0$).
-		\item Se $u_1, u_2 \in \text{Im } f \Rightarrow u_1 + u_2 \in \text{Im } f$. In effetti, $u_1 \in \text{Im } f \Rightarrow \exists v_1 \in V \mid f(v_1) = u_1$ e $u_2 \in \text{Im } f \Rightarrow \exists v_2 \in V \mid f(v_2) = u_2$. Quindi:
-		      \begin{align*}
-			      \exists v_1 + v_2 \in V \mid f(v_1 + v_2) = f(v_1) + f(v_2) = u_1 + u_2 \Rightarrow u_1 + u_2 \in \text{Im } f
-		      \end{align*}
-		\item Se $u \in \text{Im } (u = f(v) \ \forall v \in V)$ e $a \in K \Rightarrow f(av) = af(v) = au \Rightarrow au \in \text{Im } f$
-	\end{description}
+	Im $f = \{u \in U \mid \exists v \in V \mid f(v) = u\}$. \\
+	Siano $u_1, u_2 \in \text{Im } f$, quindi $\exists v_1, v_2 \in V \mid f(v_1) = u_1$ e $f(v_2) = u_2$. \\
+	Allora $u_1 + u_2 = f(v_1) + f(v_2) = f(v_1 + v_2)$, quindi $u_1 + u_2 \in \text{Im } f$ (un elemento di $V$ è mandato in $u_1 + u_2$). \\
+	Allo stesso modo, $\forall a \in K, u \in \text{Im } f \Rightarrow \exists v \in V \mid f(v) = u \Rightarrow f(av) = a \cdot f(v) = a \cdot u \in \text{Im } f$. \\
+	Quindi Im $f$ è un sottospazio vettoriale di $U$.
 \end{dimm}
 
 \begin{deff}{Nucleo di un'applicazione lineare}{}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	Sia $f: V \rightarrow U$ un'applicazione lineare.
 	Il \textbf{nucleo} di $f$ è l'insieme dei vettori di $V$ che risultano in $0$ dopo l'applicazione di $f$:
-	\[ \text{Ker } f = \{v \in V \mid f(v) = 0\} \]
+	\[ \ker f = \{v \in V \mid f(v) = 0\} \]
 \end{deff}
 \begin{prop}
-	Ker $f$ è un sottospazio vettoriale di $V$.
+	$\ker f$ è un sottospazio vettoriale di $V$.
 \end{prop}
 \begin{dimm}
-	Devo verificare che le proprietà di un sottospazio vettoriale siano rispettate:
+	Devo verificare che le proprietà di un sottospazio vettoriale siano rispettate, sapendo che, dato un $v \in \ker f$, per definizione $f(v) = 0$:
 	\begin{description}
-		\item Ker $f$ non è vuoto perchè $0 \in \text{Ker } f$ (dato che $f(0) = 0$).
-		\item Se $v_1, v_2 \in \text{Ker } f \Rightarrow f(v_1) = f(v_2) = 0 \Rightarrow f(v_1 + v_2) = f(v_1) + f(v_2) = 0 + 0 = 0 \Rightarrow v_1 + v_2 \in \text{Ker } f$
-		\item Se $v \in \text{Ker } f \ (f(v) = 0)$ e $a \in K \Rightarrow f(av) = af(v) = a \cdot 0 = 0 \Rightarrow av \in \text{Ker } f$
+		\item $\ker f$ non è vuoto perchè $0 \in \ker f$ (dato che $f(v - v) = f(v) - f(v) = 0$).
+		\item Se $v_1, v_2 \in \ker f \Rightarrow$ anche $v_1 + v_2 \in \ker f$, perchè $f(v_1 + v_2) = f(v_1) + f(v_2) = 0$.
+		\item Se $v \in \ker f$ e $a \in \mathbb{K} \Rightarrow f(av) = af(v) = a \cdot 0 = 0 \Rightarrow av \in \ker f$.
 	\end{description}
+	Quindi $\ker f$ è un sottospazio vettoriale di $V$.
 \end{dimm}
 \begin{prop}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
-	$f$ è iniettiva $\Leftrightarrow$ Ker $f = \{0\}$
+	$f$ è iniettiva $\Leftrightarrow \ker f = \{0\}$
 \end{prop}
 \begin{dimm}
 	Dimostriamo entrambi i versi:
 	\begin{description}
-		\item[$\Rightarrow$] Se $f$ è iniettiva, allora $f(0) = 0$ (per definizione di iniettività).
-		      Quindi, dato un $v \in \text{Ker } f$, $f(v) = 0 = f(0) \Rightarrow v = 0 \Rightarrow \text{Ker } f = \{0\}$
-		\item[$\Leftarrow$] Devo dimoistrare che se $\text{Ker } f = \{0\}$ allora $f$ è iniettiva.
-		      Dati due vettori $v_1, v_2 \in V$ tali che $f(v_1) = f(v_2)$, allora $f(v_1) - f(v_2) = 0 = f(v_1 - v_2) = 0 \Rightarrow v_1 - v_2 \in \text{Ker } f = \{0\} \Rightarrow v_1 - v_2 = 0 \Rightarrow v_1 = v_2$.
-		      Di conseguenza, $f$ è iniettiva.
+		\item[$\Rightarrow$] Devo dimostrare che se $f$ è iniettiva allora $\ker f = \{0\}$. \\
+		Dalla precedente dimostrazione, $f(0) = 0$ è sempre vero, quindi $0 \in \ker f$.
+		Se esistesse un altro $v \in V$ tale che $f(v) = 0$, contraddirrebbe la definizione di iniettività.
+		Quindi $\ker f = \{0\}$.
+		\item[$\Leftarrow$] Devo dimostrare che se $\ker f = \{0\}$ allora $f$ è iniettiva. \\
+		      Quindi, supponiamo che $\ker f = \{0\}$. Vogliamo mostrare che se $f(v_1) = f(v_2) \Rightarrow v_1 = v_2$. \\
+		      Dato che $f$ è lineare e sappiamo che $f(v_1) = f(v_2)$, $f(v_1) - f(v_2) = 0 \Rightarrow f(v_1 - v_2) = 0$. \\
+		      Quindi $v_1 - v_2 \in \ker f = \{0\} \Rightarrow v_1 - v_2 = 0 \Rightarrow v_1 = v_2$. \\
+		      Di conseguenza, $f$ è iniettiva per definizione.
 	\end{description}
 \end{dimm}
 \begin{es}
@@ -911,41 +919,74 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 	Quindi Ker $f = \{0\}$ e $f$ è iniettiva.
 	Inoltre, Im $f = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\} = \{(x, -x) \mid x \in \mathbb{R}\}$.
 \end{es}
+
 \begin{teo}{Teorema del rango}{}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	Sia $f: V \rightarrow U$ un'applicazione lineare. Allora:
 	\begin{equation*}
-		\text{dim Ker} f + \text{dim Im} f = \text{dim} V
+		\dim V = \dim \ker f + \dim \text{Im} f
 	\end{equation*}
 \end{teo}
 \begin{dimm}
-	Sia $v_1, v_2, ..., v_d$ una base di Ker $f$ (sottospazio di $V$) e completiamola a una base di $V$, $v_1, v_2, ..., v_d, v_{d+1}, ..., v_n$.
-	Per la definizione di Ker $f$, $f(v_1) = f(v_2) = ... = f(v_d) = 0$.
-	Quindi i vettori $f(v_{d+1}), f(v_{d+2}), ..., f(v_n)$ generano Im $f$. \\
-	Sia $u \in \text{Im } f$, cioè $\exists v \in V \mid f(v) = u$. Poichè $v_1, v_2, ..., v_n$ sono una base di $V$,
-	$\exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$ per il teorema delle coordinate. \\
-	Poichè $f$ è lineare, $f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_{d+1}f(v_{d+1}) + ... + a_nf(v_n)$. \\
-	Dunque $\forall u \in \text{Im } f, \exists! a_{d+1}, ..., a_n \in K \mid u = f(v) = a_{d+1}f(v_{d+1}) + ... + a_nf(v_n)$,
-	cioè per il teorema delle coordinate, $f(v_{d+1}), f(v_{d+2}), ..., f(v_n)$ sono una base di Im $f$. \\
-	Quindi $\text{dim Ker} f = d, \text{dim V} = n, \text{dim Im} f = n - d$ e la formula è verificata.
+	Sia $v_1, v_2, ..., v_k$ una base di $\ker f$ e completiamola a una base di $V$: \\
+	$v_1, v_2, ..., v_k, v_{k+1}, ..., v_n$. \\
+	Sia $u \in \IM f$, cioè $u \in U$ e $\exists v \in V \mid f(v) = u$. \\
+	Poichè $v_1, ..., v_k, v_{k + 1}, ..., v_n$ sono una base di $V$, $\exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$ per il teorema delle coordinate. \\
+	Quindi $u = f(v) = f(a_1v_1 + ... + a_kv_k + a_{k + 1}v_{k + 1} + ... + a_nv_n) = a_1f(v_1) + ... + a_kf(v_k) + a_{k + 1}f(v_{k + 1}) + ... + a_nf(v_n)$. \\
+	Cioè $\forall u \in \IM f \exists! a_{k + 1}, ..., a_n \in \mathbb{K} \mid u = a_{k + 1}f(v_{k + 1}) + ... + a_nf(v_n)$,
+	infatti $f(v_1) = f(v_2) = ... = f(v_k) = 0$ perchè $v_1, v_2, ..., v_k \in \ker f$. \\
+	Quindi $f(v_{k + 1}), ..., f(v_n)$ sono linearmente indipendenti e formano una base di $\IM f$.
+	Perciò $\dim \ker f = k, \dim V = n, \dim \IM f = n - k$.
 \end{dimm}
 
 \begin{es}
-	Conseguenze del teorema del rango:
-	\begin{itemize}
-		\item Se $f$ è iniettiva, allora $\dim U \geq \dim V$. \\
-		      Infatti, $\dim U \geq \dim \text{Im} f = \dim V - \dim \text{Ker} f = \dim V - 0 = \dim V$.
-		\item Se $f$ è suriettiva, allora $\dim U \leq \dim V$. \\
-		      Infatti, $\dim U = \dim \text{Im} f = \dim V - \dim \text{Ker} f \leq \dim V$.
-		\item Se $f$ è biunivoca, allora Ker $\dim U = \dim V$. Infatti per i punti precedenti valgono entrambe le disuguaglianze.
-		\item Se $\dim U = \dim V$, allora $f$ è iniettiva $\Leftrightarrow$ $f$ è suriettiva $\Leftrightarrow$ $f$ è biunivoca. \\
-		      Infatti $f$ è iniettiva $\Leftrightarrow \dim \text{Ker} f = 0 \Leftrightarrow \dim V = \dim \text{Im} f + 0 \Leftrightarrow \dim V = \dim \text{Im} f \Leftrightarrow \dim U = \dim \text{Im} f \Leftrightarrow f$ è suriettiva.
-	\end{itemize}
+	$V = \mathbb{R}^3 = U, f: V \rightarrow U, f(x, y, z) = (x - y, y - z, z - x)$ è iniettiva o suriettiva? Qual'è la dimensione di $\ker f$? Definire anche $\IM f$. \\
+	Devo verificare se Ker $f = \{0\}$. \\
+	Formalmente, $\ker f = \{ v \in V \mid f(v) = 0 \} = \{ (x, y, z) \in V \mid f(x, y, z) = (0, 0, 0) \} = \{ (x, y, z) \in V \mid x = y = z \} = \{ (t, t, t) \mid t \in \mathbb{R} \}$. \\
+	Quindi, $\dim \ker f = 1 \ne 0$, quindi $f$ non è iniettiva. \\
+	Per il teorema del rango, $\dim V = \dim \ker f + \dim \IM f$,
+	quindi $\dim \IM f = \dim V - \dim \ker f = 3 - 1 = 2 \ne 3$, quindi $f$ non è suriettiva. \\
+	\\
+	Troviamo $\IM f$:
+	Troviamo una base di $\ker f$: $v_1 = (1, 1, 1)$. Completiamolo ora a una base di $V$: $v_2 = (1, 0, 0), v_3 = (0, 1, 0)$. \\
+	$f(v_1) = (0, 0, 0)$, $f(v_2) = (1, 0, -1)$, $f(v_3) = (-1, 1, 0)$. \\
+	$f(v_2), f(v_3)$ sono linearmente indipendenti e non nulli, quindi formano una base di $\IM f$. \\
+	Quindi $\IM f = \{t(1, 0, -1) + s(-1, 1, 0) \mid t, s \in \mathbb{R}\} = \{(t - s, s, -t) \mid t, s \in \mathbb{R}\} = \{(x, y, z) \in V \mid x + y + z = 0\}$. \\
 \end{es}
+
+\begin{es}
+	$V = \mathbb{R}[x]_{\le 2}=\{ax^2 + bx + c \mid a, b, c \in \mathbb{R}\}, U = V$, $f: V \rightarrow U, f(p(x)) = p'(x) = 2ax + b$.
+	Trovare $\ker f$ e $\IM f$ e le loro dimensioni. \\
+	$\IM f = \{ \text{polinomi di grado } \le 1 \} = \{ax + b \mid a, b \in \mathbb{R}\} = \mathbb{R}[x]_{\le 1}$. \\
+	$\ker f = \{p(x) \in V \mid p'(x) = 0\} = \{ax^2 + bx + c \mid 2ax + b = 0 \Rightarrow a = 0, b = 0\} = \{c \mid c \in \mathbb{R}\}$. \\
+	Quindi $\dim \ker f = 1$, $\dim \IM f = 2$. \\
+	Per il teorema del rango, $\dim V = \dim \ker f + \dim \IM f = 1 + 2 = 3$.
+\end{es}
+
+\begin{prop}
+	Conseguenze del teorema del rango, data un'applicazione lineare $f: V \rightarrow U$:
+	\begin{enumerate}
+		\item Se $\dim V > \dim U$, $f$ non è iniettiva.
+		\item Se $\dim V < \dim U$, $f$ non è suriettiva.
+		\item Se $\dim V = \dim V$, allora $f$ è iniettiva $\Leftrightarrow$ $f$ è suriettiva.
+	\end{enumerate}
+\end{prop}
+
+\begin{dimm}
+	Dimostriamo i tre punti:
+	\begin{enumerate}
+		\item $\dim \ker f = \dim V - \dim \IM f \ge \dim V - \dim U > 0 \Rightarrow \ker f \ne \{0\}$. \\
+		      Quindi $f$ non è iniettiva.
+		\item $\dim \IM f = \dim V - \dim \ker f < \dim U \Rightarrow \IM f \ne U$. \\
+		      Quindi $f$ non è suriettiva.
+		\item $\dim V = \dim \IM f + \dim \ker f = \dim U$ \\
+		      Se $f$ è iniettiva, $\dim \ker f = 0$, quindi $\dim \IM f = \dim U$ cioè $\IM f = U$ e $f$ è suriettiva. \\
+			  Viceversa, se $f$ è suriettiva, $\dim \IM f = \dim U$, quindi $\dim \ker f = 0$ e $f$ è iniettiva.
+	\end{enumerate}
+\end{dimm}
 
 \subsection{Isomorfismi}
 \begin{deff}{Isomorfismo}{}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
-	$f$ è un \textbf{isomorfismo} se è biunivoca.
+	Un'applicazione lineare è chiamata \textbf{isomorfismo} se è biunivoca.
 \end{deff}
 
 \begin{es}
@@ -983,8 +1024,12 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 	Quindi $f$ è lineare e biunivoca, quindi è un isomorfismo.
 \end{es}
 
+\begin{oss}
+	Una applicazione lineare $f: V \rightarrow U$ è un isomorfismo $\Leftrightarrow \ker f = \{0\}$ e Im $f = V$.
+\end{oss}
+
 \begin{deff}{Isomorfismo di spazi vettoriali}{}
-	Due spazi vettoriali $V$ e $U$ su un campo $K$ si dicono \textbf{isomorfi} se esiste un isomorfismo $f: V \rightarrow U$.
+	Due spazi vettoriali $V$ e $U$ su un campo $K$ si dicono \textbf{isomorfi} se esiste un isomorfismo $f: V \rightarrow U$ e scriviamo $V \cong U$.
 \end{deff}
 \begin{prop}
 	"Essere isomorfi" è una relazione di equivalenza.
@@ -992,25 +1037,47 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 \begin{dimm}
 	Devo verificare che la relazione sia riflessiva, simmetrica e transitiva:
 	\begin{description}
-		\item[Riflessività] $V$ è isomorfo a se stesso tramite l'identità (l'identità è un isomorfismo).
-		\item[Simmetria] Se $V$ è isomorfo a $U$, allora $U$ è isomorfo a $V$ tramite l'isomorfismo inverso.
-		\item[Transitività] Se $V$ è isomorfo a $U$ e $U$ è isomorfo a $W$, allora $V$ è isomorfo a $W$ tramite la composizione degli isomorfismi.
+		\item[Riflessività] Se $V$ è uno spazio vettoriale, allora $f: V \rightarrow V, f(v) = v$ è un isomorfismo ($V$ è isomorfo a se stesso).
+		\item[Simmetria] Se $V$ è isomorfo a $U$, allora esiste un isomorfismo $f: V \rightarrow U$. \\
+		      Allora $f^{-1}: U \rightarrow V$ è un isomorfismo, quindi $U$ è isomorfo a $V$.
+		\item[Transitività] Se $V$ è isomorfo a $U$ e $U$ è isomorfo a $W$, allora esistono due isomorfismi $f: V \rightarrow U$ e $g: U \rightarrow W$. \\
+		      Allora la composizione $g \circ f: V \rightarrow W$ è un isomorfismo, quindi $V$ è isomorfo a $W$.
 	\end{description}
 \end{dimm}
 
+\begin{es}
+	$\mathbb{K} = \mathbb{R}, V = \mathbb{K}[x]_{\le 2} = \{ax^2 + bx + c \mid a, b, c \in \mathbb{K}\}, U = \mathbb{R}^3 = \{(a, b, c) \mid a, b, c \in \mathbb{K}\}, f: V \rightarrow U, f(ax^2 + bx + c) = (a, b, c)$ è un isomorfismo? \\
+	$f$ è lineare, iniettiva e suriettiva, quindi è un isomorfismo. \\
+	Quindi $V$ e $U$ sono isomorfi, quindi $V \cong U$.
+\end{es}
+
 \begin{prop}
-	La composizione di un'applicazione lineare è lineare e la composizione di un isomorfismo è un isomorfismo.
+	\begin{enumerate}
+		\item La composizione di applicazioni lineari è un'applicazione lineare.
+		\item La composizione di isomorfismi è un isomorfismo.
+		\item L'applicazione inversa di un isomorfismo è un isomorfismo.
+	\end{enumerate}
 \end{prop}
 \begin{dimm}
-	Siano $V, U, W$ tre spazi vettoriali su un campo $K$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
-	Siano $v_1, v_2 \in V, a \in K$. \\
-	Verifico che la composizione sia lineare:
-	\begin{align*}
-		(g \circ f)(v_1 + v_2) & = g(f(v_1 + v_2)) = g(f(v_1) + f(v_2)) = g(f(v_1)) + g(f(v_2)) = (g \circ f)(v_1) + (g \circ f)(v_2) \\
-		(g \circ f)(av)        & = g(f(av)) = g(af(v)) = ag(f(v)) = a(g \circ f)(v)
-	\end{align*}
-	Inoltre, se $f$ e $g$ sono biunivoche esistono le inverse $f^{-1}$ e $g^{-1}$. Perciò anche $g \circ f$ è biunivoca perchè $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$. \\
-	Quindi $g \circ f$ è lineare e biunivoca, cioè un isomorfismo.
+	Siano $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
+	\begin{enumerate}
+		\item Devo verificare che la composizione $g \circ f: V \rightarrow W$ sia lineare, ovvero $\forall v_1, v_2 \in V, a \in K$:
+		      \begin{align*}
+			      (g \circ f)(v_1 + v_2) & = g(f(v_1 + v_2)) = g(f(v_1) + f(v_2)) = g(f(v_1)) + g(f(v_2)) \\
+				  						 & = (g \circ f)(v_1) + (g \circ f)(v_2) \\
+			      (g \circ f)(av)        & = g(f(av)) = g(af(v)) = ag(f(v)) = a(g \circ f)(v)
+		      \end{align*}
+			  Quindi $g \circ f$ è lineare.
+		\item Dalla definizione, la composizione di applicazioni iniettive è iniettiva e la composizione di applicazioni suriettive è suriettiva. \\
+		      Infatti, se $f$ e $g$ sono iniettive allora $\ker f = \{0\}, \ker g = \{0\} \Rightarrow \ker(g \circ f) = \ker g \circ \ker f = \{0\}$. \\
+			  Analogamente, se $f$ e $g$ sono suriettive allora $\IM f = V, \IM g = U \Rightarrow \IM(g \circ f) = \IM g \ \circ \IM f = W$.
+			  Quindi $g \circ f$ è iniettiva e suriettiva (biunivoca), ovvero è un isomorfismo.
+		\item Sappiamo che se $f$ è biunivoca, allora esiste $f^{-1}$. Mostriamo che se $f$ è lineare, anche $f^{-1}$ lo è: \\
+			  Siano $u_1, u_2 \in U$, vogliamo mostrare che $f^{-1}(u_1 + u_2) = f^{-1}(u_1) + f^{-1}(u_2)$. \\
+			  Poichè $f$ è biunivoca, $\exists! v_1, v_2 \in V \mid f(v_1) = u_1$ e $f(v_2) = u_2$. \\
+			  Allora $f^{-1}(u_1 + u_2) = f^{-1}(f(v_1) + f(v_2)) = f^{-1}(f(v_1 + v_2)) = v_1 + v_2 = f^{-1}(u_1) + f^{-1}(u_2)$. \\
+			  Analogamente $\forall a \in \mathbb{K}, u \in U, \exists v \in V \mid f(v) = u, f^{-1}(au) = f^{-1}(af(v)) = f^{-1}(f(av)) = av = af^{-1}(u)$.
+	\end{enumerate}
 	\begin{center}
 		\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 
@@ -1057,30 +1124,70 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 		\end{tikzpicture}
 	\end{center}
 \end{dimm}
-\begin{prop}
-	L'inverso di un isomorfismo è un isomorfismo.
-\end{prop}
-\begin{dimm}
-	Sia $f: V \rightarrow U$ un isomorfismo di spazi vettoriali. Poichè $f$ è biunivoca $\exists f^{-1}: U \rightarrow V$. \\
-	Dobbiamo verificare che $f^{-1}$ sia lineare. \\
-	Siano $u_1, u_2 \in U, a \in K$. Poichè $f$ è biunivoca, $\exists! v_1, v_2 \in V \mid f(v_1) = u_1, f(v_2) = u_2$.
-	Quindi:
+
+\begin{es}
+	Dire se $f: \mathbb{R}^2 \rightarrow \mathbb{R}^2, f(x, y) = (2x + y, x- y)$ è un isomorfismo e, se sì, calcolare $f^{-1}$. \\
+	$\ker f = \{(x, y) \in \mathbb{R}^2 \mid f(x, y) = (0, 0)\}$, cioè:
 	\begin{align*}
-		f^{-1}(u_1 + u_2) & = f^{-1}(f(v_1) + f(v_2)) = f^{-1}(f(v_1 + v_2)) = v_1 + v_2 = f^{-1}(u_1) + f^{-1}(u_2) \\
-		f^{-1}(au)        & = f^{-1}(af(v)) = f^{-1}(f(av)) = av = af^{-1}(u)
+		f(x, y) = (2x + y, x - y) = (0, 0) \Rightarrow \begin{cases}
+			                                                2x + y = 0 \\
+			                                                x - y = 0
+		                                                \end{cases}
+		\Rightarrow \begin{cases}
+			            x = y \\
+			            2x + x = 0 \Rightarrow 3x = 0 \Rightarrow x = 0
+		            \end{cases} \Rightarrow y = 0
 	\end{align*}
-	Quindi $f^{-1}$ è lineare e biunivoca, cioè un isomorfismo.
-\end{dimm}
+	Quindi $\ker f = \{0\}$ e $f$ è iniettiva. \\
+	Dalla dimensione dell'immagine, $\dim \IM f = \dim V - \dim \ker f = 2 - 0 = 2$ (dal teorema del rango), quindi $\IM f = \mathbb{R}^2$ e $f$ è suriettiva. \\
+	Quindi $f$ è un isomorfismo. \\
+	Calcoliamo $f^{-1}$, ovvero cerchiamo l'unico $(t, s) \in \mathbb{R}^2$ tale che $f(x, y) = (t, s)$:
+	\begin{align*}
+		f(x, y) = (2x + y, x - y) = (t, s) \Rightarrow \begin{cases}
+			                                                2x + y = t \\
+			                                                x - y = s
+		                                                \end{cases} \\
+		\Rightarrow \begin{cases}
+			            x = \frac{t + s}{3} \\
+						y = \frac{t - 2s}{3}
+		            \end{cases}
+	\end{align*}
+	Quindi $f^{-1}(t, s) = \left( \frac{t + s}{3}, \frac{t - 2s}{3} \right)$.
+\end{es}
+
 \begin{teo}{Teorema dell'estensione lineare}{}
-	Sia $V$ uno spazio vettoriale su un campo $K$ e $v_1, v_2, ..., v_n$ una base di $V$. \\
-	Siano $U$ uno spazio vettoriale su $K$ e $u_1, u_2, ..., u_n$ vettori di $U$. \\
+	Siano $V, U$ spazi vettoriali su un campo $K$ e $v_1, v_2, ..., v_n$ una base di $V$,
+	$u_1, u_2, ..., u_n$ vettori di $U$. \\
 	Allora esiste un'unica applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = u_1, f(v_2) = u_2, ..., f(v_n) = u_n$.
 \end{teo}
 \begin{dimm}
-	Sia $v$ un vettore di $V$. Poichè $v_1, v_2, ..., v_n$ è una base di $V$, $\exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
-	Quindi $f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = a_1u_1 + a_2u_2 + ... + a_nu_n$. \\
-	Quindi $f$ esiste ed è unicamente determinata.
+	Sia $v \in V$. Poichè $v_1, v_2, ..., v_n$ sono una base di $V$, $\exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+	Per la linearità $f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = a_1u_1 + a_2u_2 + ... + a_nu_n$. \\
+	Quindi $f$ esiste ed è unica (associa univocamente ogni $v \in V$ a un $u \in U$).
 \end{dimm}
+
+\begin{es}
+	$V = \mathbb{R}^2 = U, v_1 = (1, 1), v_2 = (1, -1), v = (3, 1), u_1 = 2v_1 - v_2, u_2 = 3v_1 - 2v_2$. \\
+	Sia $f: V \rightarrow U$ tale che $f(v_1) = u_1, f(v_2) = u_2$. \\
+	Calcolare $f(v)$. \\
+	Sapendo che $v = a_1v_1 + a_2v_2$, calcoliamo $a_1$ e $a_2$:
+	\begin{equation*}
+		v = (3, 1) = a_1(1, 1) + a_2(1, -1) \Rightarrow \begin{cases}
+			              a_1 + a_2 = 3 \\
+			              a_1 - a_2 = 1
+		              \end{cases} \Rightarrow \begin{cases}
+			            a_1 = 2 \\
+			            a_2 = 1
+		            \end{cases}
+	\end{equation*}
+	Quindi $v = 2v_1 + 1v_2$. \\
+	Calcoliamo $f(v)$:
+	\begin{equation*}
+		f(v) = f(2v_1 + v_2) = 2f(v_1) + f(v_2) = 2u_1 + u_2 = 2(2v_1 - v_2) + (3v_1 - 2v_2) = (7v_1 - 4v_2)
+	\end{equation*}
+	Quindi $f(v) = 7v_1 - 4v_2 = (3, 11)$.
+\end{es}
+
 \begin{es}
 	Sia $V = \mathbb{R}^2, l_1 = (1, 0), l_2 = (0, 1)$ , dire se esiste ed è unica un'applicazione lineare $f: V \rightarrow V$ tale che $f(l_1) = (2, 1), f(l_2) = (-1, 3)$. \\
 	Poichè $l_1, l_2$ è una base di $V$, per il teorema dell'estensione lineare esiste ed è unica un'applicazione lineare $f: V \rightarrow V$ tale che $f(l_1) = (2, 1), f(l_2) = (-1, 3)$.
@@ -1102,9 +1209,9 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 
 Il teorema dell'estensione lineare indica che per sapere chi è $f$ è sufficiente conoscere cosa fa sui vettori di una base di $V$.
 \begin{deff}{Matrice associata ad un'applicazione lineare}{}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ e $f: V \rightarrow U$ un'applicazione lineare.
+	Siano $V$ e $U$ due spazi vettoriali su un campo $\mathbb{K}$ e $f: V \rightarrow U$ un'applicazione lineare.
 	Siano $v_1, v_2, ..., v_n$ una base di $V$ e $u_1, u_2, ..., u_m$ una base di $U$. \\
-	Dato $f(v_1) \in U \exists! a_{11}, a_{21}, ..., a_{m1} \in K \mid f(v_1) = a_{11}u_1 + a_{21}u_2 + ... + a_{m1}u_m$. \\
+	Dato $f(v) \in U \ \exists! a_{1}, a_{2}, ..., a_{m} \in \mathbb{K} \mid f(v) = a_{1}u_1 + a_{2}u_2 + ... + a_{m}u_m$. \\
 	Definiamo la \textbf{matrice associata} ad $f$ rispetto alle basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ come:
 	\begin{equation*}
 		\begin{pmatrix}
@@ -1114,91 +1221,128 @@ Il teorema dell'estensione lineare indica che per sapere chi è $f$ è sufficien
 			a_{1n} & a_{2n} & \cdots & a_{mn}
 		\end{pmatrix}
 	\end{equation*}
-	Ho ottenuto una matrice $m \times n$., cioè una tabella con $m$ righe e $n$ colonne.
+	ovvero la matrice che ha alla $i$-esima riga e $j$-esima colonna l'elemento $a_{ij}$, cioè il coefficiente di $u_j$ in $f(v_i)$.
+	\begin{align*}
+		f(v_1) & = a_{11}u_1 + a_{12}u_2 + ... + a_{1m}u_m \\
+		f(v_2) & = a_{21}u_1 + a_{22}u_2 + ... + a_{2m}u_m \\
+		\vdots  & \\
+		f(v_n) & = a_{n1}u_1 + a_{n2}u_2 + ... + a_{nm}u_m
+	\end{align*}
+	Quindi la matrice associata ad $f$ ha $m$ righe e $n$ colonne, cioè è una matrice $m \times n$.
 \end{deff}
 Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto alle basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ determina univocamente $f$.
-\begin{es}
-	Sia $V = \mathbb{R}^3$ e $U = \mathbb{R}^2$. Siano $v_1 = (1, 1, 0), v_2 = (1, 0, -1), v_3 = (0, 1, 2)$ una base di $V$ e $u_1 = (0, 2), u_2 = (-1, 0)$ una base di $U$. \\
-	Sia $f: V \rightarrow U$ un'applicazione lineare tale che $f(x, y, z) = (x - z, 2y - x)$. \\
-	Allora la matrice associata ad $f$ rispetto alle basi $v_1, v_2, v_3$ e $u_1, u_2$ è:
-	\begin{align*}
-		\begin{pmatrix}
-			1  & \frac{1}{2} & 0 \\
-			-1 & - 2         & 2
-		\end{pmatrix}
-	\end{align*}
-\end{es}
-\begin{align*}
-	f(v_1) = f(1, 1, 0) = (1 - 0, 2 - 1) = (1, 1) = 1 \cdot u_1 + 1 \cdot u_2      \\
-	f(v_2) = f(1, 0, -1) = (1 + 1, 0 - 1) = (0, -1) = 0 \cdot u_1 + (-1) \cdot u_2 \\
-	f(v_3) = f(0, 1, 2) = (0 - 2, 2 - 0) = (-2, 2) = (-2) \cdot u_1 + 2 \cdot u_2
-\end{align*}
-\begin{es}
-	La matrice ottenuta dipende dalle basi scelte. Se scelgo basi diverse, ottengo matrici diverse.
-\end{es}
 
-Siano $V, U, W$ tre spazi vettoriali su un campo $K$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
-I campi hanno rispettivamente le basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ e $w_1, w_2, ..., w_p$.
-Sia $A$ la matrice di $f$ e $B$ la matrice di $g$ rispetto alle basi scelte. \\
-Si vuole calcolare la matrice di $g \circ f$ rispetto alle basi scelte. \\
-$f(v_1)$ si può scrivere come $\sum_{j} a_{ji}u_j$ e $g(u_j)$ si può scrivere come $\sum_{h} b_{hj}w_h$. \\
-Quindi $g(f(v_i)) = g\left(\sum_{j} a_{ji}u_j\right) = \sum_{j} a_{ji}g(u_j) = \sum_{j} a_{ji}\left(\sum_{h} b_{hj}w_h\right) = \sum_{h} \left(\sum_{j} a_{ji}b_{hj}\right)w_h$. \\
-La matrice di $g \circ f$ rispetto alle basi scelte è la matrice che ha alla $h$-esima riga e $i$-esima colonna l'elemento $\sum_{j\in\{1,...,m\}} a_{ji}b_{hj}$, ovvero il "prodotto riga per colonna" delle matrici $A$ e $B$.
+\begin{oss}
+	La matrice ottenuta dipende dalle basi scelte. Se scelgo basi diverse, ottengo matrici diverse.
+\end{oss}
+
 \begin{es}
-	Sia $V = U = W$ con base $l_1 = (1, 0), l_2 = (0, 1)$. Siano $f(x, y) = (5x + 2y, -2x + y)$ e $g(x, y) = (2x - y, -x + 3y)$.
-	Calcolare la matrice di $g \circ f$ rispetto alla base $l_1, l_2$. \\
-	La matrice di $f$ è:
+	$V = \mathbb{R}^3, U = \mathbb{R}^2, f: V \rightarrow U, f(x, y, z) = (2x + y, x - 3z)$. \\
+	Consideriamo la base $v_1 = (1, -1, 0), v_2 = (2, 1, 0), v_3 = (0, 1, 1)$ di $V$ e la base $u_1 = (0, -1), u_2 = (2, 0)$ di $U$. \\
+	Scriviamo la matrice associata ad $f$ rispetto a queste basi. \\
+	Calcoliamo $f(v_1), f(v_2), f(v_3)$:
+	\begin{align*}
+		f(v_1) & = f(1, -1, 0) = (2 \cdot 1 + (-1), 1 \cdot (-1), 1 \cdot 1 - 3 \cdot 0) = (1, 1) = - 1u_1 + \frac{1}{2}u_2 \\
+		f(v_2) & = f(2, 1, 0) = (2 \cdot 2 + 1, 2 - 3 \cdot 0) = (5, 2) = - 2u_1 + \frac{5}{2}u_2 \\
+		f(v_3) & = f(0, 1, 1) = (2 \cdot 0 + 1, 0 - 3 \cdot 1) = (1, -3) = - 2u_1 + \frac{1}{2}u_2
+	\end{align*}
+	Quindi la matrice associata ad $f$ rispetto alle basi scelte è:
 	\begin{align*}
 		A = \begin{pmatrix}
-			    5  & 2 \\
-			    -2 & 1
+			    -1 & -2 & -2 \\
+			    \frac{1}{2} & \frac{5}{2} & \frac{1}{2}
 		    \end{pmatrix}
 	\end{align*}
-	La matrice di $g$ è:
-	\begin{align*}
-		B = \begin{pmatrix}
-			    2  & -1 \\
-			    -1 & 3
-		    \end{pmatrix}
-	\end{align*}
-	La matrice di $g \circ f$ è:
-	\begin{align*}
-		BA = \begin{pmatrix}
-			     2  & -1 \\
-			     -1 & 3
-		     \end{pmatrix} \begin{pmatrix}
-			                   5  & 2 \\
-			                   -2 & 1
-		                   \end{pmatrix} = \begin{pmatrix}
-			                                   2 \cdot 5 + (-1) \cdot (-2) & 2 \cdot 2 + (-1) \cdot 1 \\
-			                                   (-1) \cdot 5 + 3 \cdot (-2) & (-1) \cdot 2 + 3 \cdot 1
-		                                   \end{pmatrix} = \begin{pmatrix}
-			                                                   12  & 3 \\
-			                                                   -11 & 1
-		                                                   \end{pmatrix}
-	\end{align*}
-	Aritmeticamente:
-	\begin{align*}
-		g(f(x, y)) & = g(5x + 2y, -2x + y) = g(5x + 2y, -2x + y) = (2(5x + 2y) - (-2x + y), -(5x + 2y) + 3(-2x + y)) \\
-		           & = (12x + 3y, -11x + y)
-	\end{align*}
-	Le soluzioni coincidono.
 \end{es}
 
+\begin{es}
+	$V = \mathbb{R}^2, U = \mathbb{R}^2, v_1 = (3, -2)$. Esiste una e una sola applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = l1 = (1, 0)$? \\
+	Osserviamo che $v_1$ non è una base di $V$, quindi non posso applicare il teorema dell'estensione lineare. \\
+	Infatti, posso completare $v_1$ a una base di $V$, ad esempio $v_1 = (3, -2), v_2 = (1, 1)$. \\
+	So che $f(v_1) = (1, 0)$ ma $f(v_2)$ può essere scelto arbitrariamente (ad esempio $f(v_2) = (0, 1)$ o $f(v_2) = (1, 1)$). \\
+	Quindi $f$ esiste ma non è unica.
+\end{es}
+
+\begin{es}
+	$V = \mathbb{R}^3, U = \mathbb{R}^3, v_1 = (1, 0, 0), v_2 = (0, 1, 0), v_3 = (2, 3, 0)$. \\
+	Dire se esiste ed è unica un'applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = (1, 1, 0), f(v_2) = (0, 0, 1), f(v_3) = (5, 5, 7)$. \\
+	Osserviamo che $v_3 = 2v_1 + 3v_2$, quindi $f(v_3) = 2f(v_1) + 3f(v_2)$. Di conseguenza, $v_1, v_2, v_3$ non è una base di $V$. \\
+	Quindi, se $f$ esiste ed è lineare, $(5, 5, 7) = f(v_3) = 2f(v_1) + 3f(v_2) = 2(1, 1, 0) + 3(0, 0, 1) = (2, 2, 3)$, che non è possibile. \\
+	Quindi non esiste un'applicazione lineare $f$ che soddisfi le condizioni. \\
+	Esiste invece un'applicazione lineare $g: V \rightarrow U$ tale che $g(v_1) = (1, 1, 0), g(v_2) = (0, 0, 1), g(v_3) = (2, 2, 3)$? \\
+	Sì, infatti $g(v_3) = 2g(v_1) + 3g(v_2) = 2(1, 1, 0) + 3(0, 0, 1) = (2, 2, 3)$, ma non è unica. \\
+	Posso infatti completare $v_1, v_2$ a una base di $V$, ad esempio $v_1 = (1, 0, 0), v_2 = (0, 1, 0), v_4 = (0, 0, 1)$
+	e posso scegliere $g(v_4)$ arbitrariamente.
+\end{es}
+
+% Siano $V, U, W$ tre spazi vettoriali su un campo $K$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
+% I campi hanno rispettivamente le basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ e $w_1, w_2, ..., w_p$.
+% Sia $A$ la matrice di $f$ e $B$ la matrice di $g$ rispetto alle basi scelte. \\
+% Si vuole calcolare la matrice di $g \circ f$ rispetto alle basi scelte. \\
+% $f(v_1)$ si può scrivere come $\sum_{j} a_{ji}u_j$ e $g(u_j)$ si può scrivere come $\sum_{h} b_{hj}w_h$. \\
+% Quindi $g(f(v_i)) = g\left(\sum_{j} a_{ji}u_j\right) = \sum_{j} a_{ji}g(u_j) = \sum_{j} a_{ji}\left(\sum_{h} b_{hj}w_h\right) = \sum_{h} \left(\sum_{j} a_{ji}b_{hj}\right)w_h$. \\
+% La matrice di $g \circ f$ rispetto alle basi scelte è la matrice che ha alla $h$-esima riga e $i$-esima colonna l'elemento $\sum_{j\in\{1,...,m\}} a_{ji}b_{hj}$, ovvero il "prodotto riga per colonna" delle matrici $A$ e $B$.
+% \begin{es}
+% 	Sia $V = U = W$ con base $l_1 = (1, 0), l_2 = (0, 1)$. Siano $f(x, y) = (5x + 2y, -2x + y)$ e $g(x, y) = (2x - y, -x + 3y)$.
+% 	Calcolare la matrice di $g \circ f$ rispetto alla base $l_1, l_2$. \\
+% 	La matrice di $f$ è:
+% 	\begin{align*}
+% 		A = \begin{pmatrix}
+% 			    5  & 2 \\
+% 			    -2 & 1
+% 		    \end{pmatrix}
+% 	\end{align*}
+% 	La matrice di $g$ è:
+% 	\begin{align*}
+% 		B = \begin{pmatrix}
+% 			    2  & -1 \\
+% 			    -1 & 3
+% 		    \end{pmatrix}
+% 	\end{align*}
+% 	La matrice di $g \circ f$ è:
+% 	\begin{align*}
+% 		BA = \begin{pmatrix}
+% 			     2  & -1 \\
+% 			     -1 & 3
+% 		     \end{pmatrix} \begin{pmatrix}
+% 			                   5  & 2 \\
+% 			                   -2 & 1
+% 		                   \end{pmatrix} = \begin{pmatrix}
+% 			                                   2 \cdot 5 + (-1) \cdot (-2) & 2 \cdot 2 + (-1) \cdot 1 \\
+% 			                                   (-1) \cdot 5 + 3 \cdot (-2) & (-1) \cdot 2 + 3 \cdot 1
+% 		                                   \end{pmatrix} = \begin{pmatrix}
+% 			                                                   12  & 3 \\
+% 			                                                   -11 & 1
+% 		                                                   \end{pmatrix}
+% 	\end{align*}
+% 	Aritmeticamente:
+% 	\begin{align*}
+% 		g(f(x, y)) & = g(5x + 2y, -2x + y) = g(5x + 2y, -2x + y) = (2(5x + 2y) - (-2x + y), -(5x + 2y) + 3(-2x + y)) \\
+% 		           & = (12x + 3y, -11x + y)
+% 	\end{align*}
+% 	Le soluzioni coincidono.
+% \end{es}
+
 \begin{teo}{Isomorfismi e basi}{}
-	Un'applicazione lineare è un isomorfismo $\Leftrightarrow$ manda basi in basi, ovvero se $f: V \rightarrow U$ è un isomorfismo e $v_1, v_2, ..., v_n$ è una base di $V$, allora $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$.
+	Un'applicazione lineare è un isomorfismo $\Leftrightarrow$ manda basi in basi.
+	
+	Cioè se $f: V \rightarrow U$ è un isomorfismo e $v_1, v_2, ..., v_n$ è una base di $V$, allora $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$.
 \end{teo}
 \begin{dimm}
 	Dimostriamo entrambi i versi dell'implicazione:
 	\begin{itemize}
-		\item[$\Rightarrow$] Supponiamo che $f$ sia un isomorfismo e $v_1, v_2, ..., v_n$ sia una base di $V$. Si vuole dimostrare che $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$. \\
-		      Per il teorema delle coordinate, $\forall u \in U \ \exists! a_1, a_2, ..., a_n \in K \mid u = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n)$ (dato che $f$ è biunivoca e lineare e $v_1, v_2, ..., v_n$ è una base di $V$).
-		      La combinazione lineare ottenuta è unica, quindi $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$.
-		\item[$\Leftarrow$] Supponiamo che $f(v_1), f(v_2), ..., f(v_n)$ sia una base di $U$ e $v_1, v_2, ..., v_n$ sia una base di $V$. \\
-		      Si vuole dimostrare che $f$ è un isomorfismo. \\
-		      Per il teorema delle coordinate, poichè $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$, $\exists! a_1, a_2, ..., a_n \in K \mid u = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = f(a_1v_1 + a_2v_2 + ... + a_nv_n)$. \\
-		      Quindi $\forall u \in U \ \exists! v \in V \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n \land f(v) = u$. \\
-		      Quindi $f$ è biunivoca, cioè un isomorfismo.
+		\item[$\Rightarrow$] Sia $f: V \rightarrow U$ un isomorfismo e $v_1, v_2, ..., v_n$ sia una base di $V$. Si vuole dimostrare che $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$. \\
+		      Sia $u \in U$. Poichè $f$ è un isomorfismo, $\exists! v \in V \mid f(v) = u$. \\
+		      Poichè $v_1, v_2, ..., v_n$ è una base di $V$, $\exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+		      Poichè $f$ è lineare, $u = f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n)$. \\
+			  Quindi $\forall u \in U \ \exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid u = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n)$. \\
+			  Quindi $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$.
+		\item[$\Leftarrow$] Sia $f: V \rightarrow U$ un'applicazione lineare, e $v_1, v_2, ..., v_n$ sia una base di $V$ e sia $f(v_1), f(v_2), ..., f(v_n)$ una base di $U$. \\
+		      Si vuole dimostrare che $f$ è un isomorfismo, cioè che $\forall u \in U \ \exists! v \in V \mid f(v) = u$. \\
+		      Per il teorema delle coordinate $\exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid u = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = f(a_1v_1 + a_2v_2 + ... + a_nv_n)$, perchè $f(v_1), f(v_2), ..., f(v_n)$ è una base di $U$. \\
+		      Poichè $f$ è lineare, $u = f(a_1v_1 + a_2v_2 + ... + a_nv_n)$. \\
+			  Poichè $a_1, ..., a_n$ esistono e sono unici, $v = a_1v_1 + a_2v_2 + ... + a_nv_n$ è unico. \\
+			  Quindi $v \in V \mid f(v) = u$, quindi $f$ è un isomorfismo.
 	\end{itemize}
 \end{dimm}
 
