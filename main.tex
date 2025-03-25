@@ -1430,6 +1430,141 @@ Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto all
 \end{es}
 \section{Unità 4 - Lezioni 8, 9}
 \subsection{Matrici}
+\subsubsection{Operazioni tra matrici}
+\[ M_{2,3}(\mathbb{R}) = \left\{ \begin{pmatrix}
+		a & b & c \\
+		d & e & f
+	\end{pmatrix} \mid a, b, c, d, e, f \in \mathbb{R} \right\} \]
+$M_{2,3}(\mathbb{R})$ è lo spazio vettoriale delle matrici $2 \times 3$ a coefficienti reali. \\
+La somma è data da:
+\begin{align*}
+	\begin{pmatrix}
+		a & b & c \\
+		d & e & f
+	\end{pmatrix} + \begin{pmatrix}
+		a' & b' & c' \\
+		d' & e' & f'
+	\end{pmatrix} = \begin{pmatrix}
+		a + a' & b + b' & c + c' \\
+		d + d' & e + e' & f + f'
+	\end{pmatrix}
+\end{align*}
+Il prodotto per uno scalare è dato da:
+\begin{align*}
+	\lambda \cdot \begin{pmatrix}
+		a & b & c \\
+		d & e & f
+	\end{pmatrix} = \begin{pmatrix}
+		\lambda a & \lambda b & \lambda c \\
+		\lambda d & \lambda e & \lambda f
+	\end{pmatrix}
+\end{align*}
+$M_{2,3}(\mathbb{R})$ con queste operazioni è uno spazio vettoriale su $\mathbb{R}$. Che dimensione ha?
+\begin{description}
+	\item[Matrici elementari] \begin{align*}
+			e_{1_1} = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 0 & 0
+		\end{pmatrix}, e_{1_2} = \begin{pmatrix}
+			0 & 1 & 0 \\
+			0 & 0 & 0
+		\end{pmatrix}, e_{1_3} = \begin{pmatrix}
+			0 & 0 & 1 \\
+			0 & 0 & 0
+		\end{pmatrix} \\, e_{2_1} = \begin{pmatrix}
+			0 & 0 & 0 \\
+			1 & 0 & 0
+		\end{pmatrix}, e_{2_2} = \begin{pmatrix}
+			0 & 0 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix}, e_{2_3} = \begin{pmatrix}
+			0 & 0 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}
+	\end{align*}
+\end{description}
+Queste matrici sono linearmente indipendenti e generano $M_{2,3}(\mathbb{R})$. \\
+Quindi $\dim M_{2,3}(\mathbb{R}) = 6$ e $M_{2,3}(\mathbb{R}) \cong \mathbb{R}^6$.
+Infatti:
+\begin{align*}
+	\begin{pmatrix}
+		a & b & c \\
+		d & e & f
+	\end{pmatrix} = a \cdot e_{1_1} + b \cdot e_{1_2} + c \cdot e_{1_3} + d \cdot e_{2_1} + e \cdot e_{2_2} + f \cdot e_{2_3}
+\end{align*}
+Inoltre, $M_{2,3}(\mathbb{R})$ è isomorfo a $\mathbb{R}^6$.
+\subsubsection{Prodotto riga per colonna tra matrici}
+\[ M \in M_{r, s}(\mathbb{R}), N \in M_{s, t}(\mathbb{R}) \]
+Per calcolare il prodotto $M \cdot N$ è necessario che il numero di colonne di $M$ sia uguale al numero di righe di $N$.
+\begin{es}
+	\[ M = \begin{pmatrix}
+		2 & -1 & 0 \\
+		3 & 0 & 1
+	\end{pmatrix}, N = \begin{pmatrix}
+		2 & 0 & 1 & 0 \\
+		3 & 1 & 2 & 4 \\
+		0 & 1 & 2 & 0
+	\end{pmatrix} \]
+	\begin{align*}
+		 \\
+		M \cdot N &= \begin{pmatrix}
+			2 \cdot 2 + (-1) \cdot 3 + 0 \cdot 0 & 2 \cdot 0 + (-1) \cdot 1 + 0 \cdot 1 & 2 \cdot 1 + (-1) \cdot 2 + 0 \cdot 2 & 2 \cdot 0 + (-1) \cdot 4 + 0 \cdot 0 \\
+			3 \cdot 2 + 0 \cdot 3 + 1 \cdot 0 & 3 \cdot 0 + 0 \cdot 1 + 1 \cdot 1 & 3 \cdot 1 + 0 \cdot 2 + 1 \cdot 2 & 3 \cdot 0 + 0 \cdot 4 + 1 \cdot 0
+		\end{pmatrix} \\
+			&= \begin{pmatrix}
+			1 & -1 & 0 & -4 \\
+			6 & 1 & 5 & 0
+		\end{pmatrix}
+	\end{align*}
+	\textbf{Nota}: $M \cdot N \in M_{r, t}(\mathbb{R})$.
+\end{es}
+In generale, il prodotto $M \cdot N$ è una matrice $r \times t$ e ha alla $i$-esima riga e $j$-esima colonna l'elemento:
+\begin{align*}
+	(M \cdot N)_{ij} = \sum_{k=1}^{s} M_{ik} \cdot N_{kj}
+\end{align*}
+\subsubsection{Proprietà associativa}
+\[ M \in M_{r, s}(\mathbb{R}), N \in M_{s, t}(\mathbb{R}), R \in M_{t, u}(\mathbb{R}) \]
+\[ (MN)R = M(NR) \]
+dove:
+\begin{itemize}
+	\item $(MN)R \in M_{r, t}(\mathbb{R})$;
+	\item $M(NR) \in M_{s, u}(\mathbb{R})$;
+\end{itemize}
+\begin{es}
+	\[ M = \begin{pmatrix}
+		2 & 1 \\
+		0 & 1 \\
+		1 & 0
+	\end{pmatrix}, N = \begin{pmatrix}
+		2 & 3 \\
+		0 & 1
+	\end{pmatrix}, R = \begin{pmatrix}
+		2 & 1 & 3 \\
+		0 & 1 & 0
+	\end{pmatrix} \]
+	\begin{align*}
+		MN &= \begin{pmatrix}
+			4 & 7 \\
+			0 & 1 \\
+			2 & 3
+		\end{pmatrix}
+		& (MN)R = \begin{pmatrix}
+			8   & 11   & 12   \\
+			0   & 1    & 0    \\
+			4   & 5    & 6
+		\end{pmatrix} \\
+		NR &= \begin{pmatrix}
+			4 & 5 & 6 \\
+			0 & 1 & 0
+		\end{pmatrix}
+		& (MN)R = \begin{pmatrix}
+			8   & 11   & 12   \\
+			0   & 1    & 0    \\
+			4   & 5    & 6
+		\end{pmatrix}
+	\end{align*}
+\end{es}
+\subsubsection{Matrice identità}
 \begin{deff}{Matrice identità}{}
 	La matrice identità $I_n$ è la matrice quadrata $n \times n$ che ha 1 sulla diagonale principale e 0 altrove.
 	Ad esempio su $\mathbb{R}^3$:
@@ -1441,13 +1576,72 @@ Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto all
 		      \end{pmatrix}
 	\end{align*}
 \end{deff}
+\begin{oss}
+	\[ M \in M_{r, s}(\mathbb{R}) \]
+	\[ MI_s = I_rM = M \]
+\end{oss}
 \begin{es}
-	Per ogni $f: V \rightarrow V$, $id \circ f = f \circ id = f$ (perchè $id(f(v))=f(v)$ e $f(id(v))=f(v)$). \\
-	Quindi se $f$ è lineare e $A$ la sua matrice allora:
 	\begin{align*}
-		A \cdot I_n = I_n \cdot A = A
+		M = \begin{pmatrix}
+			2 & 1 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix},
+		I_3 = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix} \\
+		MI_3 = \begin{pmatrix}
+			2 & 1 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix} \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix} = \begin{pmatrix}
+			2   & 1   & 0   \\
+			0   & 1   & 0
+		\end{pmatrix} = M \\
+		I_2M = \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} \begin{pmatrix}
+			2 & 1 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix} = \begin{pmatrix}
+			2   & 1   & 0   \\
+			0   & 1   & 0
+		\end{pmatrix} = M
 	\end{align*}
-	$I_n$ è l'elemento neutro rispetto al prodotto riga per colonna.
+\end{es}
+\subsubsection{Matrice inversa}
+\begin{deff}{Matrice invertibile}{}
+	Una matrice $A \in M_{n, n}(\mathbb{R})$ è invertibile se esiste una matrice $B \in M_{n, n}(\mathbb{R})$ tale che:
+	\begin{align*}
+		AB = BA = I_n
+	\end{align*}
+	La matrice $B$ è chiamata matrice inversa di $A$.
+\end{deff}
+\begin{es}
+	Mostriamo che la matrice $A$ è invertibile utilizzando la matrice $B$ come matrice inversa.
+	\begin{align*}
+		A = \begin{pmatrix}
+			1 & 1 \\
+			0 & 1
+			\end{pmatrix}, B = \begin{pmatrix}
+			1 & -1 \\
+			0 & 1
+			\end{pmatrix} \\
+		AB = \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} = I_2 \\
+		BA = \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} = I_2
+	\end{align*}
+	Quindi $A$ è invertibile e $B$ è la matrice inversa di $A$.
 \end{es}
 \begin{oss}
 	Un'applicazione lineare $f: V \rightarrow U$ è un isomorfismo $\Leftrightarrow$ è invertibile,
@@ -1455,10 +1649,10 @@ Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto all
 	In altre parole, se $A$ è la matrice di $f$ in una base $v_1, v_2, ..., v_n$ di $V$ allora $f$ è invertibile $\Leftrightarrow$ $A$ è invertibile,
 	cioè esiste una matrice $A^{-1}$ tale che $A \cdot A^{-1} = A^{-1} \cdot A = I_n$ ($A^{-1}$ è la matrice di $f^{-1}$).
 \end{oss}
-\begin{oss}
-	Se $\dim V \neq \dim U$ non esistono isomorfismi tra $V$ e $U$ (per il teorema del rango). Quindi solo le matrici quadrate sono invertibili.
-	Se il numero di righe di $A$ è diverso dal numero di colonne, $A$ non è invertibile.
-\end{oss}
+% \begin{oss}
+% 	Se $\dim V \neq \dim U$ non esistono isomorfismi tra $V$ e $U$ (per il teorema del rango). Quindi solo le matrici quadrate sono invertibili.
+% 	Se il numero di righe di $A$ è diverso dal numero di colonne, $A$ non è invertibile.
+% \end{oss}
 \subsubsection{Cambiamenti di base}
 Sia $V$ uno spazio vettoriale su un campo $K$ e sia $f: V \rightarrow V$ un'applicazione lineare.
 Siano $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ e $\mathcal{B}' = \{u_1, u_2, ..., u_n\}$.
