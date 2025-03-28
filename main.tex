@@ -743,50 +743,6 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 	Ad esempio, $(2, 7, -3) = (2, 7, 0) + (0, 0, -3) = (2, 0, 0) + (0, 7, -3)$.
 \end{es}
 
-\begin{es}
-	Risolvere il sistema lineare:
-	\begin{align*}
-		\begin{cases}
-			2x_1 - x_2 + x_3 + 2x_4 = 1  \\
-			4x_1 - x_2 - 3x_3 - x_4 = -1 \\
-			- 2x_1 - x_2 + x_3 + x_4 = 1 \\
-			x_1 + x_2 + x_3 + x_4 = 2
-		\end{cases}
-	\end{align*}
-
-	\begin{description}
-		\item[Passo 1] Sommo a ciascuna equazione (dalla seconda in poi) la prima moltiplicata per un coefficiente tale che il termine $x_1$ nelle altre equazioni si annulli.
-		      \begin{align*}
-			      \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                                & = 1  \\
-			      \text{-2R1 + R2}           &  & \mathbf{0x_1} + x_2 - 5x_3 - 5x_4                      & = -3 \\
-			      \text{R1 + R3}             &  & \mathbf{0x_1} - 2x_2 + 2x_3 + 3x_4                     & = 2  \\
-			      -\frac{1}{2}\text{R1 + R4} &  & \mathbf{0x_1} + \frac{3}{2}x_2 + \frac{1}{2}x_3 + 0x_4 & = 1
-		      \end{align*}
-		\item[Passo 2] Vado avanti di una equazione. Non tocco più la prima e neanche la seconda, ma sommo a ciascuna equazione (dalla terza in poi) la seconda moltiplicata per un coefficiente tale che il termine $x_2$ nelle altre equazioni si annulli.
-		      \begin{align*}
-			      \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                & = 1   \\
-			      \text{R2}                  &  & x_2 - 5x_3 - 5x_4                      & = -3  \\
-			      \text{2R2 + R3}            &  & \mathbf{0x_2} - 8x_3 - 7x_4            & = - 4 \\
-			      -\frac{3}{2}\text{R2 + R4} &  & \mathbf{0x_2} + 8x_3 + \frac{15}{2}x_4 & = 6
-		      \end{align*}
-		\item[Passo 3] Vado avanti di una equazione. Non tocco più la prima, la seconda e neanche la terza, ma sommo a ciascuna equazione (dalla quarta in poi) la terza moltiplicata per un coefficiente tale che il termine $x_3$ nelle altre equazioni si annulli.
-		      \begin{align*}
-			      \text{R1}      &  & 2x_1 - x_2 + x_3 + 2x_4        & = 1   \\
-			      \text{R2}      &  & - 5x_3 - 5x_4                  & = -3  \\
-			      \text{R3}      &  & - 8x_3 - 7x_4                  & = - 4 \\
-			      \text{R3 + R4} &  & \mathbf{0x_3} + \frac{1}{2}x_4 & = 2
-		      \end{align*}
-		\item[Passo 4] Finite le equazioni per trovare la soluzione del sistema, risalgo dall'ultima risolvendo le equazioni e sostituendo le incognite di volta in volta:
-		      \begin{align*}
-			      \text{R4} &  & \frac{1}{2}x_4            & = 2 \Rightarrow x_4 = 4   \\
-			      \text{R3} &  & - 8x_3 - 7 \cdot 4        & = -4 \Rightarrow x_3 = 1  \\
-			      \text{R2} &  & - 5 \cdot 1 - 5 \cdot 4   & = -3 \Rightarrow x_2 = 17 \\
-			      \text{R1} &  & 2x_1 - 17 + 1 + 2 \cdot 4 & = 1 \Rightarrow x_1 = - 3
-		      \end{align*}
-	\end{description}
-	Ho trovato così l'unica soluzione del sistema: $x_1 = -3, x_2 = 17, x_3 = 1, x_4 = 4$.
-\end{es}
-Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una soluzione generale.
 \section{Unità 3 - Lezioni 5, 6, 7}
 \subsection{Approfondimento sulle funzioni}
 \begin{deff}{Applicazione lineare}{}
@@ -1207,52 +1163,6 @@ Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una so
 \end{es}
 
 Il teorema dell'estensione lineare indica che per sapere chi è $f$ è sufficiente conoscere cosa fa sui vettori di una base di $V$.
-\begin{deff}{Matrice associata ad un'applicazione lineare}{}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $\mathbb{K}$ e $f: V \rightarrow U$ un'applicazione lineare.
-	Siano $v_1, v_2, ..., v_n$ una base di $V$ e $u_1, u_2, ..., u_m$ una base di $U$. \\
-	Dato $f(v) \in U \ \exists! a_{1}, a_{2}, ..., a_{m} \in \mathbb{K} \mid f(v) = a_{1}u_1 + a_{2}u_2 + ... + a_{m}u_m$. \\
-	Definiamo la \textbf{matrice associata} ad $f$ rispetto alle basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ come:
-	\begin{equation*}
-		\begin{pmatrix}
-			a_{11} & a_{21} & \cdots & a_{m1} \\
-			a_{12} & a_{22} & \cdots & a_{m2} \\
-			\vdots & \vdots & \ddots & \vdots \\
-			a_{1n} & a_{2n} & \cdots & a_{mn}
-		\end{pmatrix}
-	\end{equation*}
-	ovvero la matrice che ha alla $i$-esima riga e $j$-esima colonna l'elemento $a_{ij}$, cioè il coefficiente di $u_j$ in $f(v_i)$.
-	\begin{align*}
-		f(v_1) & = a_{11}u_1 + a_{12}u_2 + ... + a_{1m}u_m \\
-		f(v_2) & = a_{21}u_1 + a_{22}u_2 + ... + a_{2m}u_m \\
-		\vdots  & \\
-		f(v_n) & = a_{n1}u_1 + a_{n2}u_2 + ... + a_{nm}u_m
-	\end{align*}
-	Quindi la matrice associata ad $f$ ha $m$ righe e $n$ colonne, cioè è una matrice $m \times n$.
-\end{deff}
-Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto alle basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ determina univocamente $f$.
-
-\begin{oss}
-	La matrice ottenuta dipende dalle basi scelte. Se scelgo basi diverse, ottengo matrici diverse.
-\end{oss}
-
-\begin{es}
-	$V = \mathbb{R}^3, U = \mathbb{R}^2, f: V \rightarrow U, f(x, y, z) = (2x + y, x - 3z)$. \\
-	Consideriamo la base $v_1 = (1, -1, 0), v_2 = (2, 1, 0), v_3 = (0, 1, 1)$ di $V$ e la base $u_1 = (0, -1), u_2 = (2, 0)$ di $U$. \\
-	Scriviamo la matrice associata ad $f$ rispetto a queste basi. \\
-	Calcoliamo $f(v_1), f(v_2), f(v_3)$:
-	\begin{align*}
-		f(v_1) & = f(1, -1, 0) = (2 \cdot 1 + (-1), 1 \cdot (-1), 1 \cdot 1 - 3 \cdot 0) = (1, 1) = - 1u_1 + \frac{1}{2}u_2 \\
-		f(v_2) & = f(2, 1, 0) = (2 \cdot 2 + 1, 2 - 3 \cdot 0) = (5, 2) = - 2u_1 + \frac{5}{2}u_2 \\
-		f(v_3) & = f(0, 1, 1) = (2 \cdot 0 + 1, 0 - 3 \cdot 1) = (1, -3) = - 2u_1 + \frac{1}{2}u_2
-	\end{align*}
-	Quindi la matrice associata ad $f$ rispetto alle basi scelte è:
-	\begin{align*}
-		A = \begin{pmatrix}
-			    -1 & -2 & -2 \\
-			    \frac{1}{2} & \frac{5}{2} & \frac{1}{2}
-		    \end{pmatrix}
-	\end{align*}
-\end{es}
 
 \begin{es}
 	$V = \mathbb{R}^2, U = \mathbb{R}^2, v_1 = (3, -2)$. Esiste una e una sola applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = l1 = (1, 0)$? \\
@@ -1652,78 +1562,270 @@ dove:
 % 	Se $\dim V \neq \dim U$ non esistono isomorfismi tra $V$ e $U$ (per il teorema del rango). Quindi solo le matrici quadrate sono invertibili.
 % 	Se il numero di righe di $A$ è diverso dal numero di colonne, $A$ non è invertibile.
 % \end{oss}
-\subsubsection{Cambiamenti di base}
-Sia $V$ uno spazio vettoriale su un campo $K$ e sia $f: V \rightarrow V$ un'applicazione lineare.
-Siano $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ e $\mathcal{B}' = \{u_1, u_2, ..., u_n\}$.
-Sia $A$ la matrice di $f$ rispetto alla base $\mathcal{B}$ e $M$ la matrice di $f$ rispetto alla base $\mathcal{B}'$.
-In altre parole $f(v_j) = a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n$ e $f(u_j) = m_{1j}u_1 + m_{2j}u_2 + ... + m_{nj}u_n$.
-\begin{teo}{Cambiamenti di base}{}
-	La matrice del cambiamento di base è $B$ ottenuta esprimendo i vettori della base $\mathcal{B}'$ in funzione di quelli della base $\mathcal{B}$.
-	Cioè $u_j = b_{1j}v_1 + b_{2j}v_2 + ... + b_{nj}v_n$.
-	Quindi:
-	\begin{align*}
-		M = B^{-1} \cdot A \cdot B
-	\end{align*}
-	dove $M$ è la matrice di $f$ rispetto alla base $\mathcal{B}'$ e $A$ è la matrice di $f$ rispetto alla base $\mathcal{B}$.
-	$B$ è la matrice del cambiamento di base, mentre $B^{-1}$ è la matrice del cambiamento di base inverso.
-\end{teo}
-% \begin{es}
-% 	Sia $V = \mathbb{R}^2$ e $v_1 = (2, 1), v_2 = (1, -1), u_1 = (1, 0), u_2 = (0, 1)$ le basi.
-
-% \end{es}
-\begin{deff}{Matrici simili}{}
-	Due matrici $A, B$ si dicono simili se esiste una matrice invertibile $B$ tale che $M = B^{-1} \cdot A \cdot B$.
+\subsubsection{Matrici associate ad un'applicazione lineare}
+\begin{deff}{Matrice associata ad un'applicazione lineare}{}
+	Sia $f: V \rightarrow U$ un'applicazione lineare.
+	Siano $B$ una base di $V$ e $C$ una base di $U$. \\
+	La \textbf{matrice associata} ad $f$ rispetto alle basi $B$ e $c$ è la matrice $M_C^B(f)$ che ha nella colonna $j$ le coordinate dell''immagine del $j$-esimo vettore della base $B$ rispetto alla base $C$:
 \end{deff}
-\begin{oss}
-	Per il teorema precedente, due matrici sono simili se e solo se rappresentano la stessa applicazione lineare rispetto a basi diverse.
-\end{oss}
 \begin{es}
-	\begin{enumerate}
-		\item $A = \begin{pmatrix}
-				      2 & 1  \\
-				      1 & -1
-			      \end{pmatrix}$ e $M = \begin{pmatrix}
-				      \frac{7}{3} & -\frac{5}{3}  \\
-				      \frac{5}{3} & -\frac{10}{3}
-			      \end{pmatrix}$ sono simili perchè $M = \begin{pmatrix}
-				      1 & 0 \\
-				      0 & 1
-			      \end{pmatrix}^{-1} \cdot A \cdot \begin{pmatrix}
-				      1 & 0 \\
-				      0 & 1
-			      \end{pmatrix}$.
-		\item Data $M$ precedente e $I_2 = \begin{pmatrix}
-				      1 & 0 \\
-				      0 & 1
-			      \end{pmatrix}$, $M$ e $I_2$ non sono simili perchè $\forall B, B^{-1} \cdot I_2 \cdot B = B^{-1} \cdot B = I_2 \neq M$.
-	\end{enumerate}
+	$f: \mathbb{R}^3 \rightarrow \mathbb{R}^2$ tale che $f(x, y, z) = (x + y, y - z)$. \\
+	Date le basi canoniche $E^3$ e $E^2$ di $\mathbb{R}^3$ e $\mathbb{R}^2$, la matrice associata ad $f$ rispetto a queste basi è:
+	\begin{align*}
+		M_{E^2}^{E^3}(f) = \begin{pmatrix}
+			1 & 1 & 0 \\
+			0 & 1 & -1
+		\end{pmatrix}
+	\end{align*}
+	Infatti:
+	\begin{align*}
+		f(e_1) & = f(1, 0, 0) = (1, 0) = 1e_1 + 0e_2 \\
+		f(e_2) & = f(0, 1, 0) = (1, 1) = 1e_1 + 1e_2 \\
+		f(e_3) & = f(0, 0, 1) = (0, -1) = 0e_1 - 1e_2
+	\end{align*}
+
+	Se aggungiamo una nuova base $C = ((1, 1), (1, -1))$ di $\mathbb{R}^2$, la matrice associata ad $f$ rispetto a $E^3$ e $C$ è:
+	\begin{align*}
+		M_C^{E^3}(f) = \begin{pmatrix}
+			\frac{1}{2} & \frac{1}{2} & 0 \\
+			0 & \frac{1}{2} & -\frac{1}{2}
+		\end{pmatrix}
+	\end{align*}
+	Infatti:
+	\begin{align*}
+		f(e_1) & = f(1, 0, 0) = (1, 0) = \frac{1}{2}(1, 1) + \frac{1}{2}(1, -1) + 0(0, 0) \\
+		f(e_2) & = f(0, 1, 0) = (1, 1) = \frac{1}{2}(1, 1) + \frac{1}{2}(1, -1) + 0(0, 0) \\
+		f(e_3) & = f(0, 0, 1) = (0, -1) = \frac{1}{2}(1, 1) + \frac{1}{2}(1, -1) + (-\frac{1}{2})(0, 0)
+	\end{align*}
 \end{es}
-\begin{prop}
-	La relazione di similitudine è una relazione di equivalenza.
-\end{prop}
+Per il teorema dell'estensione lineare, la matrice associata ad $f$ rispetto alle basi $B$ e $C$ determina univocamente $f$.
+
+\begin{oss}
+	La matrice ottenuta dipende dalle basi scelte. Se scelgo basi diverse, ottengo matrici diverse.
+\end{oss}
+
+\begin{es}
+	$V = \mathbb{R}^3, U = \mathbb{R}^2, f: V \rightarrow U, f(x, y, z) = (2x + y, x - 3z)$. \\
+	Consideriamo la base $v_1 = (1, -1, 0), v_2 = (2, 1, 0), v_3 = (0, 1, 1)$ di $V$ e la base $u_1 = (0, -1), u_2 = (2, 0)$ di $U$. \\
+	Scriviamo la matrice associata ad $f$ rispetto a queste basi. \\
+	Calcoliamo $f(v_1), f(v_2), f(v_3)$:
+	\begin{align*}
+		f(v_1) & = f(1, -1, 0) = (2 \cdot 1 + (-1), 1 \cdot (-1), 1 \cdot 1 - 3 \cdot 0) = (1, 1) = - 1u_1 + \frac{1}{2}u_2 \\
+		f(v_2) & = f(2, 1, 0) = (2 \cdot 2 + 1, 2 - 3 \cdot 0) = (5, 2) = - 2u_1 + \frac{5}{2}u_2 \\
+		f(v_3) & = f(0, 1, 1) = (2 \cdot 0 + 1, 0 - 3 \cdot 1) = (1, -3) = - 2u_1 + \frac{1}{2}u_2
+	\end{align*}
+	Quindi la matrice associata ad $f$ rispetto alle basi scelte è:
+	\begin{align*}
+		A = \begin{pmatrix}
+			    -1 & -2 & -2 \\
+			    \frac{1}{2} & \frac{5}{2} & \frac{1}{2}
+		    \end{pmatrix}
+	\end{align*}
+\end{es}
+
+\paragraph{Matrice associata e prodotto tra matrici}
+Sia $f: V \rightarrow U$ un'applicazione lineare e siano $B$ e $C$ due basi di $V$ e $U$ rispettivamente. \\
+La matrice associata ad $f$ rispetto a $B$ e $C$ è la matrice $A = M_C^B(f)$.
+Per calcolare $f(v)$ per ogni $v \in V$ si può calcolare $A \cdot v$, in quanto le coordinate di $v$ rispetto alla base $C$ si ottengono
+tramite il prodotto tra la matrice associata e il vettore $v$.
+\begin{es}
+	$V = \mathbb{R}^3, U = \mathbb{R}^2, f: V \rightarrow U, f(x, y, z) = (2x + y, x - 3z)$.
+	\[ A = M^{E_2}_{E_3}(f) = \begin{pmatrix}
+		1 & 1 & 0 \\
+		0 & 1 & - 1
+	\end{pmatrix} \]
+	Calcolare $f(2, 3, 1)$.
+	\[ f(2, 3, 1) = \begin{pmatrix}
+		1 & 1 & 0 \\
+		0 & 1 & - 1
+	\end{pmatrix} \begin{pmatrix}
+		2 \\
+		3 \\
+		1
+	\end{pmatrix} = \begin{pmatrix}
+		1 \cdot 2 + 1 \cdot 3 + 0 \cdot 1 \\
+		0 \cdot 2 + 1 \cdot 3 - 1 \cdot 1
+	\end{pmatrix} = \begin{pmatrix}
+		5 \\
+		2
+	\end{pmatrix} \]
+	Quindi $f(2, 3, 1) = (5, 2)$.
+\end{es}
+\begin{es}
+	$id: V \rightarrow V$ con $id(v) = v \ \forall v \in V$. Sia $B$ una base di $V$.
+	Chi è $M_B^B(id)$?
+	\[ M_B^B(id) = \begin{pmatrix}
+		1 & 0 & 0 \\
+		0 & 1 & 0 \\
+		0 & 0 & 1
+	\end{pmatrix} = I_n \]
+	Infatti:
+	\begin{align*}
+		id(v_1) & = v_1 = 1v_1 + 0v_2 + 0v_3 \\
+		id(v_2) & = v_2 = 0v_1 + 1v_2 + 0v_3 \\
+		id(v_3) & = v_3 = 0v_1 + 0v_2 + 1v_3
+	\end{align*}
+\end{es}
+
+\begin{teo}{Teorema della composizione}{}
+	\begin{center}
+		\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+		\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+			%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+			%Curve Lines [id:da5099385504152638] 
+			\draw    (203,153.21) .. controls (247.55,227.46) and (368.55,181.16) .. (409.78,151.12) ;
+			\draw [shift={(411,150.21)}, rotate = 143.13] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Straight Lines [id:da7275692198111594] 
+			\draw    (224,143) -- (293,142.23) ;
+			\draw [shift={(295,142.21)}, rotate = 179.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+			%Straight Lines [id:da10053352872854315] 
+			\draw    (328,139) -- (397,138.23) ;
+			\draw [shift={(399,138.21)}, rotate = 179.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+			% Text Node
+			\draw (199,128.4) node [anchor=north west][inner sep=0.75pt]    {$V$};
+			% Text Node
+			\draw (301,129.4) node [anchor=north west][inner sep=0.75pt]    {$U$};
+			% Text Node
+			\draw (407,129.4) node [anchor=north west][inner sep=0.75pt]    {$W$};
+			% Text Node
+			\draw (253,115.4) node [anchor=north west][inner sep=0.75pt]    {$f$};
+			% Text Node
+			\draw (357,114.4) node [anchor=north west][inner sep=0.75pt]    {$g$};
+			% Text Node
+			\draw (271,200.4) node [anchor=north west][inner sep=0.75pt]    {$f\ \circ \ g$};
+		\end{tikzpicture}
+	\end{center}
+	Siano $B$ una base di $V$, $C$ una base di $U$ e $D$ una base di $W$. \\
+	Siano $M_C^B(f)$ e $M_D^C(g)$ le matrici associate rispettivamente ad $f$ e $g$ rispetto a $B$, $C$ e $C$, $D$. \\
+	Allora la matrice associata alla composizione $g \circ f$ rispetto a $B$ e $D$ è data da:
+	\begin{align*}
+		M_D^B(g \circ f) = M_D^C(g) \cdot M_C^B(f)
+	\end{align*}
+\end{teo}
+
 \begin{dimm}
-	Dimostriamo ogni proprietà:
-	\begin{itemize}
-		\item Riflessiva: Ogni matrice $A$ è simile a se stessa perchè $A = I_n^{-1} \cdot A \cdot I_n$.
-		\item Simmetrica: Se $A$ è simile a $M$ allora $M$ è simile a $A$ infatti se $\exists B \mid M = B^{-1} \cdot A \cdot B$ allora $B^{-1} \cdot M \cdot B = B^{-1} \cdot B^{-1} \cdot A \cdot B \cdot B = (B \cdot B)^{-1} \cdot A \cdot (B \cdot B) = A$.
-		\item Transitiva: Se $A$ è simile a $M$ (cioè $\exists B \mid M = B^{-1} \cdot A \cdot B$) e $M$ è simile a $N$ (cioè $\exists C \mid N = C^{-1} \cdot M \cdot C$) allora $N = C^{-1} \cdot M \cdot C = C^{-1} \cdot B^{-1} \cdot A \cdot B \cdot C = (B \cdot C)^{-1} \cdot A \cdot (B \cdot C)$.
-		      Quindi $A$ è simile a $N$.
-	\end{itemize}
+	$v = (x_1, ..., x_n)_B \in V$. $f(v) = ?$. \\
+	$M_C^B(f)$ ha le colonne $f(v_1), ..., f(v_3)$, quindi moltiplicandolo per $v$ otteniamo:
+	\begin{align*}
+		M_C^B(f) \cdot v = M_C^B(f) \cdot \begin{pmatrix}
+			x_1 \\
+			\vdots \\
+			x_3
+		\end{pmatrix} = \begin{pmatrix}
+			y_1 \\
+			\vdots \\
+			y_m
+		\end{pmatrix}.
+	\end{align*}
+	Quindi $f(v) = (y_1, ..., y_m)_C$.
+	\[ M_D^C(g) \cdot \begin{pmatrix}
+		y_1 \\
+		\vdots \\
+		y_m
+	\end{pmatrix} = \begin{pmatrix}
+		z_1 \\
+		\vdots \\
+		z_r
+	\end{pmatrix} \]
+	Quindi $g(f(v)) = (z_1, ..., z_r)_D$.
+	Ora sostituiamo i due risultati:
+	\begin{align*}
+		M_D^C(g) \cdot M_C^B(f) \cdot v = \begin{pmatrix}
+			z_1 \\
+			\vdots \\
+			z_r
+		\end{pmatrix}
+	\end{align*}
+	Per la proprietà associativa del prodotto tra matrici, possiamo scrivere:
+	\begin{align*}
+		M_D^C(g \circ f) \cdot v = (M_D^C(g) \cdot M_C^B(f)) \cdot v = \begin{pmatrix}
+			z_1 \\
+			\vdots \\
+			z_r
+		\end{pmatrix}
+	\end{align*}
 \end{dimm}
+
+\begin{es}
+	$f:\mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $f(x, y) = (2x - y, x + y)$ e $g:\mathbb{R}^2 \rightarrow \mathbb{R}^2$ tale che $g(x, y) = (x - y, y + 3x)$. \\
+	Calcolare la matrice associata alla composizione $g \circ f$ rispetto alla base canonica di $\mathbb{R}^2$.
+
+	La matrice associata ad $f$ rispetto alla base canonica è:
+	\begin{align*}
+		M_E^E(f) = \begin{pmatrix}
+			2 & -1 \\
+			1 & 1
+		\end{pmatrix}
+	\end{align*}
+	La matrice associata ad $g$ rispetto alla base canonica è:
+	\begin{align*}
+		M_E^E(g) = \begin{pmatrix}
+			1 & -1 \\
+			3 & 1
+		\end{pmatrix}
+	\end{align*}
+	La matrice associata alla composizione $g \circ f$ rispetto alla base canonica è:
+	\begin{align*}
+		M_E^E(g \circ f) = M_E^E(g) \cdot M_E^E(f) = \begin{pmatrix}
+			1 & -1 \\
+			3 & 1
+		\end{pmatrix} \cdot \begin{pmatrix}
+			2 & -1 \\
+			1 & 1
+		\end{pmatrix} = \begin{pmatrix}
+			1 & -1 \\
+			3 & 1
+		\end{pmatrix} \cdot \begin{pmatrix}
+			2 & -1 \\
+			1 & 1
+		\end{pmatrix} = \begin{pmatrix}
+			-3 & 0 \\
+			7 & 4
+		\end{pmatrix}
+	\end{align*}
+\end{es}
+
+\begin{oss}
+	$M_C^B(f)$ è invertibile e $M_C^B(f)^{-1} = M_B^C(f^{-1})$.
+\end{oss}
+
+\subsubsection{Matrici invertibili}
+\begin{prop}
+	$f: U \rightarrow V$ è un isomorfismo $\Leftrightarrow$ la matrice associata ad $f$ rispetto a $B$ e $C$ ($M_C^B(f)$) è invertibile.
+\end{prop}
+\begin{dimm} \
+	\begin{description}
+		\item[$\Rightarrow$] Se $f$ è un isomorfismo, allora esiste un'applicazione lineare $g: V \rightarrow U$ tale che $g \circ f = id_U$ e $f \circ g = id_V$. \\
+		La matrice associata ad $g$ rispetto a $C$ e $B$ è $M_B^C(g) = M_C^B(f)^{-1}$. \\
+		Infatti:
+		\begin{align*}
+			M_B^C(g) \cdot M_C^B(f) = M_B^C(g \circ f) = M_B^B(id_U) = I_n
+		\end{align*}
+		\item[$\Leftarrow$] Se $M_C^B(f)$ è invertibile, allora esiste una matrice $A^{-1}$ tale che $A \cdot A^{-1} = A^{-1} \cdot A = I_n$. \\
+		Definiamo $g: V \rightarrow U$ in modo che le immagini dei vettori di $C$ abbiano le coordinate rispetto a $B$ date da $A^{-1}$,
+		ovvero vogliamo $M_B^C(g) = A^{-1}$. \\
+		Utilizzando la composizione:
+		\begin{align*}
+			M_B^C(g) \cdot M_C^B(f) = M_C^C(g \circ f)
+		\end{align*}
+		dove $M_C^B(f) = A \cdot A^{-1} = I_n$.
+		Quindi $f \circ g = id$.
+	\end{description}
+\end{dimm}
+
+
 \begin{teo}{Invertibilità}{}
-	Una matrice $A$ è invertibile $\Leftrightarrow$ i suoi vettori colonna sono linearmente indipendenti.
+	Una matrice quadrata $A$ $n \times n$ è invertibile $\Leftrightarrow$ le sue colonne sono linearmente indipendenti.
 \end{teo}
 \begin{dimm}
-	Siano $v_1, v_2, ..., v_n$ i vettori colonna di $A \in M_{n \times n}$.
-	Consideriamo l'applicazione lineare $f: K^n \rightarrow K^n$ tale che $f(l_1) = v_1, f(l_2) = v_2, ..., f(l_n) = v_n$.
-	Per il teorema dell'estensione lineare, $f$ esiste ed è unica. \\
-	La matrice di $f$ rispetto alla base canonica è $A = \begin{pmatrix}
-			v_1 & v_2 & ... & v_n
-		\end{pmatrix}$. \\
-	Infatti $f(l_j) = v_j = a_{1j}l_1 + a_{2j}l_2 + ... + a_{nj}l_n$. \\
-	Quindi per il teorema isomorfismo e basi, $f$ è un isomorfismo $\Leftrightarrow$ $v_1, v_2, ..., v_n$ è una base di $K^n$ $\Leftrightarrow$ $v_1, v_2, ..., v_n$ è una base di $K^n$.
-	Poichè in $K^n$ ogni insieme di $n$ vettori linearmente indipendenti è una base, allora $A$ è invertibile $\Leftrightarrow f$ è un isomorfismo $\Leftrightarrow v_1, v_2, ..., v_n$ sono linearmente indipendenti.
+	Poniamo $f: \mathbb{R}^n \Rightarrow \mathbb{R}^n$ e $M_E^E(f) = A$.
+	Per la proprietà precedente, $A$ è invertibile $\Leftrightarrow$ $f$ è un isomorfismo. \\
+	Per il teorema isomorfismi e basi, $f$ è un isomorfismo $\Leftrightarrow$ le colonne di $A$ sono linearmente indipendenti.
 \end{dimm}
+
 \begin{es}
 	Consideriamo la matrice $A = \begin{pmatrix}
 			2 & 5 \\
@@ -1787,9 +1889,12 @@ In altre parole $f(v_j) = a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n$ e $f(u_j) = m
 	Per questo $f$ non è iniettiva, nè suriettiva e quindi non è invertibile, cioè $\not\exists f^{-1} \mid f \circ f^{-1} = id = f^{-1} \circ f$.
 	Quindi non esiste una matrice $A^{-1}$ tale che $A \cdot A^{-1} = A^{-1} \cdot A = I_2$.
 \end{es}
+
+\subsubsection{Rango di una matrice}
 \begin{deff}{Rango di una matrice}{}
-	Il rango di una matrice $A$ è il massimo numero di vettori colonna linearmente indipendenti.
+	Il rango di una matrice $A$ qualunque è il massimo numero di colonne linearmente indipendenti.
 \end{deff}
+
 \begin{es}
 	$rK\begin{pmatrix}
 			2 & 5 \\
@@ -1804,8 +1909,12 @@ In altre parole $f(v_j) = a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n$ e $f(u_j) = m
 			1 & 2 & 0 & 1  & 2  \\
 			3 & 6 & 0 & -1 & -2
 		\end{pmatrix} = 2$.
-	Il teorema dell'Invertibilità può anche essere formulato come "una matrice è invertibile $\Leftrightarrow$ il suo rango è massimo".
 \end{es}
+
+\begin{prop}
+	Una matrice $A \ n \times n$ è invertibile $\Leftrightarrow$ il suo rango è massimo, cioè $rK(A) = n$.
+\end{prop}
+
 \begin{es}
 	$V = \mathbb{R}[x]_{< 4}, d: V \rightarrow V, p(x) \mapsto p'(x)$ nella base $\mathcal{B} = \{1, x, x^2, x^3\}$. \\
 	La matrice di $d$ è $D = \begin{pmatrix}
@@ -1816,9 +1925,160 @@ In altre parole $f(v_j) = a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n$ e $f(u_j) = m
 		\end{pmatrix}, rK(D) = 3$. I vettori colonna non sono linearmente indipendenti perchè $v_1 = 0$. \\
 	Quindi $D$ non è invertibile cioè non esiste $D^{-1}$. Inoltre, $d$ non è un isomorfismo.
 \end{es}
-\begin{cor}{Rango di una matrice e immagine}{}
-	$rK(A) = \dim \text{Im} f$.
+
+\subsubsection{Cambiamenti di base}
+Sia $f: V \rightarrow U$ un'applicazione lineare e siano $B, B'$ due basi di $V$ e $C, C'$ due basi di $U$. \\
+La matrice associata ad $f$ rispetto a $B$ e $C$ è $M_C^B(f)$, mentre la matrice associata ad $f$ rispetto a $B'$ e $C'$ è $M_{C'}^{B'}(f)$. \\
+Se $B'$ è una base di $V$ e $C'$ è una base di $U$, allora la matrice associata ad $f$ rispetto a $B'$ e $C'$ è data da:
+\begin{align*}
+	M_{C'}^{B'}(f) = M_{C'}^C(f) \cdot M_C^B(f) \cdot M_B^{B'}(v)
+\end{align*}
+dove $M_B^{B'}(v)$ è la matrice del cambiamento di base da $B$ a $B'$.
+
+\begin{es}
+	Siano $b_1 = (0, 1, 1), b_2 = (1, 1, 0), b_3 = (0, 0, 1)$. $B = (b_1, b_2, b_3)$ è una base di $\mathbb{R}^3$. \\
+	Sia $f: \mathbb{R}^3 \rightarrow \mathbb{R}^3$ data da $M_E^B(f) = \begin{pmatrix}
+			1 3 -1 \\
+			4 4 -5 \\
+			3 1 -6
+		\end{pmatrix}$. \\
+	a. Verificare che $M_B^B(f) = \begin{pmatrix}
+			3 & 1 & -4 \\
+			1 & 3 & -1 \\
+			0 & 0 & -2
+		\end{pmatrix}$.
+
+	Basta calcolare $f(b_1), f(b_2), f(b_3)$:
+	\begin{align*}
+		f(b_1) & = f(0, 1, 1) = (0, 1, 1) = 3(0, 1, 1) + 1(1, 1, 0) + (-4)(0, 0, 1) \\
+		f(b_2) & = f(1, 1, 0) = (1, 3, -1) = 3(0, 1, 1) + 1(1, 1, 0) + (-4)(0, 0, 1) \\
+		f(b_3) & = f(0, 0, 1) = (4, -5, -6) = (3)(0, 1, 1) + (4)(1, 1, 0) + (-5)(0, 0, -2)
+	\end{align*}
+	\
+	b. Determinare $M_E^E(f)$.
+
+	\begin{align*}
+		M_E^E(f) & = M_E^B(f) \cdot M_B^B(v) \\
+		          & = \begin{pmatrix}
+			          1 & 3 & -1 \\
+			          4 & 4 & -5 \\
+			          3 & 1 & -6
+		          \end{pmatrix} \cdot \begin{pmatrix}
+			          0 & 1 & 0 \\
+			          1 & 1 & 0 \\
+			          0 & 0 & 1
+		          \end{pmatrix} \\
+		          & = \begin{pmatrix}
+			          3 & 1 & -4 \\
+			          1 & 3 & -1 \\
+			          0 & 0 & -2
+		          \end{pmatrix} \cdot \begin{pmatrix}
+			          0 & 1 & 0 \\
+			          1 & 1 & 0 \\
+			          0 & 0 & -2
+		          \end{pmatrix} \\
+		          & = \begin{pmatrix}
+			          -2(3) + (-4)(-2) + (1)(0) \\
+			          (-2)(-4) + (-1)(-2) + (3)(0) \\
+			          (3)(-2) + (1)(-2) + (-6)(-2)
+		          \end{pmatrix} = \begin{pmatrix}
+		          		10 \\
+		          		10 \\
+		          		12
+		          	\end{pmatrix}
+	\end{align*}
+\end{es}
+
+\subsubsection{Similitudine tra matrici quadrate}
+\begin{deff}{Matrici simili}{}
+	Due matrici $A, A' \ n \times n$ si dicono simili se esiste una matrice $n \times n$ invertibile $H$ tale che:
+	\begin{align*}
+		A' = H^{-1} \cdot A \cdot H
+	\end{align*}
+\end{deff}
+
+\begin{es} \
+	\begin{enumerate}
+		\item $A = \begin{pmatrix}
+				      2 & 1  \\
+				      1 & -1
+			      \end{pmatrix}$ e $M = \begin{pmatrix}
+				      \frac{7}{3} & -\frac{5}{3}  \\
+				      \frac{5}{3} & -\frac{10}{3}
+			      \end{pmatrix}$ sono simili perchè $M = \begin{pmatrix}
+				      1 & 0 \\
+				      0 & 1
+			      \end{pmatrix}^{-1} \cdot A \cdot \begin{pmatrix}
+				      1 & 0 \\
+				      0 & 1
+			      \end{pmatrix}$.
+		\item Data $M$ precedente e $I_2 = \begin{pmatrix}
+				      1 & 0 \\
+				      0 & 1
+			      \end{pmatrix}$, $M$ e $I_2$ non sono simili perchè $\forall B, B^{-1} \cdot I_2 \cdot B = B^{-1} \cdot B = I_2 \neq M$.
+	\end{enumerate}
+\end{es}
+\begin{prop}
+	Due matrici simili rappresentano uno stesso endomorfismo (un'applicazione lineare $f: V \rightarrow V$ in cui dominio e codominio coincidono) rispetto a basi diverse.
+\end{prop}
+\begin{dimm}
+	Siano $A, A'$ due matrici simili e sia $H$ la matrice invertibile tale che $A' = H^{-1} \cdot A \cdot H$. \\
+	Sia $f: \mathbb{R}^n \rightarrow \mathbb{R}^n$ tale che $M_E^E(f) = A$. \\ (cioè $f$ è l'endomorfismo che manda i vettori della base canonica nelle colonne di $A$). \\
+	Sia $B$ la base data dalle colonne di $H$ (ricordiamo che se $H$ è invertibile, le sue colonne formano una base), cioè $H = M_E^B(f)$.
+	\begin{align*}
+		A' & = H^{-1} \cdot A \cdot H \\
+		M_B^B(f) & = H^{-1} \cdot M_E^E(f) \cdot H
+	\end{align*}
+	Quindi $M_B^B(f) = A'$.
+\end{dimm}
+
+\subsubsection{Conseguenze del teorema del rango}
+\begin{cor}{Teorema del rango per le righe}{}
+	 \[rK(A) = rK(A^T)\]
 \end{cor}
+
+
+\begin{cor}{Rango di una matrice e immagine}{}
+	\[rK(A) = \dim \IM f\]
+\end{cor}
+Il corollario precedente è una conseguenza del teorema del rango per le righe perchè
+data una matrice $A = \begin{pmatrix}
+		a_{11} & a_{12} & ... & a_{1n} \\
+		a_{21} & a_{22} & ... & a_{2n} \\
+		...    & ...    & ... & ...    \\
+		a_{m1} & a_{m2} & ... & a_{mn}
+	\end{pmatrix}$,
+se $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ è un'applicazione lineare, allora $M_E^E(f) = A$, cioè $f(e_i) = i$-esima colonna di $A$
+
+\begin{oss}
+	$\ker f = \{x \in \mathbb{R}^n \mid Ax = 0\}$, quindi $\dim \ker f = n - rK(A)$ ($n -$ il numero di equazioni indipendenti. \\
+	Possiamo anche verificarlo con la formula di Grassmann:
+	\begin{align*}
+		\dim V = \dim \IM f + \dim \ker f \Rightarrow n = \dim rk(A) + (n - rk(A))
+	\end{align*}
+\end{oss}
+
+\begin{deff}{Matrice a scala}{}
+	Una matrice $A \in M_{m,n}(K)$ è a scala se:
+	\begin{itemize}
+		\item Le righe nulle di $A$ sono tutte in fondo alla matrice.
+		\item Il primo coefficiente non nullo di ogni riga non nulla è più a destra del primo coefficiente non nullo della riga precedente.
+	\end{itemize}
+
+	\begin{align*}
+		A = \begin{pmatrix}
+			1 & 0 & 2 & 3 \\
+			0 & 0 & -2 & 4 \\
+			0 & 0 & 0 & 5 \\
+			0 & 0 & 0 & 0 \\
+		\end{pmatrix} \text{ è a scala.}
+	\end{align*}
+\end{deff}
+
+\begin{oss}
+	Se $A$ è una matrice a scala, il rango di $A$ è uguale al numero di righe non nulle. \\
+\end{oss}
+
 \begin{deff}{Matrice trasposta}{}
 	La matrice trasposta $M^T$ di una matrice $M$ è la matrice ottenuta scambiando righe con colonne.
 \end{deff}
@@ -2263,8 +2523,52 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		\end{pmatrix} = 28 \ne 0$. \\
 		Quindi per il teorema di Rouché-Capelli il sistema non ha soluzione.
 	\end{es}
-
 	\subsection{Metodo di Gauss}
+	\begin{es}
+		Risolvere il sistema lineare:
+		\begin{align*}
+			\begin{cases}
+				2x_1 - x_2 + x_3 + 2x_4 = 1  \\
+				4x_1 - x_2 - 3x_3 - x_4 = -1 \\
+				 - 2x_1 - x_2 + x_3 + x_4 = 1 \\
+				x_1 + x_2 + x_3 + x_4 = 2
+			\end{cases}
+		\end{align*}
+	
+		\begin{description}
+			\item[Passo 1] Sommo a ciascuna equazione (dalla seconda in poi) la prima moltiplicata per un coefficiente tale che il termine $x_1$ nelle altre equazioni si annulli.
+				  \begin{align*}
+					  \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                                & = 1  \\
+					  \text{-2R1 + R2}           &  & \mathbf{0x_1} + x_2 - 5x_3 - 5x_4                      & = -3 \\
+					  \text{R1 + R3}             &  & \mathbf{0x_1} - 2x_2 + 2x_3 + 3x_4                     & = 2  \\
+					  -\frac{1}{2}\text{R1 + R4} &  & \mathbf{0x_1} + \frac{3}{2}x_2 + \frac{1}{2}x_3 + 0x_4 & = 1
+				  \end{align*}
+			\item[Passo 2] Vado avanti di una equazione. Non tocco più la prima e neanche la seconda, ma sommo a ciascuna equazione (dalla terza in poi) la seconda moltiplicata per un coefficiente tale che il termine $x_2$ nelle altre equazioni si annulli.
+				  \begin{align*}
+					  \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                & = 1   \\
+					  \text{R2}                  &  & x_2 - 5x_3 - 5x_4                      & = -3  \\
+					  \text{2R2 + R3}            &  & \mathbf{0x_2} - 8x_3 - 7x_4            & = - 4 \\
+					  -\frac{3}{2}\text{R2 + R4} &  & \mathbf{0x_2} + 8x_3 + \frac{15}{2}x_4 & = 6
+				  \end{align*}
+			\item[Passo 3] Vado avanti di una equazione. Non tocco più la prima, la seconda e neanche la terza, ma sommo a ciascuna equazione (dalla quarta in poi) la terza moltiplicata per un coefficiente tale che il termine $x_3$ nelle altre equazioni si annulli.
+				  \begin{align*}
+					  \text{R1}      &  & 2x_1 - x_2 + x_3 + 2x_4        & = 1   \\
+					  \text{R2}      &  & - 5x_3 - 5x_4                  & = -3  \\
+					  \text{R3}      &  & - 8x_3 - 7x_4                  & = - 4 \\
+					  \text{R3 + R4} &  & \mathbf{0x_3} + \frac{1}{2}x_4 & = 2
+				  \end{align*}
+			\item[Passo 4] Finite le equazioni per trovare la soluzione del sistema, risalgo dall'ultima risolvendo le equazioni e sostituendo le incognite di volta in volta:
+				  \begin{align*}
+					  \text{R4} &  & \frac{1}{2}x_4            & = 2 \Rightarrow x_4 = 4   \\
+					  \text{R3} &  & - 8x_3 - 7 \cdot 4        & = -4 \Rightarrow x_3 = 1  \\
+					  \text{R2} &  & - 5 \cdot 1 - 5 \cdot 4   & = -3 \Rightarrow x_2 = 17 \\
+					  \text{R1} &  & 2x_1 - 17 + 1 + 2 \cdot 4 & = 1 \Rightarrow x_1 = - 3
+				\, \end{align*}
+		\end{description}
+		Ho trovato così l'unica soluzione del sistema: $x_1 = -3, x_2 = 17, x_3 = 1, x_4 = 4$.
+	\end{es}
+	Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una soluzione generale.
+	
 	\subsection{Algoritmo di Gauss-Jordan}
 
 	Sia $A$ una matrice $m \times n$ invertibile.
