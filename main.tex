@@ -15,6 +15,7 @@
 \usepackage{awesomebox}
 \usepackage{xcolor}
 \usepackage{soul}
+\usepackage{cancel}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \newcommand{\hlfancy}[2]{\sethlcolor{#1}\hl{#2}}
 \newcommand{\IM}{\ \mathrm{Im} \ }
@@ -2076,17 +2077,18 @@ se $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ è un'applicazione lineare, allora 
 \end{deff}
 
 \begin{oss}
-	Se $A$ è una matrice a scala, il rango di $A$ è uguale al numero di righe non nulle. \\
+	Se $A$ è una matrice a scala, il rango di $A$ è uguale al numero di righe non nulle.
 \end{oss}
 
 \begin{deff}{Matrice trasposta}{}
-	La matrice trasposta $M^T$ di una matrice $M$ è la matrice ottenuta scambiando righe con colonne.
+	La matrice trasposta $A^T$ di una matrice $A$ è la matrice ottenuta scambiando le righe con le colonne,
+	cioè facendo una riflessione rispetto alla diagonale principale.
 \end{deff}
 \begin{es}
-	$M = \begin{pmatrix}
+	$A = \begin{pmatrix}
 			3  & 1 & 7 \\
 			-1 & 0 & 4
-		\end{pmatrix}, M^T = \begin{pmatrix}
+		\end{pmatrix}, A^T = \begin{pmatrix}
 			3 & -1 \\
 			1 & 0  \\
 			7 & 4
@@ -2095,18 +2097,141 @@ se $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ è un'applicazione lineare, allora 
 \begin{oss}
 	Per come è definito il prodotto riga per colonna tra matrici, $(A \cdot B)^T = B^T \cdot A^T$.
 \end{oss}
+
+\section{Unità 5 - Lezioni 10, 11, 12}
+\subsection{Metodo di Gauss}
+	\begin{es}
+		Risolvere il sistema lineare:
+		\begin{align*}
+			\begin{cases}
+				2x_1 - x_2 + x_3 + 2x_4 = 1  \\
+				4x_1 - x_2 - 3x_3 - x_4 = -1 \\
+				 - 2x_1 - x_2 + x_3 + x_4 = 1 \\
+				x_1 + x_2 + x_3 + x_4 = 2
+			\end{cases}
+		\end{align*}
+	
+		\begin{description}
+			\item[Passo 1] Sommo a ciascuna equazione (dalla seconda in poi) la prima moltiplicata per un coefficiente tale che il termine $x_1$ nelle altre equazioni si annulli.
+				  \begin{align*}
+					  \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                                & = 1  \\
+					  \text{-2R1 + R2}           &  & \mathbf{0x_1} + x_2 - 5x_3 - 5x_4                      & = -3 \\
+					  \text{R1 + R3}             &  & \mathbf{0x_1} - 2x_2 + 2x_3 + 3x_4                     & = 2  \\
+					  -\frac{1}{2}\text{R1 + R4} &  & \mathbf{0x_1} + \frac{3}{2}x_2 + \frac{1}{2}x_3 + 0x_4 & = 1
+				  \end{align*}
+			\item[Passo 2] Vado avanti di una equazione. Non tocco più la prima e neanche la seconda, ma sommo a ciascuna equazione (dalla terza in poi) la seconda moltiplicata per un coefficiente tale che il termine $x_2$ nelle altre equazioni si annulli.
+				  \begin{align*}
+					  \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                & = 1   \\
+					  \text{R2}                  &  & x_2 - 5x_3 - 5x_4                      & = -3  \\
+					  \text{2R2 + R3}            &  & \mathbf{0x_2} - 8x_3 - 7x_4            & = - 4 \\
+					  -\frac{3}{2}\text{R2 + R4} &  & \mathbf{0x_2} + 8x_3 + \frac{15}{2}x_4 & = 6
+				  \end{align*}
+			\item[Passo 3] Vado avanti di una equazione. Non tocco più la prima, la seconda e neanche la terza, ma sommo a ciascuna equazione (dalla quarta in poi) la terza moltiplicata per un coefficiente tale che il termine $x_3$ nelle altre equazioni si annulli.
+				  \begin{align*}
+					  \text{R1}      &  & 2x_1 - x_2 + x_3 + 2x_4        & = 1   \\
+					  \text{R2}      &  & - 5x_3 - 5x_4                  & = -3  \\
+					  \text{R3}      &  & - 8x_3 - 7x_4                  & = - 4 \\
+					  \text{R3 + R4} &  & \mathbf{0x_3} + \frac{1}{2}x_4 & = 2
+				  \end{align*}
+			\item[Passo 4] Finite le equazioni per trovare la soluzione del sistema, risalgo dall'ultima risolvendo le equazioni e sostituendo le incognite di volta in volta:
+				  \begin{align*}
+					  \text{R4} &  & \frac{1}{2}x_4            & = 2 \Rightarrow x_4 = 4   \\
+					  \text{R3} &  & - 8x_3 - 7 \cdot 4        & = -4 \Rightarrow x_3 = 1  \\
+					  \text{R2} &  & - 5 \cdot 1 - 5 \cdot 4   & = -3 \Rightarrow x_2 = 17 \\
+					  \text{R1} &  & 2x_1 - 17 + 1 + 2 \cdot 4 & = 1 \Rightarrow x_1 = - 3
+				\, \end{align*}
+		\end{description}
+		Ho trovato così l'unica soluzione del sistema: $x_1 = -3, x_2 = 17, x_3 = 1, x_4 = 4$.
+	\end{es}
+	Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una soluzione generale.
+	
+\subsection{Algoritmo di Gauss-Jordan}
+
+Sia $A$ una matrice $m \times n$ invertibile.
+Dalla matrice $(A|I_n)$ si può ottenere la matrice $(I_n|A^{-1})$ applicando l'algoritmo di Gauss.
+Allora $B=A^{-1}$.
+\begin{es}
+	$A = \begin{pmatrix}
+		3 & 5 \\
+		2 & 4
+	\end{pmatrix}$. \\
+	Costruisco la matrice $(A|I_2)$ fino ad ottenere $(I_n|B)$:
+	\begin{align*}
+		\begin{pmatrix}
+			3 & 5 & \mid & 1 & 0 \\
+			2 & 4 & \mid & 0 & 1
+		\end{pmatrix} \Rightarrow \begin{matrix}
+			R1 \\
+			- \frac{2}{3}R1 + R2
+		\end{matrix} \Rightarrow \begin{pmatrix}
+			3 & 5 & \mid & 1 & 0 \\
+			0 & \frac{2}{3} & \mid & - \frac{2}{3} & 1
+		\end{pmatrix} \Rightarrow \begin{matrix}
+			\frac{1}{3}R_1
+			\frac{3}{2}R_2
+		\end{matrix} \Rightarrow \begin{pmatrix}
+			1 & \frac{5}{3} & \mid & \frac{1}{3} & 0 \\
+			0 & 1 & \mid & -1 & \frac{3}{2}
+		\end{pmatrix} \\ \Rightarrow \begin{matrix}
+			R_1 - \frac{5}{3}R_2
+			R_2
+		\end{matrix} \Rightarrow \begin{pmatrix}
+			1 & 0 & \mid & 2 & - \frac{5}{3} \\
+			0 & 1 & \mid & -1 & \frac{3}{2}
+		\end{pmatrix}
+	\end{align*}
+	Quindi $A^{-1} = \begin{pmatrix}
+		2 & - \frac{5}{3} \\
+		-1 & \frac{3}{2}
+	\end{pmatrix}$, che è uguale a quella ottenuta con $A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T$.
+\end{es}
+
+\subsection{Determinante di una matrice}
+
 \begin{deff}{Determinante di una matrice}{}
-	Il determinante di una matrice $A \in M_{n,m}(K)$ è un numero reale che si ottiene come somma dei prodotti degli elementi di una riga per i loro minori.
-	Nello specifico è definito nel seguente modo ricorsivo:
-	\begin{itemize}
-		\item Per $n = 1$, $A = (a) \Rightarrow \det A = a$.
-		\item Per $n > 1$, riduciamo il calcolo del determinante al determinante di matrici più piccoli mediante la \textbf{regola di Laplace}:
+	Il determinante di una matrice è una funzione $\det: M_{n,n}(K) \rightarrow K$ tale che $\det A \ne 0 \Leftrightarrow rk(A) = n \Leftrightarrow A$ è invertibile.
+	\begin{description}
+		\item[Matrici $1 \times 1$, $A = (a)$:]
+			È invertibile $\Leftrightarrow a \ne 0$, quindi $A^{-1} = (a^{-1})$ e \underline{$\det A = a$}, ovvero il suo unico elemento.
+		\item[Matrici $2 \times 2$, $A = \begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix}$:] Poniamo \underline{$\det A = ad - bc$}.
+		      
+		\item[Matrici $n \times n$:] Per $n > 1$, riduciamo il calcolo del determinante al determinante di matrici più piccoli mediante la \textbf{regola di Laplace}:
 		      \begin{equation*}
 			      \det A = \sum_{i = 1}^{n} (-1)^{i + j} \cdot a_{ij} \cdot \det A_{ij}
 		      \end{equation*}
-		      dove $j \in \{1, .., n\}$ e $A_{ij}$ è la matrice ottenuta da $A$ cancellando la riga $i$ e la colonna $j$.
-	\end{itemize}
+		      dove $i, j \in \{1, .., n\}$ e $A_{ij}$ è la matrice $(n - 1) \times (n - 1)$ ottenuta da $A$ cancellando la riga $i$ e la colonna $j$. \\
+			  Oppure possiamo utilizzare le righe:
+			  \begin{equation*}
+				  \det A = \sum_{j = 1}^{n} (-1)^{i + j} \cdot a_{ij} \cdot \det A_{ij}
+				\end{equation*}
+	\end{description}
 \end{deff}
+\paragraph{Approfondimento sulle matrici $2 \times 2$}
+Verifichiamo che si ha $\det A \ne 0 \Leftrightarrow A$ è invertibile, o equivalentemente $\det A = 0 \Leftrightarrow A$ non è invertibile. \\
+$\Rightarrow$ Sia $\det A = ad - bc = 0$, vogliamo quindi mostrare che $rk(A) < 2$ cioè che le righe di $A$ sono linearmente dipendenti. \\
+Consideriamo la prima riga $r_1 = (a, b)$:
+\begin{itemize}
+\item se $(a, b) = (0, 0)$ allora $r_1$ è la riga nulla e quindi $rk(A) < 2$.
+\item se $(a, b) \ne (0, 0)$ allora abbiamo $a \ne 0$ oppure $b \ne 0$.
+	Nel caso in cui $a \ne 0$, si ha $d = \frac{bc}{a}$ e quindi $\begin{pmatrix}
+	a & b \\
+	c & \frac{bc}{a}
+	\end{pmatrix}$.
+	Da qui poniamo $\alpha = \frac{c}{a} \Rightarrow c = \alpha \cdot a$ e $d = \frac{bc}{a} = \alpha \cdot b$.
+	Quindi $A = \begin{pmatrix}
+	a & b \\
+	\alpha \cdot a & \alpha \cdot b
+	\end{pmatrix}$ e quindi la seconda riga è un multiplo della prima, quindi $rk(A) < 2$.
+\end{itemize}
+$\Leftarrow$ Supponiamo che le due righe siano linearmente indipendenti, cioè che $A$ sia invertibile, cioè che $(a, b) = \alpha \cdot (c, d)$:
+Allora $\det \begin{pmatrix}
+	\alpha \cdot c & \alpha \cdot d \\
+	c & d
+\end{pmatrix} = \alpha^2 \cdot (ad - bc) = 0$.
+
 \begin{es}
 	\begin{align*}
 		A = \begin{pmatrix}
@@ -2114,58 +2239,106 @@ se $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ è un'applicazione lineare, allora 
 			    7   & 2 & 11  & 9 \\
 			    2   & 0 & - 1 & 3 \\
 			    1   & 0 & 0   & 0
-		    \end{pmatrix} \Rightarrow \det A & = 0 \cdot \det A^{(1, 2)} + ( - 1)^{2 + 2} \cdot 2 \cdot \det A^{(2, 2)} + 0 \cdot \det A^{(3, 2)} + 0 \cdot \det A^{(4, 2)} = \\
-		                                 & = 2 \cdot \det \begin{pmatrix}
-			                                                  -3 & 0   & 4 \\
-			                                                  2  & - 1 & 3 \\
-			                                                  1  & 0   & 0
-		                                                  \end{pmatrix} = 2 \cdot ( - 1)^{2 + 2} \cdot ( - 1) \cdot \det \begin{pmatrix}
-			                                                                                                                 - 3 & 4 \\
-			                                                                                                                 1   & 0
-		                                                                                                                 \end{pmatrix} =                                      \\
-		                                 & = - 2 \cdot ( - 1)^{1 + 2} \cdot 4 \cdot \det 1 = 8
+		    \end{pmatrix} \\
+		\det A &= \cancel{0 \cdot \det A^{(1, 2)}} + ( - 1)^{2 + 2} \cdot 2 \cdot \det A^{(2, 2)} + \cancel{0 \cdot \det A^{(3, 2)}} + \cancel{0 \cdot \det A^{(4, 2)}} = \\
+				&= 2 \cdot \det \begin{pmatrix}
+									-3 & 0   & 4 \\
+									2  & - 1 & 3 \\
+									1  & 0   & 0
+								\end{pmatrix} \\
+				&= 2 \cdot ( - 1)^{2 + 2} \cdot ( - 1) \cdot \det \begin{pmatrix}
+																- 3 & 4 \\
+																1   & 0
+															\end{pmatrix} \\
+				& = - 2 \cdot ( - 1)^{1 + 2} \cdot 4 \cdot \det 1 = 8
 	\end{align*}
 	Dato che $\det A = 8 \neq 0$, $A$ è invertibile.
 \end{es}
+
+\begin{es}
+	$A = \begin{pmatrix}
+		1 & 2 & 3 \\
+		4 & 0 & 5 \\
+		1 & 3 & 2
+	\end{pmatrix}$. \\
+	Calcoliamo il determinante di $A$ utilizzando la seconda colonna:
+	\begin{align*}
+		\det A & = - a_{12} \cdot \det A^{(1, 2)} + a_{22} \cdot \det A^{(2, 2)} - a_{32} \cdot \det A^{(3, 2)} \\
+		       & = - 2 \cdot \det \begin{pmatrix}
+				       4 & 5 \\
+				       1 & 2
+			       \end{pmatrix} + \cancel{0 \cdot \det A^{(2, 2)}} - 3 \cdot \det \begin{pmatrix}
+				       1 & 3 \\
+					   4 & 5
+			       \end{pmatrix} \\
+		       & = - 2(4 \cdot 2 - 5 \cdot 1) - 3(1 \cdot 5 - 3 \cdot 4) \\
+		       & = - 6 + 21 \\
+		       & = 15
+	\end{align*}
+\end{es}
+
+\begin{deff}{Proprietà della funzione determinante}{}
+	\begin{description}
+		\item[Alternante] Il determinante cambia segno se scambiamo due righe o due colonne, ovvero $\det A' = - \det A$ se $A'$ è la matrice trasformata.
+		\item[Multilineare] Siano $A, B$ due matrici che hanno tutte le colonne uguali tranne la colonna $j$.
+		Sia $C$ la matrice che ha le colonne diverse da $j$ uguali a quelle di $A$ e la colonna $j$ di $C$ è $a$ volte la colonna $j$ di $A$ più $b$ volte la colonna $j$ di $B$. \\
+		Quindi $C_{ij} = a \cdot A_{ij} + b \cdot B_{ij}$ e $\det C = a \cdot \det A + b \cdot \det B$. \\
+		La stessa cosa vale anche per le righe.
+		\item[Determinante dell'identità] $\det I_n = 1$.
+		\item[Determinante della trasposta] $\det A = \det A^T$.
+		\item[Invertibilità] $\det A \ne 0 \Leftrightarrow A$ è invertibile.
+	\end{description}
+\end{deff}
 \begin{oss}
-	Se $n = 2, A = \begin{pmatrix}
-			a_{11} & a_{12} \\
-			a_{21} & a_{22}
-		\end{pmatrix}$ la regola di Laplace implica che $\det A = a_{11} \cdot a_{22} - a_{12} \cdot a_{21}$.
-\end{oss}
-\begin{oss}
-	Se $n = 3$, $A = \begin{pmatrix}
-			a_{11} & a_{12} & a_{13} \\
-			a_{21} & a_{22} & a_{23} \\
-			a_{31} & a_{32} & a_{33}
-		\end{pmatrix}$ sviluppando Laplace rispetto alla prima colonna si ottiene la \textbf{regola di Sarrus}.
+	Il determinante è l'unica funzione $f: M_{n,m}(K) \rightarrow K$ che soddisfa le prime tre proprietà.
 \end{oss}
 
-\begin{teo}{Proprietà della funzione determinante}{}
-	La funzione determinante definita ricorsivamente $\det: M_{n,m}(K) \rightarrow K, A \mapsto \det A$ gode delle seguenti proprietà:
-	\begin{itemize}
-		\item Il determinante è \textbf{alternante}, cioè se scambiamo due colonne cambia segno.
-		      In altre parole, se $A$ è una matrice e $A'$ è la matrice ottenuta scambiando due colonne qualsiasi di $A$, allora $\det A' = - \det A$.
-		\item Il determinante è \textbf{multilineare}, cioè se ho due matrici $A = \begin{pmatrix}
-				      \vdots & \vdots & \vdots \\
-				      v_1    & v_i    & v_n    \\
-				      \vdots & \vdots & \vdots
-			      \end{pmatrix}$ e $B = \begin{pmatrix}
-				      \vdots & \vdots & \vdots \\
-				      v_1    & v_i'   & v_n    \\
-				      \vdots & \vdots & \vdots
-			      \end{pmatrix}$ allora $\det \begin{pmatrix}
-				      \vdots & \vdots       & \vdots \\
-				      v_1    & av_i + bv_i' & v_n    \\
-				      \vdots & \vdots       & \vdots
-			      \end{pmatrix} = a \cdot \det A + b \cdot \det B$.
-		\item $\det I_n = 1$.
-		\item Il determinante è l'unica funzione $f: M_{n,m}(K) \rightarrow K$ che soddisfa le tre proprietà precedenti.
-		\item $\det A = \det A^T$.
-		\item $\det A \cdot \det B = \det(A \cdot B)$.
-		\item $\det A \ne 0 \Leftrightarrow A$ è invertibile.
-	\end{itemize}
-\end{teo}
+\begin{oss}
+	Se moltiplico una riga di $A$ per un numero $k$, il determinante di $A$ viene moltiplicato per $k$:
+	\[A = \begin{pmatrix}
+		1 & 2 & 3 \\
+		4 & 5 & 6 \\
+		7 & 8 & 9
+	\end{pmatrix}; \ B = \begin{pmatrix}
+		1 & 2 & 3 \\
+		-8 & -10 & -12 \\
+		7 & 8 & 9
+	\end{pmatrix} \]
+	\[\Rightarrow \det B = - 2 \cdot \det A\]
+\end{oss}
+
+\begin{oss}
+	La trasformazione elementare di Gauss (cioè sommare a una riga un multiplo di un'altra) non cambia il determinante, quindi:
+	\[ A = \begin{pmatrix}
+		1 & 2 & 3 \\
+		4 & 5 & 6 \\
+		7 & 8 & 9
+	\end{pmatrix} \Rightarrow R_2 - R_1 \Rightarrow C = \begin{pmatrix}
+		1 & 2 & 3 \\
+		3 & 3 & 3 \\
+		7 & 8 & 9
+	\end{pmatrix} \Rightarrow \det C = \det A\]
+	Per la multilinearità: $\det C = \det A - \det B = \det A$ con $B = \begin{pmatrix}
+		1 & 2 & 3 \\
+		1 & 2 & 3 \\
+		7 & 8 & 9
+	\end{pmatrix}$.
+\end{oss}
+
+\begin{prop}
+	Il determinante di una matrice a scala è il prodotto dei coefficienti sulla diagonale principale.
+\end{prop}
+\begin{dimm}
+	\[ A = \begin{pmatrix}
+		a & d & e \\
+		0 & b & f \\
+		0 & 0 & c
+	\end{pmatrix} \Rightarrow \det A = a \cdot \det \begin{pmatrix}
+		b & f \\
+		0 & c
+	\end{pmatrix} = a \cdot b \cdot c\]
+\end{dimm}
+
 \begin{es}
 	Verificare se i seguenti vettori formano una base di $\mathbb{R}^4$:
 	\begin{align*}
@@ -2182,21 +2355,160 @@ se $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ è un'applicazione lineare, allora 
 	\end{align*}
 	$\Leftrightarrow v_1, v_2, v_3, v_4$ sono linearmente indipendenti $\Leftrightarrow$ sono una base di $\mathbb{R}^4$.
 \end{es}
+
+\begin{teo}{Teorema di Binet}{}
+	Date $A$ e $B$ due matrici $n \times n$, si ha:
+	\begin{equation*}
+		\det(A \cdot B) = \det A \cdot \det B
+	\end{equation*}
+	\begin{oss}
+		\textbf{NON} è vero che $\det(A + B) = \det A + \det B$.
+	\end{oss}
+\end{teo}
+\begin{cor}{Determinante di una matrice inversa}{}
+	Se $A$ è invertibile, allora $\det A^{-1} = \det(A)^{-1}$.
+\end{cor}
+\begin{proof}
+	Per il teorema di Binet, $\det A \cdot \det A^{-1} = \det(A \cdot A^{-1}) = \det I_n = 1$.
+\end{proof}
+\begin{cor}{Determinante di due matrici simili}{}
+	Se due matrici $A$ e $B$ sono simili, allora hanno lo stesso determinante: $\det A = \det B$.
+\end{cor}
+\begin{proof}
+	Se $A$ e $A'$ sono simili, allora $\exists H$ invertibile tale che $A' = H^{-1} \cdot A \cdot H$.
+	Quindi $\det A' = \cancel{\det(H^{-1})} \cdot \det A \cdot \cancel{\det H} = \det A$.
+\end{proof}
+
 \begin{oss}
-	Se A è invertibile, $\det(A^{-1}) = \det(A)^{-1}$. Infatti $A \cdot A^{-1} = I_n \Rightarrow \det(A \cdot A^{-1}) = \det I_n = 1 \Rightarrow \det A \cdot \det A^{-1} = 1 \Rightarrow \det A^{-1} = \det A^{-1}$.
+	Se due matrici hanno determinanti diversi, allora non sono simili.
 \end{oss}
-\begin{prop}
-	Se $A$ e $M$ sono simili, allora $\det A = \det M$.
-\end{prop}
-\begin{dimm}
-	Se $A$ e $M$ sono simili, allora $\exists B \text{invertibile} \mid M = B^{-1} \cdot A \cdot B$.
-	Quindi $\det M = \det(B^{-1} \cdot A \cdot B) = \det B^{-1} \cdot \det A \cdot \det B = \det A$ (per le proprietà del determinante).
-\end{dimm}
+
 \begin{deff}{Determinante di un'applicazione lineare}{}
 	Data $f: V \rightarrow V$ un'applicazione lineare, definiamo $det(f) = \det(A)$ dove $A$ è la matrice di $f$ rispetto a una base di $V$.
 	Per la proposizione precedente, il determinante non dipende dalla base scelta.
 	Inoltre, se $f$ è un isomorfismo, allora $det(f) \ne 0$.
 \end{deff}
+
+\subsubsection*{Prodotto vettoriale}
+\begin{deff}{Prodotto vettoriale}{}
+	Il prodotto vettoriale di due vettori $\underline{u}, \underline{v} \in \mathbb{R}^3$ è un vettore $\in \mathbb{R}^3$ definito come il determinante della matrice formata dai tre vettori:
+	\begin{equation*}
+		\underline{u} \wedge \underline{v} = \det \begin{pmatrix}
+			u_1 & u_2 & u_3 \\
+			v_1 & v_2 & v_3 \\
+			\underline{l_1} & \underline{l_2} & \underline{l_3}
+		\end{pmatrix}
+	\end{equation*}
+	dove $l$ è un vettore unitario (cioè di modulo 1) che non appartiene al piano generato da $\underline{u}$ e $\underline{v}$.
+\end{deff}
+
+\begin{es}
+	\underline{u} = $(1, 3, 0)$, \underline{v} = $(2, -5, 1)$. \\
+Calcoliamo il prodotto vettoriale $\underline{u} \wedge \underline{v}$:
+\begin{align*}
+	\underline{u} \wedge \underline{v} & = \det \begin{pmatrix}
+		1 & 3 & 0 \\
+		2 & -5 & 1 \\
+		\underline{l_1} & \underline{l_2} & \underline{l_3}
+	\end{pmatrix} = \underline{l_1}(3 \cdot 1 - 0 \cdot ( -5)) - \underline{l_2}(1 \cdot 1 - 0 \cdot 2) + \underline{l_3}(1 \cdot ( -5) - 3 \cdot 2) \\
+	          & = \underline{l_1}(3) - \underline{l_2}(1) + \underline{l_3}(-11) = (3, - 1), -11)
+\end{align*}
+\end{es}
+
+\begin{oss}
+	Il vettore $\underline{u} \wedge \underline{v}$ è perprendicolare al piano individuato da $\underline{u}$ e $\underline{v}$ in $\mathbb{R}^3$,
+	se sono linearmente indipendenti.
+\end{oss}
+
+\paragraph{Calcolo delle equazioni di un sottospazio utilizzando il determinante e il rango}
+Sia $V$ un sottospazio di $\mathbb{R}^n$ generato da $k$ vettori linearmente indipendenti $\underline{u_1}, \underline{u_2}, \ldots, \underline{u_k}$.
+\begin{description}
+	\item[Caso 1: $\mathbf{k = n - 1}$] Sia $n = 4$ e $U = \{(1, 0, 2, 1), (2, 1, 0, 0), (0, 1, 1, 0)\}$. \\
+	Un vettore generico $(x, y, z, t)$ appartiene a $V$ se e solo se è combinazione lineare dei 3 vettori della base, ovvero:
+	\[rk\begin{pmatrix}
+			1 & 0 & 2 & 1 \\
+			2 & 1 & 0 & 0 \\
+			0 & 1 & 1 & 0 \\
+			x & y & z & t
+		\end{pmatrix} = 3 \Rightarrow \det \begin{pmatrix}
+			1 & 0 & 2 & 1 \\
+			2 & 1 & 0 & 0 \\
+			0 & 1 & 1 & 0 \\
+			x & y & z & t
+		\end{pmatrix} = 0\]
+	Facciamo lo sviluppo rispetto alla quarta riga:
+	\begin{align*}
+		&\det \begin{pmatrix}
+			1 & 0 & 2 & 1 \\
+			2 & 1 & 0 & 0 \\
+			0 & 1 & 1 & 0 \\
+			x & y & z & t
+		\end{pmatrix} \\
+		&= - x \cdot \det \begin{pmatrix}
+			0 & 2 & 1 \\
+			1 & 0 & 0 \\
+			1 & 1 & 0
+		\end{pmatrix} + y \cdot \det \begin{pmatrix}
+			1 & 2 & 1 \\
+			2 & 0 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix} - z \cdot \det \begin{pmatrix}
+			1 & 0 & 1 \\
+			2 & 1 & 0 \\
+			0 & 1 & 0
+		\end{pmatrix} + t \cdot \det \begin{pmatrix}
+			1 & 0 & 2 \\
+			2 & 1 & 0 \\
+			0 & 1 & 1
+		\end{pmatrix} \\
+		&= - x + 2y - 2z + t(4 + 1) = - x + 2y - 2z + 5t = 0
+	\end{align*}
+	\item[Caso 2: $\mathbf{k < n - 1}$] Sia $n = 4$ e $U = \{(1, 2, 0, 1), (3, 1, 2, 0)\}$. \\
+	$\dim U = 2 \Rightarrow$ il sottospazio $V$ è generato da $4 - 2 = 2$ equazioni. \\
+	Un vettore generico $(x, y, z, t)$ appartiene a $V$ se e solo se è combinazione lineare dei 2 vettori della base, ovvero:
+	\[rk\begin{pmatrix}
+			1 & 2 & 0 & 1 \\
+			3 & 1 & 2 & 0 \\
+			x & y & z & t
+		\end{pmatrix} = 2\]
+	Riduciamo la matrice a scala:
+	\begin{align*}
+		\begin{pmatrix}
+			1 & 2 & 0 & 1 \\
+			3 & 1 & 2 & 0 \\
+			x & y & z & t
+		\end{pmatrix} \\
+		&\Rightarrow \begin{matrix}
+			R_2 - 3R_1 \\
+			R_3 - xR_1
+		\end{matrix} \\
+		&\Rightarrow \begin{pmatrix}
+			1 & 2 & 0 & 1 \\
+			0 & -5 & 2 & -3 \\
+			0 & y - 2x & z & t - x
+		\end{pmatrix} \\
+		&\Rightarrow 5R_3 \Rightarrow \begin{pmatrix}
+			1 & 2 & 0 & 1 \\
+			0 & -5 & 2 & -3 \\
+			0 & 5(y - 2x) & 5z & 5(t - x)
+		\end{pmatrix} \\
+		&\Rightarrow R_3 + (y - 2x)R_2 \Rightarrow \begin{pmatrix}
+			1 & 2 & 0 & 1 \\
+			0 & -5 & 2 & -3 \\
+			0 & 0 & 5z + 2(y - 2x) & 5(t - x) - 3
+		\end{pmatrix} \\
+		&\Rightarrow \begin{cases}
+			5z + 2(y - 2x) = 0 \\
+			5(t - x) - 3 = 0
+		\end{cases} \Rightarrow \begin{cases}
+			- 4x + 2y + 5z = 0 \\
+			x - 3y + 5t = 0
+		\end{cases}
+	\end{align*}
+\end{description}
+
+\subsubsection{Determinante e matrice inversa}
+
 \begin{teo}{Determinante e matrice inversa}{}
 	\begin{equation*}
 		A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T
@@ -2304,7 +2616,62 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	Quindi, se $t \ne 0, -4 \Rightarrow \dim \text{Im} f_t = rk(A) = 3$ e $\dim \ker f_t = 3 - 3 = 0 \Rightarrow f_t$ è un isomorfismo.
 	Se $t = 0, -4 \Rightarrow \dim \text{Im} f_t = rk(A) = 2$ e $\dim \ker f_t = 3 - 2 = 1 \Rightarrow f_t$ non è nè iniettiva nè suriettiva.
 \end{es}
-\section{Unità 5 - Lezioni 10, 11, 12}
+
+	\begin{deff}{Sottospazio affine}{}
+		Un sottoinsieme $S$ di $\mathbb{K}^n$ è un sottospazio affine di dimensione $d$ di $\mathbb{K}^n$ se è ottenuto traslando un sottospazio vettoriale $U$ di dimensione $d$,
+		cioè se $\exists p \in \mathbb{K}^n$ e un sottospazio vettoriale $U \subseteq \mathbb{K}^n$ tale che $S = \{p + u \mid u \in U\}$.
+	\end{deff}
+	\begin{es}
+		Consideriamo in $\mathbb{R}^2$ $U = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\}$ e $S = \{(x, y) \in \mathbb{R}^2 \mid x + y = 2\}$.
+		Disegno:
+		\tcbsidebyside[colback=white,colframe=white]{
+			\begin{tikzpicture}
+				\draw[->] (-2, 0) -- (3, 0) node[right] {$x$};
+				\draw[->] (0, -2) -- (0, 3) node[above] {$y$};
+				\draw[red] (-2, 2) -- (2, -2) node[right] {$U$};
+				\draw[blue] (-2, 4) -- (3, -1) node[right] {$S$};
+				% Draw p vectors that makes U translate to S
+				\draw[->, thick, orange] (-2, 2) -- (-1, 3) node[left] {$p$};
+				\draw[->, thick, orange] (-1, 1) -- (0, 2) node[left] {$p$};
+				\draw[->, thick, orange] (0, 0) -- (1, 1) node[left] {$p$};
+				\draw[->, thick, orange] (1, -1) -- (2, 0) node[left] {$p$};
+			\end{tikzpicture}
+		}{
+			$U$ è un sottospazio vettoriale, $S$ non lo è. \\
+			$S = \{p + u \mid u \in U\}$, cioè $S$ è ottenuto traslando $U$ di $p = (1, 1)$. $S$ è quindi un sottospazio affine di $\mathbb{R}^2$,
+			di dimensione 1.
+			In forma parametrica:
+			\begin{align*}
+				U &= \{(t, -t) \mid t \in \mathbb{R}\} \\
+				S &= \{(t, - t) + (1, 1) \mid t \in \mathbb{R}\} = \{(t + 1, 1 - t) \mid t \in \mathbb{R}\}
+			\end{align*}
+			\begin{oss}
+				Il vettore $p$ non è unico, altri vettori $p$ che traslano $U$ in $S$ sono $(2, 0), (0, 2)$, ottenendo un diverso $S = \{(t + 2, -t) \mid t \in \mathbb{R}\}$ e $S = \{(t, 1 - t) \mid t \in \mathbb{R}\}$.
+			\end{oss}
+		}
+	\end{es}
+	\begin{teo}{Sistema lineare omogeneo associato}{}
+		Sia $Ax = b$ un sistema lineare e $A$ la matrice $m \times n$ dei coefficienti. \\
+		Consideriamo il sistema lineare omogeneo associato $Ax = 0$. Allora:
+		\begin{enumerate}
+			\item L'insieme $U$ delle soluzioni del sistema omogeneo è un sottospazio vettoriale di $\mathbb{K}^n$ di dimensione $n - \text{rk}(A)$.
+			\item L'insieme $S$ delle soluzioni del sistema non omogeneo, se non è vuoto, è un sottospazio affine di $\mathbb{K}^n$ di dimensione $n - \text{rk}(A)$,
+			ottenuto traslando $U$ con qualsiasi $p \in S$ cioè $S = \{p + u \mid u \in U\}$.
+		\end{enumerate}
+	\end{teo}
+	\begin{dimm}
+		Verifichiamo i due punti:
+		\begin{enumerate}
+			\item Siano $u_1, u_2 \in U$ (cioè $Au_1 = 0, Au_2 = 0$, quindi $A(u_1 + u_2) = Au_1 + Au_2 = 0 + 0 = 0$). \\
+			Analogamente, se $u \in U$ e $k \in \mathbb{K}$, allora $A(ku) = kAu = k0 = 0$, quindi $ku \in U$. \\
+			Alla luce di questi risultati, $U$ è un sottospazio vettoriale di $\mathbb{K}^n$.
+			\item Sia $u \in U$ (cioè $Au = 0$) e $p \in S$ (cioè $Ap = b$). Allora $u + p \in S$ perchè $A(u + p) = Au + Ap = 0 + b = b$,
+			quindi $\{p + u \mid u \in U\} \subseteq S$. \\
+			Siano $p, p' \in S$ (cioè $Ap = b, Ap' = b$); allora $A(p - p') = Ap - Ap' = b - b = 0$, cioè $p - p' \in U$.
+			Quindi $p' = p + u$ con $u \in U$, cioè $S \subseteq \{p + u \mid u \in U\} \Rightarrow S = \{p + u \mid u \in U\}$.
+		\end{enumerate}
+	\end{dimm}
+	
 \subsection{Matrici e sistemi lineari}
 	Consideriamo un sistema lineare di $m$ equazioni in $n$ incognite:
 	\begin{align*}
@@ -2523,146 +2890,6 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		\end{pmatrix} = 28 \ne 0$. \\
 		Quindi per il teorema di Rouché-Capelli il sistema non ha soluzione.
 	\end{es}
-	\subsection{Metodo di Gauss}
-	\begin{es}
-		Risolvere il sistema lineare:
-		\begin{align*}
-			\begin{cases}
-				2x_1 - x_2 + x_3 + 2x_4 = 1  \\
-				4x_1 - x_2 - 3x_3 - x_4 = -1 \\
-				 - 2x_1 - x_2 + x_3 + x_4 = 1 \\
-				x_1 + x_2 + x_3 + x_4 = 2
-			\end{cases}
-		\end{align*}
-	
-		\begin{description}
-			\item[Passo 1] Sommo a ciascuna equazione (dalla seconda in poi) la prima moltiplicata per un coefficiente tale che il termine $x_1$ nelle altre equazioni si annulli.
-				  \begin{align*}
-					  \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                                & = 1  \\
-					  \text{-2R1 + R2}           &  & \mathbf{0x_1} + x_2 - 5x_3 - 5x_4                      & = -3 \\
-					  \text{R1 + R3}             &  & \mathbf{0x_1} - 2x_2 + 2x_3 + 3x_4                     & = 2  \\
-					  -\frac{1}{2}\text{R1 + R4} &  & \mathbf{0x_1} + \frac{3}{2}x_2 + \frac{1}{2}x_3 + 0x_4 & = 1
-				  \end{align*}
-			\item[Passo 2] Vado avanti di una equazione. Non tocco più la prima e neanche la seconda, ma sommo a ciascuna equazione (dalla terza in poi) la seconda moltiplicata per un coefficiente tale che il termine $x_2$ nelle altre equazioni si annulli.
-				  \begin{align*}
-					  \text{R1}                  &  & 2x_1 - x_2 + x_3 + 2x_4                & = 1   \\
-					  \text{R2}                  &  & x_2 - 5x_3 - 5x_4                      & = -3  \\
-					  \text{2R2 + R3}            &  & \mathbf{0x_2} - 8x_3 - 7x_4            & = - 4 \\
-					  -\frac{3}{2}\text{R2 + R4} &  & \mathbf{0x_2} + 8x_3 + \frac{15}{2}x_4 & = 6
-				  \end{align*}
-			\item[Passo 3] Vado avanti di una equazione. Non tocco più la prima, la seconda e neanche la terza, ma sommo a ciascuna equazione (dalla quarta in poi) la terza moltiplicata per un coefficiente tale che il termine $x_3$ nelle altre equazioni si annulli.
-				  \begin{align*}
-					  \text{R1}      &  & 2x_1 - x_2 + x_3 + 2x_4        & = 1   \\
-					  \text{R2}      &  & - 5x_3 - 5x_4                  & = -3  \\
-					  \text{R3}      &  & - 8x_3 - 7x_4                  & = - 4 \\
-					  \text{R3 + R4} &  & \mathbf{0x_3} + \frac{1}{2}x_4 & = 2
-				  \end{align*}
-			\item[Passo 4] Finite le equazioni per trovare la soluzione del sistema, risalgo dall'ultima risolvendo le equazioni e sostituendo le incognite di volta in volta:
-				  \begin{align*}
-					  \text{R4} &  & \frac{1}{2}x_4            & = 2 \Rightarrow x_4 = 4   \\
-					  \text{R3} &  & - 8x_3 - 7 \cdot 4        & = -4 \Rightarrow x_3 = 1  \\
-					  \text{R2} &  & - 5 \cdot 1 - 5 \cdot 4   & = -3 \Rightarrow x_2 = 17 \\
-					  \text{R1} &  & 2x_1 - 17 + 1 + 2 \cdot 4 & = 1 \Rightarrow x_1 = - 3
-				\, \end{align*}
-		\end{description}
-		Ho trovato così l'unica soluzione del sistema: $x_1 = -3, x_2 = 17, x_3 = 1, x_4 = 4$.
-	\end{es}
-	Quando ci sono infinite soluzioni, il metodo di gauss permette di trovare una soluzione generale.
-	
-	\subsection{Algoritmo di Gauss-Jordan}
-
-	Sia $A$ una matrice $m \times n$ invertibile.
-	Dalla matrice $(A|I_n)$ si può ottenere la matrice $(I_n|A^{-1})$ applicando l'algoritmo di Gauss.
-	Allora $B=A^{-1}$.
-	\begin{es}
-		$A = \begin{pmatrix}
-			3 & 5 \\
-			2 & 4
-		\end{pmatrix}$. \\
-		Costruisco la matrice $(A|I_2)$ fino ad ottenere $(I_n|B)$:
-		\begin{align*}
-			\begin{pmatrix}
-				3 & 5 & \mid & 1 & 0 \\
-				2 & 4 & \mid & 0 & 1
-			\end{pmatrix} \Rightarrow \begin{matrix}
-				R1 \\
-				- \frac{2}{3}R1 + R2
-			\end{matrix} \Rightarrow \begin{pmatrix}
-				3 & 5 & \mid & 1 & 0 \\
-				0 & \frac{2}{3} & \mid & - \frac{2}{3} & 1
-			\end{pmatrix} \Rightarrow \begin{matrix}
-				\frac{1}{3}R_1
-				\frac{3}{2}R_2
-			\end{matrix} \Rightarrow \begin{pmatrix}
-				1 & \frac{5}{3} & \mid & \frac{1}{3} & 0 \\
-				0 & 1 & \mid & -1 & \frac{3}{2}
-			\end{pmatrix} \\ \Rightarrow \begin{matrix}
-				R_1 - \frac{5}{3}R_2
-				R_2
-			\end{matrix} \Rightarrow \begin{pmatrix}
-				1 & 0 & \mid & 2 & - \frac{5}{3} \\
-				0 & 1 & \mid & -1 & \frac{3}{2}
-			\end{pmatrix}
-		\end{align*}
-		Quindi $A^{-1} = \begin{pmatrix}
-			2 & - \frac{5}{3} \\
-			-1 & \frac{3}{2}
-		\end{pmatrix}$, che è uguale a quella ottenuta con $A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T$.
-	\end{es}
-	\begin{deff}{Sottospazio affine}{}
-		Un sottoinsieme $S$ di $\mathbb{K}^n$ è un sottospazio affine di dimensione $d$ di $\mathbb{K}^n$ se è ottenuto traslando un sottospazio vettoriale $U$ di dimensione $d$,
-		cioè se $\exists p \in \mathbb{K}^n$ e un sottospazio vettoriale $U \subseteq \mathbb{K}^n$ tale che $S = \{p + u \mid u \in U\}$.
-	\end{deff}
-	\begin{es}
-		Consideriamo in $\mathbb{R}^2$ $U = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\}$ e $S = \{(x, y) \in \mathbb{R}^2 \mid x + y = 2\}$.
-		Disegno:
-		\tcbsidebyside[colback=white,colframe=white]{
-			\begin{tikzpicture}
-				\draw[->] (-2, 0) -- (3, 0) node[right] {$x$};
-				\draw[->] (0, -2) -- (0, 3) node[above] {$y$};
-				\draw[red] (-2, 2) -- (2, -2) node[right] {$U$};
-				\draw[blue] (-2, 4) -- (3, -1) node[right] {$S$};
-				% Draw p vectors that makes U translate to S
-				\draw[->, thick, orange] (-2, 2) -- (-1, 3) node[left] {$p$};
-				\draw[->, thick, orange] (-1, 1) -- (0, 2) node[left] {$p$};
-				\draw[->, thick, orange] (0, 0) -- (1, 1) node[left] {$p$};
-				\draw[->, thick, orange] (1, -1) -- (2, 0) node[left] {$p$};
-			\end{tikzpicture}
-		}{
-			$U$ è un sottospazio vettoriale, $S$ non lo è. \\
-			$S = \{p + u \mid u \in U\}$, cioè $S$ è ottenuto traslando $U$ di $p = (1, 1)$. $S$ è quindi un sottospazio affine di $\mathbb{R}^2$,
-			di dimensione 1.
-			In forma parametrica:
-			\begin{align*}
-				U &= \{(t, -t) \mid t \in \mathbb{R}\} \\
-				S &= \{(t, - t) + (1, 1) \mid t \in \mathbb{R}\} = \{(t + 1, 1 - t) \mid t \in \mathbb{R}\}
-			\end{align*}
-			\begin{oss}
-				Il vettore $p$ non è unico, altri vettori $p$ che traslano $U$ in $S$ sono $(2, 0), (0, 2)$, ottenendo un diverso $S = \{(t + 2, -t) \mid t \in \mathbb{R}\}$ e $S = \{(t, 1 - t) \mid t \in \mathbb{R}\}$.
-			\end{oss}
-		}
-	\end{es}
-	\begin{teo}{Sistema lineare omogeneo associato}{}
-		Sia $Ax = b$ un sistema lineare e $A$ la matrice $m \times n$ dei coefficienti. \\
-		Consideriamo il sistema lineare omogeneo associato $Ax = 0$. Allora:
-		\begin{enumerate}
-			\item L'insieme $U$ delle soluzioni del sistema omogeneo è un sottospazio vettoriale di $\mathbb{K}^n$ di dimensione $n - \text{rk}(A)$.
-			\item L'insieme $S$ delle soluzioni del sistema non omogeneo, se non è vuoto, è un sottospazio affine di $\mathbb{K}^n$ di dimensione $n - \text{rk}(A)$,
-			ottenuto traslando $U$ con qualsiasi $p \in S$ cioè $S = \{p + u \mid u \in U\}$.
-		\end{enumerate}
-	\end{teo}
-	\begin{dimm}
-		Verifichiamo i due punti:
-		\begin{enumerate}
-			\item Siano $u_1, u_2 \in U$ (cioè $Au_1 = 0, Au_2 = 0$, quindi $A(u_1 + u_2) = Au_1 + Au_2 = 0 + 0 = 0$). \\
-			Analogamente, se $u \in U$ e $k \in \mathbb{K}$, allora $A(ku) = kAu = k0 = 0$, quindi $ku \in U$. \\
-			Alla luce di questi risultati, $U$ è un sottospazio vettoriale di $\mathbb{K}^n$.
-			\item Sia $u \in U$ (cioè $Au = 0$) e $p \in S$ (cioè $Ap = b$). Allora $u + p \in S$ perchè $A(u + p) = Au + Ap = 0 + b = b$,
-			quindi $\{p + u \mid u \in U\} \subseteq S$. \\
-			Siano $p, p' \in S$ (cioè $Ap = b, Ap' = b$); allora $A(p - p') = Ap - Ap' = b - b = 0$, cioè $p - p' \in U$.
-			Quindi $p' = p + u$ con $u \in U$, cioè $S \subseteq \{p + u \mid u \in U\} \Rightarrow S = \{p + u \mid u \in U\}$.
-		\end{enumerate}
-	\end{dimm}
 	\subsection{Applicazioni alla geometria analitica}
 	\subsubsection{Retta passante per due punti}
 	Consideriamo due punti $P_1(x_1, y_1), P_2(x_2, y_2)$ in $\mathbb{R}^2, P_1 \ne P_2$. Trovare la retta che passa per $P_1$ e $P_2$.
