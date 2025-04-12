@@ -1467,7 +1467,7 @@ dove:
 			4 & 5 & 6 \\
 			0 & 1 & 0
 		\end{pmatrix}
-		& (MN)R = \begin{pmatrix}
+		& M(NR) = \begin{pmatrix}
 			8   & 11   & 12   \\
 			0   & 1    & 0    \\
 			4   & 5    & 6
@@ -1567,7 +1567,7 @@ dove:
 \begin{deff}{Matrice associata ad un'applicazione lineare}{}
 	Sia $f: V \rightarrow U$ un'applicazione lineare.
 	Siano $B$ una base di $V$ e $C$ una base di $U$. \\
-	La \textbf{matrice associata} ad $f$ rispetto alle basi $B$ e $c$ è la matrice $M_C^B(f)$ che ha nella colonna $j$ le coordinate dell''immagine del $j$-esimo vettore della base $B$ rispetto alla base $C$:
+	La \textbf{matrice associata} ad $f$ rispetto alle basi $B$ e $C$ è la matrice $M_C^B(f)$ che ha nella colonna $j$ le coordinate dell'immagine del $j$-esimo vettore della base $B$ rispetto alla base $C$:
 \end{deff}
 \begin{es}
 	$f: \mathbb{R}^3 \rightarrow \mathbb{R}^2$ tale che $f(x, y, z) = (x + y, y - z)$. \\
@@ -2616,14 +2616,12 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	Quindi, se $t \ne 0, -4 \Rightarrow \dim \text{Im} f_t = rk(A) = 3$ e $\dim \ker f_t = 3 - 3 = 0 \Rightarrow f_t$ è un isomorfismo.
 	Se $t = 0, -4 \Rightarrow \dim \text{Im} f_t = rk(A) = 2$ e $\dim \ker f_t = 3 - 2 = 1 \Rightarrow f_t$ non è nè iniettiva nè suriettiva.
 \end{es}
-
+\subsubsection{Geometria affine}
 	\begin{deff}{Sottospazio affine}{}
-		Un sottoinsieme $S$ di $\mathbb{K}^n$ è un sottospazio affine di dimensione $d$ di $\mathbb{K}^n$ se è ottenuto traslando un sottospazio vettoriale $U$ di dimensione $d$,
-		cioè se $\exists p \in \mathbb{K}^n$ e un sottospazio vettoriale $U \subseteq \mathbb{K}^n$ tale che $S = \{p + u \mid u \in U\}$.
+		Un sottoinsieme $S$ di $\mathbb{K}^n$ è detto sottospazio affine se è ottenuto traslando un sottospazio vettoriale $U$ per un vettore $v$:
 	\end{deff}
 	\begin{es}
-		Consideriamo in $\mathbb{R}^2$ $U = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\}$ e $S = \{(x, y) \in \mathbb{R}^2 \mid x + y = 2\}$.
-		Disegno:
+		Consideriamo in $\mathbb{R}^2$ $U = \langle (-1, 1) \rangle$ e $S = U + (1, 1)$.
 		\tcbsidebyside[colback=white,colframe=white]{
 			\begin{tikzpicture}
 				\draw[->] (-2, 0) -- (3, 0) node[right] {$x$};
@@ -2637,16 +2635,9 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 				\draw[->, thick, orange] (1, -1) -- (2, 0) node[left] {$p$};
 			\end{tikzpicture}
 		}{
-			$U$ è un sottospazio vettoriale, $S$ non lo è. \\
-			$S = \{p + u \mid u \in U\}$, cioè $S$ è ottenuto traslando $U$ di $p = (1, 1)$. $S$ è quindi un sottospazio affine di $\mathbb{R}^2$,
-			di dimensione 1.
-			In forma parametrica:
-			\begin{align*}
-				U &= \{(t, -t) \mid t \in \mathbb{R}\} \\
-				S &= \{(t, - t) + (1, 1) \mid t \in \mathbb{R}\} = \{(t + 1, 1 - t) \mid t \in \mathbb{R}\}
-			\end{align*}
+			$U$ è $x + y = 0$ e $S$ è $x + y = 2$.
 			\begin{oss}
-				Il vettore $p$ non è unico, altri vettori $p$ che traslano $U$ in $S$ sono $(2, 0), (0, 2)$, ottenendo un diverso $S = \{(t + 2, -t) \mid t \in \mathbb{R}\}$ e $S = \{(t, 1 - t) \mid t \in \mathbb{R}\}$.
+				Il vettore $p$ di translazione NON è unico, ad esempio possiamo prendere anche $(3, -1)$.
 			\end{oss}
 		}
 	\end{es}
@@ -2701,9 +2692,37 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			b_m
 		\end{pmatrix}
 	\end{align*}
-	e si chiamano rispettivamente matrice dei coefficienti, vettore delle incognite e vettore dei termini noti.
+	e si chiamano rispettivamente matrice dei coefficienti, vettore delle incognite e vettore dei termini noti. \\
+	Inoltre, data una applicazione lineare $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ tale che $A = M_{E_n}^{E_m}(f)$, il sistema $Ax = b$ è equivalente a $f(x) = b$.
 	\begin{oss}
 		La scrittura di un sistema $Ax=b$ è comoda anche per svolgere rapidamente il metodo di Gauss.
+	\end{oss}
+	\begin{oss}
+		Risolvere il sistema vuol dire esprimere il vettore $b$ come combinazione lineare delle colonne della matrice $A$, cioè:
+		\begin{equation*}
+			x_1 \cdot \begin{pmatrix}
+				a_{11} \\
+				a_{21} \\
+				... \\
+				a_{m1}
+			\end{pmatrix} + x_2 \cdot \begin{pmatrix}
+				a_{12} \\
+				a_{22} \\
+				... \\
+				a_{m2}
+			\end{pmatrix} + ... + x_n \cdot \begin{pmatrix}
+				a_{1n} \\
+				a_{2n} \\
+				... \\
+				a_{mn}
+			\end{pmatrix} = \begin{pmatrix}
+				b_1 \\
+				b_2 \\
+				... \\
+				b_m
+			\end{pmatrix}
+		\end{equation*}
+		Quindi il sistema è risolubile se e solo se la colonna $b$ è combinazione lineare delle colonne della matrice $A$.
 	\end{oss}
 	\begin{es}
 		Risolvere il sistema:
@@ -2745,90 +2764,55 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			\end{cases}
 		\end{align*}
 	\end{es}
-	\begin{prop}
-		\textbf{Metodo di Cramer}: Sia $Ax = b$ un sistema di $n$ equazioni in $n$ incognite ($A$ è una matrice $n \times n$). \\
-		Allora se $\det A = 0$, la soluzione del sistema non esiste o non è unica. \\
-		Se $\det A \ne 0$, allora la soluzione del sistema esiste, è unica ed è data da:
-		\begin{equation*}
-			x = A^{-1} \cdot b = \det(A)^{-1} \cdot \text{cof}(A)^T \cdot b
-		\end{equation*}
-	\end{prop}
-	\begin{proof}
-		Se $\det A = 0$, allora $A$ non è invertibile e quindi l'applicazione $X \mapsto A \cdot X$ non è biunivoca
-		(per qualche $b$ non esiste $x$ tale che $A \cdot x = b$ oppure esistono più $x$ che soddisfano $A \cdot x = b$, ovvero la soluzione non esiste o non è unica).
-		Se invece $\det A \ne 0$, allora esiste $A^{-1}$ e $A^{-1}Ax = A^{-1}b \Rightarrow x = A^{-1}b$ è l'unica soluzione del sistema.
-	\end{proof}
-	\begin{es}
-		Risolvere: 
-		$\begin{cases}
-				x - 2y = 3 \\
-				-2x + 4y = 7
-			\end{cases}$
-		Calcolo il determinante: $\det \begin{pmatrix}
-			1 & -2 \\
-			-2 & 4
-		\end{pmatrix} = 4 - 4 = 0$. \\
-		Quindi il sistema non ha soluzione o ha infinite soluzioni.
-	\end{es}
-	\begin{es}
-		Risolvere: $\begin{cases}
-			3x + 5y = 2 \\
-			2x + 4y = -1
-		\end{cases}$
-		Calcolo il determinante: $\det \begin{pmatrix}
-			3 & 5 \\
-			2 & 4
-		\end{pmatrix} = 12 - 10 = 2 \ne 0$ (la soluzione è unica per ogni b).
-		\begin{align*}
-			A^{-1} = \frac{1}{2} \begin{pmatrix}
-				4 & -5 \\
-				-2 & 3
-			\end{pmatrix} = \begin{pmatrix}
-				2 & -\frac{5}{2} \\
-				1 & \frac{3}{2}
-			\end{pmatrix} \\
-			\begin{pmatrix}
-				x \\
-				y
-			\end{pmatrix} = \begin{pmatrix}
-				2 & -\frac{5}{2} \\
-				1 & \frac{3}{2}
-			\end{pmatrix} \begin{pmatrix}
-				2 \\
-				- 1
-			\end{pmatrix} = \begin{pmatrix}
-				2 \cdot 2 - \frac{5}{2} \cdot ( - 1) \\
-				1 \cdot 2 + \frac{3}{2} \cdot - 1
-			\end{pmatrix} = \begin{pmatrix}
-				4 + \frac{5}{2} \\
-				2 - \frac{3}{2}
-			\end{pmatrix} = \begin{pmatrix}
-				\frac{13}{2} \\
-				\frac{1}{2}
-			\end{pmatrix}
-		\end{align*}
-	\end{es}
-	Tuttavia il metodo di Cramer funziona solo per matrici quadrate $m = n$ ed è computazionalmente costoso.
 	\begin{teo}{Teorema di Rouché-Capelli}{}
-		Sia $Ax = b$ un sistema di $m$ equazioni in $n$ incognite e $A|b$ la matrice ottenuta aggiungendo la colonna $b$ alla matrice $A$.
-		Allora il sistema ammette almeno una soluzione se e solo se $\text{rk}(A) = \text{rk}(A|b)$.
+		Il sistema lineare $Ax = b$ è risolvibile se e solo se $\text{rk}(A) = \text{rk}(A|b)$.
 	\end{teo}
 	\begin{proof}
-		Se $\text{rk}(A) = \text{rk}(A|b), b$ è combinazione lineare dei vettori colonna di $v_1, v_2, ..., v_n$ di $A$ cioè
-		$\exists x_1, x_2, ..., x_n \in K \mid b = x_1v_1 + x_2v_2 + ... + x_nv_n$. \\
-		Quindi $A\begin{pmatrix}
-			x_1 \\
-			x_2 \\
-			... \\
-			x_n
-		\end{pmatrix} = b$ ha la soluzione $x = \begin{pmatrix}
-			x_1 \\
-			x_2 \\
-			... \\
-			x_n
-		\end{pmatrix}$. \\
-		Se invece $\text{rk}(A|b) > \text{rk}(A)$, allora il sistema non ha soluzione (perchè $b$ non è combinazione lineare dei vettori colonna di $A$).
+		Per l'osservazione precedente, il sistema è risolvibile se e solo se il numero di colonne indipendenti in $A|b$ non aumenta rispetto ad $A$ (cioè $\text{rk}(A) = \text{rk}(A|b)$).
 	\end{proof}
+	\paragraph{Conseguenza} Per capire se un sistema è risolvibile, possiamo considerare la matrice completa $A|b$, ridurla tramite Gauss ad una matrice a scala $A'|b'$ e verificare se $\text{rk}(A') = \text{rk}(A'|b')$.
+
+	\begin{es}
+		\begin{equation*}
+			\begin{cases}
+				x_1 + 2x_2 + x_3 = 2 \\
+				x_2 - x_3 = 6 \\
+				x_1 + 3x_3 = - 10
+			\end{cases}
+		\end{equation*}
+		\begin{align*}
+			A|b = \begin{pmatrix}
+				1 & 2 & 1 & \mid & 2 \\
+				0 & 1 & -1 & \mid & 6 \\
+				1 & 0 & 3 & \mid & -10
+			\end{pmatrix}
+			&\Rightarrow \begin{matrix}
+				R_1 \\
+				R_3 - R_1 \\
+				R_2 - 2R_1
+			\end{matrix} \Rightarrow \begin{pmatrix}
+				1 & 2 & 1 & \mid & 2 \\
+				0 & 1 & -1 & \mid & 6 \\
+				0 & -2 & 2 & \mid & -12
+			\end{pmatrix} \\
+			&\Rightarrow \begin{matrix}
+				R_1 \\
+				R_2 \\
+				R_3 + 2R_2
+			\end{matrix} \Rightarrow \begin{pmatrix}
+				1 & 2 & 1 & \mid & 2 \\
+				0 & 1 & -1 & \mid & 6 \\
+				0 & 0 & 0 & \mid & 0
+			\end{pmatrix}
+		\end{align*}
+		Quindi:
+		\begin{align*}
+			\text{rk}(A) &= 2 \\
+			\text{rk}(A|b) &= 2 \\
+			\text{rk}(A) &= \text{rk}(A|b) \Rightarrow \text{il sistema è risolvibile.}
+		\end{align*}
+	\end{es}
+
 	\begin{es}
 		$A = \begin{pmatrix}
 			1 & -2 \\
@@ -2889,6 +2873,85 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			1 & -1 & 1
 		\end{pmatrix} = 28 \ne 0$. \\
 		Quindi per il teorema di Rouché-Capelli il sistema non ha soluzione.
+	\end{es}
+	\begin{teo}{}{}
+		Consideriamo il sistema $Ax = b$ con $n$ incognite:
+		\begin{enumerate}
+			\item Se $\text{rk}(A) = rk(A|b) = n$, il sistema ha una soluzione unica.
+			\item Se $\text{rk}(A) = rk(A|b) < n$, il sistema ha infinite soluzioni (se $\mathbb{K} = \mathbb{R}$).
+		\end{enumerate}
+	\end{teo}
+	\begin{proof}
+		\begin{enumerate}
+			\item Riduciamo il sistema ad uno a scala ed eliminiamo le righe nulle in fondo. \\
+				Quindi $A'x = b'$ dove la matrice $A'$, avendo $n$ colonne, essendo in scala e non avendo righe nulle è della forma $n \times n$, ovvero:
+				\begin{align*}
+					A' = \begin{pmatrix}
+						1 & 0 & ... & 0 \\
+						0 & 1 & ... & 0 \\
+						... & ... & ... & ... \\
+						0 & 0 & ... & 1
+					\end{pmatrix}
+				\end{align*}
+				Di conseguenza, A' è invertibile. \\
+				Moltiplichiamo l'equazione $A'x = b'$ per $A'^{-1}$ e otteniamo $x = A'^{-1}b'$.
+				Quindi il sistema ha una soluzione unica.
+			\item Caso speciale: $b = \begin{pmatrix}
+				0 \\
+				0 \\
+				... \\
+				0
+			\end{pmatrix}$ e quindi $Ax = 0$. \\
+			L'insieme delle soluzioni è proprio $\ker F$ (dove $F$ era tale che $A = M_{E_n}^{E_m}(F)$).
+			Sappiamo che $\dim \ker F = n - \dim(\IM F) = n - \text{rk}(A) > 0$. Quindi $\ker F$ contiene infiniti elementi. \\
+			Caso generale con $b$ qualunque: chiamamo $U = \ker F$ determinato nel caso precedente. Quindi se $u \in U \Rightarrow Au = 0$.
+			Per il teorema di Rouché-Capelli, sappiamo che esiste una soluzione e la chiamiamo $v \in \mathbb{R}^n$, quindi:
+			$A \cdot v = b$. \\
+			Inoltre, $\forall u \in U$ si ha che $u + v$ è ancora una soluzione, infatti:
+			$A(u + v) = Au + Av = 0 + b = b$.
+		\end{enumerate}
+	\end{proof}
+	\begin{es}
+		\[ \begin{cases}
+			x + 2y - z = 1 \\
+			2x + 7y - 5z = 1 \\
+			 -x + y - 2z = -2
+		\end{cases} \]
+		Consideriamo il sistema omogeneo associato:
+		\[ \begin{cases}
+			x + 2y - z = 0 \\
+			2x + 7y - 5z = 0 \\
+			 -x + y - 2z = 0
+		\end{cases} \]
+		Quindi:
+		\begin{align*}
+			A = \begin{pmatrix}
+				1 & 2 & -1 \\
+				2 & 7 & -5 \\
+				-1 & 1 & -2
+			\end{pmatrix} \Rightarrow A|b = \begin{pmatrix}
+				1 & 2 & -1 \\
+				0 & 3 & -3 \\
+				0 & 3 & - 3
+			\end{pmatrix} \Rightarrow y = z \Rightarrow x = z - 2y = - z
+		\end{align*}
+		Quindi $U = \{(-z, z, z) \mid z \in \mathbb{R}\}$. Quindi passiamo alla matrice associata al sistema originale:
+		\begin{align*}
+			A = \begin{pmatrix}
+				1 & 2 & -1 | 1 \\
+				2 & 7 & -5 | 1 \\
+				-1 & 1 & -2 | - 2
+			\end{pmatrix} \Rightarrow A|b = \begin{pmatrix}
+				1 & 2 & -1 | 1 \\
+				0 & 3 & -3 | - 1 \\
+				0 & 3 & -3 | - 1
+			\end{pmatrix} \Rightarrow \begin{cases}
+				z = 0 \\
+				3y = -1 \Rightarrow y = -\frac{1}{3} \\
+				x + 2y = 1 \Rightarrow x = 1 - 2y = \frac{5}{3}
+			\end{cases} \Rightarrow v = (\frac{5}{3}, -\frac{1}{3}, 0)
+		\end{align*}
+		Quindi l'insieme delle soluzioni è $S = \{(-z, z, z) + (\frac{5}{3}, -\frac{1}{3}, 0) \mid z \in \mathbb{R}\} = \{(\frac{5}{3} - z, -\frac{1}{3} + z, z) \mid z \in \mathbb{R}\}$.
 	\end{es}
 	\subsection{Applicazioni alla geometria analitica}
 	\subsubsection{Retta passante per due punti}
