@@ -2619,6 +2619,8 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 \subsubsection{Geometria affine}
 	\begin{deff}{Sottospazio affine}{}
 		Un sottoinsieme $S$ di $\mathbb{K}^n$ è detto sottospazio affine se è ottenuto traslando un sottospazio vettoriale $U$ per un vettore $v$:
+		\[S = \{U + v \mid v \in \mathbb{K}^n\}\]
+		Inoltre, $\dim S = \dim U$.
 	\end{deff}
 	\begin{es}
 		Consideriamo in $\mathbb{R}^2$ $U = \langle (-1, 1) \rangle$ e $S = U + (1, 1)$.
@@ -3039,11 +3041,30 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			\item Un punto in $\mathbb{R}^n$ è un sottospazio affine di dimensione 0.
 			\item Una retta in $\mathbb{R}^n$ è un sottospazio affine di dimensione 1.
 			\item Un piano in $\mathbb{R}^n$ è un sottospazio affine di dimensione 2.
+			\item Un iperpiano in $\mathbb{R}^n$ è un sottospazio affine di dimensione $n - 1$.
 		\end{itemize}
 		Dati due punti distinti di $\mathbb{K}^n$, esiste un'unica retta che li contiene. \\
 		Dati tre punti non allineati di $\mathbb{K}^n$, esiste un unico piano che li contiene.
 		Se invece i tre punti sono allineati, esistono infiniti piani che li contengono.
 	\end{deff}
+
+	\begin{oss}
+		Un piano in $\mathbb{R}^3$ passante per tre punti esiste ed è unico se i tre punti non sono allineati, cioè se i vettori $\overrightarrow{P_1P_2}, \overrightarrow{P_1P_3}$ non sono proporzionali/paralleli.
+	\end{oss}
+
+	\begin{es}
+		$P_1 = (2, 0, -1), P_2 = (3, 1, 0), P_3 = (4, 2, 1)$. \\
+		$\overrightarrow{P_1P_2} = (3 - 2, 1 - 0, 0 - (-1)) = (1, 1, 1)$ e $\overrightarrow{P_1P_3} = (4 - 2, 2 - 0, 1 - (-1)) = (2, 2, 2)$. \\
+		Quindi $\overrightarrow{P_1P_2}$ è parallelo a $\overrightarrow{P_1P_3}$ e quindi i tre punti sono allineati.
+	\end{es}
+
+	\begin{oss}
+		Le rette sono iperpiani di $\mathbb{R}^2$ e i piani sono iperpiani di $\mathbb{R}^3$.
+	\end{oss}
+
+	\begin{oss}
+		Gli iperpiani sono determinati da un'equazione del tipo $a_1x_1 + a_2x_2 + ... + a_nx_n = b$.
+	\end{oss}
 
 	\begin{es}
 		Determinare la retta passante per i punti $P(3, 1, -1), Q(2, 2, 1)$. \\
