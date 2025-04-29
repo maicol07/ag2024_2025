@@ -691,11 +691,16 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 	\end{equation*}
 \end{teo}
 \begin{proof}
-	Sia $v_1, v_2, ..., v_k$ una base di $U \cap W$. \\
-	Completiamola a una base di $U$: $v_1, v_2, ..., v_k, u_1, u_2, ..., u_m$. \\
-	Completiamo ora $v_1, v_2, ...,v_k$ a una base di $W$: $v_1, v_2, ..., v_k, w_1, w_2, ..., w_n$. \\
-	Si può verificare che $v_1, v_2, ..., v_k, u_1, u_2, ..., u_m, w_1, w_2, ..., w_n$ è una base. \\
-	Perciò $\dim(U \cap W) = l, \dim U = l + n, \dim W = l + m, \dim(U + W) = l + m + n$.
+	Otteniamo progressivamente le basi di $U \cap W$, $U$ e $W$ e le loro dimensioni.
+	\begin{description}
+		\item[$\mathbf{U \cap W}$] Sia $v_1, ..., v_k$ una base di $U \cap W$ e quindi $\dim(U \cap W) = l$.
+		\item[$\mathbf{U}$] Completiamo la base di $U \cap W$ a una base di $U$: $v_1, ..., v_k, u_1, ..., u_m$.
+		      Quindi $\dim U = l + m$.
+		\item[$\mathbf{W}$] Completiamo la base di $U \cap W$ a una base di $W$: $v_1, ..., v_k, w_1, ..., w_n$.
+			  Quindi $\dim W = l + n$.
+		\item[$\mathbf{U + W}$] Unendo le basi di $U$ e $W$ si ottiene la base di $U + W$:$v_1, ..., v_k, u_1, ..., u_m, w_1, ..., w_n$
+		      Quindi $\dim(U + W) = l + m + n$.
+	\end{description}
 \end{proof}
 
 \begin{es}
