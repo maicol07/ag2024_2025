@@ -2512,59 +2512,6 @@ Sia $V$ un sottospazio di $\mathbb{R}^n$ generato da $k$ vettori linearmente ind
 	\end{align*}
 \end{description}
 
-\subsubsection{Determinante e matrice inversa}
-
-\begin{teo}{Determinante e matrice inversa}{}
-	\begin{equation*}
-		A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T
-	\end{equation*}
-	dove cof$(A)$ è la matrice dei cofattori di $A$, ovvero:
-	\begin{equation*}
-		\text{cof}(A)_{ij} = (-1)^{i + j} \cdot \det A_{ij}
-	\end{equation*}
-\end{teo}
-\begin{es}
-	$A = \begin{pmatrix}
-			3 & 5 \\
-			2 & 4
-		\end{pmatrix}$. Determinare l'inversa.
-	\begin{enumerate}
-		\item Verifichiamo se è Invertibile. $\det A = 3 \cdot 4 - 5 \cdot 2 = 2 \ne 0 \Rightarrow A$ è invertibile.
-		\item Calcoliamo la matrice dei cofattori:
-		      \begin{align*}
-			      \text{cof}(A) = \begin{pmatrix}
-				                      4  & -2 \\
-				                      -5 & 3
-			                      \end{pmatrix}
-		      \end{align*}
-		\item Calcoliamo l'inversa:
-		      \begin{align*}
-			      A^{-1} = \frac{1}{\det A} \cdot \text{cof}(A)^T = \frac{1}{2} \cdot \begin{pmatrix}
-				                                                                          4  & -5 \\
-				                                                                          -2 & 3
-			                                                                          \end{pmatrix} = \begin{pmatrix}
-				                                                                                          2  & -\frac{5}{2} \\
-				                                                                                          -1 & \frac{3}{2}
-			                                                                                          \end{pmatrix}
-		      \end{align*}
-	\end{enumerate}
-	Possiamo verificare che l'inversa è corretta moltiplicando $A$ per $A^{-1}$ (e verificando che il risultato sia la matrice identità):
-	\begin{align*}
-		A \cdot A^{-1} = \begin{pmatrix}
-			                 3 & 5 \\
-			                 2 & 4
-		                 \end{pmatrix} \cdot \begin{pmatrix}
-			                                     2  & -\frac{5}{2} \\
-			                                     -1 & \frac{3}{2}
-		                                     \end{pmatrix} = \begin{pmatrix}
-			                                                     3 \cdot 2 + 5 \cdot ( - \frac{1}{2}) & 3 \cdot ( - \frac{5}{2}) + 5 \cdot \frac{3}{2} \\
-			                                                     2 \cdot 2 + 4 \cdot ( - \frac{1}{2}) & 2 \cdot ( - \frac{5}{2}) + 4 \cdot \frac{3}{2}
-		                                                     \end{pmatrix} = \begin{pmatrix}
-			                                                                     1 & 0 \\
-			                                                                     0 & 1
-		                                                                     \end{pmatrix} = I_2
-	\end{align*}
-\end{es}
 Il determinante permette di formulare anche una regola per calcolare il \textbf{prodotto vettoriale},
 cioè un'operazione $f: \mathbb{R}^3 \times \mathbb{R}^3 \rightarrow \mathbb{R}^3$ tale che $f(u, v) = u \wedge v$, molto usata in fisica.
 Se $u = (a_1, a_2, a_3)$ e $v = (b_1, b_2, b_3)$, allora $u \wedge v = \det \begin{pmatrix}
