@@ -3126,8 +3126,9 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		= \{(x, y, z) \in \mathbb{R}^3 \mid x + 2y - z = 0\}$.
 	\end{es}
 	\section{Unità 6  - Lezioni 13, 14, 15}
+	\subsection{Endomorfismi e autovettori}
 	\begin{deff}{Endomorfismo}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. Un'applicazione lineare $f: V \to V$ è detta endomorfismo di $V$.
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. Un \text{endomorfismo} è una applicazione lineare $f: V \to V$.
 	\end{deff}
 	\begin{deff}{Matrice diagonale}{}
 		Una matrice $D (n \times n)$ è detta \textbf{diagonale} se $d_{ij} = 0 \ \forall i \ne j$ (cioè se è nulla al di fuori della diagonale principale).
@@ -3142,7 +3143,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{deff}
 	\begin{oss}
 		Due matrici diagonali sono semplici da moltiplicare tra loro:
-		\begin{align*}
+		\[
 			D = \begin{pmatrix}
 			d_{11} & 0 & \cdots & 0 \\
 			0 & d_{22} & \cdots & 0 \\
@@ -3153,14 +3154,13 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			0 & e_{22} & \cdots & 0 \\
 			\vdots & \vdots & \ddots & \vdots \\
 			0 & 0 & \cdots & e_{nn}
-		\end{pmatrix}. \\
-		DE = \begin{pmatrix}
+		\end{pmatrix}. \]
+		\[ DE = \begin{pmatrix}
 			d_{11}e_{11} & 0 & \cdots & 0 \\
 			0 & d_{22}e_{22} & \cdots & 0 \\
 			\vdots & \vdots & \ddots & \vdots \\
 			0 & 0 & \cdots & d_{nn}e_{nn}
-		\end{pmatrix}
-		\end{align*}
+		\end{pmatrix} \]
 		Inoltre, $\det D = d_{11}d_{22}...d_{nn}$ e se $\det D \ne 0$ (cioè $d_i \ne 0 \forall i$) allora $D$ è invertibile e $D^{-1} = \begin{pmatrix}
 			\frac{1}{d_{11}} & 0 & \cdots & 0 \\
 			0 & \frac{1}{d_{22}} & \cdots & 0 \\
@@ -3177,10 +3177,11 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 
 	\begin{deff}{Autovettore}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo.
-		Un vettore $v \in V, v \ne 0$ è detto \textbf{autovettore} di $f$ se $f(v) = \lambda v$ per un certo $\lambda \in \mathbb{K}$ (detto \textbf{autovalore} di $f$).
+		Un vettore $v \in V, v \ne 0$ è detto \textbf{autovettore} di $f$ se $\forall \lambda \in \mathbb{K}, f(v) = \lambda v$.
+		$\lambda$ è detto \textbf{autovalore} di $f$.
 	\end{deff}
 	\begin{es}
-		$f(x, y) = (2y, 2x)$
+		$\mathbb{K} = \mathbb{R}, V = \mathbb{R}^2, f: V \to V, f(x, y) = (2y, 2x)$
 		\begin{itemize}
 			\item $l_1$ non è un autovettore perchè $f(l_1) = f(1, 0) = 2l_2 = (0, 2) \ne \lambda (1, 0)$.
 			\item $l_2$ non è un autovettore perchè $f(l_2) = f(0, 1) = 2l_1 = (2, 0) = 2(0, 1)$.
@@ -3226,19 +3227,21 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		\item Per ogni autovalore $\lambda$ trovare gli autovettori corrispondenti.
 	\end{enumerate}
 
+	\subsubsection{Passo 1: Trovare gli autovalori di $f$}
 	\begin{deff}{Polinonio caratteristico}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo.
 		Il polinomio $p(\lambda) = \det(f - \lambda I)$ è detto \textbf{polinomio caratteristico} di $f$.
 	\end{deff}
 	\begin{teo}{Autovalori e polinomio caratteristico}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo.
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$, $f: V \to V$ un endomorfismo e $p(x)$ il suo polinomio caratteristico.
 		Allora $\lambda_i \in K$ è un autovalore di $f$ se e solo se $p(\lambda_i) = 0$.
 	\end{teo}
 	\begin{proof}
-		$\lambda_i$ è un autovalore di $f$ se e solo se esiste un vettore $v \ne 0 \in V$ tale che $f(v) = \lambda_i v$.
-		Quindi $f(v) = \lambda_i v \Leftrightarrow (f - \lambda_i I)(v) = 0 \Leftrightarrow \exists v \ne 0 \in \ker (f - \lambda_i I)
-		\Leftrightarrow \ker (f - \lambda_i I) \ne \{0\} \Leftrightarrow f - \lambda_i I$ non è iniettiva e quindi non è invertibile
-		$\Leftrightarrow \det(f - \lambda_i I) = 0 \Leftrightarrow p(\lambda_i) = 0$. 
+		$\lambda_i$ è un autovalore di $f \Leftrightarrow \exists v \in V, v \ne 0$ tale che $f(v) = \lambda_i v \Leftrightarrow (f - \lambda_i I)(v) = 0
+		\Leftrightarrow \exists v \in V, v \ne 0 \mid (f - \lambda_i I)(v) = f(v) - \lambda_i v = \lambda_i v - \lambda_i v = 0
+		\Leftrightarrow \exists v \in V, v \ne 0 \mid v \in \ker (f - \lambda_i V)
+		\Leftrightarrow \ker (f - \lambda_i I) \ne \{0\} \Leftrightarrow f - \lambda_i I$ non è iniettiva e quindi non è un isomorfismo
+		$\Leftrightarrow p(\lambda_i) = \det(f - \lambda_i I) = 0$.
 	\end{proof}
 	\begin{es}
 		$f: \mathbb{R}^2 \to \mathbb{R}^2, f(x, y) = (2y, 2x)$.
@@ -3448,24 +3451,25 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		\end{itemize}
 	\end{es}
 
+	\subsubsection{Passo 2: Trovare gli autovettori di $f$ per ogni autovalore}
 	\begin{deff}{Autospazio}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{K}$, $f: V \to V$ un endomorfismo e $\lambda_i \in \mathbb{K}$ un autovalore di $f$. \\
 		L'\textbf{autospazio} di $f$ relativo all'autovalore $\lambda_i$ è l'insieme $V_{\lambda_i} = \{v \in V \mid f(v) = \lambda_i v\}$.
 	\end{deff}
 	\begin{prop}
-		\begin{enumerate}
-			\item $V_{\lambda_i}$ è un sottospazio vettoriale di $V$.
-			\item Se $\lambda_i \ne \lambda_j$ allora $V_{\lambda_i} \cap V_{\lambda_j} = \{0\}$.
-		\end{enumerate}
+		$V_{\lambda_i}$ è un sottospazio vettoriale di $V$.
 	\end{prop}
 	\begin{proof}
-		\begin{enumerate}
-			\item Se $v, u \in V\lambda_i$ (cioè $f(v) = \lambda_i v$ e $f(u) = \lambda_i u$) allora $f(v + u) = f(v) + f(u) = \lambda_i v + \lambda_i u = \lambda_i(v + u)$,
-				quindi $v + u \in V_{\lambda_i}$.
-				Inoltre se $a \in \mathbb{K}, f(av) = af(v) = a\lambda_i v = \lambda_i (av)$, quindi $av \in V_{\lambda_i}$.
-			\item Sia $v \in V_{\lambda_i} \cap V_{\lambda_j}$, con $\lambda_i \ne \lambda_j$.
-				Allora $\lambda_i v = f(v) = \lambda_j v \Rightarrow (\lambda_i - \lambda_j)v = 0 \Rightarrow v = 0$.
-		\end{enumerate}
+		Se $v_1, v_2 \in V_{\lambda_i} \Rightarrow f(v_1) = \lambda_i v_1$ e $f(v_2) = \lambda_i v_2 \Rightarrow f(v_1 + v_2) = f(v_1) + f(v_2) = \lambda_i v_1 + \lambda_i v_2 = \lambda_i(v_1 + v_2) = v_1 + v_2 \in V_{\lambda_i}$. \\
+		Analogamente, se $a \in \mathbb{K}, f(av) = af(v) = a\lambda_i v = \lambda_i (av)$, quindi $av \in V_{\lambda_i}$.
+	\end{proof}
+	\begin{prop}
+		Se $\lambda_i \ne \lambda_j$ allora $V_{\lambda_i} \cap V_{\lambda_j} = \{0\}$.
+	\end{prop}
+	\begin{proof}
+		Sia $v \in V_{\lambda_i} \cap V_{\lambda_j}$, con $\lambda_i \ne \lambda_j$.
+		Allora $\lambda_i v = f(v) = \lambda_j v \Rightarrow (\lambda_i - \lambda_j)v = 0 \Rightarrow v = 0$. \\
+		Nota: $\lambda_i - \lambda_j \ne 0$ perchè $\lambda_i \ne \lambda_j$.
 	\end{proof}
 
 	\begin{deff}{Molteplità algebrica e geometrica}{}
