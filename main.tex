@@ -169,7 +169,7 @@ perchè:
 
 \subsection{Campo e spazio vettoriale}
 \begin{deff}{Campo}{}
-	Un campo è un insieme $K$ con due operazioni \textbf{somma} e \textbf{prodotto}, commutative e associative, con proprietà distributiva, elementi neutri 0 e 1, opposto di ogni elemento e inverso di ogni elemento non nullo.
+	Un campo è un insieme $\mathbb{K}$ con due operazioni \textbf{somma} e \textbf{prodotto}, commutative e associative, con proprietà distributiva, elementi neutri 0 e 1, opposto di ogni elemento e inverso di ogni elemento non nullo.
 	\begin{itemize}
 		\item Ogni elemento di $X$ ha un opposto $-x$.
 		\item Ogni elemento di $X \ne 0$ ha un inverso $x^{-1}$.
@@ -198,10 +198,10 @@ perchè:
 \end{oss}
 
 \begin{deff}{Spazio vettoriale}{}
-	Sia $K$ un campo. Uno spazio vettoriale su $K$ è un insieme $V$ con due operazioni:
+	Sia $\mathbb{K}$ un campo. Uno spazio vettoriale su $\mathbb{K}$ è un insieme $V$ con due operazioni:
 	\begin{description}
 		\item \textbf{Somma} $+: \forall v_1, v_2 \in V \rightarrow v_1 + v_2 \in V$
-		\item \textbf{Prodotto per scalare} $\cdot: \forall a \in K, \forall v \in V \rightarrow a \cdot v \in V$
+		\item \textbf{Prodotto per scalare} $\cdot: \forall a \in \mathbb{K}, \forall v \in V \rightarrow a \cdot v \in V$
 	\end{description}
 	tali che valgano le seguenti proprietà:
 	\begin{description}
@@ -209,16 +209,16 @@ perchè:
 		\item \textbf{Prodotto per scalare}: Associativa, Distributiva rispetto alla somma, Elemento neutro $1$
 	\end{description}
 \end{deff}
-Dato uno spazio vettoriale $V$ su un campo $K$, gli elementi di $V$ sono detti \textbf{vettori} e gli elementi di $K$ sono detti \textbf{scalari}.
+Dato uno spazio vettoriale $V$ su un campo $\mathbb{K}$, gli elementi di $V$ sono detti \textbf{vettori} e gli elementi di $\mathbb{K}$ sono detti \textbf{scalari}.
 
 \begin{deff}{Sottospazio vettoriale}{}
-	Sia $V$ uno spazio vettoriale su un campo $K$. Un sottospazio vettoriale di $V$ è un sottoinsieme $U$ di $V$ non vuoto (cioè $0 \in U$) che è chiuso rispetto alla somma e al prodotto per scalare, cioè:
+	Sia $V$ uno spazio vettoriale su un campo $\mathbb{K}$. Un sottospazio vettoriale di $V$ è un sottoinsieme $U$ di $V$ non vuoto (cioè $0 \in U$) che è chiuso rispetto alla somma e al prodotto per scalare, cioè:
 	\[ u_1, u_2 \in U \Rightarrow u_1 + u_2 \in U \]
-	\[ a \in K, u \in U \Rightarrow a \cdot u \in U \]
+	\[ a \in \mathbb{K}, u \in U \Rightarrow a \cdot u \in U \]
 \end{deff}
 
 \begin{es}
-	Sia $K = \mathbb{R}$ e $V = \mathbb{R}^2 = \{(x, y) \mid x, y \in \mathbb{R}\}$. \\
+	Sia $\mathbb{K} = \mathbb{R}$ e $V = \mathbb{R}^2 = \{(x, y) \mid x, y \in \mathbb{R}\}$. \\
 	$U = \{(x, y) \in \mathbb{R}^2 \mid y = 2x\}$ è un sottospazio vettoriale di $V$ perchè dati $v_1 = (x, 2x), v_2 = (x', 2x') \in U$ e $a \in \mathbb{R}$:
 	\begin{description}
 		\item[Non vuoto] $0 = (0, 0) \in U$
@@ -228,28 +228,28 @@ Dato uno spazio vettoriale $V$ su un campo $K$, gli elementi di $V$ sono detti \
 \end{es}
 
 % \begin{prop}
-% 	$U$ è un sottospazio vettoriale di $V \Leftrightarrow \forall v_1, v_2 \in U, \forall a_1, a_2 \in K: a_1v_1 + a_2v_2 \in U$
+% 	$U$ è un sottospazio vettoriale di $V \Leftrightarrow \forall v_1, v_2 \in U, \forall a_1, a_2 \in \mathbb{K}: a_1v_1 + a_2v_2 \in U$
 % 	(combinazione lineare di $v_1$ e $v_2$)
 % \end{prop}
 % \begin{proof}
-% 	Siano $v_1, v_2 \in U$ e $a_1, a_2 \in K$.
+% 	Siano $v_1, v_2 \in U$ e $a_1, a_2 \in \mathbb{K}$.
 % 	Poichè $U$ è un sottospazio vettoriale, $a_1v_1, a_2v_2 \in U \Rightarrow a_1v_1 + a_2v_2 \in U$
 % 	\\\\
 % 	Dimostrazione simmetrica per l'altro verso: \\
-% 	Siano $v_1, v_2 \in U$ e $a_1, a_2 \in K$.
-% 	Poichè $a_1v_1 + a_2v_2 \in U$, $a_1v_1 + a_2v_2 = v \in U \forall a_1, a_2 \in K$, scegliendo $a_1 = 1, a_2 = 1$ otteniamo $v_1 + v_2 \in U$.
-% 	Scegliendo invece $a_2 = 0$ otteniamo $a_1v_1 \in U \forall a_1 \in K$.
+% 	Siano $v_1, v_2 \in U$ e $a_1, a_2 \in \mathbb{K}$.
+% 	Poichè $a_1v_1 + a_2v_2 \in U$, $a_1v_1 + a_2v_2 = v \in U \forall a_1, a_2 \in \mathbb{K}$, scegliendo $a_1 = 1, a_2 = 1$ otteniamo $v_1 + v_2 \in U$.
+% 	Scegliendo invece $a_2 = 0$ otteniamo $a_1v_1 \in U \forall a_1 \in \mathbb{K}$.
 % \end{proof}
 
 \subsection{Combinazione e Indipendenza lineare}
 
 \begin{deff}{Combinazione lineare}{}
-	Sia $V$ uno spazio vettoriale su un campo $K$ e $v_1, v_2, ..., v_n \in V$.
+	Sia $V$ uno spazio vettoriale su un campo $\mathbb{K}$ e $v_1, v_2, ..., v_n \in V$.
 	Diciamo che $v \in V$ è una combinazione lineare di $v_1, v_2, ..., v_n$ se:
-	\[ \exists a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n \]
+	\[ \exists a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n \]
 \end{deff}
 \begin{es}
-	$K = \mathbb{R}, V = \mathbb{R}^2, v_1 = (2, 0), v_2 = (0, -1), v = (1, 3)$ è una combinazione lineare di $v_1$ e $v_2$ perchè:
+	$\mathbb{K} = \mathbb{R}, V = \mathbb{R}^2, v_1 = (2, 0), v_2 = (0, -1), v = (1, 3)$ è una combinazione lineare di $v_1$ e $v_2$ perchè:
 	\[ \frac{1}{2}v_1 + (-3)v_2 = (1, 0) + (0, 3) = (1, 3) = v \]
 	Se non li vedo ad occhio, posso risolvere il sistema per cercare i coefficienti:
 	\[ a_1v_1 + a_2v_2 = (2a_1, 0) + (0, -a_2) = (2a_1, -a_2) = (1, 3) \]
@@ -302,7 +302,7 @@ Dato uno spazio vettoriale $V$ su un campo $K$, gli elementi di $V$ sono detti \
 \end{es}
 
 \begin{oss}
-	Un sottoinsieme non vuoto $U$ di uno spazio vettoriale $V$ è un sottospazio vettoriale di $V$ se e solo se $U$ contiene tutte le combinazioni lineari dei suoi elementi (infatti, dati $u_1, u_2 \in U$ e $u_1 + u_2 \in U$ e $a \in K$ sono combinazioni lineari particolari)
+	Un sottoinsieme non vuoto $U$ di uno spazio vettoriale $V$ è un sottospazio vettoriale di $V$ se e solo se $U$ contiene tutte le combinazioni lineari dei suoi elementi (infatti, dati $u_1, u_2 \in U$ e $u_1 + u_2 \in U$ e $a \in \mathbb{K}$ sono combinazioni lineari particolari)
 \end{oss}
 
 \begin{deff}{Indipendenza lineare}{}
@@ -333,7 +333,7 @@ Dato uno spazio vettoriale $V$ su un campo $K$, gli elementi di $V$ sono detti \
 
 \subsection{Base e dimensione}
 \begin{deff}{Base}{}
-	Sia $V$ uno spazio vettoriale su un campo $K$. \\
+	Sia $V$ uno spazio vettoriale su un campo $\mathbb{K}$. \\
 	Un insieme di vettori $v_1, v_2, ..., v_n \in V$ è detto \textbf{base} di $V$ se sono linearmente indipendenti e generano $V$, cioè:
 	\[ V = \langle v_1, v_2, ..., v_n \rangle \]
 \end{deff}
@@ -521,7 +521,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 \begin{teo}{Teorema delle coordinate}{}
 	Un insieme di vettori $v_1, v_2, ..., v_n$ è una base di uno spazio vettoriale $V$ se e solo se ogni vettore $v \in V$ può essere scritto in modo unico come combinazione lineare di $v_1, v_2, ..., v_n$, ovvero:
 	\begin{equation*}
-		\forall v \in V, \exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n
+		\forall v \in V, \exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n
 	\end{equation*}
 	\notebox{Nota: Il simbolo $\exists!$ vuol dire \enquote*{esiste ed è unico}.}
 \end{teo}
@@ -529,18 +529,18 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 	Dimostrazione del teorema delle coordinate per i due versi:
 	\begin{description}
 		\item[$\Rightarrow$] Siano $v_1, v_2, ..., v_n$ una base di $V$,cioè generano $V$ e sono linearmente indipendenti. \\
-		      Quindi, $\forall v \in V, \exists a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
-		      Per dimostrare l'unicità, supponiamo che esistano $b_1, b_2, ..., b_n \in K \mid v = b_1v_1 + b_2v_2 + ... + b_nv_n$. \\
+		      Quindi, $\forall v \in V, \exists a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+		      Per dimostrare l'unicità, supponiamo che esistano $b_1, b_2, ..., b_n \in \mathbb{K} \mid v = b_1v_1 + b_2v_2 + ... + b_nv_n$. \\
 		      Sottraendo, $0 = v - v = (a_1 - b_1)v_1 + (a_2 - b_2)v_2 + ... + (a_n - b_n)v_n$. \\
 		      Poichè $v_1, v_2, ..., v_n$ sono linearmente indipendenti, allora $a_1 - b_1 = a_2 - b_2 = ... = a_n - b_n = 0 \Rightarrow a_1 = b_1, a_2 = b_2, ..., a_n = b_n$.
 		      Per cui, $a_1, a_2, ..., a_n$ sono uniche.
-		\item[$\Leftarrow$] Per ipotesi $\forall v \in V, \exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+		\item[$\Leftarrow$] Per ipotesi $\forall v \in V, \exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
 		      Dunque $v_1, v_2, ..., v_n$ generano $V$ e, poichè $0 \in V$, gli unici coefficienti pesibili sono $a_1 = a_2 = ... = a_n = 0$. \\
 		      Per cui, $v_1, v_2, ..., v_n$ sono linearmente indipendenti. e quindi sono una base di $V$.
 	\end{description}
 \end{proof}
 \begin{teo}{Teorema della dimensione}{}
-	Sia $V$ uno spazio vettoriale su un campo $K$. Tutte le basi di $V$ hanno lo stesso numero di elementi, detto \textbf{dimensione} di $V$ e indicato con $\dim V$.
+	Sia $V$ uno spazio vettoriale su un campo $\mathbb{K}$. Tutte le basi di $V$ hanno lo stesso numero di elementi, detto \textbf{dimensione} di $V$ e indicato con $\dim V$.
 \end{teo}
 
 \begin{teo}{Teorema di completamento ed estrazione}{}
@@ -639,7 +639,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 	Siano $u_1, u_2 \in U \cap W, u_1, u_2 \in U$ e $U$ è un sottospazio vettoriale, quindi $u_1 + u_2 \in U$.
 	Analogamente, $u_1, u_2 \in W$ e $W$ è un sottospazio vettoriale, quindi $u_1 + u_2 \in W$. \\
 	Quindi, $u_1 + u_2 \in U \cap W$. \\
-	Allo stesso modo si dimostra che $\forall a \in K, u \in U \cap W \Rightarrow a \cdot u \in U \cap W$.
+	Allo stesso modo si dimostra che $\forall a \in \mathbb{K}, u \in U \cap W \Rightarrow a \cdot u \in U \cap W$.
 \end{proof}
 
 \begin{oss}
@@ -663,7 +663,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 	Se $u_1, u_2 \in U + W \Rightarrow \exists w_1, w_2 \in W, u_1, u_2 \in U \mid v_1 = u_1 + w_1, v_2 = u_2 + w_2$.
 	\[ v_1 + v_2 = (u_1 + w_1) + (u_2 + w_2) = (u_1 + u_2) + (w_1 + w_2) \in U + W \]
 	Si nota che $u_1 + u_2 \in U$ e $w_1 + w_2 \in W$. \\
-	Allo stesso modo si dimostra che $\forall a \in K, v \in U + W \Rightarrow a \cdot v \in U + W$.
+	Allo stesso modo si dimostra che $\forall a \in \mathbb{K}, v \in U + W \Rightarrow a \cdot v \in U + W$.
 \end{proof}
 
 \begin{es}
@@ -752,13 +752,13 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 \section{Unità 3 - Lezioni 5, 6, 7}
 \subsection{Approfondimento sulle funzioni}
 \begin{deff}{Applicazione lineare}{}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$.
+	Siano $V$ e $U$ due spazi vettoriali su un campo $\mathbb{K}$.
 	Un'applicazione $f: V \rightarrow U$ è \textbf{lineare} se valgono entrambe le proprietà:
 	\begin{align*}
 		f(v_1 + v_2) = f(v_1) + f(v_2) &  & \forall v_1, v_2 \in V           \\
-		f(a \cdot v) = a \cdot f(v)    &  & \forall a \in K, \forall v \in V
+		f(a \cdot v) = a \cdot f(v)    &  & \forall a \in \mathbb{K}, \forall v \in V
 	\end{align*}
-	Oppure, equivalentemente, $f$ è lineare $\Leftrightarrow \forall v_1, v_2 \in V, \forall a_1, a_2 \in K$:
+	Oppure, equivalentemente, $f$ è lineare $\Leftrightarrow \forall v_1, v_2 \in V, \forall a_1, a_2 \in \mathbb{K}$:
 	\begin{equation*}
 		f(a_1v_1 + a_2v_2) = a_1f(v_1) + a_2f(v_2)
 	\end{equation*}
@@ -826,7 +826,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 	Im $f = \{u \in U \mid \exists v \in V \mid f(v) = u\}$. \\
 	Siano $u_1, u_2 \in \text{Im } f$, quindi $\exists v_1, v_2 \in V \mid f(v_1) = u_1$ e $f(v_2) = u_2$. \\
 	Allora $u_1 + u_2 = f(v_1) + f(v_2) = f(v_1 + v_2)$, quindi $u_1 + u_2 \in \text{Im } f$ (un elemento di $V$ è mandato in $u_1 + u_2$). \\
-	Allo stesso modo, $\forall a \in K, u \in \text{Im } f \Rightarrow \exists v \in V \mid f(v) = u \Rightarrow f(av) = a \cdot f(v) = a \cdot u \in \text{Im } f$. \\
+	Allo stesso modo, $\forall a \in \mathbb{K}, u \in \text{Im } f \Rightarrow \exists v \in V \mid f(v) = u \Rightarrow f(av) = a \cdot f(v) = a \cdot u \in \text{Im } f$. \\
 	Quindi Im $f$ è un sottospazio vettoriale di $U$.
 \end{proof}
 
@@ -990,7 +990,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 \end{oss}
 
 \begin{deff}{Isomorfismo di spazi vettoriali}{}
-	Due spazi vettoriali $V$ e $U$ su un campo $K$ si dicono \textbf{isomorfi} se esiste un isomorfismo $f: V \rightarrow U$ e scriviamo $V \cong U$.
+	Due spazi vettoriali $V$ e $U$ su un campo $\mathbb{K}$ si dicono \textbf{isomorfi} se esiste un isomorfismo $f: V \rightarrow U$ e scriviamo $V \cong U$.
 \end{deff}
 \begin{prop}
 	"Essere isomorfi" è una relazione di equivalenza.
@@ -1022,7 +1022,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 \begin{proof}
 	Siano $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
 	\begin{enumerate}
-		\item Devo verificare che la composizione $g \circ f: V \rightarrow W$ sia lineare, ovvero $\forall v_1, v_2 \in V, a \in K$:
+		\item Devo verificare che la composizione $g \circ f: V \rightarrow W$ sia lineare, ovvero $\forall v_1, v_2 \in V, a \in \mathbb{K}$:
 		      \begin{align*}
 			      (g \circ f)(v_1 + v_2) & = g(f(v_1 + v_2)) = g(f(v_1) + f(v_2)) = g(f(v_1)) + g(f(v_2)) \\
 				  						 & = (g \circ f)(v_1) + (g \circ f)(v_2) \\
@@ -1117,12 +1117,12 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 \end{es}
 
 \begin{teo}{Teorema dell'estensione lineare}{}
-	Siano $V, U$ spazi vettoriali su un campo $K$ e $v_1, v_2, ..., v_n$ una base di $V$,
+	Siano $V, U$ spazi vettoriali su un campo $\mathbb{K}$ e $v_1, v_2, ..., v_n$ una base di $V$,
 	$u_1, u_2, ..., u_n$ vettori di $U$. \\
 	Allora $\exists! f: V \rightarrow U$ tale che $f(v_1) = u_1, f(v_2) = u_2, ..., f(v_n) = u_n$.
 \end{teo}
 \begin{proof}
-	Sia $v \in V$. Poichè $v_1, v_2, ..., v_n$ sono una base di $V$, $\exists! a_1, a_2, ..., a_n \in K \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
+	Sia $v \in V$. Poichè $v_1, v_2, ..., v_n$ sono una base di $V$, $\exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
 	Per la linearità $f(v) = f(a_1v_1 + a_2v_2 + ... + a_nv_n) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n) = a_1u_1 + a_2u_2 + ... + a_nu_n$. \\
 	Quindi $f$ esiste ed è unica (associa univocamente ogni $v \in V$ a un $u \in U$).
 \end{proof}
@@ -1190,7 +1190,7 @@ Il teorema dell'estensione lineare indica che per sapere chi è $f$ è sufficien
 	e posso scegliere $g(v_4)$ arbitrariamente.
 \end{es}
 
-% Siano $V, U, W$ tre spazi vettoriali su un campo $K$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
+% Siano $V, U, W$ tre spazi vettoriali su un campo $\mathbb{K}$ e $f: V \rightarrow U, g: U \rightarrow W$ due applicazioni lineari.
 % I campi hanno rispettivamente le basi $v_1, v_2, ..., v_n$ e $u_1, u_2, ..., u_m$ e $w_1, w_2, ..., w_p$.
 % Sia $A$ la matrice di $f$ e $B$ la matrice di $g$ rispetto alle basi scelte. \\
 % Si vuole calcolare la matrice di $g \circ f$ rispetto alle basi scelte. \\
@@ -1294,10 +1294,10 @@ Il teorema dell'estensione lineare indica che per sapere chi è $f$ è sufficien
 \end{es}
 
 \begin{cor}{Isomorfismo e dimensione}{}
-	Due spazi vettoriali su K con la stessa dimensione sono isomorfi tra loro.
+	Due spazi vettoriali su $\mathbb{K}$ con la stessa dimensione sono isomorfi tra loro.
 \end{cor}
 \begin{proof}
-	Siano $V$ e $U$ due spazi vettoriali su un campo $K$ con $\dim V = \dim U = n$.
+	Siano $V$ e $U$ due spazi vettoriali su un campo $\mathbb{K}$ con $\dim V = \dim U = n$.
 	Inoltre, siano $v_1, v_2, ..., v_n$ una base di $V$ e $u_1, u_2, ..., u_n$ una base di $U$. \\
 	Per il teorema dell'estensione lineare, esiste ed è unica un'applicazione lineare $f: V \rightarrow U$ tale che $f(v_1) = u_1, f(v_2) = u_2, ..., f(v_n) = u_n$. \\
 	Per il teorema dell'isomorfismo e basi $f$ è un isomorfismo.
@@ -2065,7 +2065,7 @@ se $f:\mathbb{R}^n \rightarrow \mathbb{R}^m$ è un'applicazione lineare, allora 
 \end{oss}
 
 \begin{deff}{Matrice a scala}{}
-	Una matrice $A \in M_{m,n}(K)$ è a scala se:
+	Una matrice $A \in M_{m,n}(\mathbb{K})$ è a scala se:
 	\begin{itemize}
 		\item Le righe nulle di $A$ sono tutte in fondo alla matrice.
 		\item Il primo coefficiente non nullo di ogni riga non nulla è più a destra del primo coefficiente non nullo della riga precedente.
@@ -2194,7 +2194,7 @@ Allora $B=A^{-1}$.
 \subsection{Determinante di una matrice}
 
 \begin{deff}{Determinante di una matrice}{}
-	Il determinante di una matrice è una funzione $\det: M_{n,n}(K) \rightarrow K$ tale che $\det A \ne 0 \Leftrightarrow rk(A) = n \Leftrightarrow A$ è invertibile.
+	Il determinante di una matrice è una funzione $\det: M_{n,n}(\mathbb{K}) \rightarrow \mathbb{K}$ tale che $\det A \ne 0 \Leftrightarrow rk(A) = n \Leftrightarrow A$ è invertibile.
 	\begin{description}
 		\item[Matrici $1 \times 1$, $A = (a)$:]
 			È invertibile $\Leftrightarrow a \ne 0$, quindi $A^{-1} = (a^{-1})$ e \underline{$\det A = a$}, ovvero il suo unico elemento.
@@ -2295,7 +2295,7 @@ Allora $\det \begin{pmatrix}
 	\end{description}
 \end{deff}
 \begin{oss}
-	Il determinante è l'unica funzione $f: M_{n,m}(K) \rightarrow K$ che soddisfa le prime tre proprietà.
+	Il determinante è l'unica funzione $f: M_{n,m}(\mathbb{K}) \rightarrow \mathbb{K}$ che soddisfa le prime tre proprietà.
 \end{oss}
 
 \begin{oss}
@@ -3078,7 +3078,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\begin{es}
-		Sia $K = \mathbb{Z}_3$. Trovare tutti gli elementi del piano di $K$ di equazione $2x + y + z = 1$. \\
+		Sia $\mathbb{K} = \mathbb{Z}_3$. Trovare tutti gli elementi del piano di $\mathbb{K}$ di equazione $2x + y + z = 1$. \\
 		Osserviamo che poichè $\mathbb{Z}_3 = \{\overline{0}, \overline{1}, \overline{2}\}$, allora ha $3^3 = 27$ elementi e un piano in esso avrà $3^2 = 9$ elementi.
 		$p = \{(\overline{0}, \overline{0}, \overline{1}), (\overline{0}, \overline{1}, \overline{0}), (\overline{0}, \overline{2}, \overline{2}),
 		(\overline{1}, \overline{0}, \overline{2}), (\overline{1}, \overline{1}, \overline{1}), (\overline{1}, \overline{2}, \overline{0}),
@@ -3234,7 +3234,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{deff}
 	\begin{teo}{Autovalori e polinomio caratteristico}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{K}$, $f: V \to V$ un endomorfismo e $p(x)$ il suo polinomio caratteristico.
-		Allora $\lambda_i \in K$ è un autovalore di $f$ se e solo se $p(\lambda_i) = 0$.
+		Allora $\lambda_i \in \mathbb{K}$ è un autovalore di $f$ se e solo se $p(\lambda_i) = 0$.
 	\end{teo}
 	\begin{proof}
 		$\lambda_i$ è un autovalore di $f \Leftrightarrow \exists v \in V, v \ne 0$ tale che $f(v) = \lambda_i v \Leftrightarrow (f - \lambda_i I)(v) = 0
@@ -3379,7 +3379,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 	Tuttavia, se il polinomio caratteristico non ha i suoi zeri in $\mathbb{K}$, allora non è detto che esistano autovettori.
 	\begin{es}
-		$K = \mathbb{Q}, f: \mathbb{Q}^2 \to \mathbb{Q}^2, f(x, y) = (2y, x), \mathbb{Q} = \{$ numeri razionali $\}$. \\
+		$\mathbb{K} = \mathbb{Q}, f: \mathbb{Q}^2 \to \mathbb{Q}^2, f(x, y) = (2y, x), \mathbb{Q} = \{$ numeri razionali $\}$. \\
 		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0), e_2 = (0, 1)$:
 		\begin{align*}
 			f(e_1) &= f(1, 0) = (0, 1) = 0e_1 + 1e_2 \\
