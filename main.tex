@@ -201,18 +201,18 @@ perchè:
 	Sia $\mathbb{K}$ un campo. Uno spazio vettoriale su $\mathbb{K}$ è un insieme $V$ con due operazioni:
 	\begin{description}
 		\item \textbf{Somma} $+: \forall v_1, v_2 \in V \rightarrow v_1 + v_2 \in V$
-		\item \textbf{Prodotto per scalare} $\cdot: \forall a \in \mathbb{K}, \forall v \in V \rightarrow a \cdot v \in V$
+		\item \textbf{Prodotto per uno scalare} $\cdot: \forall a \in \mathbb{K}, \forall v \in V \rightarrow a \cdot v \in V$
 	\end{description}
 	tali che valgano le seguenti proprietà:
 	\begin{description}
 		\item \textbf{Somma}: Associativa, Commutativa, Elemento neutro $0$, Elemento opposto $-v$
-		\item \textbf{Prodotto per scalare}: Associativa, Distributiva rispetto alla somma, Elemento neutro $1$
+		\item \textbf{Prodotto per uno scalare}: Associativa, Distributiva rispetto alla somma, Elemento neutro $1$
 	\end{description}
 \end{deff}
 Dato uno spazio vettoriale $V$ su un campo $\mathbb{K}$, gli elementi di $V$ sono detti \textbf{vettori} e gli elementi di $\mathbb{K}$ sono detti \textbf{scalari}.
 
 \begin{deff}{Sottospazio vettoriale}{}
-	Sia $V$ uno spazio vettoriale su un campo $\mathbb{K}$. Un sottospazio vettoriale di $V$ è un sottoinsieme $U$ di $V$ non vuoto (cioè $0 \in U$) che è chiuso rispetto alla somma e al prodotto per scalare, cioè:
+	Sia $V$ uno spazio vettoriale su un campo $\mathbb{K}$. Un sottospazio vettoriale di $V$ è un sottoinsieme $U$ di $V$ non vuoto (cioè $0 \in U$) che è chiuso rispetto alla somma e al prodotto per uno scalare, cioè:
 	\[ u_1, u_2 \in U \Rightarrow u_1 + u_2 \in U \]
 	\[ a \in \mathbb{K}, u \in U \Rightarrow a \cdot u \in U \]
 \end{deff}
@@ -774,7 +774,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 			f(v_1) + f(v_2) & = (2z_1, x_1 + y_1) + (2z_2, x_2 + y_2) = (2z_1 + 2z_2, x_1 + x_2 + y_1 + y_2) \\
 							& = (2(z_1 + z_2), x_1 + x_2 + y_1 + y_2)
 		\end{align*}
-		\item[Prodotto per scalare:]
+		\item[Prodotto per uno scalare:]
 		\begin{align*}
 			f(a \cdot v) = f(ax, ay, az)       & = (2az, ax + ay) \\
 			a \cdot f(v) = a \cdot (2z, x + y) & = (2az, ax + ay)
@@ -791,7 +791,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 				f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (2(x_1 + x_2), (y_1 + y_2)^2) & = (2(x_1 + x_2), y_1^2 + 2y_1y_2 + y_2^2) \\
 				f(v_1) + f(v_2) = (2x_1, y_1^2) + (2x_2, y_2^2)                        & = (2(x_1 + x_2), y_1^2 + y_2^2)
 			\end{align*}
-		\item[Prodotto per scalare:]
+		\item[Prodotto per uno scalare:]
 			\begin{align*}
 				f(a \cdot v) = f(ax, ay)         & = (2ax, (ay)^2) \\
 				a \cdot f(v) = a \cdot (2x, y^2) & = (2ax, ay^2)
@@ -808,7 +808,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 			f(v_1 + v_2) = f(x_1 + x_2, y_1 + y_2) = (0, (x_1 + x_2) + (y_1 + y_2), 1) & = (0, x_1 + x_2 + y_1 + y_2, 1) \\
 			f(v_1) + f(v_2) = (0, x_1 + y_1, 1) + (0, x_2 + y_2, 1)                    & = (0, x_1 + x_2 + y_1 + y_2, 2)
 		\end{align*}
-		\item[Prodotto per scalare:]
+		\item[Prodotto per uno scalare:]
 		\begin{align*}
 			f(a \cdot v) = f(ax, ay)             & = (0, ax + ay, 1) \\
 			a \cdot f(v) = a \cdot (0, x + y, 1) & = (0, ax + ay, a)
