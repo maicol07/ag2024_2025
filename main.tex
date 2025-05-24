@@ -16,6 +16,7 @@
 \usepackage{xcolor}
 \usepackage{soul}
 \usepackage{cancel}
+\usepackage{mathtools}
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \newcommand{\hlfancy}[2]{\sethlcolor{#1}\hl{#2}}
 \newcommand{\IM}{\ \mathrm{Im} \ }
@@ -3521,7 +3522,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{prop}
 	\begin{proof}
 		$m_g(\lambda_i) \ge 1$ perchè se $m_g(\lambda_i) = 0$ allora $V_{\lambda_i} = \{0\}$
-		e quindi non ci sarebbero vettori $v \in V, v \ne 0$ tali che $f(v) = \lambda_i v$ e quindi $\lambda_i$ non sarebbe un autovalore di $f$, contraddicendo la definizione stessa di autovalore. \\
+		e quindi non ci sarebbero autovettori $v \in V, v \ne 0$ tali che $f(v) = \lambda_i v$ e quindi $\lambda_i$ non sarebbe un autovalore di $f$, contraddicendo la definizione stessa di autovalore. \\
 		Sia ora $h = m_g(\lambda_i) = \dim V_{\lambda_i}$ e mostriamo che $m_a(\lambda_i) \ge h$. \\
 		Presa una base $\{v_1, v_2, ..., v_h\}$ di $V_{\lambda_i}$, completiamola ad una base di $V$ aggiungendo $v_{h+1}, ..., v_n$.
 		Scriviamo la matrice di $f$ rispetto a questa base:
@@ -3545,9 +3546,11 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		Quindi il fattore $(\lambda_i - \lambda)^h$ è presente nel polinomio caratteristico $p(\lambda)$ almeno $h$ volte, cioè $m_a(\lambda_i) \ge h$.
 	\end{proof}
 
+	\subsection{Diagonalizzabilità}
+
 	\begin{teo}{Criterio di diagonalizzabilità}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo e siano $\lambda_1, \lambda_2, ..., \lambda_k$ i suoi autovalori.
-		$f$ è diagonalizzabile se e solo se valgono le seguenti due condizioni:
+		Sia $f: V \to V$ un endomorfismo e siano $\lambda_1, ..., \lambda_k$ i suoi autovalori.
+		$f$ è diagonalizzabile se e solo se valgono entrambe le condizioni:
 		\begin{enumerate}
 			\item $\lambda_i \in \mathbb{K}$ per ogni $i = 1, 2, ..., k$, ovvero tutti gli autovalori sono nel campo.
 			\item $m_a(\lambda_i) = m_g(\lambda_i)$ per ogni $i = 1, 2, ..., k$, ovvero la molteplicità algebrica è uguale alla molteplicità geometrica per ogni autovalore.
@@ -3555,15 +3558,15 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{teo}
 
 	\begin{proof}
-		Supponiamo che valga la condizione 1, cioè $\lambda_1, \lambda_2, ..., \lambda_t \in \mathbb{K}$ e consideriamo gli autospazi $V_{\lambda_1}, V_{\lambda_2}, ..., V_{\lambda_t}$. \\
-		Sia $U = V_{\lambda_1} \oplus V_{\lambda_2} \oplus ... \oplus V_{\lambda_t}$, cioè $U$ è la somma diretta degli autospazi (perchè $V_{\lambda_i} \cap V_{\lambda_j} = \{0\}$ se $\lambda_i \ne \lambda_j$). \\
-		Sia $\mathcal{B}_1$ una base di $V_{\lambda_1}$, $\mathcal{B}_2$ una base di $V_{\lambda_2}$, ..., $\mathcal{B}_t$ una base di $V_{\lambda_t}$;
-		quindi poichè la somma è diretta $\mathcal{B} = \mathcal{B}_1 \cup \mathcal{B}_2 \cup ... \cup \mathcal{B}_t$ è una base di $U$.
-		Quindi $\dim U = \dim V_{\lambda_1} + \dim V_{\lambda_2} + ... + \dim V_{\lambda_t} = m_g(\lambda_1) + m_g(\lambda_2) + ... + m_g(\lambda_t)$. \\
-		D'altra parte $\dim V = m_a(\lambda_1) + m_a(\lambda_2) + ... + m_a(\lambda_t)$. \\
+		Supponiamo che valga la condizione 1, cioè $\lambda_1, ..., \lambda_k \in \mathbb{K}$ e consideriamo gli autospazi $V_{\lambda_1}, ..., V_{\lambda_k}$. \\
+		Sia $U = V_{\lambda_1} \oplus ... \oplus V_{\lambda_k}$, cioè $U$ è la somma diretta degli autospazi (perchè $V_{\lambda_i} \cap V_{\lambda_j} = \{0\}$ se $\lambda_i \ne \lambda_j$). \\
+		Sia $\mathcal{B}_1$ una base di $V_{\lambda_1}$, ..., $\mathcal{B}_t$ una base di $V_{\lambda_k}$;
+		quindi poichè la somma è diretta $\mathcal{B} = \mathcal{B}_1 \cup ... \cup \mathcal{B}_t$ è una base di $U$.
+		Quindi $\dim U = \dim V_{\lambda_1} + ... + \dim V_{\lambda_k} = m_g(\lambda_1) + ... + m_g(\lambda_k)$. \\
+		D'altra parte $\dim V = n = \text{grado di } p(x) = m_a(\lambda_1) + ... + m_a(\lambda_k)$. \\
 		Se vale la condizione 2 allora $\dim U = \dim V$ e quindi $U = V$ e quindi $\mathcal{B}$ è una base di $V$ composta da autovettori di $f$ e quindi la matrice di $f$ rispetto a $\mathcal{B}$ è diagonale. \\
-		Se non vale la condizione 2 allora $\dim U = m_g(\lambda_1) + m_g(\lambda_2) + ... + m_g(\lambda_t) < m_a(\lambda_1) + m_a(\lambda_2) + ... + m_a(\lambda_t) = \dim V$ e quindi $B$ non è una base di $V$.
-		Posso completare $\mathcal{B}$ ad una base di $V$ ma i vettori che aggiungo non sono autovettori di $f$ e quindi la matrice di $f$ rispetto a $\mathcal{B}$ non è diagonale.
+		Se non vale la condizione 2 allora $\dim U = m_g(\lambda_1) + ... + m_g(\lambda_k) < m_a(\lambda_1) + ... + m_a(\lambda_k) = \dim V$ e quindi $B$ è una base di $U$, ma non di $V$.
+		Posso completarla ad una base di $V$ solo aggiungendo vettori che non sono autovettori di $f$ e quindi la matrice di $f$ rispetto a $\mathcal{B}$ non è diagonale.
 	\end{proof}
 
 	\begin{oss}
@@ -3644,8 +3647,8 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\begin{es}
-		Dati $f: \mathbb{R}^4 \to \mathbb{R}^4, f(x, y, z, w) = (y, z, w, 0)$.
-		Dire se $f$ è diagonalizzabile e in caso affermativo trovare una base di autovettori. \\
+		Dati $f: \mathbb{R}^4 \to \mathbb{R}^4, f(x, y, z, w) = (y, z, w, 0)$,
+		dire se $f$ è diagonalizzabile e in caso affermativo trovare una base di autovettori. \\
 		Scrivo la matrice di $f$ in una base qualsiasi, ad esempio quella canonica $e_1 = (1, 0, 0, 0), e_2 = (0, 1, 0, 0), e_3 = (0, 0, 1, 0), e_4 = (0, 0, 0, 1)$:
 		\begin{align*}
 			f(e_1) &= f(1, 0, 0, 0) = (0, 0, 0, 0) = 0e_1 + 0e_2 + 0e_3 + 0e_4 \\
@@ -3681,27 +3684,23 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\begin{deff}{Endomorfismo nilpotente}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo. \\
-		$f$ si dice \textbf{nilpotente} se esiste un $n \in \mathbb{N}$ tale che $f^n = 0$, cioè $f \circ f \circ ... \circ f(v) = 0 \ \forall v \in V$.
+		Un endomorfismo $f: V \to V$ si dice \textbf{nilpotente} se esiste un $n \in \mathbb{N}$ tale che $f^n = 0$, cioè $f \circ ... \circ f(v) = 0 \ \forall v \in V$.
 	\end{deff}
-	\begin{deff}{Matrice nilpotente}{}
-		Sia $A \in M_n(\mathbb{K})$. \\
-		$A$ si dice \textbf{nilpotente} se esiste un $n \in \mathbb{N}$ tale che $A^n = 0$, cioè $A \cdot A \cdot ... \cdot A = 0$
-		(la matrice ha tutti gli elementi nulli).
-	\end{deff}
+	\begin{oss}
+		$f$ è nilpotente $\Leftrightarrow$ la matrice di $f$ rispetto ad una base di $V$ è nilpotente, cioè esiste un $n \in \mathbb{N}$ tale che $A^n = 0$.
+	\end{oss}
 
 	\begin{teo}{Endomorfismo nilpotente non diagonalizzabile}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e $f: V \to V$ un endomorfismo. \\
-		Se $f$ è nilpotente allora $f$ non è diagonalizzabile.
+		Se un endomorfismo $f: V \to V$ è nilpotente allora $f$ non è diagonalizzabile.
 	\end{teo}
 	\begin{proof}
-		Sia $\lambda$ un autovalore di $f$ e sia $v$ un autovettore relativo ad $\lambda$, cioè $f(v) = \lambda v$. \\
-		Poichè $f$ è nilpotente esiste un $n \in \mathbb{N}$ tale che $f^n = 0$, cioè $f \circ f \circ ... \circ f(v) = 0$, in
-		particolare $f^n(v) = 0$. \\
+		Sia $\lambda$ un autovalore di $f$ e sia $v$ un suo autovettore, cioè $v \ne 0, f(v) = \lambda v$. \\
+		Poichè $f$ è nilpotente esiste un $n \in \mathbb{N}$ tale che $f(v)^n = 0$, cioè $f(v) \circ ... \circ f(v) = 0$. \\
 		D'altra parte $f^n(v) = f^{n-1}(\lambda v) = \lambda f^{n-1}(v) = ... = \lambda^n v$. \\
-		Quindi $\lambda^n = 0$ (perchè $f^n(v) = 0$) e quindi $\lambda = 0$. \\
-		Quindi l'unico autovalore di $f$ è $\lambda = 0$. Di conseguenza, se $f$ fosse diagonalizzabile,
-		avrebbe come matrice una matrice diagonale con tutti gli elementi nulli, cioè la matrice nulla, che è assurdo.
+		Quindi $\lambda^nv = 0 \Rightarrow \lambda^n = 0$ (perchè $f^n(v) = 0$) e quindi $\lambda = 0$. \\
+		Quindi l'unico autovalore di $f$ è $\lambda = 0$. Quindi poichè $f \ne 0$, l'autospazio $V_0$ non è tutto lo spazio $V$,
+		cioè $m_g(0) < \dim V$ e quindi $m_a(0) = m_g(0) < \dim V$.
+		Quindi $f$ non è diagonalizzabile.
 	\end{proof}
 
 	\begin{es}
@@ -3724,6 +3723,24 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		\end{align*}
 		$A$ quindi non è nilpotente ma non si diagonalizza.
 	\end{es}
+
+	\begin{es}
+		$V = \mathbb{R}^3[x]_{\le 3} = \{a_x^3 + b_x^2 + c_x + d \mid a, b, c, d \in \mathbb{R}\}$. \\
+		$d: V \to V, d(p(x)) = p'(x) = 3ax^2 + 2bx + c$ è un endomorfismo nilpotente perchè $d^4(p(x)) = 0 \forall p(x) \in V$. \\
+		In effetti nella base $1, x, x^2, x^3$ la matrice di $d$ è:
+		\begin{align*}
+			A = \begin{pmatrix}
+				0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 \\
+				3 & 2 & 1 & 0
+			\end{pmatrix}
+		\end{align*}
+		ottenuta calcolando $d(1) = 0, d(x) = 1, d(x^2) = 2x, d(x^3) = 3x^2$. \\
+		Quindi $d^4(p(x)) = 0 \forall p(x) \in V$ e quindi $d$ è nilpotente. \\
+	\end{es}
+
+	\subsection{Blocco di Jordan e decomposizione canonica di Jordan}
 
 	\begin{deff}{Blocco di Jordan}{}
 		Sia $A \in M_n(\mathbb{K})$ una matrice non diagonalizzabile. \\
@@ -3782,13 +3799,12 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\begin{teo}{Decomposizione canonica di Jordan}{}
-		Sia $f: V \to V$ un endomorfismo e siano $\lambda_1, \lambda_2, ..., \lambda_k$ gli autovalori di $f$. \\
-		Allora: \\
+		Sia $f: V \to V$ un endomorfismo e siano $\lambda_1, ..., \lambda_k$ i suoi autovalori. Allora:
 		\begin{enumerate}
-			\item $f$ è somma di una applicazione diagonalizzabile $f_d$ e di una applicazione nilpotente $f_n$.
-			Tale decomposizione $f = f_d + f_n$ è unica e $f$ è diagonalizzabile se e solo se $f_n = 0$.
+			\item $f = f_d + f_n$, dove $f_d$ è una applicazione diagonalizzabile mentre $f_n$ una una applicazione nilpotente.
+			Tale decomposizione è unica e diagonalizzabile $\Leftrightarrow f_n = 0$.
 			\item Esiste una base di $V$ in cui la matrice di $f$ è la forma canonica di Jordan
-			(dove per ciascun autovalore $\lambda_i$ si hanno $m_g(\lambda_i)$ blocchi di Jordan, la cui somma delle dimensioni è $m_a(\lambda_i)$).
+			(dove per ciascun autovalore $\lambda_i$ si hanno $m_g(\lambda_i)$ blocchi di Jordan, la cui somma delle dimensioni è $m_a(\lambda_i)$):
 			\begin{equation*}
 				\begin{pmatrix}
 					J_{\lambda_1, n_1} & 0 & \cdots & 0 \\
@@ -3801,79 +3817,118 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{teo}
 
 	\begin{es}
-		Supponiamo di avere $f: \mathbb{R}^6 \to \mathbb{R}^6$ con autovalori $\lambda_1 = 7, \lambda_2 = 3, \lambda_3 = -2$ con
-		molteplicità algebrica rispettivamente $m_a(7) = 3, m_a(3) = 2, m_a(-2) = 1$.
-		Supponiamo inoltre che tutte le molteplicità geometriche siano $-1$ (quindi $f$ non è diagonalizzabile). \\
-		Per il teorema della decomposizione canonica di Jordan, esiste una base di $\mathbb{R}^6$ in cui la matrice di $f$ è:
+		Sia $f: \mathbb{R}^6 \to \mathbb{R}^6$ con autovalori $\lambda_1 = 7, \lambda_2 = 3, \lambda_3 = -2$ e con
+		$m_a(7) = 3, m_a(3) = 2, m_a(-2) = 1$. e $mg(\lambda_1) = mg(\lambda_2) = mg(\lambda_3) = -1$ (quindi $f$ non è diagonalizzabile). \\
+		Per il teorema precedente, esiste una base di $\mathbb{R}^6$ in cui la matrice di $f$ è:
 		\begin{equation*}
 			\begin{pmatrix}
 				J_{7,3} & 0 & 0 \\
 				0 & J_{3,2} & 0 \\
 				0 & 0 & J_{-2,1}
-			\end{pmatrix}
+			\end{pmatrix} = \left(
+			\begin{array}{ccc|ccc|ccc}
+			7 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 7 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 7 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			\hline
+			0 & 0 & 0 & 3 & 1 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 3 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 3 & 0 & 0 & 0 \\
+			\hline
+			0 & 0 & 0 & 0 & 0 & 0 & -2 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 0 & -2 & 1 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -2
+			\end{array}
+			\right)
 		\end{equation*}
 	\end{es}
 
-	\begin{es}
-		Sia $V = \mathbb{K}[x]_{\le 3} = \{p(x) = a + bx + cx^2 + dx^3 \mid a, b, c, d \in \mathbb{R}\}$.
-		Consideriamo l'endomorfismo $f: V \to V$ definito da $f(p(x)) = p'(x)$, cioè la derivata di $p(x) = b + 2cx + 3dx^2$.
-		Dire se $f$ è diagonalizzabile.
-		$d^4(p(x)) = 0 \ \forall p(x)$ di grado $\le 3$. $d'' = 0, d \ne 0 \Rightarrow d$ non è diagonalizzabile.
-	\end{es}
-
 	\section{Unità 7  - Lezioni 16, 17}
-	\subsection{Forme bilineari e prodotti scalari}
+	\subsection{Forme bilineari}
 	\begin{deff}{Forma bilineare}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. \\
-		Una \textbf{forma bilineare} su $V$ è una funzione $f: V \times V \to \mathbb{K}$ che è lineare rispetto ad entrambe le variabili, cioè:
+		Una \textbf{forma bilineare} su $V$ è una applicazione $\beta: V \times V \to \mathbb{K}$ che è lineare rispetto a ciascuna variabile, cioè:
 		\begin{enumerate}
-			\item $f(x + y, z) = f(x, z) + f(y, z) \ \forall x, y, z \in V$
-			\item $f(x, y + z) = f(x, y) + f(x, z) \ \forall x, y, z \in V$
-			\item $f(\lambda x, y) = \lambda f(x, y) = f(x, \lambda y) \ \forall x, y \in V, \lambda \in \mathbb{K}$
+			\item $\beta(a_1v_1 + a_2v_2, u) = a_1\beta(v_1, u) + a_2\beta(v_2, u)$
+			\item $\beta(v, a_1u_1 + a_2u_2) = a_1\beta(v, u_1) + a_2\beta(v, u_2)$
 		\end{enumerate}
 	\end{deff}
 
 	\begin{es}
-		$V: \mathbb{R}^2, \beta(v, u) = 2x_1y_1 + x_1y_2 + x 3x_2y_1 - x_2y_2, v = (x_1, x_2), u = (y_1, y_2), v' = (x_1', x_2')$.
+		Siano $V: \mathbb{R}^2, \beta: \mathbb{R}^2 \times \mathbb{R}^2 \to \mathbb{R}, \beta(v, u) = 2x_1y_1 + x_1y_2 - x_2y_2, v = (x_1, x_2), u = (y_1, y_2)$.
 		Verificare se $\beta$ è una forma bilineare. \\
-		$\beta(v + v', u) = 2(x_1 + x_1')y_1 + (x_1 + x_1')y_2 + 3(x_2 + x_2')y_1 - (x_2 + x_2')y_2 = 2x_1y_1 + x_1y_2 + 3x_2y_1 - x_2y_2 + 2x_1'y_1 + x_1'y_2 + 3x_2'y_1 - x_2'y_2 = \beta(v, u) + \beta(v', u)$. \\
-		Analogamente si verifica che $\beta(v, u + u') = \beta(v, u) + \beta(v, u')$. \\
-		$\beta(av, u) = 2(ax_1)y_1 + (ax_1)y_2 + 3(ax_2)y_1 - (ax_2)y_2 = a(2x_1y_1 + x_1y_2 + 3x_2y_1 - x_2y_2) = a\beta(v, u)$. \\
-		Analogamente si verifica che $\beta(v, au) = a\beta(v, u)$. \\
+		Definiamo $v' = (x_1', x_2')$, dobbiamo verificare che $\beta(av + a'v', u) = a\beta(v, u) + a'\beta(v', u)$ e $\beta(v, au + au') = a\beta(v, u) + a'\beta(v, u')$.
+		\begin{align*}
+			av + a'v' &= a(x_1, x_2) + a'(x_1', x_2') = (ax_1 + a'x_1', ax_2 + a'x_2') \\
+			\beta(av + a'v', u) &= 2(ax_1 + a'x_1')y_1 + (ax_1 + a'x_1')y_2 - (ax_2 + a'x_2')y_2 \\
+			&= 2ax_1y_1 + 2a'x_1'y_1 + ax_1y_2 + a'x_1'y_2 - ax_2y_2 - a'x_2'y_2 \\
+			&= a(2x_1y_1 + x_1y_2 - x_2y_2) + a'(2x_1'y_1 + x_1'y_2 - x_2'y_2) \\
+			&= a\beta(v, u) + a'\beta(v', u)
+		\end{align*}
+		La prima condizione è verificata. La seconda condizione è simile:
+		\begin{align*}
+			au + a'u' &= a(y_1, y_2) + a'(y_1', y_2') = (ay_1 + a'y_1', ay_2 + a'y_2') \\
+			\beta(v, au + a'u') &= 2x_1(ay_1 + a'y_1') + x_1(ay_2 + a'y_2') - x_2(ay_2 + a'y_2') \\
+			&= 2ax_1y_1 + 2a'x_1'y_1 + ax_1y_2 + a'x_1'y_2 - ax_2y_2 - a'x_2'y_2 \\
+			&= a(2x_1y_1 + x_1y_2 - x_2y_2) + a'(2x_1'y_1 + x_1'y_2 - x_2'y_2) \\
+			&= a\beta(v, u) + a'\beta(v, u')
+		\end{align*}
 		Quindi $\beta$ è una forma bilineare.
 	\end{es}
 
 	\begin{es}
-		Sia $V = \mathbb{R}^2$ su $\mathbb{K} = \mathbb{R}$ e sia $v = (x_1, x_2), u = (y_1, y_2)$. \\
-		Verificare se $\beta(v, u) = x_1y_1 + x_2y_2$ è una forma bilineare. \\
-		$\beta(av, u) = (ax_1)(ax_2) + y_1y_2 = a^2x_1y_1 + a^2x_2y_2 = a^2\beta(v, u) \ne a\beta(v, u)$. \\
+		Siano $V = \mathbb{R}^2, v = (x_1, x_2), u = (y_1, y_2), v' = (x_1', x_2')$. \\
+		Verificare se $\beta(v, u) = x_1x_2 + y_1y_2$ è una forma bilineare.
+		\begin{align*}
+			\beta(av + a'v', u) &= (ax_1 + a'x_1')(ax_2 + a'x_2') + y_1y_2 \\
+			&= a^2x_1x_2 + a'^2x_1'x_2' + aa'x_1'x_2 + y_1y_2 \\
+			&\ne a\beta(v, u) + a'\beta(v', u) \\
+			&= ax_1x_2 + ay_1y_2 + a'x_1'x_2' + a'y_1'y_2' \\
+		\end{align*}
 		Quindi $\beta$ non è una forma bilineare.
 	\end{es}
 
+	\begin{es}
+		Sia $V = \mathbb{K}^n, v = (x_1, x_2, ..., x_n), u = (y_1, y_2, ..., y_n)$
+		e sia $\beta(v, u) = x_1y_1 + x_2y_2 + ... + x_ny_n$ un \enquote*{prodotto scalare standard}.
+		Si verifica facilmente che $\beta$ è bilineare, quindi è un prodotto scalare.
+	\end{es}
+
+	\begin{es}
+		Siano $a, b \in \mathbb{R}$ e sia $V = \{ \text{funzioni continue } f: [a, b] \to \mathbb{R} \}$.
+		Date $f, g \in V$, ovvero $f, g: [a, b] \to \mathbb{R}$, si definisce $\beta(f, g) = \int_a^b f(t)g(t)dt$.
+		Questa è una forma bilineare perchè $\int_a^h (f(t) + h(t))g(t)dt = \int_a^b f(t)g(t)dt + \int_a^b h(t)g(t)dt$
+		e $\int_a^b h(f(t) + g(t))dt = h\int_a^b f(t)g(t)dt$
+	\end{es}
+
 	\begin{deff}{Forma bilineare simmetrica}{}
-		Una forma bilineare $\beta: V \times V \to \mathbb{K}$ si dice \textbf{simmetrica} se $\beta(v, u) = \beta(u, v) \ \forall v, u \in V$.
+		Una forma bilineare $\beta: V \times V \to \mathbb{K}$ si dice \textbf{simmetrica} se $\beta(v, u) = \beta(u, v) \ \forall v, u \in V$. \\
 		Una forma bilineare $\beta: V \times V \to \mathbb{K}$ si dice \textbf{antisimmetrica} se $\beta(v, u) = -\beta(u, v) \ \forall v, u \in V$.
 	\end{deff}
 
 	\begin{es}
-		Sia $V = \mathbb{R}^2$ su $\mathbb{K} = \mathbb{R}$ e sia $v = (x_1, x_2), u = (y_1, y_2)$. \\
+		Sia $V = \mathbb{R}^2$ su $\mathbb{K} = \mathbb{R}$ e siano $v = (x_1, x_2), u = (y_1, y_2)$.
 		\begin{enumerate}
 			\item Verificare se $\beta(v, u) = 2x_1y_1 - 3x1y_2 - 3x_2y_1 + 4x_2y_2$ è simmetrica. \\
 			$\beta(u, v) = 2y_1x_1 - 3y_1x_2 - 3y_2x_1 + 4y_2x_2 = 2x_1y_1 - 3x_1y_2 - 3x_2y_1 + 4x_2y_2 = \beta(v, u)$. \\
 			Quindi $\beta$ è simmetrica.
+			
 			\item Verificare se $\beta(v, u) =x_1y_2 - x_2y_1$ è antisimmetrica. \\
 			$\beta(u, v) = y_1x_2 - y_2x_1 = -x_1y_2 + x_2y_1 = -\beta(v, u)$. \\
 			Quindi $\beta$ è antisimmetrica.
 			\begin{oss}
-				$\beta = \det \begin{pmatrix}
+				$\beta = \det \begin{psmallmatrix}
 					x_1 & y_1 \\
 					x_2 & y_2
-				\end{pmatrix}$.
+				\end{psmallmatrix})$.
 			\end{oss}
-			\item Verificare se $\beta(v, u) = 2x_1y_2 - 3x_2y_1$ è simmetrica o antisimmetrica. \\
-			$\beta(u, v) = 2y_1x_2 - 3y_2x_1 = 2x_2y_1 - 3x_1y_2 \ne \beta(v, u) \ne -\beta(v, u)$. \\
-			Quindi $\beta$ non è simmetrica ne antisimmetrica.
-			Lo si può vedere anche con un esempio numerico: $\beta((1, 0), (1, 1)) = 2, \beta((1, 1), (1, 0)) = -3$.
+			
+			\item Verificare se $\beta(v, u) = 2x_1y_2 + 3x_2y_1 - 5x_2y_1$ è simmetrica o antisimmetrica. \\
+			$\beta(u, v) = 2y_1x_2 - 5x_1y_2 + 3y_2x_1 \ne \beta(v, u)$. \\
+			$\beta(u, v) = 2y_1x_2 - 5x_1y_2 + 3y_2x_1 \ne -\beta(v, u)$. \\
+			Quindi $\beta$ non è simmetrica ne antisimmetrica. \\
+			Lo si può vedere anche con un esempio numerico: $\beta((1, 0), (1, 1)) = 2$ e $\beta((1, 1), (1, 0)) = 3$.
+			
 			\item Può esistere una forma bilineare che sia sia simmetrica che antisimmetrica? \\
 			$\beta(v, u) = \beta(u, v) = -\beta(v, u) \Rightarrow \beta(v, u) = -\beta(v, u) \Rightarrow 2\beta(v, u) = 0 \Rightarrow \beta(v, u) = 0 \ \forall v, u \in V$.
 			Quindi solo la forma bilineare nulla è sia simmetrica che antisimmetrica.
@@ -3890,28 +3945,29 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{oss}
 
 	\begin{deff}{Matrice di una forma bilineare}{}
-		la matrice di una forma bilineare $\beta: V \times V \to \mathbb{K}$ rispetto ad una base $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ di $V$ è la matrice $A \in M_n(\mathbb{K})$ tale che $a_{ij} = \beta(v_i, v_j)$.
+		La matrice di una forma bilineare $\beta: V \times V \to \mathbb{K}$ rispetto ad una base $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ di $V$
+		è la matrice $A \in M_n(\mathbb{K})$ tale che $a_{ij} = \beta(v_i, v_j)$.
 	\end{deff}
 	\begin{oss}
-		Se $v = a_1v_1 + ... + a_nv_n, u = b_1v_1 + ... + b_nv_n$ allora $\beta(v, u) = (a_1, a_2, ..., a_n)A \begin{pmatrix}
+		Se $v = a_1v_1 + ... + a_nv_n, u = b_1v_1 + ... + b_nv_n$ allora $\beta(v, u) = (a_1, ..., a_n)A \begin{psmallmatrix}
 			b_1 \\
 			b_2 \\
 			\vdots \\
 			b_n
-		\end{pmatrix}$.
+		\end{psmallmatrix}$.
 	\end{oss}
 
 	\begin{es}
-		Sia $v_1 = (1, 1), v_2 = (1, -1)$ una base di $V = \mathbb{R}^2$ e $\beta(v, u) = x_1y_1 + 2x-1y_2 - x_2y_1 + 3x_2y_2$ una forma bilineare su $V$.
+		Sia $v_1 = (1, 1), v_2 = (1, -1)$ una base di $V = \mathbb{R}^2$ e $\beta(v, u) = x_1y_1 + 2x_1y_2 - x_2y_1 + 3x_2y_2$ una forma bilineare su $V$.
 		Trovare la matrice di $\beta$ rispetto alla base $\mathcal{B} = \{v_1, v_2\}$.
 		\begin{align*}
-			\beta(v_1, v_1) &= 1 \cdot 1 + 2 \cdot 1 - 1 \cdot 1 + 3 \cdot 1 = 5 \\
-			\beta(v_1, v_2) &= 1 \cdot 1 + 2 \cdot (-1) - 1 \cdot 1 + 3 \cdot (-1) = -3 \\
-			\beta(v_2, v_1) &= -3 \\
-			\beta(v_2, v_2) &= 1 \cdot (-1) + 2 \cdot (-1) - 1 \cdot (-1) + 3 \cdot (-1) = -7 \\
+			\beta(v_1, v_1) &= 1 + 2 - 1 + 3 = 5 \\
+			\beta(v_1, v_2) &= 1 - 2 - 1 - 3 = - 5 \\
+			\beta(v_2, v_1) &= 1 + 2 + 1 - 3 = 1 \\
+			\beta(v_2, v_2) &= 1 - 2 + 1 + 3 = 3 \\
 			A &= \begin{pmatrix}
-				5 & -3 \\
-				-3 & -7
+				5 & -5 \\
+				1 & 3
 			\end{pmatrix}
 		\end{align*}
 	\end{es}
@@ -3934,19 +3990,39 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 				2 & 3 \\
 				-1 & 1
 			\end{pmatrix}$ non è nè simmetrica nè antisimmetrica.
+			\item $D = \begin{pmatrix}
+				1 & 4 & -3 \\
+				4 & 7 & 9 \\
+				-3 & 9 & 5
+			\end{pmatrix}$ è simmetrica.
+			\item $E = \begin{pmatrix}
+				0 & 5 & -6 \\
+				-5 & 0 & 1 \\
+				6 & -1 & 0
+			\end{pmatrix}$ è antisimmetrica.
+			\item $F = \begin{pmatrix}
+				3 & 5 & -6 \\
+				-5 & 1 & 1 \\
+				6 & -1 & 7
+			\end{pmatrix}$ non è nè simmetrica nè antisimmetrica.
 		\end{enumerate}
 	\end{es}
 	\begin{oss}
-		Una forma bilineare $\beta$ è simmetrica se e solo se la sua matrice rispetto ad una base è simmetrica.
-		Analogamente, una forma bilineare $\beta$ è antisimmetrica se e solo se la sua matrice rispetto ad una base è antisimmetrica.
+		Una forma bilineare $\beta$ è simmetrica $\Leftrightarrow$ la sua matrice rispetto ad una base è simmetrica. \\
+		Analogamente, una forma bilineare $\beta$ è antisimmetrica $\Leftrightarrow$ la sua matrice rispetto ad una base è antisimmetrica.
+	\end{oss}
+
+	\begin{oss}
+		Se una forma bilineare $\beta$ è antisimmetrica e $\beta = 0$ allora sicuramente non è diagonale. L'unica matrice antisimmetrica che è anche diagonale è la matrice nulla. \\
+		Se invece $\beta$ è simmetrica allora si può trovare una base in cui la sua matrice è diagonale.
 	\end{oss}
 
 	\begin{deff}{Matrici congruenti}{}
-		Due matrici $A, M$ si dicono \textbf{congruenti} se esiste una matrice invertibile $B$ tale che $A = B^TMB$.
+		Due matrici $A, M$ si dicono \textbf{congruenti} se esiste una matrice invertibile $B$ tale che $M = B^TAB$.
 	\end{deff}
 
 	\begin{teo}{Matrici congruenti e forme bilineari}{}
-		Due matrici $A, M$ sono congruenti se e solo se rappresentano la stessa forma bilineare rispetto a basi diverse.
+		Due matrici $A, M$ sono congruenti $\Leftrightarrow$ rappresentano la stessa forma bilineare.
 	\end{teo}
 	\begin{proof}
 		Siano $\mathcal{B} = \{v_1, v_2, ..., v_n\}$ e $\mathcal{B}' = \{u_1, u_2, ..., u_n\}$ due basi di $V$. \\
@@ -3968,9 +4044,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			\vdots \\
 			y_n
 		\end{pmatrix}$. \\
-		Allora $\beta(v, u) = \begin{pmatrix}
-			a_1 & \cdots & a_n
-		\end{pmatrix}A \begin{pmatrix}
+		Allora $\beta(v, u) = (a_1, ..., a_n)A \begin{pmatrix}
 			b_1 \\
 			\vdots \\
 			b_n
@@ -3993,92 +4067,148 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		Se $\beta$ è simmetrica si può sempre trovare una base diagonalizzante.
 	\end{oss}
 
+	\paragraph{I tre usi delle matrici}
+	\begin{description}
+		\item[Sistemi lineari] La matrice di un sistema lineare $Ax = b$ è la matrice in cui sono scritti i coefficienti del sistema.
+		Due matrici $A, M$ rappresentano sistemi \textbf{equivalenti} (cioè hanno la stessa soluzione) $\Leftrightarrow$ applicando l'algoritmo di Gauss si ottiene la stessa matrice a scala.
+		\item[Applicazioni lineari] La matrice di un'applicazione lineare $f: V \to W$ è la matrice in cui $A_{ij}$ è l'$i$-esima coordinata del vettore $f(v_j)$ nella base $v_1, ..., v_n$.
+		Due matrici $A, M$ rappresentano la stessa applicazione lineare $\Leftrightarrow$ sono \textbf{simili}, cioè $\exists B$ tale che $M = B^{-1}AB$.
+		\item[Forme bilineari] La matrice di una forma bilineare è la matrice in cui $A_{ij} = \beta(v_i, v_j)$.
+		Due matrici $A, M$ rappresentano la stessa forma bilineare $\Leftrightarrow$ sono \textbf{congruenti}, cioè $\exists B$ tale che $M = B^TAB$.
+	\end{description}
+
 	\begin{teo}{Diagonalizzazione di una forma bilineare simmetrica}{}
 		Sia $\beta: V \times V \to \mathbb{K}$ una forma bilineare simmetrica. \\
-		Allora esiste una base $\mathcal{B}$ di $V$ tale che la matrice di $\beta$ rispetto a $\mathcal{B}$ è diagonale. \\
+		Allora esiste una base $u_1, ..., u_n$ di $V$ tale che la matrice di $\beta$ rispetto a $\mathcal{B}$ è diagonale ($\beta(v_i, v_j) = 0 \forall i \ne j$). \\
 		In altre parole, se $A$ è una matrice simmetrica allora esiste una matrice diagonale che è congruente ad $A$.
 	\end{teo}
 	\begin{proof}
-		Definiamo una base qualsiasi di $V: \mathcal{B} = \{w_1, w_2, ..., w_n\}$. \\
+		Definiamo una base qualsiasi di $V: \{w_1, w_2, ..., w_n\}$.
 		\begin{enumerate}
-			\item Se $\beta(w_1, w_1)$ vado allo step 2. \\
-			Se $\beta(w_1, w_1) = 0$ ma esiste $i$ tale che $\beta(w_i, w_i) \ne 0$ allora scambio $w_1$ con $w_i$ e vado allo step 2. \\
-			Se $\beta(w_i, w_i) = 0 \ \forall i \ne 1$ allora cerco $i, j$ tali che $\beta(w_i, w_j) \ne 0$ e scambio $w_1$ con $w_i + w_j$, $w_2$ con $w_j$, $w_i$ con $w_1$ e $w_j$ con $w_2$ e vado allo step 2.
-			\item Dal passo 1, $\beta(w_1, w_1) \ne 0$. Definiamo una nuova base $w_1', w_2', ..., w_n'$ tale che $w_1' = w_1$ e $w_i' = w_i - \frac{\beta(w_i, w_1)}{\beta(w_1, w_1)}w_1 \ \forall i \ne 1$. \\
-			In questo modo $\beta(w_i', w_1') = \beta(w_i, w_1) - \frac{\beta(w_i, w_1)}{\beta(w_1, w_1)}\beta(w_1, w_1) = 0 \ \forall i \ne 1$. \\
+			\item Se $\beta(w_1, w_1) \ne 0$ vado allo step 2. \\
+			Se $\beta(w_1, w_1) = 0$ ma $\exists i \mid \beta(w_i, w_i) \ne 0$ allora scambio $w_1$ con $w_i$ e vado allo step 2. \\
+			Se $\beta(w_i, w_i) = 0 \ \forall i \in \{ 1, ..., n \}$ allora cerco $i, j$ tali che $\beta(w_i, w_j) \ne 0$ e scambio $w_1$ con $w_i + w_j$, $w_2$ con $w_j$, $w_i$ con $w_1$ e $w_j$ con $w_2$ e vado allo step 2.
+			\item Dal passo 1, $\beta(w_1, w_1) \ne 0$. Definiamo una nuova base $w_1', w_2', ..., w_n'$ tale che $w_1' = w_1$ e $w_i' = w_i - \frac{\beta(w_i, w_1)}{\beta(w_1, w_1)}w_1 \ \forall i \ne 1$,
+			in questo modo $\beta(w_1', w_i) = \beta(w_1, w_i) - \frac{\beta(w_1, w_i)}{\cancel{\beta(w_1, w_1)}}\cancel{\beta(w_1, w_1)} = 0 \ \forall i = \{2, ..., n\}$. \\
 			Ora $w_1'$ non lo tocco più e riapplico il passo 1 e passo 2 a $w_2', ..., w_n'$.
 		\end{enumerate}
 		Dopo $n - 1$ iterazioni si ottiene una base $u_1, u_2, ..., u_n$ tale che la matrice $\beta$ rispetto a tale base è diagonale.
 	\end{proof}
 
+	\begin{es}
+		Sia $B: \mathbb{R}^2 \to \mathbb{R}^2$ con $B(e_1, e_1) = 2, B(e_1, e_2) = 3, B(e_2, e_1) = 3, B(e_2, e_2) = 1$.
+		Quindi $A = \begin{pmatrix}
+			2 & 3 \\
+			3 & 1
+		\end{pmatrix}$.
+		La matrice $A$ è simmetrica, quindi per il teorema precedente esiste una base $u_1, u_2$ di $\mathbb{R}^2$ tale che la matrice di $B$ rispetto a tale base è diagonale.
+		\begin{description}
+			\item[Passo 1] $\beta(u_1, u_1) = 2 \ne 0$, quindi vado al passo 2.
+			\item[Passo 2] Definisco $w_1' = e_1, w_2' = e_2 - \frac{\beta(e_2, e_1)}{\beta(e_1, e_1)}e_1 = e_2 - \frac{3}{2}e_1$ in modo che $\beta(w_1', w_2') = \beta(e_1, e_2) - \frac{\beta(e_1, e_2)}{\beta(e_1, e_1)}\beta(e_1, e_1) = 3 - \frac{3}{2}2 = 0$
+			e $\beta(w_2', w_2') = \beta(e_2, e_2) - \frac{\beta(e_2, e_1)}{\beta(e_1, e_1)}\beta(e_1, e_2) = 1 - \frac{3}{2}3 = -\frac{7}{2}$.
+		\end{description}
+		Nella nuova base $\{w_1', w_2'\}$ la matrice di $B$ è:
+		\begin{equation*}
+			\begin{pmatrix}
+				2 & 0 \\
+				0 & -\frac{7}{2}
+			\end{pmatrix}
+		\end{equation*}
+		Quindi la matrice di $B$ rispetto alla base $\{w_1', w_2'\}$ è diagonale.
+	\end{es}
+
+	\subsection{Teorema di Sylvester}
+	\begin{deff}{Segnatura di una forma bilineare}{}
+		Sia $\beta: V \times V \to \mathbb{R}$ una forma bilineare simmetrica su uno spazio vettoriale $V$ di dimensione finita. \\
+		La \textbf{segnatura} di $\beta$ è la tripletta $(n_+, n_-, n_0)$ dove:
+		\begin{itemize}
+			\item $n_+$ è il numero di autovettori di $\beta$ con autovalore positivo;
+			\item $n_-$ è il numero di autovettori di $\beta$ con autovalore negativo;
+			\item $n_0$ è il numero di autovettori di $\beta$ con autovalore nullo.
+		\end{itemize}
+		La segnatura è indipendente dalla base scelta.
+	\end{deff}
+
 	\begin{teo}{Teorema di Sylvester}{}
-		Sia $\beta: V \times V \to \mathbb{K}$ una forma bilineare simmetrica. \\
-		Esiste una base $u_1, u_2, ..., u_n$ di $V$ tale che la matrice di $\beta$ rispetto a tale base è diagonale con $r$ elementi $1$, $s$ elementi $-1$ e $n - r - s$ elementi $0$.
-		I numeri $r, s$ dipendono solo da $\beta$ e non dalla base scelta e sono detti \textbf{segnatura} di $\beta$.
+		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ e $\beta: V \times V \to \mathbb{R}$ una forma bilineare simmetrica. \\
+		Allora esiste una base $u_1, u_2, ..., u_n$ di $V$ tale che la matrice di $\beta$ rispetto a tale base è diagonale con $n_+$ elementi $1$, $n_-$ elementi $-1$ e $n_0$ elementi $0$:
+		\begin{align*}
+			\begin{pmatrix}
+				\mathbf{1} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+				0 & \mathbf{\ddots} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+				0 & 0 & \mathbf{1} & 0 & 0 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & \mathbf{-1} & 0 & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & \mathbf{\ddots} & 0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & \mathbf{-1}& 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & 0 & \mathbf{0} & 0 & 0 \\
+				0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathbf{\ddots} & 0 \\
+				0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \mathbf{0}
+			\end{pmatrix}
+		\end{align*}
 	\end{teo}
 
 	\begin{proof}
-		Per il teorema di diagonalizzazione esiste una base $v_1, v_2, ..., v_n$ tale che la matrice di $\beta$ rispetto a tale base è diagonale. \\
+		Per il teorema di diagonalizzazione esiste una base $u_1, ..., u_n$ tale che la matrice di $\beta$ rispetto a tale base è diagonale. \\
 		Quindi:
-		\begin{align*}
-			\beta(v_i, v_i) &> 0 \ \forall i = 1, 2, ..., r \\
-			\beta(v_i, v_i) &< 0 \ \forall i = r + 1, r + 2, ..., r + s \\
-			\beta(v_i, v_i) &= 0 \ \forall i = r + s + 1, r + s + 2, ..., n
-		\end{align*}
-		Consideriamo la base $u_1 = \begin{cases}
-			\frac{1}{\sqrt{|\beta(v_i, v_i)|}} & \text{se } i \le r + s \\
-			v_i & \text{se } i > r + s
-		\end{cases}$ \\
-		così che $\beta(u_1, u_1) = \begin{cases}
-			1 & \text{se } i = 1, 2, ..., r \\
-			-1 & \text{se } i = r + 1, r + 2, ..., r + s \\
-			0 & \text{se } i = r + s + 1, r + s + 2, ..., n
-		\end{cases}$.
+		\begin{enumerate}[label=(\alph*)]
+			\item $\beta(u_i, u_j) = a_i > 0 \ \forall i = \{1, ..., n_+\}$
+			\item $\beta(u_i, u_j) = a_i < 0 \ \forall i = \{n_+ + 1, ..., n_+ + n_-\}$
+			\item $\beta(u_i, u_j) = 0 \ \forall i = \{n_+ + n_- + 1, ..., n\}$
+		\end{enumerate}
+		Ora, nei casi (a) e (b) posso definire $v_i = \frac{1}{\sqrt{|a_i|}}u_i$ in modo che $\beta(v_i, v_i) = 1$ nel caso a e $\beta(v_i, v_i) = -1$ nel caso b. \\
+		Per il caso (c) posso definire $v_i = u_i$ in modo che $\beta(v_i, v_i) = 0$.
+		Omettiamo la seconda parte della dimostrazione (la segnatura non dipende dalla base scelta ma solo da $\beta$.
 	\end{proof}
-
-	% Saltato un esempio e un pò di roba
 
 	\begin{teo}{Teorema di Sylvester per le forme quadratiche}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{C}$ e sia $\beta$ una forma bilineare simmetrica su $V$. \\
 		Allora esiste una base $u_1, u_2, ..., u_n$ di $V$ tale che la matrice di $\beta$ rispetto a tale base è diagonale del tipo:
 		\begin{align*}
 			\begin{pmatrix}
-				I_r & \vline & 0 \\
+				r & \vline & 0 \\
 				\hline
 				0 & \vline & 0
 			\end{pmatrix}
 		\end{align*}
-		dove $r$ è il rango della matrice.
+		dove $r = n_+ + n_-$ indica $r$ volte 1.
 	\end{teo}
 
 	\begin{proof}
-		Come nella dimostrazione precedente, salvo che $\forall i = r + 1, r + 2, ..., r + s$ si ha $\beta(v_i, v_i) = 0$.
-		Definisco $u_i = \frac{1}{\sqrt{|\beta(v_i, v_i)|}}v_i$ così che $\beta(u_i, u_i) = (\frac{1}{\sqrt{|\beta(v_i, v_i)|}})^2\beta(v_i, v_i) = 1$.
+		Come nella dimostrazione precedente, ma nel caso (b) definisco $v_i = \frac{1}{\sqrt{|a_i|}}u_i$ in modo che $\beta(v_i, v_i) = 1$ anche nel caso b.
 	\end{proof}
 
+	\begin{oss}
+		$r$ è il rango della matrice di $\beta$ rispetto alla base $\{u_1, u_2, ..., u_n\}$.
+	\end{oss}
+
 	\begin{cor}{Congruenza e segnatura}{}
-		Due matrici simmetriche $A, B$ sono congruenti su $\mathbb{R} \Leftrightarrow$ hanno la stessa segnatura. \\
+		Due matrici simmetriche $n \times n$ sono congruenti su $\mathbb{R} \Leftrightarrow$ hanno la stessa segnatura. \\
 		Sono invece congruenti su $\mathbb{C} \Leftrightarrow$ hanno lo stesso rango.
 	\end{cor}
+
+	\begin{dimm}
+		Due matrici sono congruenti $\Leftrightarrow$ rappresentano la stessa forma bilineare. \\
+		Quindi, per il teorema precedente, sono tra loro congruenti $\Leftrightarrow$ sono congruenti alla stessa matrice.
+	\end{dimm}
 
 	\begin{es}
 		Le matrici $A = \begin{pmatrix}
 			2 & 0 \\
 			0 & 3
 		\end{pmatrix}$ e $B = \begin{pmatrix}
-			2 & 0 \\
+			8 & 0 \\
 			0 & -3
 		\end{pmatrix}$ sono congruenti su $\mathbb{C}$ perchè hanno entrambe rango 2
-		ma non sono congruenti su $\mathbb{R}$ perchè hanno segnature diverse (rispettivamente $2, 0$ e $1, 1$).
+		ma non sono congruenti su $\mathbb{R}$ perchè hanno segnature diverse (rispettivamente $n_{+_A} = 2, n_{-_A} = 0$ e $n_{+_B} = 1, n_{-_B} 1$).
 	\end{es}
+
+	\subsection{Forme quadratiche e matrice hassiana}
 	
 	\begin{deff}{Forma quadratica}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ una forma bilineare simmetrica. \\
-		La \textbf{forma quadratica} associata a $\beta$ è la funzione $q: V \to \mathbb{K}$ definita da $q(v) = \beta(v, v) \ \forall v \in V$.
+		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ e sia $\beta: V \times V \to \mathbb{R}$ una forma bilineare simmetrica. \\
+		La \textbf{forma quadratica} associata a $\beta$ è la funzione $q: V \to \mathbb{R}$:
+		\[ q(v) = \beta(v, v) \ \forall v \in V \]
 	\end{deff}
-	\begin{oss}
-		Data $q$ posso ricostruire $\beta$, perchè $\beta(v, u) = \frac{1}{2}(q(v + u) - q(v) - q(u))$.
-	\end{oss}
 
 	\begin{es}
 		Sia $V = \mathbb{R}^2, v = (x_1, x_2), u = (y_1, y_2), \beta(v, u) = 2x_1y_1 + 3x_1y_2 + 3x_2y_1 - x_2y_2$. \\
@@ -4086,19 +4216,21 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\begin{oss}
-		Si chiama forma quadratica perchè $\forall a \in \mathbb{K}$, $q(av) = a^2q(v)$.
-		Se $q(0) = \beta(0, 0) = 0$
+		Si chiama forma quadratica perchè se $a \in \mathbb{R} e v \in V$, $q(av) = \beta(av, av) = a \cdot a \cdot \beta(v, v) = a^2q(v)$.
 	\end{oss}
 
-	\begin{deff}{Forma quadratica definita positiva, negativa, semidefinita, indefinita}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $q: V \to \mathbb{K}$ una forma quadratica. \\
-		$q$ è:
+	\begin{oss}
+		$q(0) = 0$ perchè $q(0) = \beta(0, 0) = \beta(v - v, v - v) = \beta(v, v) - \beta(v, v) = 0$.
+	\end{oss}
+
+	\begin{deff}{Caratterizzazione di una forma quadratica}{}
+		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. Una forma quadratica $q: V \to \mathbb{K}$ può essere:
 		\begin{itemize}
 			\item \textbf{definita positiva} se $q(v) > 0 \ \forall v \ne 0, v \in V$
 			\item \textbf{definita negativa} se $q(v) < 0 \ \forall v \ne 0, q \in V$
 			\item \textbf{semidefinita positiva} se $q(v) \ge 0 \ \forall v \in V$
 			\item \textbf{semidefinita negativa} se $q(v) \le 0 \ \forall v \in V$
-			\item \textbf{indefinita} se esistono $v_1, v_2 \in V$ tali che $q(v_1) > 0$ e $q(v_2) < 0$
+			\item \textbf{indefinita} se $\exists v_1, v_2 \in V \mid q(v_1) > 0$ e $q(v_2) < 0$
 		\end{itemize}
 	\end{deff}
 
@@ -4107,39 +4239,46 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		\begin{itemize}
 			\item $q(x_1, x_2) = x_1^2 + x_2^2$ è definita positiva, perchè $q(x_1, x_2) = x_1^2 + x_2^2 > 0 \ \forall x_1, x_2 \ne 0$.
 			\item $q(x_1, x_2) = -x_1^2 - x_2^2$ è definita negativa, perchè $q(x_1, x_2) = -x_1^2 - x_2^2 < 0 \ \forall x_1, x_2 \ne 0$.
-			\item $q(x_1, x_2) = x_1^2$ è semidefinita positiva, perchè $q(x_1, x_2) = x_1^2 \ge 0 \ \forall x_1, x_2$, ma $q(0, 1) = 0$.
-			\item $q(x_1, x_2) = -x_1^2$ è semidefinita negativa, perchè $q(x_1, x_2) = -x_1^2 \le 0 \ \forall x_1, x_2$, ma $q(0, 1) = 0$.
+			\item $q(x_1, x_2) = x_1^2$ è semidefinita positiva, perchè $q(x_1, x_2) = x_1^2 \ge 0 \ \forall x_1, x_2$, ma $q(0, x_2) = 0$.
+			\item $q(x_1, x_2) = -x_1^2$ è semidefinita negativa, perchè $q(x_1, x_2) = -x_1^2 \le 0 \ \forall x_1, x_2$, ma $q(0, x_2) = 0$.
 			\item $q(x_1, x_2) = x_1^2 - x_2^2$ è indefinita, perchè $q(1, 0) = 1 > 0$ e $q(0, 1) = -1 < 0$.
-			\item $q(x_1, x_2) = x_1^2 + 9x_2^2 + 6x_1x_2$ è semidefinita positiva, perchè $q(x_1, x_2) = x_1^2 + 9x_2^2 + 6x_1x_2 = (x_1 + 3x_2)^2 \ge 0 \Leftrightarrow x1 = -3x_2 \ \forall x_1, x_2$.
-			Dunque ad esempio $q(-3, 1) = 0$.
+			\item $q(x_1, x_2) = x_1^2 + 9x_2^2 + 6x_1x_2$ è semidefinita positiva, perchè $q(e_1) = 1 > 0, q(e_2) = -1 < 0$.
+			\item $q(x_1, x_2) = x_1^2 + 6x_1x_2 + 9x_2^2 = (x_1 + 3x_2)^2$ è semidefinita positiva, perchè $e = 0 \Leftrightarrow x_1 = -3x_2$ e quindi $q(-3, 1) = 0$.
 		\end{itemize}
 	\end{es}
 
 	\begin{oss}
 		\begin{itemize}
-			\item $q$ è definita positiva se e solo se la segnatura di $\beta$ è $(n, 0)$, ovvero esiste una base in cui la matrice di $\beta$ è $I_n$.
-			\item $q$ è definita negativa se e solo se la segnatura di $\beta$ è $(0, n)$.
-			\item $q$ è semidefinita positiva se e solo se la segnatura di $\beta$ è $(r, n - r)$ con $r \le n$.
-			\item $q$ è semidefinita negativa se e solo se la segnatura di $\beta$ è $(n - r, r)$ con $r \le n$.
-			\item $q$ è indefinita se e solo se la segnatura di $\beta$ è $(r, s)$ con $r, s \ne 0$.
+			\item $q$ è definita positiva $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ = n, n_- = 0, n_0 = 0)$.
+			\item $q$ è definita negativa $\Leftrightarrow$ la segnatura di $\beta$ è $(0, n)$.
+			\item $q$ è semidefinita positiva $\Leftrightarrow$ la segnatura di $\beta$ è $(r, n - r)$ con $r \le n$.
+			\item $q$ è semidefinita negativa $\Leftrightarrow$ la segnatura di $\beta$ è $(n - r, r)$ con $r \le n$.
+			\item $q$ è indefinita $\Leftrightarrow$ la segnatura di $\beta$ è $(r, s)$ con $r, s \ne 0$.
 		\end{itemize}
 	\end{oss}
 
 	\begin{deff}{Matrice hassiana}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ e sia $f: \mathbb{R^n} \to \mathbb{R}$ una funzione di $n$ variabili, derivabile due volte. \\
-		Dato $v \in \mathbb{R}^n$, la \textbf{matrice hassiana} di $f$ in $v$ è la matrice $Hf(v) \in M_n(\mathbb{R})$ tale che $h_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}(v)$. \\
+		Sia $f: \mathbb{R^n} \to \mathbb{R}$ una funzione di $n$ variabili, derivabile due volte. \\
+		Dato $v = (x_1, ..., x_n) \in \mathbb{R}^n$, la \textbf{matrice hassiana} di $f$ in $v$ è la matrice $Hf(v)$ tale che:
+		\[ {Hf(v)}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}(v) \]
 		Se le derivate seconde sono continue allora $Hf(v)$ è simmetrica. \\
-		Inoltre, se $Hf(v)$ è:
+		La matrice hassiana serve per capire la natura dei punti critici ($\nabla f = 0$). Infatti, se $Hf(v)$ è:
 		\begin{itemize}
-			\item definita positiva allora $f$ ha un minimo locale in $v$
-			\item definita negativa allora $f$ ha un massimo locale in $v$
-			\item indefinita allora $f$ ha un punto di sella in $v$
+			\item definita positiva $\Rightarrow f$ ha un punto di minimo locale in $v$.
+			\item definita negativa $\Rightarrow f$ ha un punto di massimo locale in $v$.
+			\item indefinita $\Rightarrow f$ ha un punto di sella in $v$.
 		\end{itemize}
 	\end{deff}
 
+	\subsection{Prodotto scalare e base ortonormale}
+
 	\begin{deff}{Prodotto scalare}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{R}$. \\
-		Un \textbf{prodotto scalare} su $V$ è una forma bilineare simmetrica $\beta: V \times V \to \mathbb{K}$ che è definita positiva.
+		Un \textbf{prodotto scalare} su $V$ è una forma bilineare simmetrica e definita positiva. \\
+		Notazioni quando $\beta$ è un prodotto scalare:
+		\begin{itemize}
+			\item $\beta(v, u) = (v, u) = \langle v, u \rangle = v \cdot u$.
+			\item $q(v) = ||v||^2$, cioè $||v|| = \sqrt{(v, u)}$.
+		\end{itemize}
 	\end{deff}
 
 	\begin{es}
@@ -4154,31 +4293,63 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\begin{deff}{Versore}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
-		Un vettore $v \in V$ si dice \textbf{versore} se $\beta(v, v) = 1$.
-		Inoltre, $v, u$ sono ortogonali se $\beta(v, u) = 0$. \\
-		Un insieme di vettori sono \textbf{ortonormali} se sono versori tra loro ortogonali, cioè se $\forall i, j (V_i, V_j) = \begin{cases}
+		Sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
+		Un vettore $v \in V$ si dice \textbf{versore} se $||v|| = 1$ cioè se $(v, v) = 1$. \\
+		Inoltre, $v, u$ sono \textbf{ortogonali} se $(v, u) = 0$. \\
+		Un insieme di vettori $v_1, ..., v_n$ sono \textbf{ortonormali} se sono versori tra loro ortogonali,
+		cioè se $(v_i, v_j) = \begin{cases}
 			1 & \text{se } i = j \\
 			0 & \text{se } i \ne j
-		\end{cases}$.
+		\end{cases}$
 	\end{deff}
 
-	\begin{teo}{Base e prodotto scalare}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
-		Allora esiste una base ortonormale di $V$ rispetto a $\beta$.
+	\begin{teo}{Base ortonormale}{}
+		Per ogni prodotto scalare esiste una base ortonormale.
 	\end{teo}
 	\begin{proof}
-		Per il teorema di Sylvester, poichè il prodotto scalare è una forma bilineare simmetrica,
-		esiste una base $v_1, v_2, ..., v_n$ tale che la matrice di $\beta$ rispetto a tale base è diagonale con $r$ elementi $1$, $s$ elementi $-1$ e $n - r - s$ elementi $0$. \\
-		Poichè è definita positiva, la segnatura è $(n, 0)$, quindi $r = n$ e $s = 0$, cioè la matrice è $I_n$. \\
-		Dunque $(V_i, V_j) = (I_n)_{ij} = \begin{cases}
+		Poichè un prodotto scalare è una forma bilineare simmetrica definita positiva, esiste una base $v_1, ..., v_n$ tale che la matrice di $\beta$ rispetto a tale base è $I_n$ e quindi $(v_i, v_j) = (I_n)_{ij} = \begin{cases}
 			1 & \text{se } i = j \\
 			0 & \text{se } i \ne j
-		\end{cases}$.
+		\end{cases}$ (cioè $v_1, ..., v_n$ è una base ortonormale).
 	\end{proof}
 
-	\section{Unità 8  - Lezioni 18, 19, 20}
+	\begin{es}
+		Siano $V = \mathbb{R}^n, v = (x_1, ..., x_n), u = (y_1, ..., y_n)$. \\
+		$(v, u) = x_1y_1 + x_2y_2 + ... + x_ny_n$ è una forma bilineare simmetrica definita positiva (perchè nella base canonica la matrice è $I_n$) $\Rightarrow$ è un prodotto scalare (detto \textbf{prodotto scalare standard}). \\
+		Quindi $e_1, ..., e_n$ è una base ortonormale di $V$ e $||v|| = \sqrt{(v, v)} = \sqrt{x_1^2 + ... + x_n^2}$.
+	\end{es}
 
+	\begin{es}
+		Siano $a, b \in \mathbb{R}$ e $V = \{f: [a, b] \to \mathbb{R} \mid f \text{ continua}\}$. \\
+		Definiamo il prodotto scalare $(f, g) = \int_a^b f(t)g(t)dt$ (cioè $||f|| = \sqrt{\int_a^b (f(t))^2 dt}$). \\
+		È definita positiva perchè $\int_a^b (f(t))^2 dt > 0$ per $f \ne 0$.
+	\end{es}
+
+	\begin{es}
+		Siano $V = \mathbb{R}^2, \beta((x_1, x_2), (y_1, y_2)) = 2x_1y_1 + x_1y_2 + x_2y_1 + x_2y_2$. \\
+		$\beta$ è bilineare, simmetrica e la sua matrice rispetto alla base canonica è $A = \begin{pmatrix}
+			2 & 1 \\
+			1 & 1
+		\end{pmatrix}$. \\
+		$w_1 = e_1, w_2 = e_2 - \frac{1}{2}e_1$ e in questa base la matrice di $\beta$ è:
+		\begin{equation*}
+			\begin{pmatrix}
+				2 & 0 \\
+				0 & \frac{1}{2}
+			\end{pmatrix}
+		\end{equation*}
+		$v_1 = \frac{1}{\sqrt{2}}w_1 = (\frac{\sqrt{2}}{2}, 0)$ e $v_2 = \sqrt{2}w_2 = (\frac{-\sqrt{2}}{2}, \sqrt{2})$. \\
+		In questa base $\beta(v_1, v_1) = \frac{2}{\sqrt{2}^2} = 1$, $\beta(v_2, v_2) = \frac{\sqrt{2}^2}{2} = 1$ e la sua matrice è:
+		\begin{equation*}
+			\begin{pmatrix}
+				1 & 0 \\
+				0 & 1
+			\end{pmatrix}
+		\end{equation*}
+		Perciò $\beta$ è un prodotto scalare e $v_1, v_2$ è una base ortonormale rispetto a $\beta$ (non rispetto al prodotto scalare standard).
+	\end{es}
+
+	\section{Unità 8  - Lezioni 18, 19, 20}
 	\begin{prop}
 		Il prodotto scalare di due vettori è uguale al prodotto scalare standard dei vettori delle loro coordinate rispetto ad una base ortonormale.
 	\end{prop}
