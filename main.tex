@@ -3840,22 +3840,21 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		Per il teorema precedente, esiste una base di $\mathbb{R}^6$ in cui la matrice di $f$ è:
 		\begin{equation*}
 			\begin{pmatrix}
-				J_{7,3} & 0 & 0 \\
-				0 & J_{3,2} & 0 \\
-				0 & 0 & J_{-2,1}
+				J_{7,3} & \vline & 0 & \vline & 0 \\
+				\hline
+				0 & \vline & J_{3,2} & \vline & 0 \\
+				\hline
+				0 & \vline & 0 & \vline & J_{-2,1}
 			\end{pmatrix} = \left(
-			\begin{array}{ccc|ccc|ccc}
-			7 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-			0 & 7 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
-			0 & 0 & 7 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			\begin{array}{ccc|cc|c}
+			7 & 1 & 0 & 0 & 0 & 0 \\
+			0 & 7 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 7 & 0 & 0 & 0 \\
 			\hline
-			0 & 0 & 0 & 3 & 1 & 0 & 0 & 0 & 0 \\
-			0 & 0 & 0 & 0 & 3 & 1 & 0 & 0 & 0 \\
-			0 & 0 & 0 & 0 & 0 & 3 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 3 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 3 & 0 \\
 			\hline
-			0 & 0 & 0 & 0 & 0 & 0 & -2 & 1 & 0 \\
-			0 & 0 & 0 & 0 & 0 & 0 & 0 & -2 & 1 \\
-			0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -2
+			0 & 0 & 0 & 0 & 0 & -2
 			\end{array}
 			\right)
 		\end{equation*}
