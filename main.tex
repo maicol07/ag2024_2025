@@ -24,20 +24,17 @@
 \setlist[description]{leftmargin=\parindent,labelindent=\parindent}
 \tcbuselibrary{theorems}
 
-\newtcbtheorem[number within=section]{teo}{Teorema}%
+\newtcbtheorem[number within=section,list inside={teo}]{teo}{Teorema}%
 {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 \theoremstyle{definition}
-\newtcbtheorem[number within=section]{cor}{Corollario}%
+\newtcbtheorem[number within=section,list inside={cor}]{cor}{Corollario}%
 {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
-\newtcbtheorem[number within=section]{deff}{Definizione}%
+\newtcbtheorem[number within=section,list inside={deff}]{deff}{Definizione}%
 {colback=blue!3,colframe=blue!25!gray,fonttitle=\bfseries}{th}
 \newtheorem*{oss}{Osservazione}
 \newtheorem*{dimm}{Dimostrazione}
 \newtheorem*{es}{Esempio}
 \newtheorem*{prop}{Proposizione}
-% Add theorems to the table of contents
-% \usepackage{tocloft}
-% \newcommand{\listoftheorems}{\section*{Lista dei teoremi}\addcontentsline{toc}{section}{Lista dei teoremi}\cftsetindents{section}{0em}{2.3em}\cftsetindents{subsection}{2.3em}{2.3em}\cftsetindents{subsubsection}{4.6em}{2.3em}}
 
 \title{Riassunto Algebra e Geometria}
 \author{Maicol Battistini}
@@ -46,6 +43,12 @@
 
 \maketitle
 \tableofcontents
+\newpage
+
+\tcblistof[\section*]{deff}{Lista delle definizioni}
+\tcblistof[\section*]{teo}{Lista dei teoremi}
+\tcblistof[\section*]{cor}{Lista dei corollari}
+
 \newpage
 
 \section{Unità 1 - Lezioni 1, 2}
