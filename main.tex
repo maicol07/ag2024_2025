@@ -13,7 +13,7 @@
 \usepackage{wrapfig}
 \usepackage{enumitem}
 \usepackage{awesomebox}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{soul}
 \usepackage{cancel}
 \usepackage{mathtools}
@@ -4367,32 +4367,40 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{es}
 
 	\section{Unità 8  - Lezioni 18, 19, 20}
+	\subsection{Approfondimenti sul prodotto scalare}
 	\begin{prop}
-		Il prodotto scalare di due vettori è uguale al prodotto scalare standard dei vettori delle loro coordinate rispetto ad una base ortonormale.
+		Il prodotto scalare di due vettori è uguale al prodotto scalare standard delle loro coordinate rispetto a una base ortonormale.
 	\end{prop}
 	\begin{proof}
-		Sappiamo che, se $\beta$ è una forma lineare e $A$ è la sua matrice rispetto a una base $v_1, v_2, ..., v_n$, e se
-		$v = a_1v_1 + a_2v_2 + ... + a_nv_n$ e $u = b_1v_1 + b_2v_2 + ... + b_nv_n$, allora $\beta(v, u) = (a_1, a_2, ..., a_n)A \begin{pmatrix}
-			b_1 \\
-			b_2 \\
-			\vdots \\
-			b_n
-		\end{pmatrix}$. \\
-		Ora, se $\beta$ è un prodotto scalare e $v_1, v_2, ..., v_n$ è una base ortonormale, allora $A = I_n$ e quindi $(v, u) = (x_1, x_2, ..., x_n)I_n \begin{pmatrix}
-			y_1 \\
-			y_2 \\
-			\vdots \\
-			y_n
-		\end{pmatrix} = x_1y_1 + x_2y_2 + ... + x_ny_n$.
+		Siano $v, u \in V$ e $v_1, ..., v_n$ una base ortonormale. Siano $(a_1, ..., a_n)$ e $(b_1, ..., b_n) \in \mathbb{R}^2$ le coordinate di $v$ e $u$ rispetto alla base ortonormale:
+		\begin{align*}
+			v &= a_1v_1 + ... + a_nv_n \\
+			u &= b_1v_1 + ... + b_nv_n
+		\end{align*}
+		Allora:
+		\begin{align*}
+			(v, u) &= (a_1v_1 + ... + a_nv_n, \ b_1v_1 + ... + b_nv_n) \\
+			&= a_1b_1(v_1, v_1) + ... + a_nb_n(v_n, v_n) \\
+			&= a_1b_1 + ... + a_nb_n \\
+			&= ((a_1, ..., a_n), (b_1, ..., b_n))
+		\end{align*}
 	\end{proof}
 
 	\begin{prop}
-		Se $v_1, v_2, ..., v_n$ sono vettori tra loro ortogonali, allora sono linearmente indipendenti.
+		Se dei vettori $v_1, ..., v_n$ sono ortogonali, allora sono linearmente indipendenti.
 	\end{prop}
 	\begin{proof}
-		Supponiamo che $(v_i, v_j) = 0$ per $i \ne j$ e vogliamo mostrare che se $a_1v_1 + a_2v_2 + ... + a_nv_n = 0$ allora $a_1 = a_2 = ... = a_n = 0$. \\
-		In effetti, per ogni $\forall i \in \{1, 2, ..., n\}$ abbiamo che $(a_1v_1 + a_2v_2 + ... + a_nv_n, v_i) = a_1(v_1, v_i) + a_2(v_2, v_i) + ... + a_n(v_n, v_i) = a_i(v_i, v_i) = 0$.
-		Quindi $(v_i, a_1v_1 + a_2v_2 + ... + a_nv_n) = (v_i, 0) = 0$
+		Siano $a_1, ..., a_k \in \mathbb{R}$ e $a_1v_1 + ... + a_kv_k = 0$. Dobbiamo mostrare che $a_1 = ... = a_k = 0$. \\
+		Per $v_1$:
+		\[ 0 = (v_1, 0) = (v_1, a_1v_1 + ... + a_kv_k) = a_1(v_1, v_1) + ... + a_k(v_1, v_k) = a_1(v_1, v_1) \Rightarrow a_1 = 0 \]
+		Si noti che $(v_1, v_1) \ne 0$ perchè un prodotto scalare è definito positivo, mentre $(v_1, v_k) = 0$ perchè i vettori sono ortogonali. Lo stesso vale per ogni altro vettore $(v_1, v_i)$ con $i = 2, ..., k$. \\
+		Analogamente si verifica che:
+		\begin{align*}
+			0 &= (v_2, 0) = \Rightarrow a_2 = 0 \\
+			&\vdots \\
+			0 &= (v_k, 0) = \Rightarrow a_k = 0
+		\end{align*}
+		Quindi $a_1 = ... = a_k = 0$ e sono linearmente indipendenti.
 	\end{proof}
 
 	\begin{es}
@@ -4407,55 +4415,111 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		Nella base $\{v_1, v_2\}$, la matrice di $\beta$ è $I_2$, di conseguenza la segnatura di $\beta$ è $(2, 0)$ e quindi $\beta$ è definita positiva, cioè è un prodotto scalare.
 	\end{es}
 
+	\begin{es}
+		Sia $V = \{ \text{matrici } 2 \times 2 \text{ a coefficienti in } \mathbb{R} \text{ simmetriche}\} = \left\{\begin{pmatrix}
+			a & b \\
+			b & c
+		\end{pmatrix} \mid a, b, c \in \mathbb{R}\right\}$ con la forma bilineare $\left\langle \begin{pmatrix}
+			a & b \\
+			b & c
+		\end{pmatrix}, \begin{pmatrix}
+			x & y \\
+			y & z
+		\end{pmatrix} \right\rangle = ax + 2by + cz$. \\
+		Osserviamo che è simmetrica e che, dati $A = \begin{pmatrix}
+			1 & 0 \\
+			0 & 0
+		\end{pmatrix}, B = \begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+		\end{pmatrix}, C = \begin{pmatrix}
+			0 & 0 \\
+			0 & 1
+		\end{pmatrix}$ e tale che $(A, B) = 0 = (A, C) = (B, C) \Rightarrow A, B, C$ sono ortogonali $\Rightarrow$ sono linearmente indipendenti $\Rightarrow$ formano una base ortogonale di $V$. \\
+		Sono versori? $||A|| = 1, ||C|| = 1$, ma $||B|| = \sqrt{(B, B)} = \sqrt{2} \ne 1$ quindi non sono versori. Definisco $B^{-1} = \frac{\sqrt{2}}{2}B = \begin{pmatrix}
+			0 & \frac{1}{\sqrt{2}} \\
+			\frac{1}{\sqrt{2}} & 0
+		\end{pmatrix}$ e $B^{-1}$ è un versore. \\
+		Quindi la funzione bilineare data è un prodotto scalare e, rispetto ad essa, la base $\{A, B^{-1}, C\}$ è una base ortonormale.
+	\end{es}
+
+	\subsection{Distanza euclidea e angolo convesso}
+
 	\begin{prop}
 		\textbf{Disuguaglianza di Carichy-Schwartz} \\
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
-		Allora $\forall v, u \in V$ vale che $|\beta(v, u)| \le \sqrt{\beta(v, v)}\sqrt{\beta(u, u)}$ e l'uguaglianza vale se e solo se $v$ e $u$ sono linearmente dipendenti.
+		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ con un prodotto scalare. \\
+		Allora $\forall v, u \in V |(v, u)| \le ||v|| \cdot ||u||$ e l'uguaglianza vale se e solo se $v$ e $u$ sono linearmente dipendenti.
 	\end{prop}
+
 	\begin{deff}{Angolo convesso}{}
-		L'angolo convesso tra $v, u \in V$ è $\theta = \arccos\left(\frac{\beta(v, u)}{\sqrt{\beta(v, v)}\sqrt{\beta(u, u)}}\right)$.
+		L'angolo convesso tra $v, u \in V$ è $\theta = \arccos\left(\frac{(v, u)}{||v|| \cdot ||u||}\right)$.
 	\end{deff}
 	\begin{deff}{Distanza euclidea}{}
-		La distanza euclidea tra due punti $P, Q \in \mathbb{R}^n$ è $d(P, Q) = ||\overrightarrow{PQ}|| = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + ... + (x_n - y_n)^2}$.
+		La distanza euclidea tra due punti $P, Q \in \mathbb{R}^n$ è:
+		\[d(P, Q) = ||\overrightarrow{PQ}|| = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + ... + (x_n - y_n)^2}\]
 	\end{deff}
 	\begin{es}
 		$P = (3, 1), Q = (5, 0)$. Calcolare la distanza euclidea tra $P$ e $Q$. \\
 		$d(P, Q) = \sqrt{(3 - 5)^2 + (1 - 0)^2} = \sqrt{4 + 1} = \sqrt{5}$.
 	\end{es}
 
-	\begin{teo}{Proprietà distanza euclidea}{}
-		La distanza euclidea gode delle seguenti proprietà:
+	\begin{prop}
+		La distanza euclidea gode delle seguenti proprietà $\forall P, Q, R \in V$:
 		\begin{enumerate}
 			\item $d(P, Q) \ge 0$ e $d(P, Q) = 0 \Leftrightarrow P = Q$
-			\item $d(P, Q) = d(Q, P) \ \forall P, Q \in V$
-			\item $d(P, Q) \le d(P, R) + d(R, Q) \forall P, Q, R \in V$ (disuguaglianza triangolare)
+			\item $d(P, Q) = d(Q, P)$
+			\item $d(P, Q) \le d(P, R) + d(R, Q)$
 		\end{enumerate}
-	\end{teo}
+	\end{prop}
 	\begin{proof}
+		Dimostriamo le proprietà:
 		\begin{enumerate}
 			\item Poichè un prodotto scalare è definito positivo, $(\overrightarrow{PQ}, \overrightarrow{PQ}) \ge 0$ e quindi $||\overrightarrow{PQ}|| = 0 \Leftrightarrow \overrightarrow{PQ} = 0 \Leftrightarrow P = Q$.
-			\item Se $a \in \mathbb{R}, ||av|| = \sqrt{(av, av)} = \sqrt{a^2(v, v)} = |a|\sqrt{(v, v)} = |a|||v||$. \\
-			In particolare, se $a = -1, d(P, Q) = ||\overrightarrow{PQ}|| = ||\overrightarrow{QP}|| = d(Q, P)$.
-			\item $d(P, Q) = ||\overrightarrow{PQ}|| = ||\overrightarrow{PR} + \overrightarrow{RQ}|| \le ||\overrightarrow{PR}|| + ||\overrightarrow{RQ}|| = d(P, R) + d(R, Q)$.
-			\item Se $v, w \in V, ||v+w|| \le ||v|| + ||w||$ perchè $||v+w||^2 = (v+w, v+w) = (v, v) + 2(v, w) + (w, w) \le ||v||^2 + 2||v||\cdot||w|| + ||w||^2 = (||v|| + ||w||)^2$.
-			In particolare per $v = \overrightarrow{PR}, w = \overrightarrow{RQ}, v + w = \overrightarrow{PR} + \overrightarrow{RQ} \le \overrightarrow{PQ}$.
+			\item Se $a \in \mathbb{R}, ||av|| = \sqrt{(av, av)} = \sqrt{a^2(v, v)} = \sqrt{2}\sqrt{(v, v)} |a|\sqrt{(v, v)} = |a| \cdot ||v||$. \\
+			In particolare, se $a = -1$, ho che $||-v|| = ||v||$. Quindi $d(P, Q) = ||\overrightarrow{PQ}|| = ||-\overrightarrow{QP}|| = d(Q, P)$.
+			\item Se $v, w \in V \Rightarrow ||v + w||^2 = (v + w, v + w) = (v, v) + \textcolor{OliveGreen}{2(v, w)} + (w, w) \le ||v||^2 + \textcolor{OliveGreen}{2|v, w|} + ||w||^2 = (||v|| + ||w||)^2$ (per la disuguaglianza di Carichy-Schwartz $\textcolor{OliveGreen}{2(v, w)} \le 2||v|| \cdot ||w||$). \\
+			In particolare, per $v = \overrightarrow{PR}, w = \overrightarrow{RQ}, v + w = \overrightarrow{PQ}$, ho la disuguaglianza cercata.
 		\end{enumerate}
 	\end{proof}
 
 	\begin{deff}{Sottospazio ortoganale}{}
-		Sia $U$ un sottospazio vettoriale.
-		Il \textbf{sottospazio ortogonale} di $U$ è $U^\perp = \{v \in V \mid \forall u \in U, \beta(v, u) = 0\}$.
+		Sia $U$ un sottospazio vettoriale su uno spazio vettoriale $V$ su $\mathbb{R}$. \\
+		Il \textbf{sottospazio ortogonale} a $U$ è $U^\perp = \{v \in V \mid (v, u) = 0 \ \forall u \in U\}$.
 	\end{deff}
 	\begin{oss}
-		Se $v_1, v_2, ..., v_n \in U^\perp$ allora $(v_1, u) = 0, (v_2, u) = 0, ..., (v_n, u) = 0 \ \forall u \in U$ e quindi $(v_1 + v_2, u) = (v_1, u) + (v_2, u) = 0 \Rightarrow v_1 + v_2 \in U^\perp$.
-		Analogamente, se $v \in U^\perp$ e $a \in \mathbb{K}$ allora $(av, u) = a(v, u) = 0 \Rightarrow av \in U^\perp$.
+		$U^\perp$ è un sottospazio vettoriale di $V$. Se $a_1, a_2 \in \mathbb{R}, v_1, v_2 \in U^\perp$ allora $a_1v_1 + a_2v_2 \in U^\perp$ perchè $(a_1v_1 + a_2v_2, u) = a_1(v_1, u) + a_2(v_2, u) = 0 + 0 = 0 \ \forall u \in U$. \\
+		Inoltre, se $u_1, u_k$ è una base di $U$ allora $v \in U^\perp \Leftrightarrow (v, u_1) = 0, ..., (v, u_k) = 0$.
+		In questo modo, $U^\perp$ è descritto da $k$ equazioni cartesiane in $V$, quindi $\dim U^\perp = n - k = \dim V - \dim U$. Quindi $V = U \oplus U^\perp$ (cioè $V$ è la somma diretta di $U$ e $U^\perp$).
 	\end{oss}
-	\begin{oss}
-		Osserviamo anche che $U \cap U^\perp = \{0\}$, infatti se $u \in U, U^\perp$ allora $(u, u) = 0 \Rightarrow u = 0$.
-	\end{oss}
-	Inoltre, se $u_1, u_2, ..., u_n$ è una base di $U$ allora $U^\perp \Leftrightarrow (v, u_1) = 0, (v, u_2) = 0, ..., (v, u_n) = 0$. \\
-	Quindi, se $\dim U = k$ allora $\dim V = n, \dim U^\perp = n - k$ (è descritto da $k$ equazioni cartesiane).
-	Pertanto, $V = U \oplus U^\perp$.
+
+	\begin{es}
+		$V = \mathbb{R}^3, U = \{x, y, z \in \mathbb{R}^3 \mid x = 2y \}$. Base di $U: u_1 = (1, 2, 0), u_2 = (1, 2, 1)$. \\
+		$U^\perp = \{v \in V \mid (v, u) = 0 \forall u \in U \Leftrightarrow (v, u_1) = 0, (v, u_2) = 0\}$. \\
+		Calcoliamo il prodotto scalare rispetto al prodotto scalare standard:
+		\begin{align*}
+			(v, u_1) &= (x, y, z) \cdot (1, 2, 0) = x + 2y + 0z = 0 \\
+			(v, u_2) &= (x, y, z) \cdot (1, 2, 1) = x + 2y + z = 0
+		\end{align*}
+		Quindi le equazioni cartesiane che definiscono $U^\perp$ sono:
+		\begin{align*}
+			\begin{cases}
+				x + 2y = 0 \\
+				x + 2y + z = 0
+			\end{cases}
+		\end{align*}
+		Se invece ho il prodotto scalare $((x, y, z), (a, b, c)) = 5xa + 2xb + 2ya + yb + 3zc$, allora:
+		\begin{align*}
+			(v, u_1) &= (x, y, z) \cdot (1, 2, 0) = 5x + 4x + 2y + 2y + 0z= 0 \\
+			(v, u_2) &= (x, y, z) \cdot (1, 2, 1) = 5x + 4x + 2y + 2y + 3z = 0
+		\end{align*}
+		Quindi le equazioni cartesiane che definiscono $U^\perp$ rispetto a questo prodotto scalare sono:
+		\begin{align*}
+			\begin{cases}
+				9x + 4y = 0 \\
+				9x + 4y + 3z = 0 \Rightarrow z = 0
+			\end{cases}
+		\end{align*}
+	\end{es}
 
 	\begin{es}
 		$V = \mathbb{R}^5, U = \{(x_1, x_2, x_3, x_4, x_5) \in V$ tale che $x_1 - 2x_2 = 0, x_3 = 0 e x_4 = x_2 + x_5\}$. \\
@@ -4480,67 +4544,108 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 
 	\subsection{Isometrie}
 	\begin{deff}{Isometria}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
-		Un'applicazione lineare $f: V \to V$ è un'\textbf{isometria} se preserva il prodotto scalare, cioè $(f(v), f(u)) = (v, u) \ \forall v, u \in V$.
+		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ con un prodotto scalare. \\
+		Un'applicazione lineare $f: V \to V$ è un'\textbf{isometria} di $V$ se preserva il prodotto scalare, cioè:
+		\[ (f(v), f(u)) = (v, u) \ \forall v, u \in V \]
 	\end{deff}
 	\begin{oss}
 		"Isometria" = "stessa misura"
 	\end{oss}
 	\begin{prop}
-		$f$ è un isometria $\Leftrightarrow \forall v, u \in V, ||f(v)|| = ||v||$.
+		$f$ è un isometria $\Leftrightarrow ||f(v)|| = ||v|| \ \forall v, u \in V$.
 	\end{prop}
 	\begin{proof}
+		Dimostriamo entrambe le implicazioni:
 		\begin{itemize}
-			\item[$\Rightarrow$] Se $f$ è un'isometria, allora $||f(v)|| = \sqrt{(f(v), f(v))} = \sqrt{(v, v)} = ||v||$.
-			\item[$\Leftarrow$] Dati $v, u \in V$, calcoliamo $||v + u||^2 - ||v - u||^2 = (v + u, v + u) - (v - u, v - u) = 4(v, u) \Rightarrow (v, u) = \frac{||v + u||^2 - ||v - u||^2}{4}$. \\
-			Quindi se $f$ conserva la norma $(v, u) = \frac{||f(v) + f(u)||^2 - ||f(v) - f(u)||^2}{4} = \frac{||v + u||^2 - ||v - u||^2}{4} = (f(v), f(u))$.
+			\item[$\Rightarrow$] Se $f$ è un'isometria, allora $||f(v)||^2 = (f(v), f(v)) = (v, v) = ||v||^2$.
+			\item[$\Leftarrow$] Dati $v, u \in V$, se f conserva le norme, calcoliamo:
+			\begin{align*}
+				||v + u||^2 - ||v - u||^2 &= (v + u, v + u) - (v - u, v - u) \\
+										  &= \cancel{(v, u)} + \cancel{(u, u)} + 2(v, u) - \cancel{(v, v)} - \cancel{(u, u)} + 2(v, u) \\
+										  &= 4(v, u) \\
+										  &\Rightarrow (v, u) = \frac{||v + u||^2 - ||v - u||^2}{4}
+			\end{align*}
+			Quindi se $f$ conserva le norme allora conserva anche il prodotto scalare.
 		\end{itemize}
 	\end{proof}
 
 	\begin{es}
-		Sia $V = \mathbb{R}^2$ con il prodotto scalare standard. Dato $v = (x, y) \in V$, consideriamo l'applicazione $f: V \to V$ definita da $f(x, y) = (\frac{\sqrt{3}}{2}x + \frac{1}{2}y, -\frac{1}{2}x + \frac{\sqrt{3}}{2}y)$. \\
+		Sia $V = \mathbb{R}^2$ con il prodotto scalare standard. Dato $v = (x, y) \in V$, consideriamo l'applicazione $f: V \to V$ definita da:
+		\[ f(x, y) = \left(\frac{\sqrt{3}}{2}x + \frac{1}{2}y, -\frac{1}{2}x + \frac{\sqrt{3}}{2}y \right) \]
 		$f$ è un'isometria? \\
 		Sì, perchè $||v|| = \sqrt{x^2 + y^2},
 		||f(v)|| = \sqrt{(\frac{\sqrt{3}}{2}x + \frac{1}{2}y)^2 + (-\frac{1}{2}x + \frac{\sqrt{3}}{2}y)^2} = \sqrt{\frac{3}{4}x^2 + xy + \frac{1}{4}y^2 + \frac{1}{4}x^2 - xy + \frac{3}{4}y^2} = \sqrt{x^2 + y^2} = ||v||$.
 	\end{es}
 
 	\begin{oss}
-		Una isometria conserva le distanze
+		Una isometria conserva le distanze tra i puynti e conserva anche gli angoli:
+		\[ \arccos\left(\frac{(v, u)}{\sqrt{(v, v)}\sqrt{(u, u)}}\right) = \arccos\left(\frac{(f(v), f(u))}{||f(v)|||f(u)||}\right) \]
+		(angolo convcesso tra $v$ e $u$, angolo convesso tra $f(v)$ e $f(u)$).
 	\end{oss}
-	\begin{prop}
-		Se $f$ è un'isometria, allora $f$ conserva gli angoli.
-	\end{prop}
-	\begin{proof}
-		In effetti, l'angolo convesso tra $v, u$ è:
-		\begin{align*}
-			\arccos\left(\frac{(v, u)}{\sqrt{(v, v)}\sqrt{(u, u)}}\right) = \arccos\left(\frac{(f(v), f(u))}{||f(v)|||f(u)||}\right)
-		\end{align*}
-		che è l'angolo convesso tra $f(v), f(u)$.
-	\end{proof}
 
 	\begin{oss}
 		Non vale il contrario, cioè se $f$ conserva gli angoli non è detto che sia un'isometria.
 	\end{oss}
 
-	\begin{teo}{Isometrie e isomorfismo}{}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$ e sia $\beta: V \times V \to \mathbb{K}$ un prodotto scalare. \\
-		Allora $f: V \to V$ è un'isometria se e solo se è un isomorfismo.
-	\end{teo}
-	\begin{proof}
-		Sia $V$ uno spazio vettoriale con un prodotto scalare e sia $f: V \to V$ un'isometria rispetto a quel prodotto scalare. \\
-		Mostriamo prima che $f$ è iniettiva. \\
-		Poichè un prodotto scalare è definito positivo, $||v|| = 0 \Leftrightarrow v = 0$. \\
-		Ora, se $v \in \ker f$ allora $f(v) = 0 \Rightarrow ||f(v)|| = 0$ ma poichè $f$ è un'isometria, $||f(v)|| = ||v|| = 0 \Rightarrow v = 0 \Rightarrow \ker f = \{0\}$. \\
-		Quindi $f$ è iniettiva. \\
-		Mostriamo ora che $f$ è suriettiva: per il teorema del rango, $\dim Im f = \dim V - 0$ e quindi $f$ è suriettiva.
-	\end{proof}
 	\begin{es}
-		Non vale il contrario, cioè se $f$ è un isomorfismo non è detto che sia un'isometria.
+		$f: V \to V, f(v) = 2y \in V$. L'angolo tra $v$ e $u$ è:
+		\[\theta = \arccos\left(\frac{(v, u)}{||v|| \cdot ||u||}\right) = \arccos\left(\frac{(2y, 2y)}{||2y|| \cdot ||2y||}\right) = \arccos\left(\frac{\cancel{4}(y, y)}{\cancel{4}||y||^2}\right) \]
+		Quindi $f$ conserva gli angoli, ma non è un'isometria perchè $||f(v)|| = ||2y|| = 2||y|| \ne ||y||$.
 	\end{es}
 
+	\begin{teo}{Isometrie e isomorfismo}{}
+		Ogni isometria è un isomorfismo.
+	\end{teo}
+	\begin{proof}
+		Sia $f$ un'isometria. Se $v \in \ker f$, allora $f(v) = 0$ e quindi $||v|| = ||f(v)|| = 0$. \\
+		Ma allora $v = 0$ e quindi $\ker f = \{0\}$. Quindi $f$ è iniettiva. \\
+		Di conseguenza, per il teorema del rango è anche suriettiva (perchè $\dim V = \dim \IM f + \dim \ker f$ e $\dim \ker f = 0$).
+	\end{proof}
+
+	\begin{oss}
+		Non vale il contrario, cioè se $f$ è un isomorfismo non è detto che sia un'isometria. Ad esempio, $f = 2I$, ovvero $f(v) = 2v \ \forall V \in V$, è un isomorfismo ma non è un'isometria perchè $||f(v)|| = 2||v|| \ne ||v||$.
+	\end{oss}
+
+	\begin{prop}
+		Sua $f: V \to V$ è un'isometria e sia $\lambda$ un autovalore di $f$. Se $\lambda \in \mathbb{R}$, allora $\lambda = 1$ o $\lambda = -1$.
+	\end{prop}
+	\begin{proof}
+		Se $\lambda$ è un autovalore di $f$, allora $\exists v \in V, v \ne 0 \mid f(v) = \lambda v$ e quindi:
+		\begin{align*}
+			||f(v)|| &= ||\lambda v|| = |\lambda| \cdot ||v|| \\
+			&= ||v|| \quad \text{(perchè $f$ è un'isometria)} \\
+			&\Rightarrow |\lambda| = 1
+		\end{align*}
+	\end{proof}
+
+	\begin{oss}
+		$f$ può avere autovalori non reali, ad esempio se $f: \mathbb{R}^2 \to \mathbb{R}^2$, data da $f(x, y) = (y, -x)$ è un'isometria rispetto al prodotto scalare standard (perchè $||(x, y)|| = x^2 + y^2 = ||(y, -x)||$)
+		ma $\begin{pmatrix}
+			0 - \lambda & 1 \\
+			-1 & 0 - \lambda
+		\end{pmatrix} = \lambda^2 + 1$, allora ha come autovalori $\lambda = i$ e $\lambda = -i$, entrambi $\in \mathbb{C}$.
+	\end{oss}
+
 	\begin{deff}{Matrice ortogonale}{}
-		Una matrice $A$ è \textbf{ortogonale} se $A^tA = I_n$.
+		Una matrice $A$ è \textbf{ortogonale} se $A^tA = I_n$ (cioè $A^t = A^{-1}$).
+		In altre parole i vettori colonna di $A$ formano una base ortonormale rispetto al prodotto scalare standard.
 	\end{deff}
+
+	\begin{es}
+		$A = \begin{pmatrix}
+			0 & 1 \\
+			-1 & 0
+		\end{pmatrix}$ è ortogonale perchè $A^tA = \begin{pmatrix}
+			0 & -1 \\
+			1 & 0
+		\end{pmatrix} \begin{pmatrix}
+			0 & 1 \\
+			-1 & 0
+		\end{pmatrix} = \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} = I_2$.
+	\end{es}
 
 	\begin{es}
 		$A = \begin{pmatrix}
@@ -4557,111 +4662,138 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			0 & 1
 		\end{pmatrix} = I_2$.
 	\end{es}
-	\begin{oss}
-		$A$ è ortogonale se e solo se le colonne di $A$ formano una base ortonormale rispetto al prodotto scalare standard.
-	\end{oss}
 
-	\begin{teo}{Basi ortonormali e matrice del cambio di base}
-		Sia $V$ uno spazio vettoriale su $\mathbb{K}$. \\
-		Sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$. Allora sia $v_1', v_2', ..., v_n'$ un'altra base ortonormale di $V$
-		se e solo se la matrice del cambio di base è ortogonale.
-	\end{teo}
+	\begin{prop}
+		Se $A$ è ortogonale $det(A) = \pm 1$.
+	\end{prop}
 	\begin{proof}
-		Poichè $v_1, v_2, ..., v_n$ è una base ortonormale, cioè $(v_i, v_j) = \begin{cases}
-			1 & \text{se } i = j \\
-			0 & \text{se } i \ne j
-		\end{cases}$, allora la matrice di tale prodotto scalare in base $v_1, v_2, ..., v_n$ è $I_n$. \\
-		Quindi se $B$ è la matrice del cambio di base, la matrice del prodotto scalare in base $v_1', v_2', ..., v_n'$ è $B^tI_nB = B^tB = I_n$. \\
-		Quindi $B$ è ortogonale.
+		Per definizione: $1 = \det(I_n) = \det(A^tA) = \det(A^t) \cdot \det(A) = (\det(A))^2 \Rightarrow \det(A) = \pm 1$.
 	\end{proof}
 
-	\begin{teo}{Isometrie e basi ortogonali}
-		Una applicazione lineare $f: V \to V$ è un'isometria se e solo se manda basi ortonormali in basi ortonormali.
+	\begin{oss}
+		Non vale il contrario, cioè se $\det(A) = \pm 1$ non è detto che $A$ sia ortogonale. Ad esempio, $A = \begin{pmatrix}
+			2 & 0 \\
+			0 & \frac{1}{2}
+		\end{pmatrix}$ ha $\det(A) = 1$ ma non è ortogonale perchè $A^tA = \begin{pmatrix}
+			2 & 0 \\
+			0 & \frac{1}{2}
+		\end{pmatrix} \begin{pmatrix}
+			2 & 0 \\
+			0 & \frac{1}{2}
+		\end{pmatrix} = \begin{pmatrix}
+			4 & 0 \\
+			0 & \frac{1}{4}
+		\end{pmatrix} \ne I_2$.
+	\end{oss}
+
+	\begin{teo}{Basi ortonormali e matrice del cambio di base (T1)}{}
+		Sia $v_1, ..., v_n$ una base ortonormale (BON). Allora anche $w_1, ..., w_n$ è una base ortonormale $\Leftrightarrow$ la matrice del cambio di base è ortogonale.
 	\end{teo}
 	\begin{proof}
+		Poichè $(v_i, v_j) = \begin{cases}
+			1 & \text{se } i = j \\
+			0 & \text{se } i \ne j
+		\end{cases}$, \\
+		allora la matrice del prodotto scalare nella base $v_1, ..., v_n$ è $I_n$. \\
+		Quindi se $B$ è la matrice del cambiamento di base, la matrice del prodotto scalare in base $w_1, ..., w_n$ è $B^tI_nB = B^tB$. Quindi $w_1, ..., w_n$ è una BON  $\Leftrightarrow$ $B^tB = I_n \Leftrightarrow B$ è ortogonale.
+	\end{proof}
+
+	\begin{teo}{Isometrie e basi ortogonali (T2)}{}
+		Una applicazione lineare $f: V \to V$ è un'isometria $\Leftrightarrow$ manda basi ortonormali in basi ortonormali.
+	\end{teo}
+	\begin{proof}
+		Dimostriamo entrambe le implicazioni:
 		\begin{itemize}
-			\item[$\Rightarrow$] Sia $f$ una isometria e sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$. \\
-			Allora $(f(v_i), f(v_j)) = (v_i, v_j) = \begin{cases}
+			\item[$\Rightarrow$] Se $f$ è una isometria e $v_1, ..., v_n$ una base ortonormale di $V$, allora $(f(v_i), f(v_j)) = (v_i, v_j) = \begin{cases}
 				1 & \text{se } i = j \\
 				0 & \text{se } i \ne j
-			\end{cases}$, cioè $f(v_1), f(v_2), ..., f(v_n)$ è una base ortonormale di $V$.
-			\item[$\Leftarrow$] Sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$ etale che $f(v_1), f(v_2), ..., f(v_n)$ è una base ortonormale di $V$. \\
-			Si vuole mostrare che $f$ è un'isometria. \\
-			Dati $v, u \in V$, scriviamo $v = a_1v_1 + a_2v_2 + ... + a_nv_n$ e $u = b_1v_1 + b_2v_2 + ... + b_nv_n$. \\
-			Poichè $f$ è lineare, $f(v) = a_1f(v_1) + a_2f(v_2) + ... + a_nf(v_n)$ e $f(u) = b_1f(v_1) + b_2f(v_2) + ... + b_nf(v_n)$. \\
-			Allora $(v, u) = (a_1, ..., a_n) \begin{pmatrix}
-				b_1 \\
-				b_2 \\
-				\vdots \\
-				b_n
-			\end{pmatrix} = a_1b_1 + a_2b_2 + ... + a_nb_n = (f(v), f(u)) \ \forall v, u \in V$ cioè $f$ è un'isometria.
+			\end{cases}$, cioè $f(v_1), ..., f(v_n)$ è una base ortonormale di $V$.
+			\item[$\Leftarrow$] Sia $f: V \to V$ lineare, sia $v_1, ..., v_n$ una base ortonormale di $V$ tale che anche $f(v_1), ..., f(v_n)$ è una base ortonormale di $V$.
+			Vogliamo mostrare che $f$ è un'isometria. \\
+			Dati $v, u \in V$, scriviamo $v = a_1v_1 + ... + a_nv_n$ e $u = b_1v_1 + ... + b_nv_n$. \\
+			Poichè $f$ è lineare, $f(v) = a_1f(v_1) + ... + a_nf(v_n)$ e $f(u) = b_1f(v_1) + ... + b_nf(v_n)$. \\
+			Quindi $(v, u) = a_1b_1 + ... + a_nb_n = (f(v), f(u)) \ \forall v, u \in V$ cioè $f$ è un'isometria.
 		\end{itemize}
 	\end{proof}
 
-	\begin{teo}{Isometrie e matrici ortogonali}
-		Un'applicazione lineare $f: V \to V$ è un'isometria se e solo se la sua matrice in una qualsiasi base ortonormale è ortogonale.
+	\begin{teo}{Isometrie e matrici ortogonali (T3)}{}
+		Un'applicazione lineare $f: V \to V$ è un'isometria $\Leftrightarrow$ la sua matrice in una qualsiasi base ortonormale è una matrice ortogonale.
 	\end{teo}
 	\begin{proof}
-		Sia $v_1, v_2, ..., v_n$ una base ortonormale di $V$ e sia $A$ la matrice di $f$ in tale base, cioè:
+		Sia $v_1, ..., v_n$ una base ortonormale di $V$ e sia $A$ la matrice di $f$ in tale base, cioè:
 		\begin{align*}
-			f(v_1) = a_{11}v_1 + a_{21}v_2 + ... + a_{n1}v_n \\
-			f(v_2) = a_{12}v_1 + a_{22}v_2 + ... + a_{n2}v_n \\
-			\vdots \\
-			f(v_n) = a_{1n}v_1 + a_{2n}v_2 + ... + a_{nn}v_n \\
-			A = \begin{pmatrix}
-				a_{11} & a_{12} & \cdots & a_{1n} \\
-				a_{21} & a_{22} & \cdots & a_{2n} \\
-				\vdots & \vdots & \ddots & \vdots \\
-				a_{n1} & a_{n2} & \cdots & a_{nn}
+			f(v_1) &= a_{11}v_1 + a_{21}v_2 + ... + a_{n1}v_n \\
+				   &\vdots \\
+			f(v_n) &= a_{1n}v_1 + a_{2n}v_2 + ... + a_{nn}v_n \\
+				 A &= \begin{pmatrix}
+				a_{11} & \cdots & a_{1n} \\
+				a_{21} & \cdots & a_{2n} \\
+				\vdots & \ddots & \vdots \\
+				a_{n1} & \cdots & a_{nn}
 			\end{pmatrix}
 		\end{align*}
-		$(f(v_i), f(v_j)) = (a_{1i}v_1 + a_{2i}v_2 + ... + a_{ni}v_n, a_{1j}v_1 + a_{2j}v_2 + ... + a_{nj}v_n) = a_{1i}a_{1j} + a_{2i}a_{2j} + ... + a_{ni}a_{nj} = (v_i, v_j) = (AA^T)_{ij}$. \\
-		Quindi $f(f(v_i), f(v_j)) = (v_i, v_j) \Rightarrow AA^T = I_n. f$ è un'isometria se e solo se $f(v_i), ..., f(v_n)$ è una base ortonormale di $V \Leftrightarrow$ $A$ è ortogonale. \\
-		Quindi $\Leftrightarrow (f(v_i), f(v_j)) = \begin{cases}
+		Dunque $(f(v_i), f(v_j)) = a_{1i}a_{1j} + ... + a_{ni}a_{nj} =$ prodotto scalare standard tra la $i$-esima e la $j$-esima colonna di $A = (A^tA)_{ij}$. \\
+		Quindi $f$ è un'isometria $\Leftrightarrow$ (utilizzando il teorema precedente) $f(v_i), ..., f(v_n)$ è una base ortonormale di $\Leftrightarrow (f(v_i), f(v_j)) = \begin{cases}
 			1 & \text{se } i = j \\
 			0 & \text{se } i \ne j
-		\end{cases} \Leftrightarrow A^TA = \begin{cases}
+		\end{cases} \Leftrightarrow (A^TA)_{ij} = \begin{cases}
 			1 & \text{se } i = j \\
 			0 & \text{se } i \ne j
-		\end{cases} \Leftrightarrow A^TA = I_n \Leftrightarrow A \text{ è ortogonale}$.
+		\end{cases} \Leftrightarrow (A^TA)_{ij} = I_n \Leftrightarrow A \text{ è ortogonale}$.
 	\end{proof}
 	
 	\begin{center}
-		\includegraphics[width=\linewidth]{images/es_teo_ortonormale.png}
+		\includegraphics[width=\linewidth]{images/legami_teoremi_isometrie.png}
 	\end{center}
+
+	\begin{es}
+		$V = \mathbb{R}^3$ con il prodotto scalare standard. $f: V \to V$ definita da $f(x, y, z) = (z, -x, y)$. $f$ è un'isometria?
+		\begin{description}
+			\item[Soluzione 1] Calcoliamo le norme: $||(x, y, z)|| = \sqrt{x^2 + y^2 + z^2} = \sqrt{z^2 + x^2 + y^2} = ||(z, -x, y)||$. Quindi $f$ è un'isometria.
+			\item[Soluzione 2] $f$ manda la base ortonormale $e_1, e_2, e_3$ in $f(e_1) = (0, -1, 0) = -e_2, f(e_2) = (0, 0, 1) = e_3, f(e_3) = (1, 0, 0) = e_1$ che è una base ortonormale di $V$.
+			Quindi $f$ è un'isometria per il teorema T2.
+			\item[Soluzione 3] La matrice di $f$ rispetto alla base ortonormale $e_1, e_2, e_3$ è: \\
+			\[ A = \begin{pmatrix}
+				0 & 0 & 1 \\
+				-1 & 0 & 0 \\
+				0 & 1 & 0
+			\end{pmatrix} \]
+			Calcoliamo $A^TA = \begin{pmatrix}
+				0 & -1 & 0 \\
+				0 & 0 & 1 \\
+				1 & 0 & 0
+			\end{pmatrix} \begin{pmatrix}
+				0 & 0 & 1 \\
+				-1 & 0 & 0 \\
+				0 & 1 & 0
+			\end{pmatrix} = \begin{pmatrix}
+				1 & 0 & 0 \\
+				0 & 1 & 0 \\
+				0 & 0 & 1
+			\end{pmatrix} = I_3$. \\
+			Quindi $f$ è un'isometria per il teorema T3.
+		\end{description}
+	\end{es}
+
 	\begin{es}
 		$V = \mathbb{R}^2$ con il prodotto scalare standard. \\
 		$f: V \to V$ definita da $f(x, y, <) = (z, x, y)$. $f$ è un'isometria? \\
 		Sì perchè $||(x, y, z)|| = \sqrt{x^2 + y^2 + z^2} = \sqrt{z^2 + x^2 + y^2} = ||(z, x, y)||$.
 	\end{es}
 
-	\begin{oss}
-		Le nozioni di base ortonormale e isometria dipendono dal prodotto scalare su $V$.
-	\end{oss}
-
-	\begin{prop}
-		Sia $f$ un'isometria. Allora $\det f = \pm 1$.
-	\end{prop}
-
-	\begin{proof}
-		Fissiamo una base ortonormale $v_1, v_2, ..., v_n$ di $V$. \\
-		In tale base la matrice $A$ di $f$ è ortogonale, cioè $A^TA = I_n$. \\
-		$1 = \det I_n = \det(A^TA) = \det A^T \det A = (\det A)^2 \Rightarrow \det A = \pm 1$.
-	\end{proof}
+	\begin{es}
+		Dimostrare che se due matrici $A, M$ sono congruenti, allora i loro determinanti hanno lo stesso segno. \\
+		Se $A$ e $M$ sono congruenti, allora esiste una matrice invertibile $B$ tale che $M = B^tAB$. \\
+		Allora $\det(M) = \det(B^tAB) = \det(B^t)\det(A)\det(B) = (\det(B))^2\det(A)$. \\
+		Ma $(\det(B))^2 \ge 0$ e quindi $\det(M)$ e $\det(A)$ hanno lo stesso segno.
+	\end{es}
 
 	\begin{oss}
-		Non vale l'inversa!
+		In particolare, la matrice di un prodotto scalare deve avere determinante positivo, perchè è congruente alla matrice $I_n$ per il teorema di Sylvester.
 	\end{oss}
 
-	\begin{prop}
-		Sia $f: V \to V$ un'isometria e $\lambda$ un suo autovalore. Se $\lambda \in \mathbb{R}$ allora $\lambda = \pm 1$.
-	\end{prop}
-	\begin{proof}
-		Se $\lambda$ è un autovalore di $f$ allora $\exists v \in V, v \ne 0$ tale che $f(v) = \lambda v$ e quindi
-		$||f(v)|| = ||\lambda v|| = |\lambda|||v|| = ||v|| \Rightarrow |\lambda| = 1 \Rightarrow \lambda = \pm 1$.
-	\end{proof}
-
-	\begin{oss}
-		Può succedere che una isometria $f: V \to V$ abbia autovalori non reali (ad esempio, numeri complessi).
-	\end{oss}
+	\paragraph{Esempio TEST esame}
+	Data $a_1v_1 + a_2v_2 + a_3v_3 = 0$ è vero che l'unica soluzione è $a_1 = a_2 = a_3 = 0$? \\
+	\textbf{No, non è vero.} Infatti, se $v_1, v_2, v_3$ sono linearmente indipendenti, allora l'unica soluzione è $a_1 = a_2 = a_3 = 0$. \\
+	Se invece sono linearmente dipendenti, allora esistono $a_1, a_2, a_3 \in \mathbb{R}$ tali che $a_1v_1 + a_2v_2 + a_3v_3 = 0$ con almeno uno tra $a_1, a_2, a_3$ diverso da zero.
 \end{document}
