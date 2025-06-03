@@ -4139,9 +4139,9 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		Sia $\beta: V \times V \to \mathbb{R}$ una forma bilineare simmetrica su uno spazio vettoriale $V$ di dimensione finita. \\
 		La \textbf{segnatura} di $\beta$ è la tripletta $(n_+, n_-, n_0)$ dove:
 		\begin{itemize}
-			\item $n_+$ è il numero di autovettori di $\beta$ con autovalore positivo;
-			\item $n_-$ è il numero di autovettori di $\beta$ con autovalore negativo;
-			\item $n_0$ è il numero di autovettori di $\beta$ con autovalore nullo.
+			\item $n_+$ è il numero di autovettori positivi di $\beta$;
+			\item $n_-$ è il numero di autovettori negativi di $\beta$;
+			\item $n_0$ è il numero di autovettori nulli di $\beta$.
 		\end{itemize}
 		La segnatura è indipendente dalla base scelta.
 	\end{deff}
@@ -4219,7 +4219,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		ma non sono congruenti su $\mathbb{R}$ perchè hanno segnature diverse (rispettivamente $n_{+_A} = 2, n_{-_A} = 0$ e $n_{+_B} = 1, n_{-_B} = 1$).
 	\end{es}
 
-	\subsection{Forme quadratiche e matrice hassiana}
+	\subsection{Forme quadratiche e matrice hessiana}
 	
 	\begin{deff}{Forma quadratica}{}
 		Sia $V$ uno spazio vettoriale su $\mathbb{R}$ e sia $\beta: V \times V \to \mathbb{R}$ una forma bilineare simmetrica. \\
@@ -4266,20 +4266,20 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 
 	\begin{oss}
 		\begin{itemize}
-			\item $q$ è definita positiva $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ = n, n_- = 0, n_0 = 0)$.
-			\item $q$ è definita negativa $\Leftrightarrow$ la segnatura di $\beta$ è $(0, n)$.
-			\item $q$ è semidefinita positiva $\Leftrightarrow$ la segnatura di $\beta$ è $(r, n - r)$ con $r \le n$.
-			\item $q$ è semidefinita negativa $\Leftrightarrow$ la segnatura di $\beta$ è $(n - r, r)$ con $r \le n$.
-			\item $q$ è indefinita $\Leftrightarrow$ la segnatura di $\beta$ è $(r, s)$ con $r, s \ne 0$.
+			\item $q$ è definita positiva $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ = n, n_- = 0, n_0 = 0) \Leftrightarrow$ ha solo autovalori positivi $\Leftrightarrow$ esiste una base in cui la matrice di $\beta$ è $I_n$.
+			\item $q$ è definita negativa $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ = 0, n_- = n, n_0 = 0) \Leftrightarrow$ ha solo autovalori negativi.
+			\item $q$ è semidefinita positiva $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ = r, n_- = 0, n_0 = n - r)$ con $r \le n \Leftrightarrow$ ha $r$ autovalori positivi, $n - r$ autovalori nulli e nessun autovalore negativo.
+			\item $q$ è semidefinita negativa $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ = 0, n_- = r, n_0 = n - r)$ con $r \le n \Leftrightarrow$ ha $r$ autovalori negativi, $n - r$ autovalori nulli e nessun autovalore positivo.
+			\item $q$ è indefinita $\Leftrightarrow$ la segnatura di $\beta$ è $(n_+ > 0, n_- > 0, n_0 = 0) \Leftrightarrow$ ha almeno un autovalore positivo e uno negativo.
 		\end{itemize}
 	\end{oss}
 
-	\begin{deff}{Matrice hassiana}{}
+	\begin{deff}{Matrice hessiana}{}
 		Sia $f: \mathbb{R}^n \to \mathbb{R}$ una funzione di $n$ variabili, derivabile due volte. \\
-		Dato $v = (x_1, ..., x_n) \in \mathbb{R}^n$, la \textbf{matrice hassiana} di $f$ in $v$ è la matrice $Hf(v)$ tale che:
+		Dato $v = (x_1, ..., x_n) \in \mathbb{R}^n$, la \textbf{matrice hessiana} di $f$ in $v$ è la matrice $Hf(v)$ tale che:
 		\[ {Hf(v)}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}(v) \]
 		Se le derivate seconde sono continue allora $Hf(v)$ è simmetrica. \\
-		La matrice hassiana serve per capire la natura dei punti critici ($\nabla f = 0$). Infatti, se $Hf(v)$ è:
+		La matrice hessiana serve per capire la natura dei punti critici ($\nabla f = 0$). Infatti, se $Hf(v)$ è:
 		\begin{itemize}
 			\item definita positiva $\Rightarrow f$ ha un punto di minimo locale in $v$.
 			\item definita negativa $\Rightarrow f$ ha un punto di massimo locale in $v$.
@@ -4305,7 +4305,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 			\item $V = \{\text{funzioni } [a, b] \to \mathbb{R}\}, \beta(f, g) = \int_a^b f(x)g(x)dx$ è un prodotto scalare?
 			No, la funzione è bilineare e simmetrica ma non è definita positiva perchè $\beta(f, f) = \int_a^b f^2(x)dx \ge 0$ ma $\beta(f, f) = 0 \Leftrightarrow f(x) = 0 \ \forall x \in [a, b]$.
 			\item $U = \{f: [a, b] \to \mathbb{R} \mid f \text{ continua}\}, \beta(f, g) = \int_a^b f(x)g(x)dx$ è un prodotto scalare?
-			Sì, pwechè è bilineare, simmetrica e definita positiva peerchè sia $t \ne 0$ allora $\exists p \in ]a, b[$ tale che $f(p) \ne 0$ e quindi $\int_a^b f^2(x)dx > 0$.
+			Sì, perchè è bilineare, simmetrica e definita positiva peerchè sia $t \ne 0$ allora $\exists p \in ]a, b[$ tale che $f(p) \ne 0$ e quindi $\int_a^b f^2(x)dx > 0$.
 		\end{itemize}
 	\end{es}
 
