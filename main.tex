@@ -21,6 +21,7 @@
 \newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \newcommand{\hlfancy}[2]{\sethlcolor{#1}\hl{#2}}
 \newcommand{\IM}{\ \mathrm{Im} \ }
+\usepackage{fancyhdr}
 
 \setlist[description]{leftmargin=\parindent,labelindent=\parindent}
 \tcbuselibrary{theorems, skins}
@@ -65,6 +66,10 @@
 \tcblistof[\section*]{cor}{Lista dei corollari}
 
 \newpage
+
+\pagestyle{fancy}
+\fancyhead[lo]{\nouppercase{\rightmark}}
+\fancyhead[ro,le]{\thepage}
 
 \section{Unità 1 - Lezioni 1, 2}
 \subsection{Insiemi}
