@@ -559,7 +559,7 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 		      Poichè $v_1, v_2, ..., v_n$ sono linearmente indipendenti, allora $a_1 - b_1 = a_2 - b_2 = ... = a_n - b_n = 0 \Rightarrow a_1 = b_1, a_2 = b_2, ..., a_n = b_n$.
 		      Per cui, $a_1, a_2, ..., a_n$ sono uniche.
 		\item[$\Leftarrow$] Per ipotesi $\forall v \in V, \exists! a_1, a_2, ..., a_n \in \mathbb{K} \mid v = a_1v_1 + a_2v_2 + ... + a_nv_n$. \\
-		      Dunque $v_1, v_2, ..., v_n$ generano $V$ e, poichè $0 \in V$, gli unici coefficienti pesibili sono $a_1 = a_2 = ... = a_n = 0$. \\
+		      Dunque $v_1, v_2, ..., v_n$ generano $V$ e, poichè $0 \in V$, gli unici coefficienti possibili sono $a_1 = a_2 = ... = a_n = 0$. \\
 		      Per cui, $v_1, v_2, ..., v_n$ sono linearmente indipendenti. e quindi sono una base di $V$.
 	\end{description}
 \end{proof}
@@ -660,8 +660,8 @@ Se invece si hanno dei vettori che generano $V$ si può \enquote*{\textbf{estrar
 \end{prop}
 
 \begin{proof}
-	Siano $u_1, u_2 \in U \cap W, u_1, u_2 \in U$ e $U$ è un sottospazio vettoriale, quindi $u_1 + u_2 \in U$.
-	Analogamente, $u_1, u_2 \in W$ e $W$ è un sottospazio vettoriale, quindi $u_1 + u_2 \in W$. \\
+	Siano $u_1, u_2 \in U \cap W, u_1, u_2 \in U, u_1, u_2 \in W$. \\
+	Dato che $U$ e $W$ sono sottospazi vettoriali $u_1 + u_2 \in U$ e $u_1 + u_2 \in W$ (perchè $U$ e $W$ sono chiusi rispetto alla somma).
 	Quindi, $u_1 + u_2 \in U \cap W$. \\
 	Allo stesso modo si dimostra che $\forall a \in \mathbb{K}, u \in U \cap W \Rightarrow a \cdot u \in U \cap W$.
 \end{proof}
