@@ -4632,7 +4632,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 	\end{oss}
 
 	\begin{deff}{Matrice ortogonale}{}
-		Una matrice $A$ è \textbf{ortogonale} se $A^tA = I_n$ (cioè $A^t = A^{-1}$).
+		Una matrice $A$ è \textbf{ortogonale} se $A^TA = I_n$ (cioè $A^T = A^{-1}$).
 		In altre parole i vettori colonna di $A$ formano una base ortonormale rispetto al prodotto scalare standard.
 	\end{deff}
 
@@ -4640,7 +4640,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		$A = \begin{pmatrix}
 			0 & 1 \\
 			-1 & 0
-		\end{pmatrix}$ è ortogonale perchè $A^tA = \begin{pmatrix}
+		\end{pmatrix}$ è ortogonale perchè $A^TA = \begin{pmatrix}
 			0 & -1 \\
 			1 & 0
 		\end{pmatrix} \begin{pmatrix}
@@ -4656,7 +4656,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		$A = \begin{pmatrix}
 			\frac{\sqrt{3}}{2} & \frac{1}{2} \\
 			-\frac{1}{2} & \frac{\sqrt{3}}{2}
-		\end{pmatrix}$ è ortogonale perchè $A^tA = \begin{pmatrix}
+		\end{pmatrix}$ è ortogonale perchè $A^TA = \begin{pmatrix}
 			\frac{\sqrt{3}}{2} & -\frac{1}{2} \\
 			\frac{1}{2} & \frac{\sqrt{3}}{2}
 		\end{pmatrix} \begin{pmatrix}
@@ -4672,14 +4672,14 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 		Se $A$ è ortogonale $det(A) = \pm 1$.
 	\end{prop}
 	\begin{proof}
-		Per definizione: $1 = \det(I_n) = \det(A^tA) = \det(A^t) \cdot \det(A) = (\det(A))^2 \Rightarrow \det(A) = \pm 1$.
+		Per definizione: $1 = \det(I_n) = \det(A^TA) = \det(A^T) \cdot \det(A) = (\det(A))^2 \Rightarrow \det(A) = \pm 1$.
 	\end{proof}
 
 	\begin{oss}
 		Non vale il contrario, cioè se $\det(A) = \pm 1$ non è detto che $A$ sia ortogonale. Ad esempio, $A = \begin{pmatrix}
 			2 & 0 \\
 			0 & \frac{1}{2}
-		\end{pmatrix}$ ha $\det(A) = 1$ ma non è ortogonale perchè $A^tA = \begin{pmatrix}
+		\end{pmatrix}$ ha $\det(A) = 1$ ma non è ortogonale perchè $A^TA = \begin{pmatrix}
 			2 & 0 \\
 			0 & \frac{1}{2}
 		\end{pmatrix} \begin{pmatrix}
@@ -4737,7 +4737,7 @@ Il prodotto vettoriale eredita le proprietà del determinante:
 				a_{n1} & \cdots & a_{nn}
 			\end{pmatrix}
 		\end{align*}
-		Dunque $(f(v_i), f(v_j)) = a_{1i}a_{1j} + ... + a_{ni}a_{nj} =$ prodotto scalare standard tra la $i$-esima e la $j$-esima colonna di $A = (A^tA)_{ij}$. \\
+		Dunque $(f(v_i), f(v_j)) = a_{1i}a_{1j} + ... + a_{ni}a_{nj} =$ prodotto scalare standard tra la $i$-esima e la $j$-esima colonna di $A = (A^TA)_{ij}$. \\
 		Quindi $f$ è un'isometria $\Leftrightarrow$ (utilizzando il teorema precedente) $f(v_i), ..., f(v_n)$ è una base ortonormale di $\Leftrightarrow (f(v_i), f(v_j)) = \begin{cases}
 			1 & \text{se } i = j \\
 			0 & \text{se } i \ne j
